@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADpreneur | Ahmad Dahlan Preneur - Food Court Digital Mahasiswa UAD</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        uad: {
+                            orange: '#F26522',
+                            darkOrange: '#D95314',
+                            lightOrange: '#FFF4EE',
+                            charcoal: '#4B4E53',
+                            slate: '#334155',
+                            dark: '#1E293B',
+                            bg: '#F8FAFC'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar & subtle animations */
+        body {
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+        .tenant-card {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .tenant-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(243, 112, 33, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+        .ig-gradient {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        .ig-gradient:hover {
+            opacity: 0.92;
+        }
+        /* Hide scrollbar for category pills on mobile */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-uad-orange selection:text-white">
+
+    <!-- ==================== NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo SVG Kustom ADpreneur sesuai gambar referensi (image_5cf3b2.jpg) -->
+                <a href="#" class="flex items-center group focus:outline-none py-1" aria-label="ADpreneur - Ahmad Dahlan Preneur">
+                    <svg class="h-11 sm:h-12 w-auto" viewBox="0 0 430 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Huruf A Serif Elegan Oranye -->
+                        <path d="M52 14H58.5L92 84C94.2 88.5 96.5 90.2 100.5 90.5V93H73.5V90.5C78.2 90.2 79.8 88.2 77.8 83.8L70.2 67.2H39.8L31.5 83.8C29.4 88.2 31.2 90.2 36.2 90.5V93H14V90.5C18.5 90 21.2 87.8 24.2 82.2L52 14ZM54.5 28.5L42.2 61.5H67.8L54.5 28.5Z" fill="#F26522"/>
+                        
+                        <!-- Huruf D Serif Elegan Oranye (Bertautan di sebelah A) -->
+                        <path d="M95 14H128.5C157.5 14 174 30.2 174 53.5C174 77.2 157.2 93 127.5 93H95V90.5C101.2 90 103 88.2 103 81.5V25.5C103 18.8 101.2 17 95 16.5V14ZM116.5 20.5V86.5H127.2C148.5 86.5 159.2 73.5 159.2 53.5C159.2 33.5 148.5 20.5 127.2 20.5H116.5Z" fill="#F26522"/>
+                        
+                        <!-- Garis Lengkungan Swoosh Dinamis Melintang dari Kaki Kiri A Menembus D -->
+                        <path d="M22 89.5C42 62.5 84 44.5 138 41.5L133.5 45.2L139.5 44.8C91.5 51.2 51.5 67.5 22 89.5Z" fill="#F26522"/>
+                        <path d="M24 88.5C47 61 88 44 139 41.2C135 43.8 131.5 45.6 127 47.2C85 52 50 67.5 24 88.5Z" fill="#F26522"/>
+
+                        <!-- Teks "preneur" Sans-Serif Tebal Modern Abu-Abu Gelap -->
+                        <text x="182" y="75" fill="#4B4E53" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="700" font-size="60" letter-spacing="-1.5">preneur</text>
+                        
+                        <!-- Sub-teks "Ahmad Dahlan Preneur" dengan Spasi Huruf Lebar -->
+                        <text x="198" y="96" fill="#4B4E53" font-family="'Inter', 'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="14.2" letter-spacing="3.6">Ahmad Dahlan Preneur</text>
+                    </svg>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#beranda" class="text-sm font-medium text-slate-700 hover:text-uad-orange transition-colors">Beranda</a>
+                    <a href="#direktori" class="text-sm font-medium text-slate-700 hover:text-uad-orange transition-colors">Direktori Tenant</a>
+                    <a href="#cara-kerja" class="text-sm font-medium text-slate-700 hover:text-uad-orange transition-colors">Alur Kerja</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openRegisterModal()" class="bg-uad-orange hover:bg-uad-darkOrange text-white font-display font-semibold text-sm px-5 py-2.5 rounded-xl shadow-md shadow-orange-500/20 transition-all active:scale-95 flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Daftarkan Usahamu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="beranda" class="relative overflow-hidden bg-white pt-12 pb-16 lg:pt-20 lg:pb-24 border-b border-slate-100">
+        <!-- Decorative Background Blobs -->
+        <div class="absolute top-0 right-0 -translate-y-12 translate-x-1/4 w-96 h-96 bg-orange-100/70 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/4 w-80 h-80 bg-amber-50 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-uad-lightOrange border border-orange-200 text-uad-orange text-xs sm:text-sm font-semibold mb-6">
+                    <span class="w-2 h-2 rounded-full bg-uad-orange animate-pulse"></span>
+                    <span>Ekosistem Wirausaha Mahasiswa Universitas Ahmad Dahlan</span>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="font-display text-3xl sm:text-5xl lg:text-[52px] font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-6">
+                    Pusat Kuliner, Produk, & Jasa Mahasiswa <span class="text-uad-orange">UAD</span> dalam Satu Genggaman
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-base sm:text-lg text-slate-600 leading-relaxed mb-8 max-w-2xl mx-auto">
+                    Platform direktori resmi layaknya <strong>food court digital</strong> kampus. Temukan dagangan teman mahasiswa, datangi lapak offline-nya, atau pesan langsung lewat WhatsApp & Instagram tanpa perantara!
+                </p>
+
+                <!-- Search Bar Box -->
+                <div class="max-w-2xl mx-auto bg-white p-2 rounded-2xl shadow-lg shadow-slate-200/70 border border-slate-200 flex flex-col sm:flex-row gap-2">
+                    <div class="relative flex-1 flex items-center">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400 pl-4 pr-3"></i>
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            onkeyup="filterTenants()"
+                            placeholder="Cari dimsum, kopi, desain grafis, thrifting, atau lokasi kampus..." 
+                            class="w-full py-3 pr-4 text-sm sm:text-base text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
+                        >
+                    </div>
+                    <button onclick="scrollToDirectory()" class="bg-uad-orange hover:bg-uad-darkOrange text-white font-display font-semibold px-7 py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shrink-0">
+                        <span>Jelajahi Tenant</span>
+                        <i class="fa-solid fa-arrow-down text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-3 gap-4 max-w-xl mx-auto mt-10 pt-8 border-t border-slate-100">
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-slate-800" id="statTenantCount">8+</p>
+                        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Tenant Mahasiswa</p>
+                    </div>
+                    <div class="border-x border-slate-200">
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-uad-orange">2 Metode</p>
+                        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Offline & Online</p>
+                    </div>
+                    <div>
+                        <p class="font-display text-2xl sm:text-3xl font-extrabold text-slate-800">0%</p>
+                        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Potongan Biaya</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DIREKTORI TENANT (FOOD COURT DIGITAL) ==================== -->
+    <section id="direktori" class="py-14 sm:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header & Filters -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+                <div>
+                    <span class="text-uad-orange font-bold text-sm uppercase tracking-wider">Aula Usaha Mahasiswa</span>
+                    <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+                        Direktori Tenant ADpreneur
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-1">
+                        Pilih kategori atau metode pemesanan untuk menemukan usaha mahasiswa UAD di sekitarmu.
+                    </p>
+                </div>
+
+                <!-- Filter Metode Pemesanan -->
+                <div class="flex items-center gap-2 bg-white p-1.5 rounded-xl border border-slate-200 self-start">
+                    <span class="text-xs font-semibold text-slate-500 px-2.5 hidden sm:inline">Metode:</span>
+                    <button onclick="setMethodFilter('all')" id="method-all" class="method-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-white transition-all cursor-pointer">
+                        Semua
+                    </button>
+                    <button onclick="setMethodFilter('offline')" id="method-offline" class="method-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-all cursor-pointer flex items-center gap-1.5">
+                        <i class="fa-solid fa-location-dot text-uad-orange"></i> Lapak Offline
+                    </button>
+                    <button onclick="setMethodFilter('online')" id="method-online" class="method-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-all cursor-pointer flex items-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp text-emerald-600"></i> Online / PO
+                    </button>
+                </div>
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div class="flex items-center gap-2.5 overflow-x-auto no-scrollbar pb-4 mb-6">
+                <button onclick="setCategoryFilter('all')" id="cat-all" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-uad-orange text-white shadow-sm shadow-orange-500/25 transition-all whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-border-all mr-1.5"></i> Semua Tenant
+                </button>
+                <button onclick="setCategoryFilter('Kuliner')" id="cat-Kuliner" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-uad-orange hover:text-uad-orange transition-all whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-utensils mr-1.5"></i> Kuliner & Minuman
+                </button>
+                <button onclick="setCategoryFilter('Fashion & Barang')" id="cat-Fashion & Barang" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-uad-orange hover:text-uad-orange transition-all whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-bag-shopping mr-1.5"></i> Fashion & Barang
+                </button>
+                <button onclick="setCategoryFilter('Jasa & Kreatif')" id="cat-Jasa & Kreatif" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-uad-orange hover:text-uad-orange transition-all whitespace-nowrap cursor-pointer">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i> Jasa & Kreatif
+                </button>
+            </div>
+
+            <!-- Grid Kartu Tenant -->
+            <div id="tenantGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Cards will be dynamically rendered via JS -->
+            </div>
+
+            <!-- Empty State jika pencarian tidak ditemukan -->
+            <div id="emptyState" class="hidden text-center py-16 bg-white rounded-3xl border border-slate-200">
+                <div class="w-16 h-16 bg-orange-50 text-uad-orange rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-store-slash"></i>
+                </div>
+                <h3 class="font-display text-lg font-bold text-slate-800">Tenant tidak ditemukan</h3>
+                <p class="text-slate-500 text-sm mt-1 max-w-md mx-auto">Coba gunakan kata kunci lain atau ubah filter kategori & metode pemesanan di atas.</p>
+                <button onclick="resetFilters()" class="mt-5 px-5 py-2 bg-slate-800 text-white text-sm font-semibold rounded-xl hover:bg-slate-700 transition cursor-pointer">
+                    Reset Pencarian
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ALUR KERJA (HOW IT WORKS) ==================== -->
+    <section id="cara-kerja" class="py-16 sm:py-20 bg-white border-t border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-uad-orange font-bold text-sm uppercase tracking-wider">Konsep & Ekosistem</span>
+                <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+                    Bagaimana ADpreneur Bekerja?
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base mt-2">
+                    Menjembatani pelaku usaha mikro mahasiswa UAD dengan ribuan sivitas akademika secara cepat dan transparan.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-slate-50 rounded-3xl p-7 border border-slate-200/70 relative">
+                    <div class="w-12 h-12 rounded-2xl bg-uad-orange text-white font-display font-extrabold text-xl flex items-center justify-center shadow-md shadow-orange-500/20 mb-5">
+                        1
+                    </div>
+                    <h3 class="font-display text-lg font-bold text-slate-900 mb-2">Daftar & Verifikasi Kampus</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Mahasiswa pemilik usaha mendaftarkan brand, produk/jasa, lokasi lapak offline, serta tautan Instagram & WhatsApp menggunakan NIM aktif UAD.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-slate-50 rounded-3xl p-7 border border-slate-200/70 relative">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-800 text-white font-display font-extrabold text-xl flex items-center justify-center shadow-md mb-5">
+                        2
+                    </div>
+                    <h3 class="font-display text-lg font-bold text-slate-900 mb-2">Tampil di Aula Food Court Digital</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Usaha mahasiswa tampil rapi di etalase digital ADpreneur sehingga tidak lagi tenggelam di grup WhatsApp dan mendapat sorotan resmi ekosistem kampus.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-slate-50 rounded-3xl p-7 border border-slate-200/70 relative">
+                    <div class="w-12 h-12 rounded-2xl bg-uad-orange text-white font-display font-extrabold text-xl flex items-center justify-center shadow-md shadow-orange-500/20 mb-5">
+                        3
+                    </div>
+                    <h3 class="font-display text-lg font-bold text-slate-900 mb-2">Pesan Offline atau Online</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Pembeli bebas memilih: <strong>datang langsung ke titik lapak kampus</strong> (offline) atau klik tombol <strong>WhatsApp / Instagram</strong> untuk pesan & Pre-Order (online).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col items-center md:items-start">
+                <!-- Logo SVG Kustom ADpreneur Versi Dark Background -->
+                <svg class="h-11 w-auto" viewBox="0 0 430 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M52 14H58.5L92 84C94.2 88.5 96.5 90.2 100.5 90.5V93H73.5V90.5C78.2 90.2 79.8 88.2 77.8 83.8L70.2 67.2H39.8L31.5 83.8C29.4 88.2 31.2 90.2 36.2 90.5V93H14V90.5C18.5 90 21.2 87.8 24.2 82.2L52 14ZM54.5 28.5L42.2 61.5H67.8L54.5 28.5Z" fill="#F26522"/>
+                    <path d="M95 14H128.5C157.5 14 174 30.2 174 53.5C174 77.2 157.2 93 127.5 93H95V90.5C101.2 90 103 88.2 103 81.5V25.5C103 18.8 101.2 17 95 16.5V14ZM116.5 20.5V86.5H127.2C148.5 86.5 159.2 73.5 159.2 53.5C159.2 33.5 148.5 20.5 127.2 20.5H116.5Z" fill="#F26522"/>
+                    <path d="M24 88.5C47 61 88 44 139 41.2C135 43.8 131.5 45.6 127 47.2C85 52 50 67.5 24 88.5Z" fill="#F26522"/>
+                    <text x="182" y="75" fill="#F8FAFC" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="700" font-size="60" letter-spacing="-1.5">preneur</text>
+                    <text x="198" y="96" fill="#CBD5E1" font-family="'Inter', 'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="14.2" letter-spacing="3.6">Ahmad Dahlan Preneur</text>
+                </svg>
+                <p class="text-xs text-slate-400 mt-2">
+                    Gagasan Kreatif Ekosistem Wirausaha Mahasiswa Universitas Ahmad Dahlan.
+                </p>
+            </div>
+            <div class="flex flex-wrap justify-center md:justify-end items-center gap-6 text-xs text-slate-400">
+                <span>Kampus 1 • Kampus 2 • Kampus 3 • Kampus 4 (Utama) • Kampus 5</span>
+                <span class="text-uad-orange font-semibold">#BanggaBeliTemanSendiri</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL DETAIL TENANT ==================== -->
+    <div id="detailModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-slate-100 animate-[fadeIn_0.2s_ease-out]">
+            <div class="relative h-56 bg-slate-200">
+                <img id="modalImg" src="" alt="Produk" class="w-full h-full object-cover">
+                <button onclick="closeDetailModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 text-slate-800 hover:bg-white flex items-center justify-center shadow-md cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="absolute bottom-3 left-4 flex gap-2">
+                    <span id="modalCategory" class="px-3 py-1 rounded-full text-xs font-bold bg-uad-orange text-white shadow"></span>
+                    <span id="modalStatus" class="px-3 py-1 rounded-full text-xs font-bold bg-white text-slate-800 shadow"></span>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex justify-between items-start gap-4">
+                    <div>
+                        <h3 id="modalTitle" class="font-display text-2xl font-extrabold text-slate-900"></h3>
+                        <p id="modalOwner" class="text-xs font-medium text-slate-500 mt-0.5"></p>
+                    </div>
+                    <span id="modalPrice" class="font-display font-bold text-uad-orange text-base bg-uad-lightOrange px-3 py-1 rounded-xl shrink-0"></span>
+                </div>
+
+                <p id="modalDesc" class="text-slate-600 text-sm leading-relaxed mt-4"></p>
+
+                <!-- Info Metode Pemesanan -->
+                <div class="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2.5">
+                    <div class="flex items-start gap-3">
+                        <div class="w-7 h-7 rounded-lg bg-orange-100 text-uad-orange flex items-center justify-center shrink-0 mt-0.5">
+                            <i class="fa-solid fa-location-dot text-xs"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-800">Titik Lapak Offline / COD Kampus:</p>
+                            <p id="modalLocation" class="text-xs text-slate-600 mt-0.5"></p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-7 h-7 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+                            <i class="fa-regular fa-clock text-xs"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-800">Jam Operasional / Sistem Order:</p>
+                            <p id="modalHours" class="text-xs text-slate-600 mt-0.5"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Direct Action Buttons -->
+                <div class="grid grid-cols-2 gap-3 mt-6">
+                    <a id="modalWaBtn" href="#" target="_blank" onclick="showToast('Membuka WhatsApp penjual...')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Pesan via WA</span>
+                    </a>
+                    <a id="modalIgBtn" href="#" target="_blank" onclick="showToast('Membuka profil Instagram usaha...')" class="ig-gradient text-white font-semibold text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition shadow-sm">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                        <span>Cek Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL DAFTAR TENANT BARU ==================== -->
+    <div id="registerModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 p-6 sm:p-8">
+            <div class="flex justify-between items-center mb-5">
+                <div>
+                    <span class="text-xs font-bold text-uad-orange uppercase tracking-wider">Gratis untuk Mahasiswa UAD</span>
+                    <h3 class="font-display text-xl sm:text-2xl font-extrabold text-slate-900">Daftarkan Usahamu</h3>
+                </div>
+                <button onclick="closeRegisterModal()" class="w-9 h-9 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center justify-center cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nama Usaha / Brand *</label>
+                        <input type="text" id="regName" required placeholder="Contoh: Dimsum Mentai Dahlan" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-uad-orange">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Kategori Usaha *</label>
+                        <select id="regCategory" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-uad-orange bg-white">
+                            <option value="Kuliner">Kuliner & Minuman</option>
+                            <option value="Fashion & Barang">Fashion & Barang</option>
+                            <option value="Jasa & Kreatif">Jasa & Kreatif</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nama Pemilik & Prodi *</label>
+                        <input type="text" id="regOwner" required placeholder="Contoh: Bagas - Informatika '24" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-uad-orange">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Kisaran Harga *</label>
+                        <input type="text" id="regPrice" required placeholder="Contoh: Mulai Rp 10.000" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-uad-orange">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Lokasi Lapak Offline / Titik COD *</label>
+                    <input type="text" id="regLocation" required placeholder="Contoh: Parkiran Timur Kampus 4 UAD / Hanya Online" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-uad-orange">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">No. WhatsApp (628...) *</label>
+                        <input type="text" id="regWa" required placeholder="6281234567890" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-uad-orange">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Username Instagram *</label>
+                        <input type="text" id="regIg" required placeholder="dimsumdahlan.yk" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-uad-orange">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Singkat Produk/Jasa *</label>
+                    <textarea id="regDesc" rows="2" required placeholder="Jelaskan keunggulan produk atau jasa kamu secara singkat..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-uad-orange"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-uad-orange hover:bg-uad-darkOrange text-white font-display font-bold py-3.5 rounded-xl shadow-md shadow-orange-500/20 transition cursor-pointer mt-2">
+                    Tayangkan ke Direktori Sekarang
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 text-sm font-medium">
+        <i class="fa-solid fa-circle-check text-uad-orange text-lg"></i>
+        <span id="toastMessage">Berhasil!</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // Data Mockup Realistis Usaha Mikro Mahasiswa UAD
+        let tenants = [
+            {
+                id: 1,
+                name: "Dimsum Mentai Dahlan",
+                category: "Kuliner",
+                status: "Buka Hari Ini",
+                hasOffline: true,
+                owner: "Nadia Putri • Manajemen '24",
+                price: "Mulai Rp 12.000",
+                location: "Depan Gerbang Utama Kampus 4 UAD (Ringroad Selatan)",
+                hours: "Senin - Jumat, 10.00 - 16.30 WIB & Open PO WA",
+                desc: "Dimsum ayam udang homemade dengan saus mentai lumer yang dibakar langsung di tempat. Cocok untuk pengganjal lapar di sela jam kuliah!",
+                wa: "6281234567890",
+                ig: "dimsumdahlan.yk",
+                image: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "Kopi Susu Tamanan",
+                category: "Kuliner",
+                status: "Buka Hari Ini",
+                hasOffline: true,
+                owner: "Rizky Pratama • Teknik Informatika '23",
+                price: "Rp 10.000 - 15.000",
+                location: "Stand Kantin Sebelah Timur Kampus 3 UAD",
+                hours: "Setiap Hari, 08.30 - 17.00 WIB",
+                desc: "Es kopi susu gula aren racikan mahasiswa dengan biji kopi robusta pilihan. Tersedia kemasan botol 250ml & 1 liter untuk teman nugas.",
+                wa: "6281234567891",
+                ig: "kopisusutamanan",
+                image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "Studio Grafis & PPT Kilat",
+                category: "Jasa & Kreatif",
+                status: "Fast Response",
+                hasOffline: false,
+                owner: "Dimas Arya • Ilmu Komunikasi '24",
+                price: "Mulai Rp 15.000",
+                location: "Online (Konsultasi via WA / Meet di Perpus Kampus 4)",
+                hours: "24 Jam Online Order (Pengerjaan 3-12 Jam)",
+                desc: "Jasa desain poster acara himpunan, feed Instagram UKM, CV kreatif, hingga merapikan slide presentasi kuliah agar tampil estetik dan profesional.",
+                wa: "6281234567892",
+                ig: "dimasvisual.std",
+                image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "Secondhand & Thrift Jogja",
+                category: "Fashion & Barang",
+                status: "Ready Stock",
+                hasOffline: true,
+                owner: "Aulia Rahma • Sastra Inggris '25",
+                price: "Rp 35.000 - 85.000",
+                location: "COD Area Kampus 1 & Kampus 2 (Kapas / Pramuka)",
+                hours: "Update Katalog Tiap Rabu & Sabtu di Instagram",
+                desc: "Kurasi kemeja flanel, crewneck, dan totebag kuliah kondisi 95% like new, sudah dicuci wangi (laundry) dan siap pakai ke kampus.",
+                wa: "6281234567893",
+                ig: "auliathrift.uad",
+                image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "Risol Mayo Lumer Bu Kos",
+                category: "Kuliner",
+                status: "Pre-Order H-1",
+                hasOffline: true,
+                owner: "Siti Aminah • Farmasi '24",
+                price: "Rp 3.500 / pcs",
+                location: "Titip Kantin Kejujuran Kampus 3 & Antar Kos Tamanan",
+                hours: "Pengantaran Pagi Pukul 07.30 & Siang 12.30 WIB",
+                desc: "Risol kulit lembut isian smoked beef, telur, keju, dan mayones spesial. Menerima pesanan snack box untuk rapat organisasi & seminar kampus.",
+                wa: "6281234567894",
+                ig: "risolmayo.uad",
+                image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 6,
+                name: "Lensa Wisuda & Event UAD",
+                category: "Jasa & Kreatif",
+                status: "Booking Slot",
+                hasOffline: true,
+                owner: "Fajar Nugroho • Pendidikan Bahasa Inggris '23",
+                price: "Paket Mulai Rp 150.000",
+                location: "Area Outdoor Kampus 4 & Islamic Center UAD",
+                hours: "Sesuai Jadwal Booking (Weekday & Weekend)",
+                desc: "Jasa fotografi outdoor untuk wisuda, foto angkatan, dokumentasi event prodi, dan foto katalog produk UMKM mahasiswa. Semua file dikirim via GDrive.",
+                wa: "6281234567895",
+                ig: "fajarlens.yk",
+                image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 7,
+                name: "Buket Wisuda & Hampers",
+                category: "Fashion & Barang",
+                status: "Custom Order",
+                hasOffline: true,
+                owner: "Tari Kusuma • Psikologi '24",
+                price: "Mulai Rp 25.000",
+                location: "Kosan Belakang Kampus 4 (Bisa Ambil Sendiri / COD)",
+                hours: "Order H-2 untuk Custom Bunga Artificial & Snack",
+                desc: "Rangkaian buket snack, bunga kawat bulu (pipe cleaner), dan selempang sidang/sempro custom nama gelar dengan warna bernuansa elegan.",
+                wa: "6281234567896",
+                ig: "taricraft.bouquet",
+                image: "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 8,
+                name: "Privat TOEFL & Bahasa Inggris",
+                category: "Jasa & Kreatif",
+                status: "Buka Kelas",
+                hasOffline: false,
+                owner: "Kevin Pratama • Sastra Inggris '23",
+                price: "Rp 25.000 / Sesi",
+                location: "Online via Zoom / Belajar Bareng di Perpus UAD",
+                hours: "Sore & Malam Hari (Fleksibel)",
+                desc: "Bimbingan belajar santai persiapan tes sertifikasi bahasa Inggris kampus, grammar dasar, hingga proofreading abstrak skripsi mahasiswa.",
+                wa: "6281234567897",
+                ig: "englishwithkevin.id",
+                image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        let currentCategory = 'all';
+        let currentMethod = 'all';
+
+        // Render Cards ke Grid
+        function renderTenants(data) {
+            const grid = document.getElementById('tenantGrid');
+            const emptyState = document.getElementById('emptyState');
+            document.getElementById('statTenantCount').innerText = tenants.length + "+";
+
+            if (data.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = data.map(item => `
+                <div class="tenant-card bg-white rounded-3xl border border-slate-200/80 overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <!-- Thumbnail Image -->
+                        <div class="relative h-44 bg-slate-100 overflow-hidden cursor-pointer" onclick="openDetailModal(${item.id})">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/F37021/FFFFFF?text=ADpreneur+UAD'">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-white/95 text-slate-800 shadow-sm backdrop-blur-sm">
+                                ${item.category}
+                            </span>
+                            <span class="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-uad-orange text-white shadow-sm">
+                                ${item.price}
+                            </span>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-5">
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <span class="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
+                                    ● ${item.status}
+                                </span>
+                                <span class="text-[11px] font-medium text-slate-400">
+                                    ${item.hasOffline ? 'Offline & Online' : 'Online Order'}
+                                </span>
+                            </div>
+
+                            <h3 onclick="openDetailModal(${item.id})" class="font-display text-lg font-extrabold text-slate-900 hover:text-uad-orange transition cursor-pointer line-clamp-1 mt-1.5">
+                                ${item.name}
+                            </h3>
+                            <p class="text-xs font-medium text-slate-500 mt-0.5">${item.owner}</p>
+
+                            <p class="text-xs text-slate-600 line-clamp-2 mt-3 leading-relaxed">
+                                ${item.desc}
+                            </p>
+
+                            <!-- Offline Location Info -->
+                            <div class="mt-3.5 pt-3 border-t border-slate-100 flex items-start gap-2 text-xs text-slate-600">
+                                <i class="fa-solid fa-location-dot text-uad-orange mt-0.5 shrink-0"></i>
+                                <span class="line-clamp-1 font-medium">${item.location}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Action Footer -->
+                    <div class="px-5 pb-5 pt-1 flex items-center gap-2">
+                        <a href="https://wa.me/${item.wa}?text=Halo%20${encodeURIComponent(item.name)},%20saya%20lihat%20usahamu%20di%20web%20ADpreneur%20UAD!" target="_blank" onclick="showToast('Menghubungkan ke WhatsApp ${item.name}...')" title="Pesan via WhatsApp" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 transition">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                        <a href="https://instagram.com/${item.ig}" target="_blank" onclick="showToast('Membuka Instagram @${item.ig}...')" title="Kunjungi Instagram" class="ig-gradient text-white text-xs font-bold py-2.5 px-3 rounded-xl flex items-center justify-center transition">
+                            <i class="fa-brands fa-instagram text-sm"></i>
+                        </a>
+                        <button onclick="openDetailModal(${item.id})" title="Lihat Detail & Lokasi" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 px-3 rounded-xl transition cursor-pointer">
+                            Detail
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter Logic
+        function filterTenants() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            
+            const filtered = tenants.filter(item => {
+                const matchKeyword = item.name.toLowerCase().includes(keyword) || 
+                                     item.desc.toLowerCase().includes(keyword) || 
+                                     item.location.toLowerCase().includes(keyword) ||
+                                     item.owner.toLowerCase().includes(keyword);
+                
+                const matchCat = currentCategory === 'all' || item.category === currentCategory;
+                
+                let matchMethod = true;
+                if (currentMethod === 'offline') matchMethod = item.hasOffline === true;
+                if (currentMethod === 'online') matchMethod = true; // Semua mendukung online WA/IG
+
+                return matchKeyword && matchCat && matchMethod;
+            });
+
+            renderTenants(filtered);
+        }
+
+        function setCategoryFilter(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-uad-orange', 'text-white', 'shadow-sm', 'shadow-orange-500/25');
+                btn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+            });
+            const activeBtn = document.getElementById(`cat-${cat}`);
+            activeBtn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+            activeBtn.classList.add('bg-uad-orange', 'text-white', 'shadow-sm', 'shadow-orange-500/25');
+            filterTenants();
+        }
+
+        function setMethodFilter(method) {
+            currentMethod = method;
+            document.querySelectorAll('.method-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-white');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+            });
+            const activeBtn = document.getElementById(`method-${method}`);
+            activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+            activeBtn.classList.add('bg-slate-800', 'text-white');
+            filterTenants();
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            setCategoryFilter('all');
+            setMethodFilter('all');
+        }
+
+        function scrollToDirectory() {
+            document.getElementById('direktori').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Modal Detail Functions
+        function openDetailModal(id) {
+            const item = tenants.find(t => t.id === id);
+            if (!item) return;
+
+            document.getElementById('modalImg').src = item.image;
+            document.getElementById('modalCategory').innerText = item.category;
+            document.getElementById('modalStatus').innerText = item.status;
+            document.getElementById('modalTitle').innerText = item.name;
+            document.getElementById('modalOwner').innerText = "Owner: " + item.owner;
+            document.getElementById('modalPrice').innerText = item.price;
+            document.getElementById('modalDesc').innerText = item.desc;
+            document.getElementById('modalLocation').innerText = item.location;
+            document.getElementById('modalHours').innerText = item.hours;
+            
+            document.getElementById('modalWaBtn').href = `https://wa.me/${item.wa}?text=Halo%20${encodeURIComponent(item.name)},%20saya%20tertarik%20pesan%20produk/jasamu%20dari%20ADpreneur%20UAD!`;
+            document.getElementById('modalIgBtn').href = `https://instagram.com/${item.ig}`;
+
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+
+        // Modal Register Functions
+        function openRegisterModal() {
+            document.getElementById('registerModal').classList.remove('hidden');
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').classList.add('hidden');
+        }
+
+        function handleRegisterSubmit(e) {
+            e.preventDefault();
+            
+            const category = document.getElementById('regCategory').value;
+            let defaultImg = "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80";
+            if (category === "Fashion & Barang") defaultImg = "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80";
+            if (category === "Jasa & Kreatif") defaultImg = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80";
+
+            const locValue = document.getElementById('regLocation').value;
+
+            const newTenant = {
+                id: Date.now(),
+                name: document.getElementById('regName').value,
+                category: category,
+                status: "Tenant Baru",
+                hasOffline: !locValue.toLowerCase().includes("hanya online"),
+                owner: document.getElementById('regOwner').value,
+                price: document.getElementById('regPrice').value,
+                location: locValue,
+                hours: "Sesuai info di Instagram & WhatsApp",
+                desc: document.getElementById('regDesc').value,
+                wa: document.getElementById('regWa').value.replace(/[^0-9]/g, ''),
+                ig: document.getElementById('regIg').value.replace('@', ''),
+                image: defaultImg
+            };
+
+            tenants.unshift(newTenant);
+            closeRegisterModal();
+            document.getElementById('registerForm').reset();
+            resetFilters();
+            scrollToDirectory();
+            showToast(`Selamat! "${newTenant.name}" berhasil tayang di ADpreneur!`);
+        }
+
+        // Toast Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3200);
+        }
+
+        // Initial Render
+        window.onload = () => {
+            renderTenants(tenants);
+        };
+    </script>
+</body>
+</html>
