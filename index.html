@@ -37,7 +37,7 @@
 
     <!-- Top Announcement Banner -->
     <div class="bg-brand-orange text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-sm">
-        📢 Inovasi Kampus UAD: Platform Terpusat Usaha Mikro & Jasa Mahasiswa Ahmad Dahlan Preneur!
+        🔒 Sistem Keamanan Terverifikasi: Portal Admin & Penjual Terintegrasi Ahmad Dahlan Preneur UAD!
     </div>
 
     <!-- Navbar -->
@@ -64,8 +64,8 @@
                 <button onclick="openModal('registerModal')" class="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-brand-orange bg-brand-light hover:bg-brand-orange hover:text-white px-4 py-2.5 rounded-xl transition-all duration-200 border border-brand-orange/20">
                     <i class="fa-solid fa-store"></i> Daftar Tenant
                 </button>
-                <button onclick="openModal('adminModal')" class="inline-flex items-center gap-2 text-sm font-semibold text-white bg-brand-dark hover:bg-gray-700 px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200">
-                    <i class="fa-solid fa-shield-halved"></i> Portal Admin
+                <button onclick="openModal('loginModal')" class="inline-flex items-center gap-2 text-sm font-semibold text-white bg-brand-dark hover:bg-gray-700 px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200">
+                    <i class="fa-solid fa-lock"></i> Login Sistem
                 </button>
             </div>
         </div>
@@ -90,7 +90,7 @@
                 <div class="bg-white p-3 sm:p-4 rounded-2xl shadow-lg border border-gray-100 max-w-3xl mx-auto flex flex-col md:flex-row gap-3">
                     <div class="flex-1 relative flex items-center">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-400"></i>
-                        <input type="text" id="searchInput" oninput="filterTenants()" placeholder="Cari nama usaha, makanan, atau jasa (cth: Dimsum, Desain)..." class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/50 focus:bg-white">
+                        <input type="text" id="searchInput" placeholder="Cari nama usaha, makanan, atau jasa..." class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/50 focus:bg-white">
                     </div>
                     <div class="flex gap-2 overflow-x-auto pb-1 md:pb-0">
                         <button onclick="setCategory('all')" id="btn-all" class="cat-btn px-4 py-3 rounded-xl text-xs font-bold bg-brand-orange text-white whitespace-nowrap shadow-sm transition-all">Semua</button>
@@ -102,7 +102,7 @@
             </div>
         </section>
 
-        <!-- Tenant Directory Section (Food Court Area) -->
+        <!-- Tenant Directory Section -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
                 <div>
@@ -117,7 +117,7 @@
 
             <!-- Grid Tenant -->
             <div id="tenantContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Data akan dimuat secara dinamis via JavaScript -->
+                <!-- Data dinamis -->
             </div>
         </section>
     </main>
@@ -135,39 +135,146 @@
         </div>
     </footer>
 
-    <!-- MODAL 1: DETAIL & REVIEW TENANT (UNTUK PEMBELI / UMUM) -->
-    <div id="detailModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
-            <button onclick="closeModal('detailModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+    <!-- MODAL 1: PILIH LOGIN / PORTAL AKSES -->
+    <div id="loginModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 relative">
+            <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div id="modalContent">
-                <!-- Konten dinamis detail tenant -->
+            <h3 class="font-heading text-xl font-bold text-brand-dark mb-2"><i class="fa-solid fa-lock text-brand-orange mr-2"></i> Pilih Portal Masuk</h3>
+            <p class="text-xs text-gray-500 mb-6">Silakan pilih hak akses akun Anda ke dalam sistem ADpreneur.</p>
+            
+            <div class="space-y-3">
+                <button onclick="openAdminLogin()" class="w-full p-4 bg-brand-light hover:bg-orange-100 border border-brand-orange/30 rounded-xl flex items-center justify-between group transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-orange text-white flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-sm text-brand-dark">Login Admin Kampus</h4>
+                            <p class="text-xs text-gray-500">Validasi & monitoring sistem</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-brand-orange group-hover:translate-x-1 transition-transform"></i>
+                </button>
+
+                <button onclick="openSellerLogin()" class="w-full p-4 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl flex items-center justify-between group transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-dark text-white flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-store"></i>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-sm text-brand-dark">Login Akun Penjual (Mahasiswa)</h4>
+                            <p class="text-xs text-gray-500">Kelola toko & produk usaha</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-400 group-hover:translate-x-1 transition-transform"></i>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 2: PENDAFTARAN TENANT PENJUAL (DENGAN VALIDASI NIM/UAD) -->
+    <!-- MODAL 2: FORM LOGIN ADMIN (DENGAN KREDENSIAL KETAT) -->
+    <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full shadow-2xl p-6 relative">
+            <button onclick="closeModal('adminLoginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-brand-orange/10 text-brand-orange rounded-2xl mx-auto flex items-center justify-center text-xl mb-2">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="font-heading text-lg font-bold text-brand-dark">Login Admin Kampus</h3>
+                <p class="text-xs text-gray-500">Masukkan username & sandi resmi pengelola</p>
+            </div>
+
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Username Admin</label>
+                    <input type="text" id="adminUser" required placeholder="Masukkan username..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Password / Sandi</label>
+                    <input type="password" id="adminPass" required placeholder="Masukkan password..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
+                </div>
+                <button type="submit" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all text-sm">
+                    Masuk ke Portal Admin
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: DASHBOARD ADMIN (TERLINDUNGI) -->
+    <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button onclick="closeModal('adminModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center justify-between mb-6 border-b pb-4">
+                <div>
+                    <h3 class="font-heading text-xl font-bold text-brand-dark"><i class="fa-solid fa-shield-halved text-brand-orange mr-2"></i> Portal Dashboard Admin UAD</h3>
+                    <p class="text-xs text-gray-500">Akses aman terverifikasi. Validasi akun mahasiswa & pantau statistik kunjungan tenant.</p>
+                </div>
+                <button onclick="logoutAdmin()" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">
+                    <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> Logout Admin
+                </button>
+            </div>
+
+            <!-- Tab Navigasi Admin -->
+            <div class="flex gap-2 border-b mb-6 pb-2">
+                <button onclick="switchAdminTab('validation')" id="tab-val" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white">Validasi Usaha Masuk (<span id="pendingCountBadge">0</span>)</button>
+                <button onclick="switchAdminTab('monitoring')" id="tab-mon" class="px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Monitoring Kunjungan Tenant</button>
+            </div>
+
+            <!-- Konten Tab 1: Validasi -->
+            <div id="adminValidationContent" class="space-y-4">
+                <div id="pendingListContainer"></div>
+            </div>
+
+            <!-- Konten Tab 2: Monitoring Kunjungan -->
+            <div id="adminMonitoringContent" class="space-y-4 hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700">
+                                <th class="p-3 rounded-l-lg">Nama Usaha</th>
+                                <th class="p-3">Pemilik & NIM</th>
+                                <th class="p-3">Kategori</th>
+                                <th class="p-3 text-center rounded-r-lg">Total Kunjungan Pembeli</th>
+                            </tr>
+                        </thead>
+                        <tbody id="monitoringTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: PENDAFTARAN & LOGIN PENJUAL -->
     <div id="registerModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <h3 class="font-heading text-xl font-bold text-brand-dark mb-2"><i class="fa-solid fa-store text-brand-orange mr-2"></i> Pendaftaran Tenant Penjual</h3>
-            <p class="text-xs text-gray-500 mb-6">Masukkan data valid menggunakan akun email UAD agar divalidasi oleh Admin.</p>
+            <p class="text-xs text-gray-500 mb-6">Wajib menggunakan NIM dan email aktif @student.uad.ac.id untuk validasi kampus.</p>
             
             <form id="tenantForm" onsubmit="submitTenant(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1">Nama Pemilik Usaha</label>
-                    <input type="text" id="ownerName" required placeholder="Cth: Ahmad Fauzi" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
+                    <input type="text" id="ownerName" required placeholder="Cth: Restu Setya" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Nomor Induk Mahasiswa (NIM) & Email UAD</label>
-                    <input type="text" id="ownerNimEmail" required placeholder="Cth: 2300018902 / nama@student.uad.ac.id" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
+                    <label class="block text-xs font-bold text-gray-700 mb-1">NIM & Email UAD (Akun Verifikasi)</label>
+                    <input type="text" id="ownerNimEmail" required placeholder="Cth: 25000199 / restu@student.uad.ac.id" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Buat Sandi Penjual</label>
+                    <input type="password" id="sellerPass" required placeholder="Sandi untuk kelola toko..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1">Nama Usaha / Brand</label>
-                    <input type="text" id="businessName" required placeholder="Cth: Dimsum Dahlan Kampus 4" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
+                    <input type="text" id="businessName" required placeholder="Cth: Kripik Singkong Dahlan" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
@@ -187,8 +294,8 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Link Foto / Video Produk (URL Gambar)</label>
-                    <input type="url" id="productImage" required placeholder="https://images.unsplash.com/... (Gunakan link gambar produk)" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Link Foto / Video Produk (URL)</label>
+                    <input type="url" id="productImage" required placeholder="https://images.unsplash.com/..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
@@ -197,73 +304,32 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-700 mb-1">Username Instagram</label>
-                        <input type="text" id="instagramUser" required placeholder="@dimsumdahlan" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
+                        <input type="text" id="instagramUser" required placeholder="@usahaku" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Deskripsi Singkat Usaha</label>
-                    <textarea id="businessDesc" rows="2" required placeholder="Jelaskan produk atau jasa yang kamu tawarkan..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50"></textarea>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Deskripsi Usaha</label>
+                    <textarea id="businessDesc" rows="2" required placeholder="Jelaskan produk atau jasamu..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50"></textarea>
                 </div>
                 <button type="submit" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all">
-                    Kirim Pendaftaran (Menunggu Validasi Admin)
+                    Daftar & Kirim ke Admin
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL 3: PORTAL ADMIN (VALIDASI & MONITORING KUNJUNGAN) -->
-    <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
-            <button onclick="closeModal('adminModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+    <!-- MODAL 5: DETAIL TENANT & REVIEW PEMBELI -->
+    <div id="detailModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button onclick="closeModal('detailModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="flex items-center justify-between mb-6 border-b pb-4">
-                <div>
-                    <h3 class="font-heading text-xl font-bold text-brand-dark"><i class="fa-solid fa-shield-halved text-brand-orange mr-2"></i> Portal Dashboard Admin UAD</h3>
-                    <p class="text-xs text-gray-500">Validasi akun mahasiswa & pantau statistik kunjungan tenant secara real-time.</p>
-                </div>
-                <div class="bg-orange-50 text-brand-orange px-3 py-1.5 rounded-lg text-xs font-bold">
-                    Admin Kampus Active
-                </div>
-            </div>
-
-            <!-- Tab Navigasi Admin -->
-            <div class="flex gap-2 border-b mb-6 pb-2">
-                <button onclick="switchAdminTab('validation')" id="tab-val" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white">Validasi Usaha Masuk (<span id="pendingCountBadge">0</span>)</button>
-                <button onclick="switchAdminTab('monitoring')" id="tab-mon" class="px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Monitoring Kunjungan Tenant</button>
-            </div>
-
-            <!-- Konten Tab 1: Validasi -->
-            <div id="adminValidationContent" class="space-y-4">
-                <div id="pendingListContainer">
-                    <!-- List data pending divalidasi -->
-                </div>
-            </div>
-
-            <!-- Konten Tab 2: Monitoring Kunjungan -->
-            <div id="adminMonitoringContent" class="space-y-4 hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-xs sm:text-sm">
-                        <thead>
-                            <tr class="bg-gray-100 text-gray-700">
-                                <th class="p-3 rounded-l-lg">Nama Usaha</th>
-                                <th class="p-3">Pemilik & NIM</th>
-                                <th class="p-3">Kategori</th>
-                                <th class="p-3 text-center rounded-r-lg">Total Kunjungan Pembeli</th>
-                            </tr>
-                        </thead>
-                        <tbody id="monitoringTableBody">
-                            <!-- Data monitoring -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <div id="modalContent"></div>
         </div>
     </div>
 
-    <!-- JavaScript Logika Aplikasi -->
+    <!-- JavaScript Logika Sistem Keamanan & Multi-Role -->
     <script>
-        // Data Dummy Awal Tenant Terverifikasi
         let tenants = [
             {
                 id: 1,
@@ -275,61 +341,24 @@
                 image: "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80",
                 whatsapp: "6281234567890",
                 instagram: "dimsum.uad",
-                desc: "Dimsum ayam udang homemade buatan mahasiswa Ekonomi Pembangunan UAD. Siap antar area kosan Tamanan dan Kampus 4.",
-                status: "approved", // approved / pending
+                desc: "Dimsum ayam udang homemade buatan mahasiswa Ekonomi Pembangunan UAD.",
+                status: "approved",
                 visits: 142,
                 reviews: [
-                    { name: "Siti Rahma", comment: "Enak banget saus mentainya, pengiriman cepat!", rating: 5 },
-                    { name: "Dimas Anggara", comment: "Mantap buat nemenin ngerjain tugas skripsi.", rating: 4 }
-                ]
-            },
-            {
-                id: 2,
-                ownerName: "Anisa Fitri",
-                nimEmail: "2200012345 / anisa22@student.uad.ac.id",
-                businessName: "Thrifting Kemeja & Hoodie",
-                category: "Fashion & Barang",
-                orderMethod: "Online / PO (WA & IG)",
-                image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=600&q=80",
-                whatsapp: "6289876543210",
-                instagram: "thrift.yk",
-                desc: "Pusat pakaian bekas impor berkualitas tinggi, harga ramah di kantong mahasiswa kosan Yogyakarta.",
-                status: "approved",
-                visits: 98,
-                reviews: [
-                    { name: "Budi Santoso", comment: "Barangnya masih mulus kayak baru!", rating: 5 }
-                ]
-            },
-            {
-                id: 3,
-                ownerName: "Yoga Mahendra",
-                nimEmail: "2300015567 / yoga23@student.uad.ac.id",
-                businessName: "Jasa Desain Grafis & Cetak Banner",
-                category: "Jasa & Kreatif",
-                orderMethod: "Online / PO (WA & IG)",
-                image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80",
-                whatsapp: "6285678901234",
-                instagram: "yoga.creative",
-                desc: "Melayani pembuatan desain banner kegiatan himpunan, logo UMKM, feed Instagram, dan edit video promosi.",
-                status: "approved",
-                visits: 215,
-                reviews: [
-                    { name: "Dewi Lestari", comment: "Pengerjaan cepat dan hasilnya sangat profesional!", rating: 5 }
+                    { name: "Siti Rahma", comment: "Enak banget saus mentainya, pengiriman cepat!", rating: 5 }
                 ]
             }
         ];
 
         let currentCategory = 'all';
 
-        // Render Tenant ke Halaman Utama
         function renderTenants() {
             const container = document.getElementById('tenantContainer');
             container.innerHTML = '';
 
             const filtered = tenants.filter(t => {
                 const matchesCat = currentCategory === 'all' || t.category === currentCategory;
-                const matchesStatus = t.status === 'approved';
-                return matchesCat && matchesStatus;
+                return matchesCat && t.status === 'approved';
             });
 
             document.getElementById('tenantCount').innerText = filtered.length;
@@ -338,7 +367,7 @@
                 container.innerHTML = `
                     <div class="col-span-full text-center py-12 text-gray-400">
                         <i class="fa-solid fa-box-open text-4xl mb-2"></i>
-                        <p class="text-sm">Belum ada tenant pada kategori ini.</p>
+                        <p class="text-sm">Belum ada tenant aktif pada kategori ini.</p>
                     </div>
                 `;
                 return;
@@ -359,7 +388,7 @@
                             </div>
                             <div class="p-5">
                                 <h3 class="font-heading font-bold text-lg text-brand-dark mb-1">${t.businessName}</h3>
-                                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> ${t.ownerName} (${t.nimEmail.split('/')[0].trim()})</p>
+                                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> ${t.ownerName}</p>
                                 <p class="text-xs text-gray-600 line-clamp-2 mb-4">${t.desc}</p>
                             </div>
                         </div>
@@ -367,7 +396,7 @@
                             <button onclick="openDetail(${t.id})" class="flex-1 py-2 bg-gray-100 hover:bg-brand-orange hover:text-white text-brand-dark rounded-xl text-xs font-bold transition-colors text-center">
                                 Detail & Review
                             </button>
-                            <a href="https://wa.me/${t.whatsapp}?text=Halo%20kak,%20saya%20melihat%20usaha%20${encodeURIComponent(t.businessName)}%20di%20ADpreneur%20UAD." target="_blank" class="w-10 h-10 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl flex items-center justify-center transition-colors shadow-sm" title="Chat WhatsApp">
+                            <a href="https://wa.me/${t.whatsapp}" target="_blank" class="w-10 h-10 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl flex items-center justify-center transition-colors shadow-sm" title="Chat WhatsApp">
                                 <i class="fa-brands fa-whatsapp text-lg"></i>
                             </a>
                         </div>
@@ -376,7 +405,6 @@
             });
         }
 
-        // Filter Kategori
         function setCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
@@ -387,24 +415,66 @@
             renderTenants();
         }
 
-        // Pencarian Realtime
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const keyword = e.target.value.toLowerCase();
-            const container = document.getElementById('tenantContainer');
-            const cards = container.children;
-            // Filter sederhana berbasis DOM text
-            Array.from(cards).forEach(card => {
-                const text = card.innerText.toLowerCase();
-                card.style.display = text.includes(keyword) ? 'flex' : 'none';
-            });
-        });
+        // Sistem Autentikasi Admin
+        function openAdminLogin() {
+            closeModal('loginModal');
+            openModal('adminLoginModal');
+        }
 
-        // Buka Detail Tenant & Tambah Kunjungan Otomatis
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('adminUser').value;
+            const p = document.getElementById('adminPass').value;
+
+            // Kredensial ketat sesuai permintaan
+            if(u === 'Adminganteng12' && p === 'UADMAJU') {
+                alert("Login Admin Berhasil! Selamat datang, Pengelola UAD.");
+                closeModal('adminLoginModal');
+                openModal('adminModal');
+                renderPendingValidations();
+                renderMonitoringTable();
+            } else {
+                alert("Login Gagal! Username atau Password Admin salah.");
+            }
+        }
+
+        function logoutAdmin() {
+            closeModal('adminModal');
+            alert("Anda telah keluar dari Portal Admin.");
+        }
+
+        function openSellerLogin() {
+            closeModal('loginModal');
+            openModal('registerModal');
+        }
+
+        function submitTenant(e) {
+            e.preventDefault();
+            const newTenant = {
+                id: tenants.length + 1,
+                ownerName: document.getElementById('ownerName').value,
+                nimEmail: document.getElementById('ownerNimEmail').value,
+                businessName: document.getElementById('businessName').value,
+                category: document.getElementById('businessCategory').value,
+                orderMethod: document.getElementById('orderMethod').value,
+                image: document.getElementById('productImage').value,
+                whatsapp: document.getElementById('whatsappNumber').value,
+                instagram: document.getElementById('instagramUser').value,
+                desc: document.getElementById('businessDesc').value,
+                status: "pending",
+                visits: 0,
+                reviews: []
+            };
+
+            tenants.push(newTenant);
+            alert("Pendaftaran berhasil! Akun dan usaha kamu terdaftar dan menunggu validasi Admin dengan akun UAD.");
+            document.getElementById('tenantForm').reset();
+            closeModal('registerModal');
+        }
+
         function openDetail(id) {
             const tenant = tenants.find(t => t.id === id);
             if (!tenant) return;
-
-            // Tambah jumlah kunjungan otomatis saat dilihat pembeli
             tenant.visits += 1;
 
             let reviewsHTML = '';
@@ -413,7 +483,7 @@
                     <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 mb-2">
                         <div class="flex items-center justify-between mb-1">
                             <span class="text-xs font-bold text-brand-dark">${r.name}</span>
-                            <span class="text-amber-500 text-xs">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                            <span class="text-amber-500 text-xs">${'★'.repeat(r.rating)}</span>
                         </div>
                         <p class="text-xs text-gray-600">${r.comment}</p>
                     </div>
@@ -428,50 +498,43 @@
                     </span>
                 </div>
                 <h2 class="font-heading text-xl font-bold text-brand-dark mb-1">${tenant.businessName}</h2>
-                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> Pemilik: ${tenant.ownerName} (${tenant.nimEmail})</p>
+                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> Pemilik: ${tenant.ownerName}</p>
                 <p class="text-sm text-gray-600 mb-4 bg-gray-50 p-3 rounded-xl border border-gray-100">${tenant.desc}</p>
                 
                 <div class="flex flex-wrap gap-2 mb-6">
                     <a href="https://wa.me/${tenant.whatsapp}" target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm">
                         <i class="fa-brands fa-whatsapp text-base"></i> Hubungi WhatsApp
                     </a>
-                    <a href="https://instagram.com/${tenant.instagram.replace('@','')}" target="_blank" class="flex-1 bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-95 text-white text-xs font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm">
-                        <i class="fa-brands fa-instagram text-base"></i> Buka Instagram
-                    </a>
                 </div>
 
                 <div class="border-t pt-4 mb-4">
-                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Ulasan & Review Pembeli</h4>
+                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Ulasan Pembeli</h4>
                     <div class="max-h-40 overflow-y-auto mb-3 space-y-2">
-                        ${reviewsHTML || '<p class="text-xs text-gray-400">Belum ada ulasan untuk tenant ini.</p>'}
+                        ${reviewsHTML || '<p class="text-xs text-gray-400">Belum ada ulasan.</p>'}
                     </div>
-                    <!-- Form Kirim Review Pembeli Tanpa Login -->
                     <form onsubmit="submitReview(event, ${tenant.id})" class="space-y-2 bg-brand-light p-3 rounded-xl border border-brand-orange/20">
-                        <p class="text-xs font-bold text-brand-dark">Tulis Review / Penilaian Kamu:</p>
+                        <p class="text-xs font-bold text-brand-dark">Tulis Review Pembeli:</p>
                         <div class="grid grid-cols-2 gap-2">
                             <input type="text" id="reviewerName" required placeholder="Nama Pembeli" class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
                             <select id="reviewRating" class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
                                 <option value="5">★★★★★ (Sangat Baik)</option>
                                 <option value="4">★★★★☆ (Baik)</option>
-                                <option value="3">★★★☆☆ (Cukup)</option>
                             </select>
                         </div>
-                        <input type="text" id="reviewComment" required placeholder="Tulis komentar atau ulasan produk..." class="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
+                        <input type="text" id="reviewComment" required placeholder="Tulis komentar ulasan..." class="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
                         <button type="submit" class="w-full py-1.5 bg-brand-orange text-white text-xs font-bold rounded-lg shadow-sm">Kirim Review</button>
                     </form>
                 </div>
             `;
             openModal('detailModal');
-            renderTenants(); // Update jumlah kunjungan di background
+            renderTenants();
         }
 
-        // Kirim Review oleh Pembeli
         function submitReview(e, tenantId) {
             e.preventDefault();
             const name = document.getElementById('reviewerName').value;
             const rating = parseInt(document.getElementById('reviewRating').value);
             const comment = document.getElementById('reviewComment').value;
-
             const tenant = tenants.find(t => t.id === tenantId);
             if (tenant) {
                 tenant.reviews.push({ name, comment, rating });
@@ -480,39 +543,12 @@
             }
         }
 
-        // Pendaftaran Usaha Baru oleh Penjual
-        function submitTenant(e) {
-            e.preventDefault();
-            const newTenant = {
-                id: tenants.length + 1,
-                ownerName: document.getElementById('ownerName').value,
-                nimEmail: document.getElementById('ownerNimEmail').value,
-                businessName: document.getElementById('businessName').value,
-                category: document.getElementById('businessCategory').value,
-                orderMethod: document.getElementById('orderMethod').value,
-                image: document.getElementById('productImage').value,
-                whatsapp: document.getElementById('whatsappNumber').value,
-                instagram: document.getElementById('instagramUser').value,
-                desc: document.getElementById('businessDesc').value,
-                status: "pending", // Masuk antrean validasi admin
-                visits: 0,
-                reviews: []
-            };
-
-            tenants.push(newTenant);
-            alert("Pendaftaran berhasil! Usaha kamu telah masuk ke sistem dan menunggu validasi Admin UAD.");
-            document.getElementById('tenantForm').reset();
-            closeModal('registerModal');
-        }
-
-        // Admin Tab Switcher & Render
         function switchAdminTab(tab) {
             if(tab === 'validation') {
                 document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
                 document.getElementById('tab-mon').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200";
                 document.getElementById('adminValidationContent').classList.remove('hidden');
                 document.getElementById('adminMonitoringContent').classList.add('hidden');
-                renderPendingValidations();
             } else {
                 document.getElementById('tab-mon').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
                 document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200";
@@ -522,7 +558,6 @@
             }
         }
 
-        // Render List Validasi Admin
         function renderPendingValidations() {
             const container = document.getElementById('pendingListContainer');
             const pendingList = tenants.filter(t => t.status === 'pending');
@@ -542,23 +577,17 @@
                             <div>
                                 <h4 class="font-heading font-bold text-sm text-brand-dark">${t.businessName}</h4>
                                 <p class="text-xs text-gray-600">Pemilik: ${t.ownerName} | NIM/Email: <span class="text-brand-orange font-medium">${t.nimEmail}</span></p>
-                                <p class="text-[11px] text-gray-500">Kategori: ${t.category} (${t.orderMethod})</p>
                             </div>
                         </div>
                         <div class="flex gap-2">
-                            <button onclick="approveTenant(${t.id})" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-sm">
-                                <i class="fa-solid fa-check mr-1"></i> ACC / Validasi
-                            </button>
-                            <button onclick="rejectTenant(${t.id})" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-bold shadow-sm">
-                                <i class="fa-solid fa-xmark mr-1"></i> Tolak
-                            </button>
+                            <button onclick="approveTenant(${t.id})" class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-bold">ACC</button>
+                            <button onclick="rejectTenant(${t.id})" class="px-3 py-1.5 bg-rose-600 text-white rounded-lg text-xs font-bold">Tolak</button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        // Render Tabel Monitoring Kunjungan Admin
         function renderMonitoringTable() {
             const tbody = document.getElementById('monitoringTableBody');
             tbody.innerHTML = '';
@@ -581,7 +610,7 @@
             const tenant = tenants.find(t => t.id === id);
             if(tenant) {
                 tenant.status = 'approved';
-                alert(`Usaha "${tenant.businessName}" berhasil divalidasi dan kini resmi tayang di etalase ADpreneur!`);
+                alert(`Usaha "${tenant.businessName}" divalidasi dan resmi tayang!`);
                 renderPendingValidations();
                 renderTenants();
             }
@@ -589,17 +618,14 @@
 
         function rejectTenant(id) {
             tenants = tenants.filter(t => t.id !== id);
-            alert("Pendaftaran usaha ditolak karena tidak memenuhi syarat atau data UAD tidak valid.");
+            alert("Pendaftaran ditolak.");
             renderPendingValidations();
         }
 
-        // Modal Helpers
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        // Inisialisasi awal saat web dimuat
         renderTenants();
-        renderPendingValidations();
     </script>
 </body>
 </html>
