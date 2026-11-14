@@ -38,7 +38,7 @@
     <!-- Top Announcement Banner -->
     <div class="bg-brand-orange text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-sm flex items-center justify-center gap-2">
         <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-        <span>Sistem Sinkronisasi Terpadu: Klik tombol "Sync Data" untuk memperbarui data antar perangkat!</span>
+        <span>Fitur Transfer Data Antar Perangkat (Ekspor/Impor) Aktif untuk Presentasi Camapres!</span>
     </div>
 
     <!-- Navbar -->
@@ -109,9 +109,6 @@
                     <p class="text-xs sm:text-sm text-gray-500">Klik kartu untuk melihat galeri foto/video promosi, ulasan pembeli, dan kontak pesanan</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="manualSyncData()" class="text-xs font-semibold text-brand-orange bg-white hover:bg-brand-light px-3 py-2 rounded-lg border border-gray-200 shadow-sm flex items-center gap-1.5 transition-all">
-                        <i class="fa-solid fa-rotate"></i> Sync Data
-                    </button>
                     <div class="flex items-center gap-2 text-xs font-medium text-gray-600 bg-white px-3 py-2 rounded-lg border border-gray-200 shadow-sm">
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
                         <span id="tenantCount">0</span> Usaha Aktif
@@ -139,9 +136,7 @@
         </div>
     </footer>
 
-    <!-- ========================================== -->
-    <!-- MODAL 1: FORM PENDAFTARAN PENJUAL BARU     -->
-    <!-- ========================================== -->
+    <!-- MODAL 1: FORM PENDAFTARAN PENJUAL BARU -->
     <div id="registerModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
@@ -222,9 +217,7 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- MODAL 2: LOGIN PENJUAL (PESERTA TERDAFTAR)  -->
-    <!-- ========================================== -->
+    <!-- MODAL 2: LOGIN PENJUAL -->
     <div id="sellerLoginModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-sm w-full shadow-2xl p-6 relative">
             <button onclick="closeModal('sellerLoginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
@@ -257,9 +250,7 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- MODAL 3: DASHBOARD PENJUAL (KELOLA MEDIA)  -->
-    <!-- ========================================== -->
+    <!-- MODAL 3: DASHBOARD PENJUAL -->
     <div id="sellerDashboardModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('sellerDashboardModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
@@ -269,9 +260,7 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- MODAL 4: LOGIN ADMIN KAMPUS                -->
-    <!-- ========================================== -->
+    <!-- MODAL 4: LOGIN ADMIN KAMPUS -->
     <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-sm w-full shadow-2xl p-6 relative">
             <button onclick="closeModal('adminLoginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
@@ -301,9 +290,7 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- MODAL 5: DASHBOARD ADMIN (VALIDASI & HAPUS)-->
-    <!-- ========================================== -->
+    <!-- MODAL 5: DASHBOARD ADMIN (DENGAN EKSPOR & IMPOR DATA) -->
     <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('adminModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
@@ -312,11 +299,14 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 border-b pb-4 gap-3">
                 <div>
                     <h3 class="font-heading text-xl font-bold text-brand-dark"><i class="fa-solid fa-shield-halved text-brand-orange mr-2"></i> Portal Dashboard Admin UAD</h3>
-                    <p class="text-xs text-gray-500">Validasi pendaftar baru, pantau kunjungan, atau hapus tenant yang tidak pantas.</p>
+                    <p class="text-xs text-gray-500">Validasi, kelola tenant, atau transfer data antar perangkat (HP & Laptop).</p>
                 </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="manualSyncData()" class="bg-gray-100 hover:bg-gray-200 text-brand-dark px-3 py-1.5 rounded-lg text-xs font-bold">
-                        <i class="fa-solid fa-rotate mr-1"></i> Sync Data
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="exportData()" class="bg-brand-orange hover:bg-orange-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm" title="Salin data dari perangkat ini">
+                        <i class="fa-solid fa-file-export mr-1"></i> Ekspor Data
+                    </button>
+                    <button onclick="importData()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm" title="Tempel data dari perangkat lain">
+                        <i class="fa-solid fa-file-import mr-1"></i> Impor Data
                     </button>
                     <button onclick="logoutAdmin()" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">
                         Logout
@@ -354,9 +344,7 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- MODAL 6: DETAIL TENANT, GALERI & REVIEW    -->
-    <!-- ========================================== -->
+    <!-- MODAL 6: DETAIL TENANT & REVIEW -->
     <div id="detailModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('detailModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
@@ -366,11 +354,9 @@
         </div>
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- SCRIPT LOGIKA LOCALSTORAGE & IMPORT/EXPORT SYNC TOOL                      -->
-    <!-- ========================================================================= -->
+    <!-- SCRIPT LOGIKA APLIKASI -->
     <script>
-        const STORAGE_KEY = 'adpreneur_uad_master_data_v2';
+        const STORAGE_KEY = 'adpreneur_uad_master_data_v3';
 
         const defaultTenants = [
             {
@@ -401,15 +387,10 @@
         let currentCategory = 'all';
         let loggedInSellerId = null;
 
-        // Load & Save Data
         function loadData() {
             const data = localStorage.getItem(STORAGE_KEY);
             if (data) {
-                try {
-                    tenants = JSON.parse(data);
-                } catch (e) {
-                    tenants = [...defaultTenants];
-                }
+                try { tenants = JSON.parse(data); } catch (e) { tenants = [...defaultTenants]; }
             } else {
                 tenants = [...defaultTenants];
                 saveData();
@@ -423,16 +404,37 @@
             renderMonitoringTable();
         }
 
-        // Fitur Sinkronisasi Cepat Antar Perangkat via Clipboard/Export-Import sederhana ATAU Auto-Refresh
-        function manualSyncData() {
+        // FITUR EKSPOR & IMPOR DATA ANTAR PERANGKAT (HP <-> LAPTOP)
+        function exportData() {
             loadData();
-            renderTenants();
-            renderPendingValidations();
-            renderMonitoringTable();
-            alert("Data berhasil disegarkan dari memori perangkat!");
+            const dataStr = JSON.stringify(tenants, null, 2);
+            navigator.clipboard.writeText(dataStr).then(() => {
+                alert("Data berhasil disalin! Silakan buka Admin di Laptop, lalu klik 'Impor Data' dan tempel kodenya.");
+            }).catch(() => {
+                prompt("Salin kode data ini manual:", dataStr);
+            });
         }
 
-        // Render Etalase Utama
+        function importData() {
+            const jsonStr = prompt("Tempel (paste) kode data JSON yang disalin dari HP di sini:");
+            if (!jsonStr) return;
+            try {
+                const parsed = JSON.parse(jsonStr);
+                if (Array.isArray(parsed)) {
+                    tenants = parsed;
+                    saveData();
+                    alert("Data berhasil disinkronkan dan diperbarui secara sempurna!");
+                    renderPendingValidations();
+                    renderMonitoringTable();
+                    renderTenants();
+                } else {
+                    alert("Format data tidak valid.");
+                }
+            } catch (e) {
+                alert("Gagal membaca kode data. Pastikan teks yang ditempel benar.");
+            }
+        }
+
         function renderTenants() {
             const container = document.getElementById('tenantContainer');
             const keyword = document.getElementById('searchInput').value.toLowerCase();
@@ -501,7 +503,6 @@
             renderTenants();
         }
 
-        // Pendaftaran Tenant Baru
         function submitTenant(e) {
             e.preventDefault();
             loadData();
@@ -511,7 +512,7 @@
 
             const exists = tenants.some(t => t.email.toLowerCase() === emailVal.toLowerCase() || t.nim === nimVal);
             if (exists) {
-                alert("NIM atau Email UAD ini sudah terdaftar! Silakan langsung login melalui menu Login Penjual.");
+                alert("NIM atau Email UAD ini sudah terdaftar! Silakan login melalui menu Login Penjual.");
                 return;
             }
 
@@ -542,7 +543,6 @@
             closeModal('registerModal');
         }
 
-        // Login Penjual
         function handleSellerLogin(e) {
             e.preventDefault();
             loadData();
@@ -676,7 +676,6 @@
             renderSellerDashboard();
         }
 
-        // Admin Authentication & Actions
         function handleAdminLogin(e) {
             e.preventDefault();
             const u = document.getElementById('adminUser').value.trim();
@@ -818,7 +817,6 @@
             renderTenants();
         }
 
-        // Detail Tenant & Review
         function openDetail(id) {
             loadData();
             const tenant = tenants.find(t => t.id === id);
@@ -922,7 +920,6 @@
         function openModal(id) { document.getElementById(id).classList.add('flex'); document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.remove('flex'); document.getElementById(id).classList.add('hidden'); }
 
-        // Inisialisasi awal
         loadData();
         renderTenants();
     </script>
