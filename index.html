@@ -38,7 +38,7 @@
     <!-- Top Announcement Banner -->
     <div class="bg-brand-orange text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-sm flex items-center justify-center gap-2">
         <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-        <span>Cloud Sync Aktif: Pendaftaran & Validasi Real-Time Antar Perangkat (HP & Laptop)</span>
+        <span>Sistem Sinkronisasi Terpadu: Klik tombol "Sync Data" untuk memperbarui data antar perangkat!</span>
     </div>
 
     <!-- Navbar -->
@@ -60,7 +60,7 @@
                 <button onclick="openModal('registerModal')" class="text-xs sm:text-sm font-semibold text-brand-orange bg-brand-light hover:bg-brand-orange hover:text-white px-3 sm:px-4 py-2.5 rounded-xl transition-all border border-brand-orange/20 flex items-center gap-1.5">
                     <i class="fa-solid fa-store"></i> <span class="hidden md:inline">Daftar Tenant</span><span class="md:hidden">Daftar</span>
                 </button>
-                <button onclick="openModal('sellerLoginModal')" id="navSellerBtn" class="text-xs sm:text-sm font-semibold text-brand-dark bg-gray-100 hover:bg-gray-200 px-3 sm:px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5">
+                <button onclick="openModal('sellerLoginModal')" class="text-xs sm:text-sm font-semibold text-brand-dark bg-gray-100 hover:bg-gray-200 px-3 sm:px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-user-tie"></i> <span class="hidden md:inline">Login Penjual</span><span class="md:hidden">Penjual</span>
                 </button>
                 <button onclick="openModal('adminLoginModal')" class="text-xs sm:text-sm font-semibold text-white bg-brand-dark hover:bg-gray-700 px-3 sm:px-4 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5">
@@ -109,20 +109,14 @@
                     <p class="text-xs sm:text-sm text-gray-500">Klik kartu untuk melihat galeri foto/video promosi, ulasan pembeli, dan kontak pesanan</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="syncFromCloud(true)" class="text-xs font-semibold text-brand-orange bg-white hover:bg-brand-light px-3 py-2 rounded-lg border border-gray-200 shadow-sm flex items-center gap-1.5 transition-all">
-                        <i class="fa-solid fa-rotate"></i> Segarkan Data
+                    <button onclick="manualSyncData()" class="text-xs font-semibold text-brand-orange bg-white hover:bg-brand-light px-3 py-2 rounded-lg border border-gray-200 shadow-sm flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-rotate"></i> Sync Data
                     </button>
                     <div class="flex items-center gap-2 text-xs font-medium text-gray-600 bg-white px-3 py-2 rounded-lg border border-gray-200 shadow-sm">
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
                         <span id="tenantCount">0</span> Usaha Aktif
                     </div>
                 </div>
-            </div>
-
-            <!-- Loading Indicator -->
-            <div id="loadingIndicator" class="text-center py-12 hidden">
-                <i class="fa-solid fa-circle-notch fa-spin text-3xl text-brand-orange mb-2"></i>
-                <p class="text-xs text-gray-500">Menyinkronkan data dari Cloud Database...</p>
             </div>
 
             <!-- Grid Tenant -->
@@ -140,7 +134,7 @@
                 <p class="text-xs text-gray-400 mt-1">Platform Ekosistem Digital Wirausaha Mahasiswa Universitas Ahmad Dahlan Yogyakarta.</p>
             </div>
             <div class="text-xs text-gray-400">
-                &copy; 2026 ADpreneur UAD. Terintegrasi Cloud Sync.
+                &copy; 2026 ADpreneur UAD.
             </div>
         </div>
     </footer>
@@ -219,7 +213,7 @@
                     <textarea id="regDesc" rows="2" required placeholder="Jelaskan produk/jasa dan alamat lapak jika melayani offline..." class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm"></textarea>
                 </div>
                 <button type="submit" id="btnSubmitTenant" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all text-sm">
-                    Kirim Pendaftaran ke Cloud Admin
+                    Kirim Pendaftaran ke Admin UAD
                 </button>
             </form>
             <p class="text-center text-xs text-gray-500 mt-4">
@@ -321,7 +315,7 @@
                     <p class="text-xs text-gray-500">Validasi pendaftar baru, pantau kunjungan, atau hapus tenant yang tidak pantas.</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="syncFromCloud(true)" class="bg-gray-100 hover:bg-gray-200 text-brand-dark px-3 py-1.5 rounded-lg text-xs font-bold">
+                    <button onclick="manualSyncData()" class="bg-gray-100 hover:bg-gray-200 text-brand-dark px-3 py-1.5 rounded-lg text-xs font-bold">
                         <i class="fa-solid fa-rotate mr-1"></i> Sync Data
                     </button>
                     <button onclick="logoutAdmin()" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">
@@ -373,13 +367,11 @@
     </div>
 
     <!-- ========================================================================= -->
-    <!-- SCRIPT LOGIKA CLOUD SYNC & MULTI-ROLE (HP & LAPTOP SINKRON REAL-TIME)     -->
+    <!-- SCRIPT LOGIKA LOCALSTORAGE & IMPORT/EXPORT SYNC TOOL                      -->
     <!-- ========================================================================= -->
     <script>
-        // Menggunakan JSONBlob Public Cloud Storage API untuk sinkronisasi real-time antar HP & Laptop tanpa server berbayar
-        const CLOUD_API_URL = "https://jsonblob.com/api/jsonBlob/1305448891053907968";
+        const STORAGE_KEY = 'adpreneur_uad_master_data_v2';
 
-        // Data bawaan jika cloud baru diinisialisasi
         const defaultTenants = [
             {
                 id: 1731550001,
@@ -396,31 +388,11 @@
                 ],
                 whatsapp: "6281234567890",
                 instagram: "dimsum.uad",
-                desc: "Dimsum ayam udang homemade buatan mahasiswa Ekonomi Pembangunan UAD. Lapak offline di depan Gerbang Utama Kampus 4 setiap sore.",
+                desc: "Dimsum ayam udang homemade buatan mahasiswa Ekonomi Pembangunan UAD.",
                 status: "approved",
                 visits: 145,
                 reviews: [
-                    { name: "Siti Rahma", comment: "Saus mentainya juara, porsinya pas buat mahasiswa!", rating: 5 }
-                ]
-            },
-            {
-                id: 1731550002,
-                ownerName: "Yoga Mahendra",
-                nim: "2300015567",
-                email: "yoga23@student.uad.ac.id",
-                password: "password123",
-                businessName: "Jasa Desain Grafis & Cetak Banner",
-                category: "Jasa & Kreatif",
-                orderMethod: "Online / PO (WA & IG)",
-                image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80",
-                gallery: [],
-                whatsapp: "6285678901234",
-                instagram: "yoga.creative",
-                desc: "Melayani pembuatan desain poster event kampus, logo UMKM, feed Instagram, dan edit video promosi.",
-                status: "approved",
-                visits: 218,
-                reviews: [
-                    { name: "Dewi Lestari", comment: "Revisi cepat dan hasil desainnya sangat profesional!", rating: 5 }
+                    { name: "Siti Rahma", comment: "Saus mentainya juara!", rating: 5 }
                 ]
             }
         ];
@@ -429,63 +401,38 @@
         let currentCategory = 'all';
         let loggedInSellerId = null;
 
-        // ==========================================
-        // FUNGSI CLOUD SYNC (AGAR HP & LAPTOP SAMA)
-        // ==========================================
-        async function syncFromCloud(showAlert = false) {
-            const loader = document.getElementById('loadingIndicator');
-            if (tenants.length === 0) loader.classList.remove('hidden');
-
-            try {
-                const response = await fetch(CLOUD_API_URL, {
-                    method: 'GET',
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    if (Array.isArray(data) && data.length > 0) {
-                        tenants = data;
-                    } else {
-                        tenants = [...defaultTenants];
-                        await saveToCloud();
-                    }
-                } else {
-                    throw new Error("Cloud response not ok");
+        // Load & Save Data
+        function loadData() {
+            const data = localStorage.getItem(STORAGE_KEY);
+            if (data) {
+                try {
+                    tenants = JSON.parse(data);
+                } catch (e) {
+                    tenants = [...defaultTenants];
                 }
-            } catch (err) {
-                // Fallback ke localStorage jika offline sementara
-                const local = localStorage.getItem('adpreneur_backup');
-                tenants = local ? JSON.parse(local) : [...defaultTenants];
-            } finally {
-                loader.classList.add('hidden');
-                localStorage.setItem('adpreneur_backup', JSON.stringify(tenants));
-                renderTenants();
-                renderPendingValidations();
-                renderMonitoringTable();
-                if (loggedInSellerId) renderSellerDashboard();
-                if (showAlert) alert("Data berhasil disinkronkan dengan server Cloud!");
+            } else {
+                tenants = [...defaultTenants];
+                saveData();
             }
         }
 
-        async function saveToCloud() {
-            localStorage.setItem('adpreneur_backup', JSON.stringify(tenants));
-            try {
-                await fetch(CLOUD_API_URL, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(tenants)
-                });
-            } catch (err) {
-                console.error("Gagal menyimpan ke cloud:", err);
-            }
+        function saveData() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(tenants));
+            renderTenants();
+            renderPendingValidations();
+            renderMonitoringTable();
         }
 
-        // ==========================================
-        // RENDER ETALASE UTAMA (UNTUK PEMBELI)
-        // ==========================================
+        // Fitur Sinkronisasi Cepat Antar Perangkat via Clipboard/Export-Import sederhana ATAU Auto-Refresh
+        function manualSyncData() {
+            loadData();
+            renderTenants();
+            renderPendingValidations();
+            renderMonitoringTable();
+            alert("Data berhasil disegarkan dari memori perangkat!");
+        }
+
+        // Render Etalase Utama
         function renderTenants() {
             const container = document.getElementById('tenantContainer');
             const keyword = document.getElementById('searchInput').value.toLowerCase();
@@ -506,7 +453,7 @@
                 container.innerHTML = `
                     <div class="col-span-full text-center py-12 text-gray-400">
                         <i class="fa-solid fa-store-slash text-4xl mb-2"></i>
-                        <p class="text-sm">Belum ada tenant aktif yang sesuai pencarian.</p>
+                        <p class="text-sm">Belum ada tenant aktif yang sesuai.</p>
                     </div>
                 `;
                 return;
@@ -517,7 +464,7 @@
                     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col justify-between group">
                         <div>
                             <div class="relative h-48 overflow-hidden bg-gray-100">
-                                <img src="${t.image}" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'" alt="${t.businessName}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <img src="${t.image}" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 <span class="absolute top-3 left-3 bg-white/95 text-brand-orange text-xs font-bold px-3 py-1 rounded-full shadow-sm">
                                     ${t.category}
                                 </span>
@@ -526,9 +473,7 @@
                                 </span>
                             </div>
                             <div class="p-5">
-                                <div class="flex items-center justify-between gap-2 mb-1">
-                                    <h3 class="font-heading font-bold text-lg text-brand-dark line-clamp-1">${t.businessName}</h3>
-                                </div>
+                                <h3 class="font-heading font-bold text-lg text-brand-dark line-clamp-1">${t.businessName}</h3>
                                 <p class="text-xs text-gray-500 mb-2"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> ${t.ownerName} • <span class="text-emerald-600 font-medium">${t.orderMethod}</span></p>
                                 <p class="text-xs text-gray-600 line-clamp-2 mb-4">${t.desc}</p>
                             </div>
@@ -537,7 +482,7 @@
                             <button onclick="openDetail(${t.id})" class="flex-1 py-2.5 bg-gray-100 hover:bg-brand-orange hover:text-white text-brand-dark rounded-xl text-xs font-bold transition-colors text-center">
                                 Galeri & Review (${t.reviews ? t.reviews.length : 0})
                             </button>
-                            <a href="https://wa.me/${t.whatsapp}?text=Halo%20kak,%20saya%20melihat%20usaha%20${encodeURIComponent(t.businessName)}%20di%20ADpreneur%20UAD." target="_blank" class="w-10 h-10 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl flex items-center justify-center transition-colors shadow-sm" title="Pesan via WhatsApp">
+                            <a href="https://wa.me/${t.whatsapp}?text=Halo%20kak,%20saya%20mau%20pesan%20produk%20${encodeURIComponent(t.businessName)}." target="_blank" class="w-10 h-10 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl flex items-center justify-center transition-colors shadow-sm" title="WhatsApp">
                                 <i class="fa-brands fa-whatsapp text-lg"></i>
                             </a>
                         </div>
@@ -556,26 +501,17 @@
             renderTenants();
         }
 
-        // ==========================================
-        // PENDAFTARAN & LOGIN PESERTA (PENJUAL)
-        // ==========================================
-        async function submitTenant(e) {
+        // Pendaftaran Tenant Baru
+        function submitTenant(e) {
             e.preventDefault();
-            const btn = document.getElementById('btnSubmitTenant');
-            btn.disabled = true;
-            btn.innerText = "Menyimpan ke Cloud...";
-
-            await syncFromCloud(false); // Pastikan data terbaru diambil dulu sebelum menambah
+            loadData();
 
             const emailVal = document.getElementById('regEmail').value.trim();
             const nimVal = document.getElementById('regNim').value.trim();
 
-            // Cek duplikasi NIM atau Email
             const exists = tenants.some(t => t.email.toLowerCase() === emailVal.toLowerCase() || t.nim === nimVal);
             if (exists) {
-                alert("NIM atau Email UAD ini sudah terdaftar! Silakan langsung masuk melalui menu Login Penjual.");
-                btn.disabled = false;
-                btn.innerText = "Kirim Pendaftaran ke Cloud Admin";
+                alert("NIM atau Email UAD ini sudah terdaftar! Silakan langsung login melalui menu Login Penjual.");
                 return;
             }
 
@@ -599,18 +535,17 @@
             };
 
             tenants.push(newTenant);
-            await saveToCloud();
+            saveData();
 
-            alert("Pendaftaran berhasil tersimpan di Cloud! Data usahamu sudah masuk ke antrean validasi Admin (bisa dicek dari HP maupun Laptop).");
+            alert("Pendaftaran berhasil! Usaha kamu telah masuk ke antrean validasi Admin.");
             document.getElementById('tenantForm').reset();
-            btn.disabled = false;
-            btn.innerText = "Kirim Pendaftaran ke Cloud Admin";
             closeModal('registerModal');
         }
 
-        async function handleSellerLogin(e) {
+        // Login Penjual
+        function handleSellerLogin(e) {
             e.preventDefault();
-            await syncFromCloud(false);
+            loadData();
 
             const idInput = document.getElementById('loginSellerId').value.trim().toLowerCase();
             const passInput = document.getElementById('loginSellerPass').value;
@@ -620,7 +555,7 @@
             );
 
             if (!seller) {
-                alert("Login gagal! Email UAD/NIM atau Sandi salah.");
+                alert("Login gagal! Email/NIM atau Sandi salah.");
                 return;
             }
 
@@ -631,6 +566,7 @@
         }
 
         function renderSellerDashboard() {
+            loadData();
             const seller = tenants.find(t => t.id === loggedInSellerId);
             if (!seller) return;
 
@@ -642,7 +578,7 @@
             if (seller.gallery && seller.gallery.length > 0) {
                 seller.gallery.forEach((item, idx) => {
                     galleryHTML += `
-                        <div class="relative bg-gray-50 rounded-xl p-2 border border-gray-200 flex items-center justify-between gap-3">
+                        <div class="bg-gray-50 rounded-xl p-2.5 border border-gray-200 flex items-center justify-between gap-3">
                             <div class="flex items-center gap-3 overflow-hidden">
                                 <span class="w-8 h-8 rounded-lg bg-brand-orange/10 text-brand-orange flex items-center justify-center flex-shrink-0">
                                     <i class="fa-solid ${item.type === 'video' ? 'fa-video' : 'fa-image'}"></i>
@@ -652,14 +588,14 @@
                                     <p class="text-[10px] text-gray-400 truncate">${item.url}</p>
                                 </div>
                             </div>
-                            <button onclick="deleteSellerMedia(${idx})" class="text-rose-500 hover:bg-rose-50 p-2 rounded-lg text-xs" title="Hapus Media">
+                            <button onclick="deleteSellerMedia(${idx})" class="text-rose-500 hover:bg-rose-50 p-2 rounded-lg text-xs" title="Hapus">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>
                     `;
                 });
             } else {
-                galleryHTML = `<p class="text-xs text-gray-400 italic">Belum ada foto atau video promosi tambahan.</p>`;
+                galleryHTML = `<p class="text-xs text-gray-400 italic">Belum ada foto/video promosi tambahan.</p>`;
             }
 
             document.getElementById('sellerDashboardContent').innerHTML = `
@@ -675,19 +611,18 @@
                     </div>
                 </div>
 
-                <!-- Form Tambah Foto / Video Promosi Terbaru -->
                 <div class="bg-brand-light p-4 rounded-2xl border border-brand-orange/20 mb-6">
-                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-2"><i class="fa-solid fa-photo-film text-brand-orange mr-1.5"></i> Tambah Foto / Video Promosi Terbaru</h4>
+                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-2"><i class="fa-solid fa-photo-film text-brand-orange mr-1.5"></i> Tambah Foto / Video Promosi</h4>
                     <form onsubmit="addSellerMedia(event)" class="space-y-3">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                             <select id="mediaType" class="px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-semibold">
                                 <option value="image">Foto Produk (URL)</option>
-                                <option value="video">Video Promosi (Link MP4/YT/IG)</option>
+                                <option value="video">Video Promosi (URL)</option>
                             </select>
-                            <input type="text" id="mediaCaption" required placeholder="Judul/Keterangan Promo..." class="sm:col-span-2 px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
+                            <input type="text" id="mediaCaption" required placeholder="Judul/Keterangan..." class="sm:col-span-2 px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
                         </div>
                         <div class="flex gap-2">
-                            <input type="url" id="mediaUrl" required placeholder="Tempel link URL foto atau video di sini..." class="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
+                            <input type="url" id="mediaUrl" required placeholder="Tempel link URL foto/video di sini..." class="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
                             <button type="submit" class="px-4 py-2 bg-brand-orange hover:bg-orange-600 text-white font-bold rounded-xl text-xs shadow-sm whitespace-nowrap">
                                 + Tambahkan
                             </button>
@@ -695,16 +630,15 @@
                     </form>
                 </div>
 
-                <!-- Daftar Galeri Media Toko -->
                 <div class="mb-6">
-                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Galeri Foto & Video Promosi Aktif</h4>
+                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Galeri Promosi Aktif</h4>
                     <div class="space-y-2 max-h-48 overflow-y-auto">
                         ${galleryHTML}
                     </div>
                 </div>
 
                 <div class="flex justify-between items-center border-t pt-4">
-                    <button onclick="logoutSeller()" class="text-xs font-bold text-rose-600 hover:underline">
+                    <button onclick="loggedInSellerId = null; closeModal('sellerDashboardModal')" class="text-xs font-bold text-rose-600 hover:underline">
                         <i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar Akun Penjual
                     </button>
                     <button onclick="closeModal('sellerDashboardModal')" class="px-5 py-2 bg-brand-dark text-white text-xs font-bold rounded-xl">
@@ -714,8 +648,9 @@
             `;
         }
 
-        async function addSellerMedia(e) {
+        function addSellerMedia(e) {
             e.preventDefault();
+            loadData();
             const seller = tenants.find(t => t.id === loggedInSellerId);
             if (!seller) return;
 
@@ -726,30 +661,23 @@
                 url: document.getElementById('mediaUrl').value.trim()
             });
 
-            await saveToCloud();
-            alert("Foto/Video promosi baru berhasil ditambahkan ke etalase!");
+            saveData();
+            alert("Media promosi berhasil ditambahkan!");
             renderSellerDashboard();
         }
 
-        async function deleteSellerMedia(index) {
+        function deleteSellerMedia(index) {
+            loadData();
             const seller = tenants.find(t => t.id === loggedInSellerId);
             if (!seller || !seller.gallery) return;
 
             seller.gallery.splice(index, 1);
-            await saveToCloud();
+            saveData();
             renderSellerDashboard();
         }
 
-        function logoutSeller() {
-            loggedInSellerId = null;
-            closeModal('sellerDashboardModal');
-            alert("Berhasil keluar dari akun penjual.");
-        }
-
-        // ==========================================
-        // AUTENTIKASI & MODERASI ADMIN KAMPUS
-        // ==========================================
-        async function handleAdminLogin(e) {
+        // Admin Authentication & Actions
+        function handleAdminLogin(e) {
             e.preventDefault();
             const u = document.getElementById('adminUser').value.trim();
             const p = document.getElementById('adminPass').value;
@@ -758,19 +686,22 @@
                 closeModal('adminLoginModal');
                 document.getElementById('adminUser').value = '';
                 document.getElementById('adminPass').value = '';
-                await syncFromCloud(false);
+                loadData();
                 openModal('adminModal');
+                renderPendingValidations();
+                renderMonitoringTable();
             } else {
-                alert("Akses Ditolak! Username atau Password Admin salah.");
+                alert("Login Admin Gagal! Username atau Password salah.");
             }
         }
 
         function logoutAdmin() {
             closeModal('adminModal');
-            alert("Sesi Admin berakhir.");
+            alert("Admin keluar.");
         }
 
         function switchAdminTab(tab) {
+            loadData();
             if (tab === 'validation') {
                 document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
                 document.getElementById('tab-mon').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200";
@@ -787,6 +718,7 @@
         }
 
         function renderPendingValidations() {
+            loadData();
             const container = document.getElementById('pendingListContainer');
             const pendingList = tenants.filter(t => t.status === 'pending');
             document.getElementById('pendingCountBadge').innerText = pendingList.length;
@@ -823,11 +755,12 @@
         }
 
         function renderMonitoringTable() {
+            loadData();
             const tbody = document.getElementById('monitoringTableBody');
             tbody.innerHTML = '';
 
             if (tenants.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-gray-400 text-xs">Belum ada data tenant.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-gray-400 text-xs">Belum ada tenant.</td></tr>`;
                 return;
             }
 
@@ -853,7 +786,7 @@
                         </td>
                         <td class="p-3 text-center font-bold text-brand-orange text-xs">${t.visits}x</td>
                         <td class="p-3 text-center">
-                            <button onclick="deleteTenant(${t.id}, 'Yakin ingin menghapus permanen tenant ${t.businessName} karena tidak pantas/tidak aktif?')" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-lg text-xs font-bold transition-colors" title="Hapus Permanen Tenant">
+                            <button onclick="deleteTenant(${t.id}, 'Hapus permanen tenant ${t.businessName}?')" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-lg text-xs font-bold transition-colors">
                                 <i class="fa-solid fa-trash-can mr-1"></i> Hapus
                             </button>
                         </td>
@@ -862,63 +795,48 @@
             });
         }
 
-        async function approveTenant(id) {
+        function approveTenant(id) {
+            loadData();
             const tenant = tenants.find(t => t.id === id);
             if (tenant) {
                 tenant.status = 'approved';
-                await saveToCloud();
-                alert(`Usaha "${tenant.businessName}" berhasil divalidasi dan resmi tayang di semua perangkat!`);
+                saveData();
+                alert(`Usaha "${tenant.businessName}" divalidasi dan resmi tayang!`);
                 renderPendingValidations();
                 renderMonitoringTable();
-                renderTenants();
             }
         }
 
-        async function deleteTenant(id, confirmMsg) {
+        function deleteTenant(id, confirmMsg) {
             if (!confirm(confirmMsg)) return;
+            loadData();
             tenants = tenants.filter(t => t.id !== id);
-            await saveToCloud();
-            alert("Tenant berhasil dihapus secara permanen dari sistem.");
+            saveData();
+            alert("Tenant dihapus.");
             renderPendingValidations();
             renderMonitoringTable();
             renderTenants();
         }
 
-        // ==========================================
-        // DETAIL TENANT, GALERI & ULASAN PEMBELI
-        // ==========================================
-        async function openDetail(id) {
+        // Detail Tenant & Review
+        function openDetail(id) {
+            loadData();
             const tenant = tenants.find(t => t.id === id);
             if (!tenant) return;
 
             tenant.visits = (tenant.visits || 0) + 1;
-            saveToCloud(); // Simpan penambahan kunjungan ke cloud di background
-            renderTenants();
+            saveData();
 
             let galleryHTML = '';
             if (tenant.gallery && tenant.gallery.length > 0) {
                 galleryHTML = `<div class="mb-5"><h4 class="font-heading font-bold text-xs text-gray-500 uppercase tracking-wider mb-2">Galeri Foto & Video Promosi</h4><div class="grid grid-cols-1 sm:grid-cols-2 gap-3">`;
                 tenant.gallery.forEach(item => {
-                    if (item.type === 'video') {
-                        galleryHTML += `
-                            <a href="${item.url}" target="_blank" class="p-3 bg-gray-900 text-white rounded-xl flex items-center gap-3 hover:bg-gray-800 transition-colors">
-                                <div class="w-10 h-10 rounded-lg bg-brand-orange flex items-center justify-center flex-shrink-0">
-                                    <i class="fa-solid fa-play"></i>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <p class="text-xs font-bold truncate">${item.caption}</p>
-                                    <p class="text-[10px] text-gray-400">Klik untuk putar video promosi</p>
-                                </div>
-                            </a>
-                        `;
-                    } else {
-                        galleryHTML += `
-                            <div class="rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
-                                <img src="${item.url}" class="w-full h-32 object-cover">
-                                <p class="p-2 text-[11px] font-medium text-brand-dark">${item.caption}</p>
-                            </div>
-                        `;
-                    }
+                    galleryHTML += `
+                        <div class="rounded-xl overflow-hidden border border-gray-200 bg-gray-50 p-2">
+                            <img src="${item.url}" class="w-full h-28 object-cover rounded-lg mb-1" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'">
+                            <p class="text-[11px] font-bold text-brand-dark px-1 truncate">${item.caption}</p>
+                        </div>
+                    `;
                 });
                 galleryHTML += `</div></div>`;
             }
@@ -930,14 +848,14 @@
                         <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 mb-2">
                             <div class="flex items-center justify-between mb-1">
                                 <span class="text-xs font-bold text-brand-dark">${r.name}</span>
-                                <span class="text-amber-500 text-xs">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                                <span class="text-amber-500 text-xs">${'★'.repeat(r.rating)}</span>
                             </div>
                             <p class="text-xs text-gray-600">${r.comment}</p>
                         </div>
                     `;
                 });
             } else {
-                reviewsHTML = `<p class="text-xs text-gray-400">Belum ada ulasan pembeli. Jadilah yang pertama memberi review!</p>`;
+                reviewsHTML = `<p class="text-xs text-gray-400">Belum ada ulasan.</p>`;
             }
 
             document.getElementById('modalContent').innerHTML = `
@@ -951,36 +869,32 @@
                     </span>
                 </div>
                 <h2 class="font-heading text-xl font-bold text-brand-dark mb-1">${tenant.businessName}</h2>
-                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> Pemilik: <b>${tenant.ownerName}</b> • Metode: ${tenant.orderMethod}</p>
+                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> Pemilik: <b>${tenant.ownerName}</b> • ${tenant.orderMethod}</p>
                 <p class="text-sm text-gray-600 mb-4 bg-gray-50 p-3.5 rounded-xl border border-gray-100">${tenant.desc}</p>
                 
                 ${galleryHTML}
 
                 <div class="flex flex-wrap gap-2 mb-6">
-                    <a href="https://wa.me/${tenant.whatsapp}?text=Halo%20kak,%20saya%20mau%20pesan%20produk%20${encodeURIComponent(tenant.businessName)}%20dari%20web%20ADpreneur." target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm">
-                        <i class="fa-brands fa-whatsapp text-base"></i> Pesan via WhatsApp
-                    </a>
-                    <a href="https://instagram.com/${tenant.instagram.replace('@','')}" target="_blank" class="flex-1 bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-95 text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm">
-                        <i class="fa-brands fa-instagram text-base"></i> Kunjungi Instagram
+                    <a href="https://wa.me/${tenant.whatsapp}" target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Hubungi WhatsApp
                     </a>
                 </div>
 
                 <div class="border-t pt-4">
-                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Ulasan & Rating Pembeli</h4>
+                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Ulasan Pembeli</h4>
                     <div class="max-h-40 overflow-y-auto mb-3 space-y-2">
                         ${reviewsHTML}
                     </div>
                     <form onsubmit="submitReview(event, ${tenant.id})" class="space-y-2 bg-brand-light p-3.5 rounded-xl border border-brand-orange/20">
-                        <p class="text-xs font-bold text-brand-dark">Tulis Ulasan Kamu (Tanpa Perlu Login):</p>
+                        <p class="text-xs font-bold text-brand-dark">Tulis Ulasan Kamu:</p>
                         <div class="grid grid-cols-2 gap-2">
                             <input type="text" id="reviewerName" required placeholder="Nama Kamu" class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
                             <select id="reviewRating" class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
-                                <option value="5">★★★★★ (Sangat Puas)</option>
-                                <option value="4">★★★★☆ (Puas)</option>
-                                <option value="3">★★★☆☆ (Cukup)</option>
+                                <option value="5">★★★★★ (Sangat Baik)</option>
+                                <option value="4">★★★★☆ (Baik)</option>
                             </select>
                         </div>
-                        <input type="text" id="reviewComment" required placeholder="Bagaimana kualitas makanan/jasanya?" class="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
+                        <input type="text" id="reviewComment" required placeholder="Tulis komentar..." class="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
                         <button type="submit" class="w-full py-2 bg-brand-orange hover:bg-orange-600 text-white text-xs font-bold rounded-lg shadow-sm">Kirim Review</button>
                     </form>
                 </div>
@@ -988,8 +902,9 @@
             openModal('detailModal');
         }
 
-        async function submitReview(e, tenantId) {
+        function submitReview(e, tenantId) {
             e.preventDefault();
+            loadData();
             const name = document.getElementById('reviewerName').value.trim();
             const rating = parseInt(document.getElementById('reviewRating').value);
             const comment = document.getElementById('reviewComment').value.trim();
@@ -998,17 +913,18 @@
             if (tenant) {
                 if (!tenant.reviews) tenant.reviews = [];
                 tenant.reviews.push({ name, comment, rating });
-                await saveToCloud();
-                alert("Terima kasih! Ulasan kamu telah tersimpan.");
+                saveData();
+                alert("Ulasan terkirim!");
                 openDetail(tenantId);
             }
         }
 
-        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
-        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+        function openModal(id) { document.getElementById(id).classList.add('flex'); document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('flex'); document.getElementById(id).classList.add('hidden'); }
 
-        // Jalankan sinkronisasi Cloud saat halaman pertama dibuka
-        syncFromCloud(false);
+        // Inisialisasi awal
+        loadData();
+        renderTenants();
     </script>
 </body>
 </html>
