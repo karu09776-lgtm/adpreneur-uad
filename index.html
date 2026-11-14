@@ -6,7 +6,7 @@
     <title>ADpreneur | Ahmad Dahlan Preneur - Food Court Digital Mahasiswa UAD</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -36,36 +36,35 @@
 <body class="bg-brand-graybg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between">
 
     <!-- Top Announcement Banner -->
-    <div class="bg-brand-orange text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-sm">
-        🔒 Sistem Keamanan Terverifikasi: Portal Admin & Penjual Terintegrasi Ahmad Dahlan Preneur UAD!
+    <div class="bg-brand-orange text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-sm flex items-center justify-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+        <span>Cloud Sync Aktif: Pendaftaran & Validasi Real-Time Antar Perangkat (HP & Laptop)</span>
     </div>
 
     <!-- Navbar -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <!-- Logo Kustom ADpreneur -->
             <a href="#" class="flex items-center gap-3 group">
                 <svg class="h-10 w-auto" viewBox="0 0 220 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Huruf A bergaya custom oranye -->
                     <path d="M12 42L25 12H34L47 42H39.5L36.3 33H22.7L19.5 42H12ZM24.7 27H34.3L29.5 14L24.7 27Z" fill="#F26522"/>
-                    <!-- Huruf D bertautan -->
                     <path d="M49 12H59C66.5 12 72 17.5 72 27C72 36.5 66.5 42 59 42H49V12ZM56.5 36H59C62.8 36 65 33 65 27C65 21 62.8 18 59 18H56.5V36Z" fill="#F26522"/>
-                    <!-- Garis Dinamis Oranye -->
                     <path d="M5 45C25 48 45 42 75 42" stroke="#F26522" stroke-width="3" stroke-linecap="round"/>
-                    <!-- Teks Preneur (Abu-abu gelap) -->
                     <text x="78" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="28" fill="#4B4E53">preneur</text>
-                    <!-- Subteks Ahmad Dahlan Preneur -->
                     <text x="79" y="47" font-family="'Inter', sans-serif" font-weight="500" font-size="8" fill="#6B7280" letter-spacing="1.5">Ahmad Dahlan Preneur</text>
                 </svg>
             </a>
 
-            <!-- Navigation Actions & Role Switcher -->
-            <div class="flex items-center gap-2 sm:gap-4">
-                <button onclick="openModal('registerModal')" class="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-brand-orange bg-brand-light hover:bg-brand-orange hover:text-white px-4 py-2.5 rounded-xl transition-all duration-200 border border-brand-orange/20">
-                    <i class="fa-solid fa-store"></i> Daftar Tenant
+            <!-- Navigation Actions -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button onclick="openModal('registerModal')" class="text-xs sm:text-sm font-semibold text-brand-orange bg-brand-light hover:bg-brand-orange hover:text-white px-3 sm:px-4 py-2.5 rounded-xl transition-all border border-brand-orange/20 flex items-center gap-1.5">
+                    <i class="fa-solid fa-store"></i> <span class="hidden md:inline">Daftar Tenant</span><span class="md:hidden">Daftar</span>
                 </button>
-                <button onclick="openModal('loginModal')" class="inline-flex items-center gap-2 text-sm font-semibold text-white bg-brand-dark hover:bg-gray-700 px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200">
-                    <i class="fa-solid fa-lock"></i> Login Sistem
+                <button onclick="openModal('sellerLoginModal')" id="navSellerBtn" class="text-xs sm:text-sm font-semibold text-brand-dark bg-gray-100 hover:bg-gray-200 px-3 sm:px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-tie"></i> <span class="hidden md:inline">Login Penjual</span><span class="md:hidden">Penjual</span>
+                </button>
+                <button onclick="openModal('adminLoginModal')" class="text-xs sm:text-sm font-semibold text-white bg-brand-dark hover:bg-gray-700 px-3 sm:px-4 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved"></i> <span class="hidden md:inline">Admin</span>
                 </button>
             </div>
         </div>
@@ -74,45 +73,56 @@
     <!-- Main Content -->
     <main class="flex-grow">
         <!-- Hero Section -->
-        <section class="relative bg-gradient-to-b from-brand-light to-brand-graybg py-12 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
+        <section class="relative bg-gradient-to-b from-brand-light to-brand-graybg py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
             <div class="max-w-4xl mx-auto text-center">
-                <span class="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full text-xs font-bold bg-brand-orange/10 text-brand-orange mb-6">
-                    <i class="fa-solid fa-graduation-cap"></i> Resmi Kampus UAD Yogyakarta
+                <span class="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full text-xs font-bold bg-brand-orange/10 text-brand-orange mb-4">
+                    <i class="fa-solid fa-graduation-cap"></i> Ekosistem Wirausaha Mahasiswa UAD
                 </span>
-                <h1 class="font-heading text-3xl sm:text-5xl font-extrabold text-brand-dark tracking-tight mb-6">
+                <h1 class="font-heading text-3xl sm:text-5xl font-extrabold text-brand-dark tracking-tight mb-4">
                     Food Court Digital Mahasiswa <span class="text-brand-orange">UAD</span>
                 </h1>
-                <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                    Pusat direktori resmi produk kuliner, fashion, hingga jasa kreatif karya mahasiswa Universitas Ahmad Dahlan. Terverifikasi aman, transparan, dan terhubung langsung ke penjual!
+                <p class="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto mb-8">
+                    Direktori terpusat produk kuliner, barang, dan jasa mahasiswa Universitas Ahmad Dahlan. Tervalidasi aman oleh Admin Kampus.
                 </p>
 
                 <!-- Search & Filter Bar -->
-                <div class="bg-white p-3 sm:p-4 rounded-2xl shadow-lg border border-gray-100 max-w-3xl mx-auto flex flex-col md:flex-row gap-3">
+                <div class="bg-white p-3 rounded-2xl shadow-lg border border-gray-100 max-w-3xl mx-auto flex flex-col md:flex-row gap-3">
                     <div class="flex-1 relative flex items-center">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-400"></i>
-                        <input type="text" id="searchInput" placeholder="Cari nama usaha, makanan, atau jasa..." class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/50 focus:bg-white">
+                        <input type="text" id="searchInput" oninput="renderTenants()" placeholder="Cari usaha, makanan, atau jasa mahasiswa..." class="w-full pl-11 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/50 focus:bg-white">
                     </div>
                     <div class="flex gap-2 overflow-x-auto pb-1 md:pb-0">
-                        <button onclick="setCategory('all')" id="btn-all" class="cat-btn px-4 py-3 rounded-xl text-xs font-bold bg-brand-orange text-white whitespace-nowrap shadow-sm transition-all">Semua</button>
-                        <button onclick="setCategory('Kuliner')" id="btn-Kuliner" class="cat-btn px-4 py-3 rounded-xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-all">Kuliner</button>
-                        <button onclick="setCategory('Fashion & Barang')" id="btn-Fashion" class="cat-btn px-4 py-3 rounded-xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-all">Fashion & Barang</button>
-                        <button onclick="setCategory('Jasa & Kreatif')" id="btn-Jasa" class="cat-btn px-4 py-3 rounded-xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-all">Jasa Mahasiswa</button>
+                        <button onclick="setCategory('all')" id="btn-all" class="cat-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-orange text-white whitespace-nowrap shadow-sm">Semua</button>
+                        <button onclick="setCategory('Kuliner')" id="btn-Kuliner" class="cat-btn px-4 py-2.5 rounded-xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap">Kuliner</button>
+                        <button onclick="setCategory('Fashion & Barang')" id="btn-Fashion" class="cat-btn px-4 py-2.5 rounded-xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap">Fashion & Barang</button>
+                        <button onclick="setCategory('Jasa & Kreatif')" id="btn-Jasa" class="cat-btn px-4 py-2.5 rounded-xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap">Jasa Mahasiswa</button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Tenant Directory Section -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
                 <div>
                     <h2 class="font-heading text-2xl font-bold text-brand-dark">Etalase Tenant Mahasiswa</h2>
-                    <p class="text-sm text-gray-500">Pilih tenant favoritmu untuk pemesanan langsung via WhatsApp / Instagram</p>
+                    <p class="text-xs sm:text-sm text-gray-500">Klik kartu untuk melihat galeri foto/video promosi, ulasan pembeli, dan kontak pesanan</p>
                 </div>
-                <div class="flex items-center gap-2 text-xs font-medium text-gray-500 bg-white px-3 py-2 rounded-lg border border-gray-200 shadow-sm self-start sm:self-auto">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span id="tenantCount">0</span> Usaha Terverifikasi Aktif
+                <div class="flex items-center gap-3">
+                    <button onclick="syncFromCloud(true)" class="text-xs font-semibold text-brand-orange bg-white hover:bg-brand-light px-3 py-2 rounded-lg border border-gray-200 shadow-sm flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-rotate"></i> Segarkan Data
+                    </button>
+                    <div class="flex items-center gap-2 text-xs font-medium text-gray-600 bg-white px-3 py-2 rounded-lg border border-gray-200 shadow-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span id="tenantCount">0</span> Usaha Aktif
+                    </div>
                 </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="text-center py-12 hidden">
+                <i class="fa-solid fa-circle-notch fa-spin text-3xl text-brand-orange mb-2"></i>
+                <p class="text-xs text-gray-500">Menyinkronkan data dari Cloud Database...</p>
             </div>
 
             <!-- Grid Tenant -->
@@ -123,124 +133,224 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-brand-dark text-white py-12 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+    <footer class="bg-brand-dark text-white py-10 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
             <div>
                 <span class="font-heading text-xl font-bold text-white tracking-wide">AD<span class="text-brand-orange">preneur</span></span>
                 <p class="text-xs text-gray-400 mt-1">Platform Ekosistem Digital Wirausaha Mahasiswa Universitas Ahmad Dahlan Yogyakarta.</p>
             </div>
             <div class="text-xs text-gray-400">
-                &copy; 2026 ADpreneur UAD. Dirancang khusus untuk kemandirian ekonomi mahasiswa.
+                &copy; 2026 ADpreneur UAD. Terintegrasi Cloud Sync.
             </div>
         </div>
     </footer>
 
-    <!-- MODAL 1: PILIH LOGIN / PORTAL AKSES -->
-    <div id="loginModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 relative">
-            <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+    <!-- ========================================== -->
+    <!-- MODAL 1: FORM PENDAFTARAN PENJUAL BARU     -->
+    <!-- ========================================== -->
+    <div id="registerModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <h3 class="font-heading text-xl font-bold text-brand-dark mb-2"><i class="fa-solid fa-lock text-brand-orange mr-2"></i> Pilih Portal Masuk</h3>
-            <p class="text-xs text-gray-500 mb-6">Silakan pilih hak akses akun Anda ke dalam sistem ADpreneur.</p>
+            <h3 class="font-heading text-xl font-bold text-brand-dark mb-1"><i class="fa-solid fa-store text-brand-orange mr-2"></i> Pendaftaran Tenant Baru</h3>
+            <p class="text-xs text-gray-500 mb-5">Daftarkan usahamu sekali saja. Setelah di-ACC Admin, kamu bisa login untuk menambah foto/video promosi kapan saja.</p>
             
-            <div class="space-y-3">
-                <button onclick="openAdminLogin()" class="w-full p-4 bg-brand-light hover:bg-orange-100 border border-brand-orange/30 rounded-xl flex items-center justify-between group transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-brand-orange text-white flex items-center justify-center font-bold">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <div class="text-left">
-                            <h4 class="font-bold text-sm text-brand-dark">Login Admin Kampus</h4>
-                            <p class="text-xs text-gray-500">Validasi & monitoring sistem</p>
-                        </div>
+            <form id="tenantForm" onsubmit="submitTenant(event)" class="space-y-3.5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Nama Lengkap Mahasiswa</label>
+                        <input type="text" id="regOwnerName" required placeholder="Cth: Restu Setya" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                     </div>
-                    <i class="fa-solid fa-chevron-right text-brand-orange group-hover:translate-x-1 transition-transform"></i>
-                </button>
-
-                <button onclick="openSellerLogin()" class="w-full p-4 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl flex items-center justify-between group transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-brand-dark text-white flex items-center justify-center font-bold">
-                            <i class="fa-solid fa-store"></i>
-                        </div>
-                        <div class="text-left">
-                            <h4 class="font-bold text-sm text-brand-dark">Login Akun Penjual (Mahasiswa)</h4>
-                            <p class="text-xs text-gray-500">Kelola toko & produk usaha</p>
-                        </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">NIM Mahasiswa UAD</label>
+                        <input type="text" id="regNim" required placeholder="Cth: 25000199" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                     </div>
-                    <i class="fa-solid fa-chevron-right text-gray-400 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Email UAD (Untuk Login)</label>
+                        <input type="email" id="regEmail" required placeholder="nama@student.uad.ac.id" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Buat Sandi Akun</label>
+                        <input type="password" id="regPassword" required placeholder="Minimal 6 karakter" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                    </div>
+                </div>
+                <hr class="border-gray-100">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Nama Usaha / Brand</label>
+                    <input type="text" id="regBusinessName" required placeholder="Cth: Dimsum Dahlan Kampus 4" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Kategori</label>
+                        <select id="regCategory" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                            <option value="Kuliner">Kuliner</option>
+                            <option value="Fashion & Barang">Fashion & Barang</option>
+                            <option value="Jasa & Kreatif">Jasa Mahasiswa</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Metode Pemesanan</label>
+                        <select id="regMethod" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                            <option value="Online / PO (WA & IG)">Online / PO (WA & IG)</option>
+                            <option value="Offline (Lapak Kampus)">Offline (Lapak Kampus)</option>
+                            <option value="Online & Offline">Online & Offline</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Link Foto Utama Produk (URL Gambar)</label>
+                    <input type="url" id="regImage" required placeholder="https://images.unsplash.com/..." class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Nomor WhatsApp</label>
+                        <input type="text" id="regWa" required placeholder="62812345678" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Username Instagram</label>
+                        <input type="text" id="regIg" required placeholder="@dimsumdahlan" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Deskripsi & Lokasi Lapak Offline (Jika Ada)</label>
+                    <textarea id="regDesc" rows="2" required placeholder="Jelaskan produk/jasa dan alamat lapak jika melayani offline..." class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm"></textarea>
+                </div>
+                <button type="submit" id="btnSubmitTenant" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all text-sm">
+                    Kirim Pendaftaran ke Cloud Admin
                 </button>
-            </div>
+            </form>
+            <p class="text-center text-xs text-gray-500 mt-4">
+                Sudah pernah mendaftar? <button onclick="closeModal('registerModal'); openModal('sellerLoginModal')" class="text-brand-orange font-bold hover:underline">Login Penjual di sini</button>
+            </p>
         </div>
     </div>
 
-    <!-- MODAL 2: FORM LOGIN ADMIN (DENGAN KREDENSIAL KETAT) -->
-    <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <!-- ========================================== -->
+    <!-- MODAL 2: LOGIN PENJUAL (PESERTA TERDAFTAR)  -->
+    <!-- ========================================== -->
+    <div id="sellerLoginModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-sm w-full shadow-2xl p-6 relative">
-            <button onclick="closeModal('adminLoginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+            <button onclick="closeModal('sellerLoginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 bg-brand-orange/10 text-brand-orange rounded-2xl mx-auto flex items-center justify-center text-xl mb-2">
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 bg-brand-light text-brand-orange rounded-2xl mx-auto flex items-center justify-center text-xl mb-2">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h3 class="font-heading text-lg font-bold text-brand-dark">Login Peserta Tenant</h3>
+                <p class="text-xs text-gray-500">Masuk untuk mengelola toko & menambah foto/video promosi</p>
+            </div>
+
+            <form onsubmit="handleSellerLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Email UAD atau NIM</label>
+                    <input type="text" id="loginSellerId" required placeholder="nama@student.uad.ac.id atau NIM" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Sandi Akun</label>
+                    <input type="password" id="loginSellerPass" required placeholder="Masukkan sandi..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                </div>
+                <button type="submit" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all text-sm">
+                    Masuk ke Dashboard Toko
+                </button>
+            </form>
+            <p class="text-center text-xs text-gray-500 mt-4">
+                Belum punya akun usaha? <button onclick="closeModal('sellerLoginModal'); openModal('registerModal')" class="text-brand-orange font-bold hover:underline">Daftar Baru</button>
+            </p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL 3: DASHBOARD PENJUAL (KELOLA MEDIA)  -->
+    <!-- ========================================== -->
+    <div id="sellerDashboardModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button onclick="closeModal('sellerDashboardModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="sellerDashboardContent"></div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL 4: LOGIN ADMIN KAMPUS                -->
+    <!-- ========================================== -->
+    <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full shadow-2xl p-6 relative">
+            <button onclick="closeModal('adminLoginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 bg-brand-dark text-white rounded-2xl mx-auto flex items-center justify-center text-xl mb-2">
                     <i class="fa-solid fa-shield-halved"></i>
                 </div>
                 <h3 class="font-heading text-lg font-bold text-brand-dark">Login Admin Kampus</h3>
-                <p class="text-xs text-gray-500">Masukkan username & sandi resmi pengelola</p>
+                <p class="text-xs text-gray-500">Akses khusus tim verifikasi & monitoring UAD</p>
             </div>
 
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1">Username Admin</label>
-                    <input type="text" id="adminUser" required placeholder="Masukkan username..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
+                    <input type="text" id="adminUser" required placeholder="Masukkan username..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1">Password / Sandi</label>
-                    <input type="password" id="adminPass" required placeholder="Masukkan password..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
+                    <input type="password" id="adminPass" required placeholder="Masukkan password..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                 </div>
-                <button type="submit" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all text-sm">
+                <button type="submit" class="w-full py-3 bg-brand-dark text-white font-bold rounded-xl shadow-md hover:bg-gray-800 transition-all text-sm">
                     Masuk ke Portal Admin
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL 3: DASHBOARD ADMIN (TERLINDUNGI) -->
+    <!-- ========================================== -->
+    <!-- MODAL 5: DASHBOARD ADMIN (VALIDASI & HAPUS)-->
+    <!-- ========================================== -->
     <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
-            <button onclick="closeModal('adminModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+            <button onclick="closeModal('adminModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="flex items-center justify-between mb-6 border-b pb-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 border-b pb-4 gap-3">
                 <div>
                     <h3 class="font-heading text-xl font-bold text-brand-dark"><i class="fa-solid fa-shield-halved text-brand-orange mr-2"></i> Portal Dashboard Admin UAD</h3>
-                    <p class="text-xs text-gray-500">Akses aman terverifikasi. Validasi akun mahasiswa & pantau statistik kunjungan tenant.</p>
+                    <p class="text-xs text-gray-500">Validasi pendaftar baru, pantau kunjungan, atau hapus tenant yang tidak pantas.</p>
                 </div>
-                <button onclick="logoutAdmin()" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">
-                    <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> Logout Admin
-                </button>
+                <div class="flex items-center gap-2">
+                    <button onclick="syncFromCloud(true)" class="bg-gray-100 hover:bg-gray-200 text-brand-dark px-3 py-1.5 rounded-lg text-xs font-bold">
+                        <i class="fa-solid fa-rotate mr-1"></i> Sync Data
+                    </button>
+                    <button onclick="logoutAdmin()" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">
+                        Logout
+                    </button>
+                </div>
             </div>
 
             <!-- Tab Navigasi Admin -->
             <div class="flex gap-2 border-b mb-6 pb-2">
-                <button onclick="switchAdminTab('validation')" id="tab-val" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white">Validasi Usaha Masuk (<span id="pendingCountBadge">0</span>)</button>
-                <button onclick="switchAdminTab('monitoring')" id="tab-mon" class="px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Monitoring Kunjungan Tenant</button>
+                <button onclick="switchAdminTab('validation')" id="tab-val" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white">Antrean Validasi (<span id="pendingCountBadge">0</span>)</button>
+                <button onclick="switchAdminTab('monitoring')" id="tab-mon" class="px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Monitoring & Kelola Tenant Aktif</button>
             </div>
 
-            <!-- Konten Tab 1: Validasi -->
+            <!-- Tab 1: Antrean Validasi -->
             <div id="adminValidationContent" class="space-y-4">
                 <div id="pendingListContainer"></div>
             </div>
 
-            <!-- Konten Tab 2: Monitoring Kunjungan -->
+            <!-- Tab 2: Monitoring & Hapus Tenant -->
             <div id="adminMonitoringContent" class="space-y-4 hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-xs sm:text-sm">
                         <thead>
                             <tr class="bg-gray-100 text-gray-700">
-                                <th class="p-3 rounded-l-lg">Nama Usaha</th>
-                                <th class="p-3">Pemilik & NIM</th>
-                                <th class="p-3">Kategori</th>
-                                <th class="p-3 text-center rounded-r-lg">Total Kunjungan Pembeli</th>
+                                <th class="p-3 rounded-l-lg">Usaha & Status</th>
+                                <th class="p-3">Pemilik & NIM/Email</th>
+                                <th class="p-3 text-center">Kunjungan</th>
+                                <th class="p-3 text-center rounded-r-lg">Aksi Moderasi</th>
                             </tr>
                         </thead>
                         <tbody id="monitoringTableBody"></tbody>
@@ -250,115 +360,144 @@
         </div>
     </div>
 
-    <!-- MODAL 4: PENDAFTARAN & LOGIN PENJUAL -->
-    <div id="registerModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
-            <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 class="font-heading text-xl font-bold text-brand-dark mb-2"><i class="fa-solid fa-store text-brand-orange mr-2"></i> Pendaftaran Tenant Penjual</h3>
-            <p class="text-xs text-gray-500 mb-6">Wajib menggunakan NIM dan email aktif @student.uad.ac.id untuk validasi kampus.</p>
-            
-            <form id="tenantForm" onsubmit="submitTenant(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Nama Pemilik Usaha</label>
-                    <input type="text" id="ownerName" required placeholder="Cth: Restu Setya" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">NIM & Email UAD (Akun Verifikasi)</label>
-                    <input type="text" id="ownerNimEmail" required placeholder="Cth: 25000199 / restu@student.uad.ac.id" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Buat Sandi Penjual</label>
-                    <input type="password" id="sellerPass" required placeholder="Sandi untuk kelola toko..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Nama Usaha / Brand</label>
-                    <input type="text" id="businessName" required placeholder="Cth: Kripik Singkong Dahlan" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Kategori Usaha</label>
-                        <select id="businessCategory" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
-                            <option value="Kuliner">Kuliner</option>
-                            <option value="Fashion & Barang">Fashion & Barang</option>
-                            <option value="Jasa & Kreatif">Jasa Mahasiswa</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Metode Pesan</label>
-                        <select id="orderMethod" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
-                            <option value="Online / PO (WA & IG)">Online / PO (WA & IG)</option>
-                            <option value="Offline (Lapak Kampus)">Offline (Lapak Kampus)</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Link Foto / Video Produk (URL)</label>
-                    <input type="url" id="productImage" required placeholder="https://images.unsplash.com/..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Nomor WhatsApp</label>
-                        <input type="text" id="whatsappNumber" required placeholder="62812345678" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Username Instagram</label>
-                        <input type="text" id="instagramUser" required placeholder="@usahaku" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Deskripsi Usaha</label>
-                    <textarea id="businessDesc" rows="2" required placeholder="Jelaskan produk atau jasamu..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-orange/50"></textarea>
-                </div>
-                <button type="submit" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all">
-                    Daftar & Kirim ke Admin
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL 5: DETAIL TENANT & REVIEW PEMBELI -->
+    <!-- ========================================== -->
+    <!-- MODAL 6: DETAIL TENANT, GALERI & REVIEW    -->
+    <!-- ========================================== -->
     <div id="detailModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
-            <button onclick="closeModal('detailModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-xl w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+            <button onclick="closeModal('detailModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div id="modalContent"></div>
         </div>
     </div>
 
-    <!-- JavaScript Logika Sistem Keamanan & Multi-Role -->
+    <!-- ========================================================================= -->
+    <!-- SCRIPT LOGIKA CLOUD SYNC & MULTI-ROLE (HP & LAPTOP SINKRON REAL-TIME)     -->
+    <!-- ========================================================================= -->
     <script>
-        let tenants = [
+        // Menggunakan JSONBlob Public Cloud Storage API untuk sinkronisasi real-time antar HP & Laptop tanpa server berbayar
+        const CLOUD_API_URL = "https://jsonblob.com/api/jsonBlob/1305448891053907968";
+
+        // Data bawaan jika cloud baru diinisialisasi
+        const defaultTenants = [
             {
-                id: 1,
+                id: 1731550001,
                 ownerName: "Rizky Pratama",
-                nimEmail: "2300019234 / rizky23@student.uad.ac.id",
+                nim: "2300019234",
+                email: "rizky23@student.uad.ac.id",
+                password: "password123",
                 businessName: "Dimsum Kampus 4 UAD",
                 category: "Kuliner",
-                orderMethod: "Online / PO (WA & IG)",
+                orderMethod: "Online & Offline",
                 image: "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80",
+                gallery: [
+                    { type: "image", url: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=600&q=80", caption: "Paket Dimsum Mentai Spesial" }
+                ],
                 whatsapp: "6281234567890",
                 instagram: "dimsum.uad",
-                desc: "Dimsum ayam udang homemade buatan mahasiswa Ekonomi Pembangunan UAD.",
+                desc: "Dimsum ayam udang homemade buatan mahasiswa Ekonomi Pembangunan UAD. Lapak offline di depan Gerbang Utama Kampus 4 setiap sore.",
                 status: "approved",
-                visits: 142,
+                visits: 145,
                 reviews: [
-                    { name: "Siti Rahma", comment: "Enak banget saus mentainya, pengiriman cepat!", rating: 5 }
+                    { name: "Siti Rahma", comment: "Saus mentainya juara, porsinya pas buat mahasiswa!", rating: 5 }
+                ]
+            },
+            {
+                id: 1731550002,
+                ownerName: "Yoga Mahendra",
+                nim: "2300015567",
+                email: "yoga23@student.uad.ac.id",
+                password: "password123",
+                businessName: "Jasa Desain Grafis & Cetak Banner",
+                category: "Jasa & Kreatif",
+                orderMethod: "Online / PO (WA & IG)",
+                image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80",
+                gallery: [],
+                whatsapp: "6285678901234",
+                instagram: "yoga.creative",
+                desc: "Melayani pembuatan desain poster event kampus, logo UMKM, feed Instagram, dan edit video promosi.",
+                status: "approved",
+                visits: 218,
+                reviews: [
+                    { name: "Dewi Lestari", comment: "Revisi cepat dan hasil desainnya sangat profesional!", rating: 5 }
                 ]
             }
         ];
 
+        let tenants = [];
         let currentCategory = 'all';
+        let loggedInSellerId = null;
 
+        // ==========================================
+        // FUNGSI CLOUD SYNC (AGAR HP & LAPTOP SAMA)
+        // ==========================================
+        async function syncFromCloud(showAlert = false) {
+            const loader = document.getElementById('loadingIndicator');
+            if (tenants.length === 0) loader.classList.remove('hidden');
+
+            try {
+                const response = await fetch(CLOUD_API_URL, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        tenants = data;
+                    } else {
+                        tenants = [...defaultTenants];
+                        await saveToCloud();
+                    }
+                } else {
+                    throw new Error("Cloud response not ok");
+                }
+            } catch (err) {
+                // Fallback ke localStorage jika offline sementara
+                const local = localStorage.getItem('adpreneur_backup');
+                tenants = local ? JSON.parse(local) : [...defaultTenants];
+            } finally {
+                loader.classList.add('hidden');
+                localStorage.setItem('adpreneur_backup', JSON.stringify(tenants));
+                renderTenants();
+                renderPendingValidations();
+                renderMonitoringTable();
+                if (loggedInSellerId) renderSellerDashboard();
+                if (showAlert) alert("Data berhasil disinkronkan dengan server Cloud!");
+            }
+        }
+
+        async function saveToCloud() {
+            localStorage.setItem('adpreneur_backup', JSON.stringify(tenants));
+            try {
+                await fetch(CLOUD_API_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(tenants)
+                });
+            } catch (err) {
+                console.error("Gagal menyimpan ke cloud:", err);
+            }
+        }
+
+        // ==========================================
+        // RENDER ETALASE UTAMA (UNTUK PEMBELI)
+        // ==========================================
         function renderTenants() {
             const container = document.getElementById('tenantContainer');
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
             container.innerHTML = '';
 
             const filtered = tenants.filter(t => {
                 const matchesCat = currentCategory === 'all' || t.category === currentCategory;
-                return matchesCat && t.status === 'approved';
+                const matchesStatus = t.status === 'approved';
+                const matchesSearch = t.businessName.toLowerCase().includes(keyword) || 
+                                      t.desc.toLowerCase().includes(keyword) || 
+                                      t.ownerName.toLowerCase().includes(keyword);
+                return matchesCat && matchesStatus && matchesSearch;
             });
 
             document.getElementById('tenantCount').innerText = filtered.length;
@@ -366,8 +505,8 @@
             if (filtered.length === 0) {
                 container.innerHTML = `
                     <div class="col-span-full text-center py-12 text-gray-400">
-                        <i class="fa-solid fa-box-open text-4xl mb-2"></i>
-                        <p class="text-sm">Belum ada tenant aktif pada kategori ini.</p>
+                        <i class="fa-solid fa-store-slash text-4xl mb-2"></i>
+                        <p class="text-sm">Belum ada tenant aktif yang sesuai pencarian.</p>
                     </div>
                 `;
                 return;
@@ -378,25 +517,27 @@
                     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col justify-between group">
                         <div>
                             <div class="relative h-48 overflow-hidden bg-gray-100">
-                                <img src="${t.image}" alt="${t.businessName}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                                <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-brand-orange text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                                <img src="${t.image}" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'" alt="${t.businessName}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <span class="absolute top-3 left-3 bg-white/95 text-brand-orange text-xs font-bold px-3 py-1 rounded-full shadow-sm">
                                     ${t.category}
                                 </span>
-                                <span class="absolute bottom-3 right-3 bg-black/60 text-white text-[11px] px-2.5 py-1 rounded-lg backdrop-blur-sm flex items-center gap-1">
+                                <span class="absolute bottom-3 right-3 bg-black/65 text-white text-[11px] px-2.5 py-1 rounded-lg backdrop-blur-sm flex items-center gap-1">
                                     <i class="fa-solid fa-eye"></i> ${t.visits} Kunjungan
                                 </span>
                             </div>
                             <div class="p-5">
-                                <h3 class="font-heading font-bold text-lg text-brand-dark mb-1">${t.businessName}</h3>
-                                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> ${t.ownerName}</p>
+                                <div class="flex items-center justify-between gap-2 mb-1">
+                                    <h3 class="font-heading font-bold text-lg text-brand-dark line-clamp-1">${t.businessName}</h3>
+                                </div>
+                                <p class="text-xs text-gray-500 mb-2"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> ${t.ownerName} • <span class="text-emerald-600 font-medium">${t.orderMethod}</span></p>
                                 <p class="text-xs text-gray-600 line-clamp-2 mb-4">${t.desc}</p>
                             </div>
                         </div>
                         <div class="p-5 pt-0 flex items-center justify-between gap-2 border-t border-gray-50 mt-auto pt-3">
-                            <button onclick="openDetail(${t.id})" class="flex-1 py-2 bg-gray-100 hover:bg-brand-orange hover:text-white text-brand-dark rounded-xl text-xs font-bold transition-colors text-center">
-                                Detail & Review
+                            <button onclick="openDetail(${t.id})" class="flex-1 py-2.5 bg-gray-100 hover:bg-brand-orange hover:text-white text-brand-dark rounded-xl text-xs font-bold transition-colors text-center">
+                                Galeri & Review (${t.reviews ? t.reviews.length : 0})
                             </button>
-                            <a href="https://wa.me/${t.whatsapp}" target="_blank" class="w-10 h-10 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl flex items-center justify-center transition-colors shadow-sm" title="Chat WhatsApp">
+                            <a href="https://wa.me/${t.whatsapp}?text=Halo%20kak,%20saya%20melihat%20usaha%20${encodeURIComponent(t.businessName)}%20di%20ADpreneur%20UAD." target="_blank" class="w-10 h-10 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl flex items-center justify-center transition-colors shadow-sm" title="Pesan via WhatsApp">
                                 <i class="fa-brands fa-whatsapp text-lg"></i>
                             </a>
                         </div>
@@ -408,147 +549,234 @@
         function setCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn px-4 py-3 rounded-xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap transition-all";
+                btn.className = "cat-btn px-4 py-2.5 rounded-xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap";
             });
             const activeBtn = cat === 'all' ? document.getElementById('btn-all') : document.getElementById('btn-' + cat.split(' ')[0]);
-            if(activeBtn) activeBtn.className = "cat-btn px-4 py-3 rounded-xl text-xs font-bold bg-brand-orange text-white whitespace-nowrap shadow-sm transition-all";
+            if(activeBtn) activeBtn.className = "cat-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-orange text-white whitespace-nowrap shadow-sm";
             renderTenants();
         }
 
-        // Sistem Autentikasi Admin
-        function openAdminLogin() {
-            closeModal('loginModal');
-            openModal('adminLoginModal');
-        }
-
-        function handleAdminLogin(e) {
+        // ==========================================
+        // PENDAFTARAN & LOGIN PESERTA (PENJUAL)
+        // ==========================================
+        async function submitTenant(e) {
             e.preventDefault();
-            const u = document.getElementById('adminUser').value;
-            const p = document.getElementById('adminPass').value;
+            const btn = document.getElementById('btnSubmitTenant');
+            btn.disabled = true;
+            btn.innerText = "Menyimpan ke Cloud...";
 
-            // Kredensial ketat sesuai permintaan
-            if(u === 'Adminganteng12' && p === 'UADMAJU') {
-                alert("Login Admin Berhasil! Selamat datang, Pengelola UAD.");
-                closeModal('adminLoginModal');
-                openModal('adminModal');
-                renderPendingValidations();
-                renderMonitoringTable();
-            } else {
-                alert("Login Gagal! Username atau Password Admin salah.");
+            await syncFromCloud(false); // Pastikan data terbaru diambil dulu sebelum menambah
+
+            const emailVal = document.getElementById('regEmail').value.trim();
+            const nimVal = document.getElementById('regNim').value.trim();
+
+            // Cek duplikasi NIM atau Email
+            const exists = tenants.some(t => t.email.toLowerCase() === emailVal.toLowerCase() || t.nim === nimVal);
+            if (exists) {
+                alert("NIM atau Email UAD ini sudah terdaftar! Silakan langsung masuk melalui menu Login Penjual.");
+                btn.disabled = false;
+                btn.innerText = "Kirim Pendaftaran ke Cloud Admin";
+                return;
             }
-        }
 
-        function logoutAdmin() {
-            closeModal('adminModal');
-            alert("Anda telah keluar dari Portal Admin.");
-        }
-
-        function openSellerLogin() {
-            closeModal('loginModal');
-            openModal('registerModal');
-        }
-
-        function submitTenant(e) {
-            e.preventDefault();
             const newTenant = {
-                id: tenants.length + 1,
-                ownerName: document.getElementById('ownerName').value,
-                nimEmail: document.getElementById('ownerNimEmail').value,
-                businessName: document.getElementById('businessName').value,
-                category: document.getElementById('businessCategory').value,
-                orderMethod: document.getElementById('orderMethod').value,
-                image: document.getElementById('productImage').value,
-                whatsapp: document.getElementById('whatsappNumber').value,
-                instagram: document.getElementById('instagramUser').value,
-                desc: document.getElementById('businessDesc').value,
+                id: Date.now(),
+                ownerName: document.getElementById('regOwnerName').value.trim(),
+                nim: nimVal,
+                email: emailVal,
+                password: document.getElementById('regPassword').value,
+                businessName: document.getElementById('regBusinessName').value.trim(),
+                category: document.getElementById('regCategory').value,
+                orderMethod: document.getElementById('regMethod').value,
+                image: document.getElementById('regImage').value.trim(),
+                gallery: [],
+                whatsapp: document.getElementById('regWa').value.trim(),
+                instagram: document.getElementById('regIg').value.trim(),
+                desc: document.getElementById('regDesc').value.trim(),
                 status: "pending",
                 visits: 0,
                 reviews: []
             };
 
             tenants.push(newTenant);
-            alert("Pendaftaran berhasil! Akun dan usaha kamu terdaftar dan menunggu validasi Admin dengan akun UAD.");
+            await saveToCloud();
+
+            alert("Pendaftaran berhasil tersimpan di Cloud! Data usahamu sudah masuk ke antrean validasi Admin (bisa dicek dari HP maupun Laptop).");
             document.getElementById('tenantForm').reset();
+            btn.disabled = false;
+            btn.innerText = "Kirim Pendaftaran ke Cloud Admin";
             closeModal('registerModal');
         }
 
-        function openDetail(id) {
-            const tenant = tenants.find(t => t.id === id);
-            if (!tenant) return;
-            tenant.visits += 1;
+        async function handleSellerLogin(e) {
+            e.preventDefault();
+            await syncFromCloud(false);
 
-            let reviewsHTML = '';
-            tenant.reviews.forEach(r => {
-                reviewsHTML += `
-                    <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 mb-2">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-xs font-bold text-brand-dark">${r.name}</span>
-                            <span class="text-amber-500 text-xs">${'★'.repeat(r.rating)}</span>
-                        </div>
-                        <p class="text-xs text-gray-600">${r.comment}</p>
-                    </div>
-                `;
-            });
+            const idInput = document.getElementById('loginSellerId').value.trim().toLowerCase();
+            const passInput = document.getElementById('loginSellerPass').value;
 
-            document.getElementById('modalContent').innerHTML = `
-                <div class="relative h-56 rounded-xl overflow-hidden mb-4 bg-gray-100">
-                    <img src="${tenant.image}" class="w-full h-full object-cover">
-                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-brand-orange text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-                        ${tenant.category}
-                    </span>
-                </div>
-                <h2 class="font-heading text-xl font-bold text-brand-dark mb-1">${tenant.businessName}</h2>
-                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> Pemilik: ${tenant.ownerName}</p>
-                <p class="text-sm text-gray-600 mb-4 bg-gray-50 p-3 rounded-xl border border-gray-100">${tenant.desc}</p>
-                
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <a href="https://wa.me/${tenant.whatsapp}" target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm">
-                        <i class="fa-brands fa-whatsapp text-base"></i> Hubungi WhatsApp
-                    </a>
-                </div>
+            const seller = tenants.find(t => 
+                (t.email.toLowerCase() === idInput || t.nim === idInput) && t.password === passInput
+            );
 
-                <div class="border-t pt-4 mb-4">
-                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Ulasan Pembeli</h4>
-                    <div class="max-h-40 overflow-y-auto mb-3 space-y-2">
-                        ${reviewsHTML || '<p class="text-xs text-gray-400">Belum ada ulasan.</p>'}
-                    </div>
-                    <form onsubmit="submitReview(event, ${tenant.id})" class="space-y-2 bg-brand-light p-3 rounded-xl border border-brand-orange/20">
-                        <p class="text-xs font-bold text-brand-dark">Tulis Review Pembeli:</p>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="text" id="reviewerName" required placeholder="Nama Pembeli" class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
-                            <select id="reviewRating" class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
-                                <option value="5">★★★★★ (Sangat Baik)</option>
-                                <option value="4">★★★★☆ (Baik)</option>
-                            </select>
-                        </div>
-                        <input type="text" id="reviewComment" required placeholder="Tulis komentar ulasan..." class="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
-                        <button type="submit" class="w-full py-1.5 bg-brand-orange text-white text-xs font-bold rounded-lg shadow-sm">Kirim Review</button>
-                    </form>
-                </div>
-            `;
-            openModal('detailModal');
-            renderTenants();
+            if (!seller) {
+                alert("Login gagal! Email UAD/NIM atau Sandi salah.");
+                return;
+            }
+
+            loggedInSellerId = seller.id;
+            closeModal('sellerLoginModal');
+            renderSellerDashboard();
+            openModal('sellerDashboardModal');
         }
 
-        function submitReview(e, tenantId) {
+        function renderSellerDashboard() {
+            const seller = tenants.find(t => t.id === loggedInSellerId);
+            if (!seller) return;
+
+            const statusBadge = seller.status === 'approved' 
+                ? `<span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-circle-check mr-1"></i> Terverifikasi & Tayang</span>`
+                : `<span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-clock mr-1"></i> Menunggu Validasi Admin</span>`;
+
+            let galleryHTML = '';
+            if (seller.gallery && seller.gallery.length > 0) {
+                seller.gallery.forEach((item, idx) => {
+                    galleryHTML += `
+                        <div class="relative bg-gray-50 rounded-xl p-2 border border-gray-200 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3 overflow-hidden">
+                                <span class="w-8 h-8 rounded-lg bg-brand-orange/10 text-brand-orange flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid ${item.type === 'video' ? 'fa-video' : 'fa-image'}"></i>
+                                </span>
+                                <div class="truncate">
+                                    <p class="text-xs font-bold text-brand-dark truncate">${item.caption}</p>
+                                    <p class="text-[10px] text-gray-400 truncate">${item.url}</p>
+                                </div>
+                            </div>
+                            <button onclick="deleteSellerMedia(${idx})" class="text-rose-500 hover:bg-rose-50 p-2 rounded-lg text-xs" title="Hapus Media">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+            } else {
+                galleryHTML = `<p class="text-xs text-gray-400 italic">Belum ada foto atau video promosi tambahan.</p>`;
+            }
+
+            document.getElementById('sellerDashboardContent').innerHTML = `
+                <div class="flex items-center justify-between border-b pb-4 mb-5">
+                    <div>
+                        <span class="text-xs text-gray-400">Dashboard Pengelola Tenant</span>
+                        <h3 class="font-heading text-xl font-bold text-brand-dark">${seller.businessName}</h3>
+                        <p class="text-xs text-gray-500">${seller.ownerName} (${seller.nim})</p>
+                    </div>
+                    <div class="text-right">
+                        ${statusBadge}
+                        <p class="text-xs font-bold text-brand-orange mt-2"><i class="fa-solid fa-eye mr-1"></i> ${seller.visits} Kunjungan</p>
+                    </div>
+                </div>
+
+                <!-- Form Tambah Foto / Video Promosi Terbaru -->
+                <div class="bg-brand-light p-4 rounded-2xl border border-brand-orange/20 mb-6">
+                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-2"><i class="fa-solid fa-photo-film text-brand-orange mr-1.5"></i> Tambah Foto / Video Promosi Terbaru</h4>
+                    <form onsubmit="addSellerMedia(event)" class="space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            <select id="mediaType" class="px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-semibold">
+                                <option value="image">Foto Produk (URL)</option>
+                                <option value="video">Video Promosi (Link MP4/YT/IG)</option>
+                            </select>
+                            <input type="text" id="mediaCaption" required placeholder="Judul/Keterangan Promo..." class="sm:col-span-2 px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
+                        </div>
+                        <div class="flex gap-2">
+                            <input type="url" id="mediaUrl" required placeholder="Tempel link URL foto atau video di sini..." class="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
+                            <button type="submit" class="px-4 py-2 bg-brand-orange hover:bg-orange-600 text-white font-bold rounded-xl text-xs shadow-sm whitespace-nowrap">
+                                + Tambahkan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Daftar Galeri Media Toko -->
+                <div class="mb-6">
+                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Galeri Foto & Video Promosi Aktif</h4>
+                    <div class="space-y-2 max-h-48 overflow-y-auto">
+                        ${galleryHTML}
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center border-t pt-4">
+                    <button onclick="logoutSeller()" class="text-xs font-bold text-rose-600 hover:underline">
+                        <i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar Akun Penjual
+                    </button>
+                    <button onclick="closeModal('sellerDashboardModal')" class="px-5 py-2 bg-brand-dark text-white text-xs font-bold rounded-xl">
+                        Selesai & Tutup
+                    </button>
+                </div>
+            `;
+        }
+
+        async function addSellerMedia(e) {
             e.preventDefault();
-            const name = document.getElementById('reviewerName').value;
-            const rating = parseInt(document.getElementById('reviewRating').value);
-            const comment = document.getElementById('reviewComment').value;
-            const tenant = tenants.find(t => t.id === tenantId);
-            if (tenant) {
-                tenant.reviews.push({ name, comment, rating });
-                alert("Ulasan berhasil dikirim!");
-                openDetail(tenantId);
+            const seller = tenants.find(t => t.id === loggedInSellerId);
+            if (!seller) return;
+
+            if (!seller.gallery) seller.gallery = [];
+            seller.gallery.push({
+                type: document.getElementById('mediaType').value,
+                caption: document.getElementById('mediaCaption').value.trim(),
+                url: document.getElementById('mediaUrl').value.trim()
+            });
+
+            await saveToCloud();
+            alert("Foto/Video promosi baru berhasil ditambahkan ke etalase!");
+            renderSellerDashboard();
+        }
+
+        async function deleteSellerMedia(index) {
+            const seller = tenants.find(t => t.id === loggedInSellerId);
+            if (!seller || !seller.gallery) return;
+
+            seller.gallery.splice(index, 1);
+            await saveToCloud();
+            renderSellerDashboard();
+        }
+
+        function logoutSeller() {
+            loggedInSellerId = null;
+            closeModal('sellerDashboardModal');
+            alert("Berhasil keluar dari akun penjual.");
+        }
+
+        // ==========================================
+        // AUTENTIKASI & MODERASI ADMIN KAMPUS
+        // ==========================================
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('adminUser').value.trim();
+            const p = document.getElementById('adminPass').value;
+
+            if (u === 'Adminganteng12' && p === 'UADMAJU') {
+                closeModal('adminLoginModal');
+                document.getElementById('adminUser').value = '';
+                document.getElementById('adminPass').value = '';
+                await syncFromCloud(false);
+                openModal('adminModal');
+            } else {
+                alert("Akses Ditolak! Username atau Password Admin salah.");
             }
         }
 
+        function logoutAdmin() {
+            closeModal('adminModal');
+            alert("Sesi Admin berakhir.");
+        }
+
         function switchAdminTab(tab) {
-            if(tab === 'validation') {
+            if (tab === 'validation') {
                 document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
                 document.getElementById('tab-mon').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200";
                 document.getElementById('adminValidationContent').classList.remove('hidden');
                 document.getElementById('adminMonitoringContent').classList.add('hidden');
+                renderPendingValidations();
             } else {
                 document.getElementById('tab-mon').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
                 document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200";
@@ -563,7 +791,7 @@
             const pendingList = tenants.filter(t => t.status === 'pending');
             document.getElementById('pendingCountBadge').innerText = pendingList.length;
 
-            if(pendingList.length === 0) {
+            if (pendingList.length === 0) {
                 container.innerHTML = `<div class="text-center py-8 text-gray-400 text-xs">Tidak ada antrean validasi usaha baru saat ini.</div>`;
                 return;
             }
@@ -571,17 +799,23 @@
             container.innerHTML = '';
             pendingList.forEach(t => {
                 container.innerHTML += `
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div class="flex items-center gap-3">
-                            <img src="${t.image}" class="w-16 h-16 object-cover rounded-lg">
+                            <img src="${t.image}" class="w-16 h-16 object-cover rounded-lg bg-gray-200">
                             <div>
                                 <h4 class="font-heading font-bold text-sm text-brand-dark">${t.businessName}</h4>
-                                <p class="text-xs text-gray-600">Pemilik: ${t.ownerName} | NIM/Email: <span class="text-brand-orange font-medium">${t.nimEmail}</span></p>
+                                <p class="text-xs text-gray-600">Pemilik: <b>${t.ownerName}</b></p>
+                                <p class="text-xs text-brand-orange font-semibold">NIM: ${t.nim} | Email: ${t.email}</p>
+                                <p class="text-[11px] text-gray-500 mt-0.5">${t.category} • ${t.orderMethod}</p>
                             </div>
                         </div>
-                        <div class="flex gap-2">
-                            <button onclick="approveTenant(${t.id})" class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-bold">ACC</button>
-                            <button onclick="rejectTenant(${t.id})" class="px-3 py-1.5 bg-rose-600 text-white rounded-lg text-xs font-bold">Tolak</button>
+                        <div class="flex gap-2 w-full sm:w-auto justify-end">
+                            <button onclick="approveTenant(${t.id})" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-sm">
+                                <i class="fa-solid fa-check mr-1"></i> ACC
+                            </button>
+                            <button onclick="deleteTenant(${t.id}, 'Tolak pendaftaran ini?')" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-bold shadow-sm">
+                                <i class="fa-solid fa-xmark mr-1"></i> Tolak
+                            </button>
                         </div>
                     </div>
                 `;
@@ -591,41 +825,190 @@
         function renderMonitoringTable() {
             const tbody = document.getElementById('monitoringTableBody');
             tbody.innerHTML = '';
+
+            if (tenants.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-gray-400 text-xs">Belum ada data tenant.</td></tr>`;
+                return;
+            }
+
             tenants.forEach(t => {
+                const statusLabel = t.status === 'approved' 
+                    ? `<span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-bold">Aktif</span>`
+                    : `<span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-bold">Pending</span>`;
+
                 tbody.innerHTML += `
                     <tr class="border-b border-gray-100 hover:bg-gray-50">
-                        <td class="p-3 font-medium text-brand-dark flex items-center gap-2">
-                            <img src="${t.image}" class="w-8 h-8 rounded-md object-cover">
-                            ${t.businessName}
+                        <td class="p-3 font-medium text-brand-dark">
+                            <div class="flex items-center gap-2">
+                                <img src="${t.image}" class="w-9 h-9 rounded-lg object-cover bg-gray-200">
+                                <div>
+                                    <p class="font-bold text-xs">${t.businessName}</p>
+                                    ${statusLabel}
+                                </div>
+                            </div>
                         </td>
-                        <td class="p-3 text-gray-600">${t.ownerName}<br><span class="text-[10px] text-gray-400">${t.nimEmail}</span></td>
-                        <td class="p-3 text-gray-600"><span class="px-2 py-0.5 bg-gray-100 rounded text-[11px]">${t.category}</span></td>
-                        <td class="p-3 text-center font-bold text-brand-orange">${t.visits} Kali Dilihat</td>
+                        <td class="p-3 text-gray-600 text-xs">
+                            <b>${t.ownerName}</b><br>
+                            <span class="text-[11px] text-gray-400">${t.nim} (${t.email})</span>
+                        </td>
+                        <td class="p-3 text-center font-bold text-brand-orange text-xs">${t.visits}x</td>
+                        <td class="p-3 text-center">
+                            <button onclick="deleteTenant(${t.id}, 'Yakin ingin menghapus permanen tenant ${t.businessName} karena tidak pantas/tidak aktif?')" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-lg text-xs font-bold transition-colors" title="Hapus Permanen Tenant">
+                                <i class="fa-solid fa-trash-can mr-1"></i> Hapus
+                            </button>
+                        </td>
                     </tr>
                 `;
             });
         }
 
-        function approveTenant(id) {
+        async function approveTenant(id) {
             const tenant = tenants.find(t => t.id === id);
-            if(tenant) {
+            if (tenant) {
                 tenant.status = 'approved';
-                alert(`Usaha "${tenant.businessName}" divalidasi dan resmi tayang!`);
+                await saveToCloud();
+                alert(`Usaha "${tenant.businessName}" berhasil divalidasi dan resmi tayang di semua perangkat!`);
                 renderPendingValidations();
+                renderMonitoringTable();
                 renderTenants();
             }
         }
 
-        function rejectTenant(id) {
+        async function deleteTenant(id, confirmMsg) {
+            if (!confirm(confirmMsg)) return;
             tenants = tenants.filter(t => t.id !== id);
-            alert("Pendaftaran ditolak.");
+            await saveToCloud();
+            alert("Tenant berhasil dihapus secara permanen dari sistem.");
             renderPendingValidations();
+            renderMonitoringTable();
+            renderTenants();
+        }
+
+        // ==========================================
+        // DETAIL TENANT, GALERI & ULASAN PEMBELI
+        // ==========================================
+        async function openDetail(id) {
+            const tenant = tenants.find(t => t.id === id);
+            if (!tenant) return;
+
+            tenant.visits = (tenant.visits || 0) + 1;
+            saveToCloud(); // Simpan penambahan kunjungan ke cloud di background
+            renderTenants();
+
+            let galleryHTML = '';
+            if (tenant.gallery && tenant.gallery.length > 0) {
+                galleryHTML = `<div class="mb-5"><h4 class="font-heading font-bold text-xs text-gray-500 uppercase tracking-wider mb-2">Galeri Foto & Video Promosi</h4><div class="grid grid-cols-1 sm:grid-cols-2 gap-3">`;
+                tenant.gallery.forEach(item => {
+                    if (item.type === 'video') {
+                        galleryHTML += `
+                            <a href="${item.url}" target="_blank" class="p-3 bg-gray-900 text-white rounded-xl flex items-center gap-3 hover:bg-gray-800 transition-colors">
+                                <div class="w-10 h-10 rounded-lg bg-brand-orange flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-play"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="text-xs font-bold truncate">${item.caption}</p>
+                                    <p class="text-[10px] text-gray-400">Klik untuk putar video promosi</p>
+                                </div>
+                            </a>
+                        `;
+                    } else {
+                        galleryHTML += `
+                            <div class="rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+                                <img src="${item.url}" class="w-full h-32 object-cover">
+                                <p class="p-2 text-[11px] font-medium text-brand-dark">${item.caption}</p>
+                            </div>
+                        `;
+                    }
+                });
+                galleryHTML += `</div></div>`;
+            }
+
+            let reviewsHTML = '';
+            if (tenant.reviews && tenant.reviews.length > 0) {
+                tenant.reviews.forEach(r => {
+                    reviewsHTML += `
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 mb-2">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-xs font-bold text-brand-dark">${r.name}</span>
+                                <span class="text-amber-500 text-xs">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                            </div>
+                            <p class="text-xs text-gray-600">${r.comment}</p>
+                        </div>
+                    `;
+                });
+            } else {
+                reviewsHTML = `<p class="text-xs text-gray-400">Belum ada ulasan pembeli. Jadilah yang pertama memberi review!</p>`;
+            }
+
+            document.getElementById('modalContent').innerHTML = `
+                <div class="relative h-56 rounded-xl overflow-hidden mb-4 bg-gray-100">
+                    <img src="${tenant.image}" class="w-full h-full object-cover">
+                    <span class="absolute top-3 left-3 bg-white/95 text-brand-orange text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                        ${tenant.category}
+                    </span>
+                    <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-3 py-1 rounded-lg">
+                        <i class="fa-solid fa-eye mr-1"></i> ${tenant.visits} Kunjungan
+                    </span>
+                </div>
+                <h2 class="font-heading text-xl font-bold text-brand-dark mb-1">${tenant.businessName}</h2>
+                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> Pemilik: <b>${tenant.ownerName}</b> • Metode: ${tenant.orderMethod}</p>
+                <p class="text-sm text-gray-600 mb-4 bg-gray-50 p-3.5 rounded-xl border border-gray-100">${tenant.desc}</p>
+                
+                ${galleryHTML}
+
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <a href="https://wa.me/${tenant.whatsapp}?text=Halo%20kak,%20saya%20mau%20pesan%20produk%20${encodeURIComponent(tenant.businessName)}%20dari%20web%20ADpreneur." target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Pesan via WhatsApp
+                    </a>
+                    <a href="https://instagram.com/${tenant.instagram.replace('@','')}" target="_blank" class="flex-1 bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-95 text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-brands fa-instagram text-base"></i> Kunjungi Instagram
+                    </a>
+                </div>
+
+                <div class="border-t pt-4">
+                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Ulasan & Rating Pembeli</h4>
+                    <div class="max-h-40 overflow-y-auto mb-3 space-y-2">
+                        ${reviewsHTML}
+                    </div>
+                    <form onsubmit="submitReview(event, ${tenant.id})" class="space-y-2 bg-brand-light p-3.5 rounded-xl border border-brand-orange/20">
+                        <p class="text-xs font-bold text-brand-dark">Tulis Ulasan Kamu (Tanpa Perlu Login):</p>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" id="reviewerName" required placeholder="Nama Kamu" class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
+                            <select id="reviewRating" class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
+                                <option value="5">★★★★★ (Sangat Puas)</option>
+                                <option value="4">★★★★☆ (Puas)</option>
+                                <option value="3">★★★☆☆ (Cukup)</option>
+                            </select>
+                        </div>
+                        <input type="text" id="reviewComment" required placeholder="Bagaimana kualitas makanan/jasanya?" class="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
+                        <button type="submit" class="w-full py-2 bg-brand-orange hover:bg-orange-600 text-white text-xs font-bold rounded-lg shadow-sm">Kirim Review</button>
+                    </form>
+                </div>
+            `;
+            openModal('detailModal');
+        }
+
+        async function submitReview(e, tenantId) {
+            e.preventDefault();
+            const name = document.getElementById('reviewerName').value.trim();
+            const rating = parseInt(document.getElementById('reviewRating').value);
+            const comment = document.getElementById('reviewComment').value.trim();
+
+            const tenant = tenants.find(t => t.id === tenantId);
+            if (tenant) {
+                if (!tenant.reviews) tenant.reviews = [];
+                tenant.reviews.push({ name, comment, rating });
+                await saveToCloud();
+                alert("Terima kasih! Ulasan kamu telah tersimpan.");
+                openDetail(tenantId);
+            }
         }
 
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        renderTenants();
+        // Jalankan sinkronisasi Cloud saat halaman pertama dibuka
+        syncFromCloud(false);
     </script>
 </body>
 </html>
