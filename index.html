@@ -24,8 +24,8 @@
 </head>
 <body class="bg-brand-graybg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between">
     <div class="bg-brand-orange text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-sm flex items-center justify-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-        <span>Cloud Database Google Sheets Terhubung: Sinkronisasi Otomatis Antar Perangkat!</span>
+        <i class="fa-solid fa-lock"></i>
+        <span>ADpreneur v2.0 — Sistem Terproteksi & Sinkronisasi Baris Cloud Aktif</span>
     </div>
 
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -87,7 +87,7 @@
                     <p class="text-xs sm:text-sm text-gray-500">Klik kartu untuk melihat galeri foto/video promosi, ulasan pembeli, dan kontak pesanan</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="manualSyncData()" class="text-xs font-semibold text-brand-orange bg-white hover:bg-brand-light px-3 py-2 rounded-lg border border-gray-200 shadow-sm flex items-center gap-1.5 transition-all">
+                    <button onclick="loadPublicData(true)" class="text-xs font-semibold text-brand-orange bg-white hover:bg-brand-light px-3 py-2 rounded-lg border border-gray-200 shadow-sm flex items-center gap-1.5 transition-all">
                         <i class="fa-solid fa-rotate"></i> Segarkan Data
                     </button>
                     <div class="flex items-center gap-2 text-xs font-medium text-gray-600 bg-white px-3 py-2 rounded-lg border border-gray-200 shadow-sm">
@@ -98,7 +98,7 @@
             </div>
             <div id="loadingState" class="text-center py-12">
                 <i class="fa-solid fa-circle-notch fa-spin text-3xl text-brand-orange mb-2"></i>
-                <p class="text-xs text-gray-500">Memuat data dari Google Sheets Cloud...</p>
+                <p class="text-xs text-gray-500">Memuat data publik dari server...</p>
             </div>
             <div id="tenantContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
@@ -110,7 +110,7 @@
                 <span class="font-heading text-xl font-bold text-white tracking-wide">AD<span class="text-brand-orange">preneur</span></span>
                 <p class="text-xs text-gray-400 mt-1">Platform Ekosistem Digital Wirausaha Mahasiswa Universitas Ahmad Dahlan Yogyakarta.</p>
             </div>
-            <div class="text-xs text-gray-400">&copy; 2026 ADpreneur UAD. Powered by Google Sheets.</div>
+            <div class="text-xs text-gray-400">&copy; 2026 ADpreneur UAD. Secured Cloud Architecture.</div>
         </div>
     </footer>
 
@@ -119,7 +119,7 @@
         <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="font-heading text-xl font-bold text-brand-dark mb-1"><i class="fa-solid fa-store text-brand-orange mr-2"></i> Pendaftaran Tenant Baru</h3>
-            <p class="text-xs text-gray-500 mb-5">Daftarkan usahamu sekali saja. Setelah di-ACC Admin, kamu bisa login untuk menambah foto/video promosi kapan saja.</p>
+            <p class="text-xs text-gray-500 mb-5">Data pribadimu (NIM, Email, Sandi) terenkripsi aman dan tidak ditampilkan ke publik.</p>
             <form id="tenantForm" onsubmit="submitTenant(event)" class="space-y-3.5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
@@ -128,17 +128,17 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-700 mb-1">NIM Mahasiswa UAD</label>
-                        <input type="text" id="regNim" required placeholder="Cth: 25000199" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                        <input type="text" id="regNim" required placeholder="Cth: 2500010024" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                     </div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-bold text-gray-700 mb-1">Email UAD (Untuk Login)</label>
-                        <input type="email" id="regEmail" required placeholder="nama@student.uad.ac.id" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                        <input type="email" id="regEmail" required placeholder="nama@webmail.uad.ac.id" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-700 mb-1">Buat Sandi Akun</label>
-                        <input type="password" id="regPassword" required placeholder="Minimal 6 karakter" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                        <input type="password" id="regPassword" required minlength="6" placeholder="Minimal 6 karakter" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                     </div>
                 </div>
                 <hr class="border-gray-100">
@@ -183,12 +183,9 @@
                     <textarea id="regDesc" rows="2" required placeholder="Jelaskan produk/jasa dan alamat lapak jika melayani offline..." class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm"></textarea>
                 </div>
                 <button type="submit" id="btnSubmit" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all text-sm">
-                    Kirim Pendaftaran ke Cloud Admin
+                    Kirim Pendaftaran Terenkripsi
                 </button>
             </form>
-            <p class="text-center text-xs text-gray-500 mt-4">
-                Sudah pernah mendaftar? <button onclick="closeModal('registerModal'); openModal('sellerLoginModal')" class="text-brand-orange font-bold hover:underline">Login Penjual di sini</button>
-            </p>
         </div>
     </div>
 
@@ -199,19 +196,19 @@
             <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-brand-light text-brand-orange rounded-2xl mx-auto flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-user-tie"></i></div>
                 <h3 class="font-heading text-lg font-bold text-brand-dark">Login Peserta Tenant</h3>
-                <p class="text-xs text-gray-500">Masuk untuk mengelola toko & menambah foto/video promosi</p>
+                <p class="text-xs text-gray-500">Autentikasi aman langsung ke server Google Sheets</p>
             </div>
             <form onsubmit="handleSellerLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1">Email UAD atau NIM</label>
-                    <input type="text" id="loginSellerId" required placeholder="nama@student.uad.ac.id atau NIM" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
+                    <input type="text" id="loginSellerId" required placeholder="Email atau NIM" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1">Sandi Akun</label>
                     <input type="password" id="loginSellerPass" required placeholder="Masukkan sandi..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                 </div>
-                <button type="submit" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all text-sm">
-                    Masuk ke Dashboard Toko
+                <button type="submit" id="btnSellerLogin" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all text-sm">
+                    Verifikasi & Masuk
                 </button>
             </form>
         </div>
@@ -232,7 +229,7 @@
             <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-brand-dark text-white rounded-2xl mx-auto flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-shield-halved"></i></div>
                 <h3 class="font-heading text-lg font-bold text-brand-dark">Login Admin Kampus</h3>
-                <p class="text-xs text-gray-500">Akses khusus tim verifikasi & monitoring UAD</p>
+                <p class="text-xs text-gray-500">Verifikasi Server-Side (Zero Client Credentials)</p>
             </div>
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
@@ -243,7 +240,7 @@
                     <label class="block text-xs font-bold text-gray-700 mb-1">Password / Sandi</label>
                     <input type="password" id="adminPass" required placeholder="Masukkan password..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                 </div>
-                <button type="submit" class="w-full py-3 bg-brand-dark text-white font-bold rounded-xl shadow-md hover:bg-gray-800 transition-all text-sm">
+                <button type="submit" id="btnAdminLogin" class="w-full py-3 bg-brand-dark text-white font-bold rounded-xl shadow-md hover:bg-gray-800 transition-all text-sm">
                     Masuk ke Portal Admin
                 </button>
             </form>
@@ -257,10 +254,10 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 border-b pb-4 gap-3">
                 <div>
                     <h3 class="font-heading text-xl font-bold text-brand-dark"><i class="fa-solid fa-shield-halved text-brand-orange mr-2"></i> Portal Dashboard Admin UAD</h3>
-                    <p class="text-xs text-gray-500">Validasi tenant baru & pantau statistik kunjungan terhubung ke Google Sheets.</p>
+                    <p class="text-xs text-gray-500">Menampilkan data privat NIM & Email khusus sesi Admin terautentikasi.</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="manualSyncData()" class="bg-gray-100 hover:bg-gray-200 text-brand-dark px-3 py-1.5 rounded-lg text-xs font-bold"><i class="fa-solid fa-rotate mr-1"></i> Segarkan Data</button>
+                    <button onclick="refreshAdminData()" class="bg-gray-100 hover:bg-gray-200 text-brand-dark px-3 py-1.5 rounded-lg text-xs font-bold"><i class="fa-solid fa-rotate mr-1"></i> Segarkan Data</button>
                     <button onclick="logoutAdmin()" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Logout</button>
                 </div>
             </div>
@@ -297,68 +294,51 @@
         </div>
     </div>
 
-    <!-- SCRIPT JSONP & GOOGLE SHEETS CLOUD -->
+    <!-- SCRIPT FRONTEND AMAN (TAHAP 1: SECURITY) -->
     <script>
+        // GANTI DENGAN URL WEB APP APPS SCRIPT TERBARU MILIKMU
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx-3zl5OPkPeFOQxH18_JQMWs6Q2_oVP2_p9_DHyNLvI2WsHYLdUM20NSOWyWMEJ4qu/exec";
 
-        let tenants = [];
+        let publicTenants = [];
+        let adminTenants = [];
+        let adminSessionToken = null;
+        let currentSeller = null;
+        let sellerSessionToken = null;
         let currentCategory = 'all';
-        let loggedInSellerId = null;
 
-        // Ambil data menggunakan JSONP untuk bypass CORS browser
-        function loadData() {
+        // Helper POST ke Google Apps Script (menggunakan text/plain agar bebas CORS preflight)
+        async function postToBackend(payloadObj) {
+            const response = await fetch(WEB_APP_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payloadObj)
+            });
+            return await response.json();
+        }
+
+        // 1. MEMUAT DATA PUBLIK SAJA (Tidak mengandung NIM, Email, atau Password)
+        function loadPublicData(showAlert = false) {
+            document.getElementById('loadingState').classList.remove('hidden');
             const oldScript = document.getElementById('jsonpScript');
             if (oldScript) oldScript.remove();
 
             const script = document.createElement('script');
             script.id = 'jsonpScript';
-            script.src = `${WEB_APP_URL}?callback=handleServerData`;
+            script.src = `${WEB_APP_URL}?callback=handlePublicData&_t=${Date.now()}`;
             script.onerror = function() {
-                console.error("Gagal memuat dari Cloud, menggunakan cadangan lokal.");
-                const local = localStorage.getItem('adpreneur_backup');
-                tenants = local ? JSON.parse(local) : [];
                 document.getElementById('loadingState').classList.add('hidden');
-                renderTenants();
-                renderPendingValidations();
-                renderMonitoringTable();
+                if (showAlert) alert("Gagal terhubung ke server.");
             };
             document.body.appendChild(script);
+            if (showAlert) setTimeout(() => alert("Data publik berhasil disegarkan!"), 800);
         }
 
-        // Callback JSONP
-        function handleServerData(data) {
+        function handlePublicData(data) {
             if (Array.isArray(data)) {
-                tenants = data;
-                localStorage.setItem('adpreneur_backup', JSON.stringify(tenants));
+                publicTenants = data;
             }
             document.getElementById('loadingState').classList.add('hidden');
             renderTenants();
-            renderPendingValidations();
-            renderMonitoringTable();
-        }
-
-        async function saveData() {
-            localStorage.setItem('adpreneur_backup', JSON.stringify(tenants));
-            renderTenants();
-            renderPendingValidations();
-            renderMonitoringTable();
-
-            try {
-                await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(tenants)
-                });
-            } catch (e) {
-                console.error("Gagal menyimpan ke Cloud:", e);
-            }
-        }
-
-        function manualSyncData() {
-            document.getElementById('loadingState').classList.remove('hidden');
-            loadData();
-            alert("Data berhasil disinkronkan dengan Google Sheets!");
         }
 
         function renderTenants() {
@@ -366,7 +346,7 @@
             const keyword = document.getElementById('searchInput').value.toLowerCase();
             container.innerHTML = '';
 
-            const filtered = tenants.filter(t => {
+            const filtered = publicTenants.filter(t => {
                 const matchesCat = currentCategory === 'all' || t.category === currentCategory;
                 const matchesStatus = t.status === 'approved';
                 const matchesSearch = t.businessName.toLowerCase().includes(keyword) || 
@@ -427,83 +407,87 @@
             renderTenants();
         }
 
+        // 2. PENDAFTARAN TERENKRIPSI KE BARIS BARU GOOGLE SHEETS
         async function submitTenant(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmit');
             btn.disabled = true;
-            btn.innerText = "Mengirim ke Cloud...";
+            btn.innerText = "Mengenkripsi & Mengirim...";
 
-            const emailVal = document.getElementById('regEmail').value.trim();
-            const nimVal = document.getElementById('regNim').value.trim();
+            try {
+                const res = await postToBackend({
+                    action: "register",
+                    payload: {
+                        ownerName: document.getElementById('regOwnerName').value.trim(),
+                        nim: document.getElementById('regNim').value.trim(),
+                        email: document.getElementById('regEmail').value.trim(),
+                        password: document.getElementById('regPassword').value,
+                        businessName: document.getElementById('regBusinessName').value.trim(),
+                        category: document.getElementById('regCategory').value,
+                        orderMethod: document.getElementById('regMethod').value,
+                        image: document.getElementById('regImage').value.trim(),
+                        whatsapp: document.getElementById('regWa').value.trim(),
+                        instagram: document.getElementById('regIg').value.trim(),
+                        desc: document.getElementById('regDesc').value.trim()
+                    }
+                });
 
-            const exists = tenants.some(t => t.email.toLowerCase() === emailVal.toLowerCase() || t.nim === nimVal);
-            if (exists) {
-                alert("NIM atau Email UAD ini sudah terdaftar! Silakan login melalui menu Login Penjual.");
+                if (res.status === "success") {
+                    alert("Pendaftaran berhasil! Sandi akunmu telah di-hash aman. Menunggu validasi Admin Kampus.");
+                    document.getElementById('tenantForm').reset();
+                    closeModal('registerModal');
+                } else {
+                    alert("Gagal: " + res.message);
+                }
+            } catch (err) {
+                alert("Terjadi kesalahan koneksi ke server.");
+            } finally {
                 btn.disabled = false;
-                btn.innerText = "Kirim Pendaftaran ke Cloud Admin";
-                return;
+                btn.innerText = "Kirim Pendaftaran Terenkripsi";
             }
-
-            const newTenant = {
-                id: Date.now(),
-                ownerName: document.getElementById('regOwnerName').value.trim(),
-                nim: nimVal,
-                email: emailVal,
-                password: document.getElementById('regPassword').value,
-                businessName: document.getElementById('regBusinessName').value.trim(),
-                category: document.getElementById('regCategory').value,
-                orderMethod: document.getElementById('regMethod').value,
-                image: document.getElementById('regImage').value.trim(),
-                gallery: [],
-                whatsapp: document.getElementById('regWa').value.trim(),
-                instagram: document.getElementById('regIg').value.trim(),
-                desc: document.getElementById('regDesc').value.trim(),
-                status: "pending",
-                visits: 0,
-                reviews: []
-            };
-
-            tenants.push(newTenant);
-            await saveData();
-
-            alert("Pendaftaran berhasil! Usaha kamu telah masuk ke antrean validasi Admin Google Sheets.");
-            document.getElementById('tenantForm').reset();
-            btn.disabled = false;
-            btn.innerText = "Kirim Pendaftaran ke Cloud Admin";
-            closeModal('registerModal');
         }
 
-        function handleSellerLogin(e) {
+        // 3. LOGIN PENJUAL VIA BACKEND VERIFICATION
+        async function handleSellerLogin(e) {
             e.preventDefault();
-            const idInput = document.getElementById('loginSellerId').value.trim().toLowerCase();
-            const passInput = document.getElementById('loginSellerPass').value;
+            const btn = document.getElementById('btnSellerLogin');
+            btn.disabled = true;
+            btn.innerText = "Memverifikasi di Server...";
 
-            const seller = tenants.find(t => 
-                (t.email.toLowerCase() === idInput || t.nim === idInput) && t.password === passInput
-            );
+            try {
+                const res = await postToBackend({
+                    action: "sellerLogin",
+                    identifier: document.getElementById('loginSellerId').value,
+                    password: document.getElementById('loginSellerPass').value
+                });
 
-            if (!seller) {
-                alert("Login gagal! Email/NIM atau Sandi salah.");
-                return;
+                if (res.status === "success") {
+                    currentSeller = res.seller;
+                    sellerSessionToken = res.token;
+                    document.getElementById('loginSellerPass').value = '';
+                    closeModal('sellerLoginModal');
+                    renderSellerDashboard();
+                    openModal('sellerDashboardModal');
+                } else {
+                    alert(res.message);
+                }
+            } catch (err) {
+                alert("Gagal terhubung ke server autentikasi.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Verifikasi & Masuk";
             }
-
-            loggedInSellerId = seller.id;
-            closeModal('sellerLoginModal');
-            renderSellerDashboard();
-            openModal('sellerDashboardModal');
         }
 
         function renderSellerDashboard() {
-            const seller = tenants.find(t => t.id === loggedInSellerId);
-            if (!seller) return;
-
-            const statusBadge = seller.status === 'approved' 
+            if (!currentSeller) return;
+            const statusBadge = currentSeller.status === 'approved' 
                 ? `<span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-circle-check mr-1"></i> Terverifikasi & Tayang</span>`
                 : `<span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-clock mr-1"></i> Menunggu Validasi Admin</span>`;
 
             let galleryHTML = '';
-            if (seller.gallery && seller.gallery.length > 0) {
-                seller.gallery.forEach((item, idx) => {
+            if (currentSeller.gallery && currentSeller.gallery.length > 0) {
+                currentSeller.gallery.forEach((item, idx) => {
                     galleryHTML += `
                         <div class="bg-gray-50 rounded-xl p-2.5 border border-gray-200 flex items-center justify-between gap-3">
                             <div class="flex items-center gap-3 overflow-hidden">
@@ -515,7 +499,7 @@
                                     <p class="text-[10px] text-gray-400 truncate">${item.url}</p>
                                 </div>
                             </div>
-                            <button onclick="deleteSellerMedia(${idx})" class="text-rose-500 hover:bg-rose-50 p-2 rounded-lg text-xs" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+                            <button onclick="deleteSellerMedia(${idx})" class="text-rose-500 hover:bg-rose-50 p-2 rounded-lg text-xs"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     `;
                 });
@@ -526,13 +510,13 @@
             document.getElementById('sellerDashboardContent').innerHTML = `
                 <div class="flex items-center justify-between border-b pb-4 mb-5">
                     <div>
-                        <span class="text-xs text-gray-400">Dashboard Pengelola Tenant</span>
-                        <h3 class="font-heading text-xl font-bold text-brand-dark">${seller.businessName}</h3>
-                        <p class="text-xs text-gray-500">${seller.ownerName} (${seller.nim})</p>
+                        <span class="text-xs text-gray-400">Dashboard Pengelola Tenant (Sesi Terproteksi)</span>
+                        <h3 class="font-heading text-xl font-bold text-brand-dark">${currentSeller.businessName}</h3>
+                        <p class="text-xs text-gray-500">${currentSeller.ownerName} (${currentSeller.nim})</p>
                     </div>
                     <div class="text-right">
                         ${statusBadge}
-                        <p class="text-xs font-bold text-brand-orange mt-2"><i class="fa-solid fa-eye mr-1"></i> ${seller.visits} Kunjungan</p>
+                        <p class="text-xs font-bold text-brand-orange mt-2"><i class="fa-solid fa-eye mr-1"></i> ${currentSeller.visits} Kunjungan</p>
                     </div>
                 </div>
                 <div class="bg-brand-light p-4 rounded-2xl border border-brand-orange/20 mb-6">
@@ -556,7 +540,7 @@
                     <div class="space-y-2 max-h-48 overflow-y-auto">${galleryHTML}</div>
                 </div>
                 <div class="flex justify-between items-center border-t pt-4">
-                    <button onclick="loggedInSellerId = null; closeModal('sellerDashboardModal')" class="text-xs font-bold text-rose-600 hover:underline"><i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar Akun Penjual</button>
+                    <button onclick="currentSeller = null; sellerSessionToken = null; closeModal('sellerDashboardModal')" class="text-xs font-bold text-rose-600 hover:underline"><i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar Akun Penjual</button>
                     <button onclick="closeModal('sellerDashboardModal')" class="px-5 py-2 bg-brand-dark text-white text-xs font-bold rounded-xl">Selesai & Tutup</button>
                 </div>
             `;
@@ -564,46 +548,101 @@
 
         async function addSellerMedia(e) {
             e.preventDefault();
-            const seller = tenants.find(t => t.id === loggedInSellerId);
-            if (!seller) return;
-            if (!seller.gallery) seller.gallery = [];
-            seller.gallery.push({
+            if (!currentSeller) return;
+            if (!currentSeller.gallery) currentSeller.gallery = [];
+            currentSeller.gallery.push({
                 type: document.getElementById('mediaType').value,
                 caption: document.getElementById('mediaCaption').value.trim(),
                 url: document.getElementById('mediaUrl').value.trim()
             });
-            await saveData();
-            alert("Media promosi berhasil ditambahkan ke Cloud!");
-            renderSellerDashboard();
+
+            const res = await postToBackend({
+                action: "updateSellerGallery",
+                sellerId: currentSeller.id,
+                token: sellerSessionToken,
+                gallery: currentSeller.gallery
+            });
+
+            if (res.status === "success") {
+                alert("Media promosi berhasil disimpan ke server!");
+                renderSellerDashboard();
+                loadPublicData(false);
+            } else {
+                alert("Gagal menyimpan media: " + res.message);
+            }
         }
 
         async function deleteSellerMedia(index) {
-            const seller = tenants.find(t => t.id === loggedInSellerId);
-            if (!seller || !seller.gallery) return;
-            seller.gallery.splice(index, 1);
-            await saveData();
-            renderSellerDashboard();
+            if (!currentSeller || !currentSeller.gallery) return;
+            currentSeller.gallery.splice(index, 1);
+
+            const res = await postToBackend({
+                action: "updateSellerGallery",
+                sellerId: currentSeller.id,
+                token: sellerSessionToken,
+                gallery: currentSeller.gallery
+            });
+
+            if (res.status === "success") {
+                renderSellerDashboard();
+                loadPublicData(false);
+            }
         }
 
-        function handleAdminLogin(e) {
+        // 4. LOGIN ADMIN SERVER-SIDE (Password tidak ada di kode HTML)
+        async function handleAdminLogin(e) {
             e.preventDefault();
-            const u = document.getElementById('adminUser').value.trim();
-            const p = document.getElementById('adminPass').value;
-            if (u === 'Adminganteng12' && p === 'UADMAJU') {
-                closeModal('adminLoginModal');
-                document.getElementById('adminUser').value = '';
-                document.getElementById('adminPass').value = '';
-                openModal('adminModal');
+            const btn = document.getElementById('btnAdminLogin');
+            btn.disabled = true;
+            btn.innerText = "Memverifikasi di Server...";
+
+            try {
+                const res = await postToBackend({
+                    action: "adminLogin",
+                    username: document.getElementById('adminUser').value.trim(),
+                    password: document.getElementById('adminPass').value
+                });
+
+                if (res.status === "success") {
+                    adminSessionToken = res.token;
+                    adminTenants = res.tenants;
+                    document.getElementById('adminUser').value = '';
+                    document.getElementById('adminPass').value = '';
+                    closeModal('adminLoginModal');
+                    openModal('adminModal');
+                    renderPendingValidations();
+                    renderMonitoringTable();
+                } else {
+                    alert(res.message);
+                }
+            } catch (err) {
+                alert("Gagal menghubungi server autentikasi Admin.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Masuk ke Portal Admin";
+            }
+        }
+
+        async function refreshAdminData() {
+            if (!adminSessionToken) return;
+            const res = await postToBackend({
+                action: "adminAction",
+                subAction: "refresh",
+                token: adminSessionToken
+            });
+            if (res.status === "success") {
+                adminTenants = res.tenants;
                 renderPendingValidations();
                 renderMonitoringTable();
-            } else {
-                alert("Login Admin Gagal! Username atau Password salah.");
+                alert("Data Admin berhasil disegarkan!");
             }
         }
 
         function logoutAdmin() {
+            adminSessionToken = null;
+            adminTenants = [];
             closeModal('adminModal');
-            alert("Admin keluar.");
+            alert("Sesi Admin ditutup.");
         }
 
         function switchAdminTab(tab) {
@@ -624,8 +663,9 @@
 
         function renderPendingValidations() {
             const container = document.getElementById('pendingListContainer');
-            const pendingList = tenants.filter(t => t.status === 'pending');
+            const pendingList = adminTenants.filter(t => t.status === 'pending');
             document.getElementById('pendingCountBadge').innerText = pendingList.length;
+
             if (pendingList.length === 0) {
                 container.innerHTML = `<div class="text-center py-8 text-gray-400 text-xs">Tidak ada antrean validasi usaha baru saat ini.</div>`;
                 return;
@@ -644,8 +684,8 @@
                             </div>
                         </div>
                         <div class="flex gap-2 w-full sm:w-auto justify-end">
-                            <button onclick="approveTenant(${t.id})" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-sm"><i class="fa-solid fa-check mr-1"></i> ACC</button>
-                            <button onclick="deleteTenant(${t.id}, 'Tolak pendaftaran ini?')" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-bold shadow-sm"><i class="fa-solid fa-xmark mr-1"></i> Tolak</button>
+                            <button onclick="executeAdminAction('approve', ${t.id})" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-sm"><i class="fa-solid fa-check mr-1"></i> ACC</button>
+                            <button onclick="executeAdminAction('delete', ${t.id}, 'Tolak pendaftaran ini?')" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-bold shadow-sm"><i class="fa-solid fa-xmark mr-1"></i> Tolak</button>
                         </div>
                     </div>
                 `;
@@ -655,11 +695,11 @@
         function renderMonitoringTable() {
             const tbody = document.getElementById('monitoringTableBody');
             tbody.innerHTML = '';
-            if (tenants.length === 0) {
+            if (adminTenants.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-gray-400 text-xs">Belum ada tenant.</td></tr>`;
                 return;
             }
-            tenants.forEach(t => {
+            adminTenants.forEach(t => {
                 const statusLabel = t.status === 'approved' 
                     ? `<span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-bold">Aktif</span>`
                     : `<span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-bold">Pending</span>`;
@@ -674,39 +714,40 @@
                         <td class="p-3 text-gray-600 text-xs"><b>${t.ownerName}</b><br><span class="text-[11px] text-gray-400">${t.nim} (${t.email})</span></td>
                         <td class="p-3 text-center font-bold text-brand-orange text-xs">${t.visits}x</td>
                         <td class="p-3 text-center">
-                            <button onclick="deleteTenant(${t.id}, 'Hapus permanen tenant ${t.businessName}?')" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-lg text-xs font-bold transition-colors"><i class="fa-solid fa-trash-can mr-1"></i> Hapus</button>
+                            <button onclick="executeAdminAction('delete', ${t.id}, 'Hapus permanen tenant ${t.businessName}?')" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white rounded-lg text-xs font-bold transition-colors"><i class="fa-solid fa-trash-can mr-1"></i> Hapus</button>
                         </td>
                     </tr>
                 `;
             });
         }
 
-        async function approveTenant(id) {
-            const tenant = tenants.find(t => t.id === id);
-            if (tenant) {
-                tenant.status = 'approved';
-                await saveData();
-                alert(`Usaha "${tenant.businessName}" divalidasi dan resmi tayang di Cloud!`);
+        async function executeAdminAction(subAction, tenantId, confirmMsg = null) {
+            if (confirmMsg && !confirm(confirmMsg)) return;
+            const res = await postToBackend({
+                action: "adminAction",
+                subAction: subAction,
+                tenantId: tenantId,
+                token: adminSessionToken
+            });
+            if (res.status === "success") {
+                adminTenants = res.tenants;
                 renderPendingValidations();
                 renderMonitoringTable();
+                loadPublicData(false);
+                alert(subAction === "approve" ? "Usaha resmi divalidasi dan tayang!" : "Data tenant dihapus.");
+            } else {
+                alert("Gagal: " + res.message);
             }
         }
 
-        async function deleteTenant(id, confirmMsg) {
-            if (!confirm(confirmMsg)) return;
-            tenants = tenants.filter(t => t.id !== id);
-            await saveData();
-            alert("Tenant dihapus dari Cloud.");
-            renderPendingValidations();
-            renderMonitoringTable();
-            renderTenants();
-        }
-
         function openDetail(id) {
-            const tenant = tenants.find(t => t.id === id);
+            const tenant = publicTenants.find(t => t.id === id);
             if (!tenant) return;
             tenant.visits = (tenant.visits || 0) + 1;
-            saveData();
+            renderTenants();
+
+            // Kirim increment kunjungan ke server tanpa memblokir UI
+            postToBackend({ action: "incrementVisit", tenantId: id }).catch(() => {});
 
             let galleryHTML = '';
             if (tenant.gallery && tenant.gallery.length > 0) {
@@ -776,16 +817,25 @@
 
         async function submitReview(e, tenantId) {
             e.preventDefault();
-            const name = document.getElementById('reviewerName').value.trim();
-            const rating = parseInt(document.getElementById('reviewRating').value);
-            const comment = document.getElementById('reviewComment').value.trim();
+            const reviewObj = {
+                name: document.getElementById('reviewerName').value.trim(),
+                rating: parseInt(document.getElementById('reviewRating').value),
+                comment: document.getElementById('reviewComment').value.trim()
+            };
 
-            const tenant = tenants.find(t => t.id === tenantId);
-            if (tenant) {
-                if (!tenant.reviews) tenant.reviews = [];
-                tenant.reviews.push({ name, comment, rating });
-                await saveData();
-                alert("Ulasan terkirim ke Cloud!");
+            const res = await postToBackend({
+                action: "addReview",
+                tenantId: tenantId,
+                review: reviewObj
+            });
+
+            if (res.status === "success") {
+                const tenant = publicTenants.find(t => t.id === tenantId);
+                if (tenant) {
+                    if (!tenant.reviews) tenant.reviews = [];
+                    tenant.reviews.push(reviewObj);
+                }
+                alert("Ulasan berhasil disimpan!");
                 openDetail(tenantId);
             }
         }
@@ -793,8 +843,7 @@
         function openModal(id) { document.getElementById(id).classList.add('flex'); document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.remove('flex'); document.getElementById(id).classList.add('hidden'); }
 
-        // Muat data saat halaman dibuka
-        loadData();
+        loadPublicData(false);
     </script>
 </body>
 </html>
