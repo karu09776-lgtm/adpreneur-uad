@@ -24,8 +24,8 @@
 </head>
 <body class="bg-brand-graybg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between">
     <div class="bg-brand-orange text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-sm flex items-center justify-center gap-2">
-        <i class="fa-solid fa-box-open"></i>
-        <span>ADpreneur v2.1 — Tahap 2: Manajemen Katalog Produk & Stok Aktif</span>
+        <i class="fa-solid fa-receipt"></i>
+        <span>ADpreneur v3.0 — Tahap 3: Sistem Pemesanan & Lacak Status Transaksi Aktif</span>
     </div>
 
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -39,15 +39,18 @@
                     <text x="79" y="47" font-family="'Inter', sans-serif" font-weight="500" font-size="8" fill="#6B7280" letter-spacing="1.5">Ahmad Dahlan Preneur</text>
                 </svg>
             </a>
-            <div class="flex items-center gap-2 sm:gap-3">
-                <button onclick="openModal('registerModal')" class="text-xs sm:text-sm font-semibold text-brand-orange bg-brand-light hover:bg-brand-orange hover:text-white px-3 sm:px-4 py-2.5 rounded-xl transition-all border border-brand-orange/20 flex items-center gap-1.5">
+            <div class="flex items-center gap-2 sm:gap-2.5">
+                <button onclick="openModal('trackOrderModal')" class="text-xs sm:text-sm font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-600 hover:text-white px-3 sm:px-3.5 py-2.5 rounded-xl transition-all border border-emerald-200 flex items-center gap-1.5">
+                    <i class="fa-solid fa-clock-rotate-left"></i> <span class="hidden md:inline">Lacak Pesanan</span><span class="md:hidden">Pesanan</span>
+                </button>
+                <button onclick="openModal('registerModal')" class="text-xs sm:text-sm font-semibold text-brand-orange bg-brand-light hover:bg-brand-orange hover:text-white px-3 sm:px-3.5 py-2.5 rounded-xl transition-all border border-brand-orange/20 flex items-center gap-1.5">
                     <i class="fa-solid fa-store"></i> <span class="hidden md:inline">Daftar Tenant</span><span class="md:hidden">Daftar</span>
                 </button>
-                <button onclick="openModal('sellerLoginModal')" class="text-xs sm:text-sm font-semibold text-brand-dark bg-gray-100 hover:bg-gray-200 px-3 sm:px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5">
+                <button onclick="openModal('sellerLoginModal')" class="text-xs sm:text-sm font-semibold text-brand-dark bg-gray-100 hover:bg-gray-200 px-3 sm:px-3.5 py-2.5 rounded-xl transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-user-tie"></i> <span class="hidden md:inline">Login Penjual</span><span class="md:hidden">Penjual</span>
                 </button>
-                <button onclick="openModal('adminLoginModal')" class="text-xs sm:text-sm font-semibold text-white bg-brand-dark hover:bg-gray-700 px-3 sm:px-4 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-shield-halved"></i> <span class="hidden md:inline">Admin</span>
+                <button onclick="openModal('adminLoginModal')" class="text-xs sm:text-sm font-semibold text-white bg-brand-dark hover:bg-gray-700 px-3 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved"></i>
                 </button>
             </div>
         </div>
@@ -63,7 +66,7 @@
                     Food Court Digital Mahasiswa <span class="text-brand-orange">UAD</span>
                 </h1>
                 <p class="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto mb-8">
-                    Direktori terpusat produk kuliner, barang, dan jasa mahasiswa Universitas Ahmad Dahlan. Dilengkapi katalog harga & stok riil.
+                    Pesan kuliner, barang, dan jasa mahasiswa UAD dengan pencatatan transaksi transparan dan pelacakan status pesanan real-time.
                 </p>
                 <div class="bg-white p-3 rounded-2xl shadow-lg border border-gray-100 max-w-3xl mx-auto flex flex-col md:flex-row gap-3">
                     <div class="flex-1 relative flex items-center">
@@ -84,7 +87,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
                 <div>
                     <h2 class="font-heading text-2xl font-bold text-brand-dark">Etalase Tenant Mahasiswa</h2>
-                    <p class="text-xs sm:text-sm text-gray-500">Klik kartu untuk melihat katalog produk individual, harga, stok, dan ulasan</p>
+                    <p class="text-xs sm:text-sm text-gray-500">Pilih tenant untuk melihat katalog menu dan melakukan pemesanan tercatat</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <button onclick="loadPublicData(true)" class="text-xs font-semibold text-brand-orange bg-white hover:bg-brand-light px-3 py-2 rounded-lg border border-gray-200 shadow-sm flex items-center gap-1.5 transition-all">
@@ -113,6 +116,69 @@
             <div class="text-xs text-gray-400">&copy; 2026 ADpreneur UAD. Secured Cloud Architecture.</div>
         </div>
     </footer>
+
+    <!-- MODAL CHECKOUT PEMESANAN PRODUK -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 relative">
+            <button onclick="closeModal('checkoutModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-bag-shopping text-brand-orange mr-2"></i> Form Pemesanan</h3>
+            <p class="text-xs text-gray-500 mb-4">Pesananmu akan tercatat otomatis agar bisa dilacak statusnya.</p>
+            
+            <div class="bg-brand-light p-3.5 rounded-xl border border-brand-orange/20 mb-4">
+                <p class="text-xs text-gray-500" id="coTenantName">Nama Toko</p>
+                <p class="font-heading font-bold text-sm text-brand-dark" id="coProductName">Nama Produk</p>
+                <p class="text-xs font-extrabold text-brand-orange mt-0.5" id="coUnitPrice">Rp 0</p>
+            </div>
+
+            <form onsubmit="submitOrder(event)" class="space-y-3">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Nama Pemesan</label>
+                        <input type="text" id="coBuyerName" required placeholder="Nama lengkap..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">No. WhatsApp (Untuk Lacak)</label>
+                        <input type="text" id="coBuyerWa" required placeholder="08123456789" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3 items-center">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Jumlah Pesanan</label>
+                        <input type="number" id="coQty" value="1" min="1" max="100" oninput="updateCheckoutTotal()" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold">
+                    </div>
+                    <div class="bg-gray-50 p-2.5 rounded-xl border border-gray-200 text-right">
+                        <span class="text-[10px] text-gray-500 block">Total Estimasi</span>
+                        <span class="font-heading font-extrabold text-sm text-brand-orange" id="coTotalDisplay">Rp 0</span>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Catatan / Lokasi COD Kampus</label>
+                    <input type="text" id="coNote" placeholder="Cth: Level pedas 2, ketemu di lobi Kampus 4..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs">
+                </div>
+                <button type="submit" id="btnSubmitOrder" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition-all text-xs flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i> Catat Pesanan & Lanjut ke WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL LACAK RIWAYAT PESANAN PEMBELI -->
+    <div id="trackOrderModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button onclick="closeModal('trackOrderModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-clock-rotate-left text-emerald-600 mr-2"></i> Riwayat & Status Pesanan</h3>
+            <p class="text-xs text-gray-500 mb-4">Masukkan Nomor WhatsApp atau Kode Pesanan (misal: ORD-123456).</p>
+            
+            <form onsubmit="handleTrackOrders(event)" class="flex gap-2 mb-5">
+                <input type="text" id="trackQueryInput" required placeholder="Cth: 08123456789 atau ORD-..." class="flex-1 px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs">
+                <button type="submit" id="btnTrackOrder" class="px-4 py-2.5 bg-brand-orange hover:bg-orange-600 text-white font-bold rounded-xl text-xs shadow-sm">Cari</button>
+            </form>
+
+            <div id="trackOrderResults" class="space-y-3">
+                <p class="text-xs text-center text-gray-400 py-6">Belum ada pencarian riwayat pesanan.</p>
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL PENDAFTARAN -->
     <div id="registerModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
@@ -196,7 +262,7 @@
             <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-brand-light text-brand-orange rounded-2xl mx-auto flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-user-tie"></i></div>
                 <h3 class="font-heading text-lg font-bold text-brand-dark">Login Peserta Tenant</h3>
-                <p class="text-xs text-gray-500">Kelola produk, harga, dan stok</p>
+                <p class="text-xs text-gray-500">Kelola produk, stok, dan pesanan masuk</p>
             </div>
             <form onsubmit="handleSellerLogin(event)" class="space-y-4">
                 <div>
@@ -302,7 +368,10 @@
         let adminSessionToken = null;
         let currentSeller = null;
         let sellerSessionToken = null;
+        let sellerOrders = [];
+        let sellerActiveTab = 'orders';
         let currentCategory = 'all';
+        let activeCheckoutItem = null;
 
         async function postToBackend(payloadObj) {
             const response = await fetch(WEB_APP_URL, {
@@ -354,12 +423,7 @@
             document.getElementById('tenantCount').innerText = filtered.length;
 
             if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="col-span-full text-center py-12 text-gray-400">
-                        <i class="fa-solid fa-store-slash text-4xl mb-2"></i>
-                        <p class="text-sm">Belum ada tenant aktif yang sesuai.</p>
-                    </div>
-                `;
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400"><i class="fa-solid fa-store-slash text-4xl mb-2"></i><p class="text-sm">Belum ada tenant aktif yang sesuai.</p></div>`;
                 return;
             }
 
@@ -380,15 +444,15 @@
                                 <p class="text-xs text-gray-500 mb-2"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> ${t.ownerName} • <span class="text-emerald-600 font-medium">${t.orderMethod}</span></p>
                                 <p class="text-xs text-gray-600 line-clamp-2 mb-3">${t.desc}</p>
                                 <div class="inline-flex items-center gap-1 bg-brand-light text-brand-orange text-[11px] font-bold px-2.5 py-1 rounded-lg">
-                                    <i class="fa-solid fa-box"></i> ${productCount} Produk di Katalog
+                                    <i class="fa-solid fa-box"></i> ${productCount} Produk Tersedia
                                 </div>
                             </div>
                         </div>
                         <div class="p-5 pt-0 flex items-center justify-between gap-2 border-t border-gray-50 mt-auto pt-3">
-                            <button onclick="openDetail(${t.id})" class="flex-1 py-2.5 bg-gray-100 hover:bg-brand-orange hover:text-white text-brand-dark rounded-xl text-xs font-bold transition-colors text-center">
-                                Lihat Menu & Katalog
+                            <button onclick="openDetail(${t.id})" class="flex-1 py-2.5 bg-brand-orange hover:bg-orange-600 text-white rounded-xl text-xs font-bold transition-colors text-center shadow-sm">
+                                Pesan & Lihat Menu
                             </button>
-                            <a href="https://wa.me/${t.whatsapp}?text=Halo%20kak,%20saya%20mau%20pesan%20di%20${encodeURIComponent(t.businessName)}." target="_blank" class="w-10 h-10 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl flex items-center justify-center transition-colors shadow-sm" title="WhatsApp">
+                            <a href="https://wa.me/${t.whatsapp}" target="_blank" class="w-10 h-10 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl flex items-center justify-center transition-colors shadow-sm" title="Chat WhatsApp">
                                 <i class="fa-brands fa-whatsapp text-lg"></i>
                             </a>
                         </div>
@@ -405,6 +469,127 @@
             const activeBtn = cat === 'all' ? document.getElementById('btn-all') : document.getElementById('btn-' + cat.split(' ')[0]);
             if(activeBtn) activeBtn.className = "cat-btn px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-orange text-white whitespace-nowrap shadow-sm";
             renderTenants();
+        }
+
+        // CHECKOUT & PEMESANAN TERCATAT
+        function openCheckout(tenantId, prodIndex) {
+            const tenant = publicTenants.find(t => t.id === tenantId);
+            if (!tenant || !tenant.products || !tenant.products[prodIndex]) return;
+            const prod = tenant.products[prodIndex];
+            activeCheckoutItem = { tenant, prod };
+
+            document.getElementById('coTenantName').innerText = tenant.businessName;
+            document.getElementById('coProductName').innerText = prod.name;
+            document.getElementById('coUnitPrice').innerText = `Rp ${Number(prod.price).toLocaleString('id-ID')} / porsi`;
+            document.getElementById('coQty').value = 1;
+            updateCheckoutTotal();
+            openModal('checkoutModal');
+        }
+
+        function updateCheckoutTotal() {
+            if (!activeCheckoutItem) return;
+            const qty = Math.max(1, parseInt(document.getElementById('coQty').value) || 1);
+            const total = qty * Number(activeCheckoutItem.prod.price);
+            document.getElementById('coTotalDisplay').innerText = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        async function submitOrder(e) {
+            e.preventDefault();
+            if (!activeCheckoutItem) return;
+            const btn = document.getElementById('btnSubmitOrder');
+            btn.disabled = true;
+            btn.innerText = "Mencatat Pesanan...";
+
+            const qty = Math.max(1, parseInt(document.getElementById('coQty').value) || 1);
+            const price = Number(activeCheckoutItem.prod.price);
+            const totalPrice = qty * price;
+            const buyerName = document.getElementById('coBuyerName').value.trim();
+            const buyerWa = document.getElementById('coBuyerWa').value.trim();
+            const note = document.getElementById('coNote').value.trim();
+
+            try {
+                const res = await postToBackend({
+                    action: "createOrder",
+                    order: {
+                        tenantId: activeCheckoutItem.tenant.id,
+                        businessName: activeCheckoutItem.tenant.businessName,
+                        productName: activeCheckoutItem.prod.name,
+                        price: price,
+                        qty: qty,
+                        totalPrice: totalPrice,
+                        buyerName: buyerName,
+                        buyerWa: buyerWa,
+                        note: note
+                    }
+                });
+
+                if (res.status === "success") {
+                    const msg = encodeURIComponent(
+                        `Halo kak *${activeCheckoutItem.tenant.businessName}*,\n` +
+                        `Saya baru memesan lewat *ADpreneur UAD*:\n\n` +
+                        `• Kode Pesanan: *${res.orderId}*\n` +
+                        `• Menu: *${activeCheckoutItem.prod.name}* (${qty}x)\n` +
+                        `• Total: *Rp ${totalPrice.toLocaleString('id-ID')}*\n` +
+                        `• Pemesan: ${buyerName}\n` +
+                        `• Catatan: ${note || '-'}\n\n` +
+                        `Mohon konfirmasi pesanan saya ya kak!`
+                    );
+                    closeModal('checkoutModal');
+                    alert(`Pesanan tercatat dengan kode ${res.orderId}! Kamu akan diarahkan ke WhatsApp penjual.`);
+                    window.open(`https://wa.me/${activeCheckoutItem.tenant.whatsapp}?text=${msg}`, '_blank');
+                } else {
+                    alert("Gagal mencatat pesanan: " + res.message);
+                }
+            } catch (err) {
+                alert("Terjadi kesalahan koneksi.");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-brands fa-whatsapp text-base"></i> Catat Pesanan & Lanjut ke WhatsApp`;
+            }
+        }
+
+        // LACAK PESANAN PEMBELI
+        async function handleTrackOrders(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnTrackOrder');
+            const query = document.getElementById('trackQueryInput').value.trim();
+            btn.disabled = true;
+            btn.innerText = "Mencari...";
+
+            try {
+                const res = await postToBackend({ action: "trackOrders", query: query });
+                const container = document.getElementById('trackOrderResults');
+                if (res.status === "success" && res.orders.length > 0) {
+                    container.innerHTML = '';
+                    res.orders.forEach(o => {
+                        const badgeColor = getStatusBadgeClass(o.status);
+                        container.innerHTML += `
+                            <div class="bg-gray-50 p-3.5 rounded-xl border border-gray-200">
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="text-xs font-extrabold text-brand-dark">${o.orderId} • ${o.businessName}</span>
+                                    <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${badgeColor}">${o.status}</span>
+                                </div>
+                                <p class="text-xs font-semibold text-gray-700">${o.productName} (${o.qty}x) — <span class="text-brand-orange font-bold">Rp ${Number(o.totalPrice).toLocaleString('id-ID')}</span></p>
+                                <p class="text-[11px] text-gray-500 mt-1">Catatan: ${o.note} | Waktu: ${o.createdAt}</p>
+                            </div>
+                        `;
+                    });
+                } else {
+                    container.innerHTML = `<p class="text-xs text-center text-gray-400 py-6">Tidak ditemukan pesanan dengan nomor/kode tersebut.</p>`;
+                }
+            } catch (err) {
+                alert("Gagal terhubung ke server.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Cari";
+            }
+        }
+
+        function getStatusBadgeClass(status) {
+            if (status === "Selesai") return "bg-emerald-100 text-emerald-700";
+            if (status === "Diproses" || status === "Siap Diambil") return "bg-blue-100 text-blue-700";
+            if (status === "Dibatalkan") return "bg-rose-100 text-rose-700";
+            return "bg-amber-100 text-amber-700";
         }
 
         async function submitTenant(e) {
@@ -432,14 +617,14 @@
                 });
 
                 if (res.status === "success") {
-                    alert("Pendaftaran berhasil! Sandi akunmu telah di-hash aman. Menunggu validasi Admin Kampus.");
+                    alert("Pendaftaran berhasil! Menunggu validasi Admin Kampus.");
                     document.getElementById('tenantForm').reset();
                     closeModal('registerModal');
                 } else {
                     alert("Gagal: " + res.message);
                 }
             } catch (err) {
-                alert("Terjadi kesalahan koneksi ke server.");
+                alert("Terjadi kesalahan koneksi.");
             } finally {
                 btn.disabled = false;
                 btn.innerText = "Kirim Pendaftaran Terenkripsi";
@@ -462,6 +647,7 @@
                 if (res.status === "success") {
                     currentSeller = res.seller;
                     sellerSessionToken = res.token;
+                    sellerOrders = res.orders || [];
                     document.getElementById('loginSellerPass').value = '';
                     closeModal('sellerLoginModal');
                     renderSellerDashboard();
@@ -470,79 +656,146 @@
                     alert(res.message);
                 }
             } catch (err) {
-                alert("Gagal terhubung ke server autentikasi.");
+                alert("Gagal terhubung ke server.");
             } finally {
                 btn.disabled = false;
                 btn.innerText = "Verifikasi & Masuk";
             }
         }
 
-        // RENDER DASHBOARD PENJUAL (DENGAN MANAJEMEN PRODUK KATEGORI)
+        function switchSellerTab(tab) {
+            sellerActiveTab = tab;
+            renderSellerDashboard();
+        }
+
         function renderSellerDashboard() {
             if (!currentSeller) return;
             const statusBadge = currentSeller.status === 'approved' 
-                ? `<span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-circle-check mr-1"></i> Terverifikasi & Tayang</span>`
-                : `<span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-clock mr-1"></i> Menunggu Validasi Admin</span>`;
+                ? `<span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-circle-check mr-1"></i> Aktif</span>`
+                : `<span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-clock mr-1"></i> Pending</span>`;
 
-            let productsHTML = '';
-            if (currentSeller.products && currentSeller.products.length > 0) {
-                currentSeller.products.forEach((prod, idx) => {
-                    productsHTML += `
-                        <div class="bg-gray-50 rounded-xl p-3 border border-gray-200 flex items-center justify-between gap-3">
-                            <div class="flex items-center gap-3 overflow-hidden">
-                                <img src="${prod.image}" class="w-12 h-12 object-cover rounded-lg bg-gray-200 flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=200&q=80'">
-                                <div class="truncate">
-                                    <p class="text-xs font-bold text-brand-dark truncate">${prod.name}</p>
-                                    <p class="text-xs text-brand-orange font-semibold">Rp ${Number(prod.price).toLocaleString('id-ID')} <span class="text-gray-400 font-normal">| Stok: ${prod.stock}</span></p>
+            let tabBodyHTML = '';
+
+            if (sellerActiveTab === 'orders') {
+                if (sellerOrders.length === 0) {
+                    tabBodyHTML = `<p class="text-xs text-center text-gray-400 py-8">Belum ada pesanan masuk untuk tokomu.</p>`;
+                } else {
+                    tabBodyHTML = `<div class="space-y-3 max-h-80 overflow-y-auto">`;
+                    sellerOrders.forEach(o => {
+                        const badgeClass = getStatusBadgeClass(o.status);
+                        tabBodyHTML += `
+                            <div class="bg-gray-50 p-3.5 rounded-xl border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="text-xs font-extrabold text-brand-dark">${o.orderId}</span>
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${badgeClass}">${o.status}</span>
+                                        <span class="text-[10px] text-gray-400">${o.createdAt}</span>
+                                    </div>
+                                    <p class="text-xs font-bold text-gray-800">${o.productName} (${o.qty}x) — <span class="text-brand-orange">Rp ${Number(o.totalPrice).toLocaleString('id-ID')}</span></p>
+                                    <p class="text-[11px] text-gray-600">Pemesan: <b>${o.buyerName}</b> (${o.buyerWa}) | Catatan: ${o.note}</p>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <select onchange="changeOrderStatus('${o.orderId}', this.value)" class="px-2.5 py-1.5 bg-white border border-gray-300 rounded-lg text-xs font-semibold">
+                                        <option value="Menunggu Konfirmasi" ${o.status === 'Menunggu Konfirmasi' ? 'selected' : ''}>Menunggu Konfirmasi</option>
+                                        <option value="Diproses" ${o.status === 'Diproses' ? 'selected' : ''}>Diproses (Potong Stok)</option>
+                                        <option value="Siap Diambil" ${o.status === 'Siap Diambil' ? 'selected' : ''}>Siap Diambil / Dikirim</option>
+                                        <option value="Selesai" ${o.status === 'Selesai' ? 'selected' : ''}>Selesai</option>
+                                        <option value="Dibatalkan" ${o.status === 'Dibatalkan' ? 'selected' : ''}>Dibatalkan</option>
+                                    </select>
+                                    <a href="https://wa.me/${String(o.buyerWa).replace(/^0/, '62')}" target="_blank" class="p-2 bg-emerald-100 text-emerald-700 rounded-lg text-xs" title="Chat Pembeli"><i class="fa-brands fa-whatsapp"></i></a>
                                 </div>
                             </div>
-                            <button onclick="deleteProduct(${idx})" class="text-rose-500 hover:bg-rose-50 p-2 rounded-lg text-xs flex-shrink-0"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    `;
-                });
+                        `;
+                    });
+                    tabBodyHTML += `</div>`;
+                }
             } else {
-                productsHTML = `<p class="text-xs text-gray-400 italic">Belum ada produk dalam katalog. Tambahkan produk pertamamu di bawah!</p>`;
+                let productsHTML = '';
+                if (currentSeller.products && currentSeller.products.length > 0) {
+                    currentSeller.products.forEach((prod, idx) => {
+                        productsHTML += `
+                            <div class="bg-gray-50 rounded-xl p-3 border border-gray-200 flex items-center justify-between gap-3">
+                                <div class="flex items-center gap-3 overflow-hidden">
+                                    <img src="${prod.image}" class="w-11 h-11 object-cover rounded-lg bg-gray-200 flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=200&q=80'">
+                                    <div class="truncate">
+                                        <p class="text-xs font-bold text-brand-dark truncate">${prod.name}</p>
+                                        <p class="text-xs text-brand-orange font-semibold">Rp ${Number(prod.price).toLocaleString('id-ID')} <span class="text-gray-400 font-normal">| Stok: ${prod.stock}</span></p>
+                                    </div>
+                                </div>
+                                <button onclick="deleteProduct(${idx})" class="text-rose-500 hover:bg-rose-50 p-2 rounded-lg text-xs flex-shrink-0"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        `;
+                    });
+                } else {
+                    productsHTML = `<p class="text-xs text-gray-400 italic">Belum ada produk dalam katalog.</p>`;
+                }
+
+                tabBodyHTML = `
+                    <div class="bg-brand-light p-4 rounded-2xl border border-brand-orange/20 mb-4">
+                        <h4 class="font-heading font-bold text-xs text-brand-dark mb-2.5">+ Tambah Menu / Produk Baru</h4>
+                        <form onsubmit="addProduct(event)" class="space-y-2.5">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                <input type="text" id="prodName" required placeholder="Nama Produk..." class="px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-semibold">
+                                <input type="number" id="prodPrice" required placeholder="Harga (Cth: 15000)" class="px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
+                                <input type="text" id="prodStock" required placeholder="Stok Angka (Cth: 20)" class="px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="url" id="prodImage" required placeholder="Link URL Foto Produk..." class="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
+                                <button type="submit" class="px-4 py-2 bg-brand-orange hover:bg-orange-600 text-white font-bold rounded-xl text-xs shadow-sm whitespace-nowrap">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="space-y-2 max-h-48 overflow-y-auto">${productsHTML}</div>
+                `;
             }
 
             document.getElementById('sellerDashboardContent').innerHTML = `
-                <div class="flex items-center justify-between border-b pb-4 mb-5">
+                <div class="flex items-center justify-between border-b pb-4 mb-4">
                     <div>
                         <span class="text-xs text-gray-400">Dashboard Pengelola Tenant</span>
                         <h3 class="font-heading text-xl font-bold text-brand-dark">${currentSeller.businessName}</h3>
-                        <p class="text-xs text-gray-500">${currentSeller.ownerName} (${currentSeller.nim})</p>
                     </div>
                     <div class="text-right">
                         ${statusBadge}
-                        <p class="text-xs font-bold text-brand-orange mt-2"><i class="fa-solid fa-eye mr-1"></i> ${currentSeller.visits} Kunjungan</p>
+                        <p class="text-xs font-bold text-brand-orange mt-1"><i class="fa-solid fa-eye mr-1"></i> ${currentSeller.visits} Kunjungan</p>
                     </div>
                 </div>
 
-                <!-- FORM TAMBAH PRODUK -->
-                <div class="bg-brand-light p-4 rounded-2xl border border-brand-orange/20 mb-6">
-                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3"><i class="fa-solid fa-plus-circle text-brand-orange mr-1.5"></i> Tambah Menu / Produk Baru</h4>
-                    <form onsubmit="addProduct(event)" class="space-y-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                            <input type="text" id="prodName" required placeholder="Nama Produk/Menu..." class="px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-semibold">
-                            <input type="number" id="prodPrice" required placeholder="Harga (Cth: 15000)" class="px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
-                            <input type="text" id="prodStock" required placeholder="Stok (Cth: Tersedia / 20)" class="px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
-                        </div>
-                        <div class="flex gap-2">
-                            <input type="url" id="prodImage" required placeholder="Link URL Foto Produk..." class="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
-                            <button type="submit" class="px-4 py-2 bg-brand-orange hover:bg-orange-600 text-white font-bold rounded-xl text-xs shadow-sm whitespace-nowrap">+ Tambah Produk</button>
-                        </div>
-                    </form>
+                <div class="flex gap-2 border-b pb-3 mb-4">
+                    <button onclick="switchSellerTab('orders')" class="px-3.5 py-2 rounded-xl text-xs font-bold ${sellerActiveTab === 'orders' ? 'bg-brand-orange text-white' : 'bg-gray-100 text-gray-600'}">
+                        <i class="fa-solid fa-receipt mr-1"></i> Pesanan Masuk (${sellerOrders.length})
+                    </button>
+                    <button onclick="switchSellerTab('products')" class="px-3.5 py-2 rounded-xl text-xs font-bold ${sellerActiveTab === 'products' ? 'bg-brand-orange text-white' : 'bg-gray-100 text-gray-600'}">
+                        <i class="fa-solid fa-box-open mr-1"></i> Kelola Produk (${currentSeller.products ? currentSeller.products.length : 0})
+                    </button>
                 </div>
 
-                <div class="mb-6">
-                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Daftar Katalog Produk (${currentSeller.products ? currentSeller.products.length : 0})</h4>
-                    <div class="space-y-2 max-h-56 overflow-y-auto">${productsHTML}</div>
-                </div>
+                <div class="mb-5">${tabBodyHTML}</div>
 
                 <div class="flex justify-between items-center border-t pt-4">
                     <button onclick="currentSeller = null; sellerSessionToken = null; closeModal('sellerDashboardModal')" class="text-xs font-bold text-rose-600 hover:underline"><i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar Akun</button>
-                    <button onclick="closeModal('sellerDashboardModal')" class="px-5 py-2 bg-brand-dark text-white text-xs font-bold rounded-xl">Selesai & Tutup</button>
+                    <button onclick="closeModal('sellerDashboardModal')" class="px-5 py-2 bg-brand-dark text-white text-xs font-bold rounded-xl">Tutup</button>
                 </div>
             `;
+        }
+
+        async function changeOrderStatus(orderId, newStatus) {
+            const res = await postToBackend({
+                action: "updateOrderStatus",
+                sellerId: currentSeller.id,
+                token: sellerSessionToken,
+                orderId: orderId,
+                newStatus: newStatus
+            });
+            if (res.status === "success") {
+                sellerOrders = res.orders;
+                if (res.products) currentSeller.products = res.products;
+                renderSellerDashboard();
+                loadPublicData(false);
+                alert(`Status pesanan ${orderId} diperbarui menjadi: ${newStatus}`);
+            } else {
+                alert("Gagal update status: " + res.message);
+            }
         }
 
         async function addProduct(e) {
@@ -565,25 +818,21 @@
             });
 
             if (res.status === "success") {
-                alert("Produk berhasil ditambahkan ke katalog!");
+                alert("Produk ditambahkan!");
                 renderSellerDashboard();
                 loadPublicData(false);
-            } else {
-                alert("Gagal: " + res.message);
             }
         }
 
         async function deleteProduct(index) {
             if (!currentSeller || !currentSeller.products) return;
             currentSeller.products.splice(index, 1);
-
             const res = await postToBackend({
                 action: "updateSellerProducts",
                 sellerId: currentSeller.id,
                 token: sellerSessionToken,
                 products: currentSeller.products
             });
-
             if (res.status === "success") {
                 renderSellerDashboard();
                 loadPublicData(false);
@@ -625,11 +874,7 @@
 
         async function refreshAdminData() {
             if (!adminSessionToken) return;
-            const res = await postToBackend({
-                action: "adminAction",
-                subAction: "refresh",
-                token: adminSessionToken
-            });
+            const res = await postToBackend({ action: "adminAction", subAction: "refresh", token: adminSessionToken });
             if (res.status === "success") {
                 adminTenants = res.tenants;
                 renderPendingValidations();
@@ -720,12 +965,7 @@
 
         async function executeAdminAction(subAction, tenantId, confirmMsg = null) {
             if (confirmMsg && !confirm(confirmMsg)) return;
-            const res = await postToBackend({
-                action: "adminAction",
-                subAction: subAction,
-                tenantId: tenantId,
-                token: adminSessionToken
-            });
+            const res = await postToBackend({ action: "adminAction", subAction: subAction, tenantId: tenantId, token: adminSessionToken });
             if (res.status === "success") {
                 adminTenants = res.tenants;
                 renderPendingValidations();
@@ -735,7 +975,6 @@
             }
         }
 
-        // DETAIL MODAL MENAMPILKAN KATALOG PRODUK LENGKAP DENGAN TOMBOL ORDER WHATSAPP PER PRODUK
         function openDetail(id) {
             const tenant = publicTenants.find(t => t.id === id);
             if (!tenant) return;
@@ -746,8 +985,12 @@
             let productsHTML = '';
             if (tenant.products && tenant.products.length > 0) {
                 productsHTML = `<div class="mb-6"><h4 class="font-heading font-bold text-sm text-brand-dark mb-3"><i class="fa-solid fa-utensils text-brand-orange mr-1.5"></i> Katalog Menu & Produk</h4><div class="grid grid-cols-1 sm:grid-cols-2 gap-3">`;
-                tenant.products.forEach(p => {
-                    const waText = encodeURIComponent(`Halo kak, saya mau pesan ${p.name} seharga Rp ${Number(p.price).toLocaleString('id-ID')} dari ${tenant.businessName}.`);
+                tenant.products.forEach((p, idx) => {
+                    const isOutOfStock = String(p.stock) === "0" || String(p.stock).toLowerCase() === "habis";
+                    const btnOrder = isOutOfStock
+                        ? `<button disabled class="w-full py-2 bg-gray-200 text-gray-500 rounded-lg text-xs font-bold cursor-not-allowed">Stok Habis</button>`
+                        : `<button onclick="openCheckout(${tenant.id}, ${idx})" class="w-full py-2 bg-brand-orange hover:bg-orange-600 text-white rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shadow-sm"><i class="fa-solid fa-bag-shopping"></i> Pesan Sekarang</button>`;
+
                     productsHTML += `
                         <div class="bg-gray-50 rounded-xl p-3 border border-gray-200 flex flex-col justify-between">
                             <div class="flex items-center gap-3 mb-3">
@@ -755,12 +998,10 @@
                                 <div class="overflow-hidden">
                                     <p class="text-xs font-bold text-brand-dark truncate">${p.name}</p>
                                     <p class="text-xs text-brand-orange font-extrabold mt-0.5">Rp ${Number(p.price).toLocaleString('id-ID')}</p>
-                                    <p class="text-[10px] text-emerald-600 font-medium">Stok: ${p.stock}</p>
+                                    <p class="text-[10px] ${isOutOfStock ? 'text-rose-600' : 'text-emerald-600'} font-medium">Stok: ${p.stock}</p>
                                 </div>
                             </div>
-                            <a href="https://wa.me/${tenant.whatsapp}?text=${waText}" target="_blank" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5">
-                                <i class="fa-brands fa-whatsapp"></i> Pesan Menu Ini
-                            </a>
+                            ${btnOrder}
                         </div>
                     `;
                 });
@@ -826,12 +1067,7 @@
                 comment: document.getElementById('reviewComment').value.trim()
             };
 
-            const res = await postToBackend({
-                action: "addReview",
-                tenantId: tenantId,
-                review: reviewObj
-            });
-
+            const res = await postToBackend({ action: "addReview", tenantId: tenantId, review: reviewObj });
             if (res.status === "success") {
                 const tenant = publicTenants.find(t => t.id === tenantId);
                 if (tenant) {
