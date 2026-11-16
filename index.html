@@ -24,8 +24,8 @@
 </head>
 <body class="bg-brand-graybg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between">
     <div class="bg-brand-orange text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-sm flex items-center justify-center gap-2">
-        <i class="fa-solid fa-receipt"></i>
-        <span>ADpreneur v3.0 — Tahap 3: Sistem Pemesanan & Lacak Status Transaksi Aktif</span>
+        <i class="fa-solid fa-circle-check"></i>
+        <span>ADpreneur v4.0 — Ekosistem Terverifikasi Mahasiswa UAD & Pusat Bantuan Aktif</span>
     </div>
 
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -43,11 +43,14 @@
                 <button onclick="openModal('trackOrderModal')" class="text-xs sm:text-sm font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-600 hover:text-white px-3 sm:px-3.5 py-2.5 rounded-xl transition-all border border-emerald-200 flex items-center gap-1.5">
                     <i class="fa-solid fa-clock-rotate-left"></i> <span class="hidden md:inline">Lacak Pesanan</span><span class="md:hidden">Pesanan</span>
                 </button>
+                <button onclick="openModal('helpCenterModal')" class="text-xs sm:text-sm font-semibold text-blue-700 bg-blue-50 hover:bg-blue-600 hover:text-white px-3 sm:px-3.5 py-2.5 rounded-xl transition-all border border-blue-200 flex items-center gap-1.5" title="Pusat Bantuan & Pengaduan">
+                    <i class="fa-solid fa-headset"></i> <span class="hidden lg:inline">Bantuan</span>
+                </button>
                 <button onclick="openModal('registerModal')" class="text-xs sm:text-sm font-semibold text-brand-orange bg-brand-light hover:bg-brand-orange hover:text-white px-3 sm:px-3.5 py-2.5 rounded-xl transition-all border border-brand-orange/20 flex items-center gap-1.5">
                     <i class="fa-solid fa-store"></i> <span class="hidden md:inline">Daftar Tenant</span><span class="md:hidden">Daftar</span>
                 </button>
                 <button onclick="openModal('sellerLoginModal')" class="text-xs sm:text-sm font-semibold text-brand-dark bg-gray-100 hover:bg-gray-200 px-3 sm:px-3.5 py-2.5 rounded-xl transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-user-tie"></i> <span class="hidden md:inline">Login Penjual</span><span class="md:hidden">Penjual</span>
+                    <i class="fa-solid fa-user-tie"></i> <span class="hidden md:inline">Penjual</span>
                 </button>
                 <button onclick="openModal('adminLoginModal')" class="text-xs sm:text-sm font-semibold text-white bg-brand-dark hover:bg-gray-700 px-3 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -66,7 +69,7 @@
                     Food Court Digital Mahasiswa <span class="text-brand-orange">UAD</span>
                 </h1>
                 <p class="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto mb-8">
-                    Pesan kuliner, barang, dan jasa mahasiswa UAD dengan pencatatan transaksi transparan dan pelacakan status pesanan real-time.
+                    Belanja aman dari sesama mahasiswa UAD yang telah terverifikasi identitas akademiknya. Dilengkapi rating transparan dan layanan pengaduan kampus.
                 </p>
                 <div class="bg-white p-3 rounded-2xl shadow-lg border border-gray-100 max-w-3xl mx-auto flex flex-col md:flex-row gap-3">
                     <div class="flex-1 relative flex items-center">
@@ -86,8 +89,8 @@
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
                 <div>
-                    <h2 class="font-heading text-2xl font-bold text-brand-dark">Etalase Tenant Mahasiswa</h2>
-                    <p class="text-xs sm:text-sm text-gray-500">Pilih tenant untuk melihat katalog menu dan melakukan pemesanan tercatat</p>
+                    <h2 class="font-heading text-2xl font-bold text-brand-dark">Etalase Tenant Terverifikasi</h2>
+                    <p class="text-xs sm:text-sm text-gray-500">Semua tenant telah divalidasi identitas mahasiswa UAD oleh Admin Kampus</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <button onclick="loadPublicData(true)" class="text-xs font-semibold text-brand-orange bg-white hover:bg-brand-light px-3 py-2 rounded-lg border border-gray-200 shadow-sm flex items-center gap-1.5 transition-all">
@@ -107,22 +110,86 @@
         </section>
     </main>
 
+    <!-- FOOTER DENGAN KEBIJAKAN PRIVASI, S&K, DAN PUSAT BANTUAN -->
     <footer class="bg-brand-dark text-white py-10 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div>
                 <span class="font-heading text-xl font-bold text-white tracking-wide">AD<span class="text-brand-orange">preneur</span></span>
                 <p class="text-xs text-gray-400 mt-1">Platform Ekosistem Digital Wirausaha Mahasiswa Universitas Ahmad Dahlan Yogyakarta.</p>
             </div>
-            <div class="text-xs text-gray-400">&copy; 2026 ADpreneur UAD. Secured Cloud Architecture.</div>
+            <div class="flex flex-wrap justify-center gap-4 text-xs text-gray-300">
+                <button onclick="openModal('privacyModal')" class="hover:text-brand-orange transition-colors">Kebijakan Privasi</button>
+                <span>•</span>
+                <button onclick="openModal('termsModal')" class="hover:text-brand-orange transition-colors">Syarat & Ketentuan</button>
+                <span>•</span>
+                <button onclick="openModal('helpCenterModal')" class="hover:text-brand-orange transition-colors font-semibold text-brand-orange">Pusat Bantuan & Pengaduan</button>
+            </div>
+            <div class="text-xs text-gray-400">&copy; 2026 ADpreneur UAD. Verified Campus Ecosystem.</div>
         </div>
     </footer>
+
+    <!-- MODAL KEBIJAKAN PRIVASI -->
+    <div id="privacyModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button onclick="closeModal('privacyModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-heading text-lg font-bold text-brand-dark mb-3"><i class="fa-solid fa-user-shield text-brand-orange mr-2"></i> Kebijakan Privasi ADpreneur UAD</h3>
+            <div class="space-y-3 text-xs text-gray-600 leading-relaxed">
+                <p><b>1. Pengumpulan Data Mahasiswa:</b> ADpreneur mengumpulkan Nama Lengkap, Nomor Induk Mahasiswa (NIM), dan Email resmi UAD semata-mata untuk proses verifikasi keabsahan status mahasiswa aktif Universitas Ahmad Dahlan.</p>
+                <p><b>2. Perlindungan Data Privat:</b> Nomor NIM lengkap, alamat email pribadi, dan kata sandi (yang dienkripsi dengan algoritma SHA-256) disimpan secara privat dan <b>tidak pernah ditampilkan</b> di halaman publik.</p>
+                <p><b>3. Data Transaksi:</b> Informasi nama pemesan dan nomor WhatsApp pada fitur pemesanan hanya digunakan untuk keperluan koordinasi pengiriman pesanan antara pembeli dan tenant terkait.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL SYARAT & KETENTUAN -->
+    <div id="termsModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button onclick="closeModal('termsModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-heading text-lg font-bold text-brand-dark mb-3"><i class="fa-solid fa-file-contract text-brand-orange mr-2"></i> Syarat & Ketentuan Ekosistem</h3>
+            <div class="space-y-3 text-xs text-gray-600 leading-relaxed">
+                <p><b>1. Kelayakan Tenant:</b> Pendaftar wajib merupakan mahasiswa aktif Universitas Ahmad Dahlan yang dibuktikan dengan NIM dan email institusi yang valid.</p>
+                <p><b>2. Standar Produk & Halal:</b> Seluruh produk kuliner dan barang yang dipasarkan di lingkungan kampus UAD wajib memenuhi prinsip kehalalan, higienitas, serta tidak melanggar peraturan akademik maupun hukum yang berlaku.</p>
+                <p><b>3. Sanksi Pelanggaran:</b> Admin Kampus berhak menangguhkan atau menghapus akun tenant apabila ditemukan penipuan transaksi, ketidaksesuaian produk, atau laporan pengaduan yang terbukti valid.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PUSAT BANTUAN & PENGADUAN -->
+    <div id="helpCenterModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+            <button onclick="closeModal('helpCenterModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-headset text-blue-600 mr-2"></i> Pusat Bantuan & Pengaduan</h3>
+            <p class="text-xs text-gray-500 mb-4">Alami kendala pesanan atau ingin melaporkan pelanggaran tenant? Sampaikan kepada tim moderasi ADpreneur.</p>
+            <form onsubmit="handleReportSubmit(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Nama Pelapor</label>
+                    <input type="text" id="repName" required placeholder="Nama lengkap..." class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Kontak WhatsApp / Email Balasan</label>
+                    <input type="text" id="repContact" required placeholder="08123456789" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Nama Usaha / Kode Pesanan Terkait (Opsional)</label>
+                    <input type="text" id="repTarget" placeholder="Cth: Dimsum Dahlan / ORD-123456" class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Detail Kendala / Pengaduan</label>
+                    <textarea id="repDesc" rows="3" required placeholder="Jelaskan kronologi kendala yang dialami..." class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs"></textarea>
+                </div>
+                <button type="submit" id="btnSubmitReport" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-all text-xs">
+                    Kirim Laporan ke Admin Kampus
+                </button>
+            </form>
+        </div>
+    </div>
 
     <!-- MODAL CHECKOUT PEMESANAN PRODUK -->
     <div id="checkoutModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 relative">
             <button onclick="closeModal('checkoutModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-bag-shopping text-brand-orange mr-2"></i> Form Pemesanan</h3>
-            <p class="text-xs text-gray-500 mb-4">Pesananmu akan tercatat otomatis agar bisa dilacak statusnya.</p>
+            <p class="text-xs text-gray-500 mb-4">Pesananmu tercatat aman untuk memudahkan pelacakan.</p>
             
             <div class="bg-brand-light p-3.5 rounded-xl border border-brand-orange/20 mb-4">
                 <p class="text-xs text-gray-500" id="coTenantName">Nama Toko</p>
@@ -137,7 +204,7 @@
                         <input type="text" id="coBuyerName" required placeholder="Nama lengkap..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">No. WhatsApp (Untuk Lacak)</label>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">No. WhatsApp</label>
                         <input type="text" id="coBuyerWa" required placeholder="08123456789" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs">
                     </div>
                 </div>
@@ -153,7 +220,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1">Catatan / Lokasi COD Kampus</label>
-                    <input type="text" id="coNote" placeholder="Cth: Level pedas 2, ketemu di lobi Kampus 4..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs">
+                    <input type="text" id="coNote" placeholder="Cth: Ketemu di lobi Kampus 4..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs">
                 </div>
                 <button type="submit" id="btnSubmitOrder" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition-all text-xs flex items-center justify-center gap-2">
                     <i class="fa-brands fa-whatsapp text-base"></i> Catat Pesanan & Lanjut ke WhatsApp
@@ -168,24 +235,22 @@
             <button onclick="closeModal('trackOrderModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-clock-rotate-left text-emerald-600 mr-2"></i> Riwayat & Status Pesanan</h3>
             <p class="text-xs text-gray-500 mb-4">Masukkan Nomor WhatsApp atau Kode Pesanan (misal: ORD-123456).</p>
-            
             <form onsubmit="handleTrackOrders(event)" class="flex gap-2 mb-5">
                 <input type="text" id="trackQueryInput" required placeholder="Cth: 08123456789 atau ORD-..." class="flex-1 px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs">
                 <button type="submit" id="btnTrackOrder" class="px-4 py-2.5 bg-brand-orange hover:bg-orange-600 text-white font-bold rounded-xl text-xs shadow-sm">Cari</button>
             </form>
-
             <div id="trackOrderResults" class="space-y-3">
                 <p class="text-xs text-center text-gray-400 py-6">Belum ada pencarian riwayat pesanan.</p>
             </div>
         </div>
     </div>
 
-    <!-- MODAL PENDAFTARAN -->
+    <!-- MODAL PENDAFTARAN (DENGAN CHECKBOX PERSETUJUAN S&K) -->
     <div id="registerModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="font-heading text-xl font-bold text-brand-dark mb-1"><i class="fa-solid fa-store text-brand-orange mr-2"></i> Pendaftaran Tenant Baru</h3>
-            <p class="text-xs text-gray-500 mb-5">Data pribadimu (NIM, Email, Sandi) terenkripsi aman dan tidak ditampilkan ke publik.</p>
+            <p class="text-xs text-gray-500 mb-5">Lengkapi identitas mahasiswa UAD untuk mendapatkan lencana verifikasi resmi.</p>
             <form id="tenantForm" onsubmit="submitTenant(event)" class="space-y-3.5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
@@ -248,6 +313,10 @@
                     <label class="block text-xs font-bold text-gray-700 mb-1">Deskripsi Singkat Usaha</label>
                     <textarea id="regDesc" rows="2" required placeholder="Jelaskan profil usaha..." class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm"></textarea>
                 </div>
+                <label class="flex items-start gap-2 text-[11px] text-gray-600 bg-gray-50 p-2.5 rounded-xl border border-gray-200 cursor-pointer">
+                    <input type="checkbox" required class="mt-0.5 accent-brand-orange">
+                    <span>Saya menyatakan data mahasiswa UAD di atas benar serta menyetujui <b>Syarat & Ketentuan</b> dan <b>Kebijakan Privasi</b> ADpreneur.</span>
+                </label>
                 <button type="submit" id="btnSubmit" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all text-sm">
                     Kirim Pendaftaran Terenkripsi
                 </button>
@@ -313,23 +382,24 @@
         </div>
     </div>
 
-    <!-- MODAL DASHBOARD ADMIN -->
+    <!-- MODAL DASHBOARD ADMIN (DENGAN TAB PENGADUAN / REPORTS) -->
     <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('adminModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 border-b pb-4 gap-3">
                 <div>
                     <h3 class="font-heading text-xl font-bold text-brand-dark"><i class="fa-solid fa-shield-halved text-brand-orange mr-2"></i> Portal Dashboard Admin UAD</h3>
-                    <p class="text-xs text-gray-500">Validasi dan monitoring tenant aktif.</p>
+                    <p class="text-xs text-gray-500">Validasi mahasiswa, moderasi tenant, dan penanganan laporan pengaduan.</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="refreshAdminData()" class="bg-gray-100 hover:bg-gray-200 text-brand-dark px-3 py-1.5 rounded-lg text-xs font-bold"><i class="fa-solid fa-rotate mr-1"></i> Segarkan</button>
                     <button onclick="logoutAdmin()" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Logout</button>
                 </div>
             </div>
-            <div class="flex gap-2 border-b mb-6 pb-2">
-                <button onclick="switchAdminTab('validation')" id="tab-val" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white">Antrean Validasi (<span id="pendingCountBadge">0</span>)</button>
-                <button onclick="switchAdminTab('monitoring')" id="tab-mon" class="px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Kelola Tenant Aktif</button>
+            <div class="flex flex-wrap gap-2 border-b mb-6 pb-2">
+                <button onclick="switchAdminTab('validation')" id="tab-val" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white">Validasi Mahasiswa (<span id="pendingCountBadge">0</span>)</button>
+                <button onclick="switchAdminTab('monitoring')" id="tab-mon" class="px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Tenant Aktif</button>
+                <button onclick="switchAdminTab('reports')" id="tab-rep" class="px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Pengaduan (<span id="reportCountBadge">0</span>)</button>
             </div>
             <div id="adminValidationContent" class="space-y-4">
                 <div id="pendingListContainer"></div>
@@ -349,6 +419,9 @@
                     </table>
                 </div>
             </div>
+            <div id="adminReportsContent" class="space-y-3 hidden">
+                <div id="reportsListContainer"></div>
+            </div>
         </div>
     </div>
 
@@ -365,6 +438,7 @@
 
         let publicTenants = [];
         let adminTenants = [];
+        let adminReports = [];
         let adminSessionToken = null;
         let currentSeller = null;
         let sellerSessionToken = null;
@@ -406,6 +480,12 @@
             renderTenants();
         }
 
+        function getAverageRating(reviews) {
+            if (!reviews || reviews.length === 0) return "Baru";
+            const sum = reviews.reduce((acc, r) => acc + (Number(r.rating) || 5), 0);
+            return (sum / reviews.length).toFixed(1);
+        }
+
         function renderTenants() {
             const container = document.getElementById('tenantContainer');
             const keyword = document.getElementById('searchInput').value.toLowerCase();
@@ -429,22 +509,31 @@
 
             filtered.forEach(t => {
                 const productCount = t.products ? t.products.length : 0;
+                const avgRating = getAverageRating(t.reviews);
+                const reviewCount = t.reviews ? t.reviews.length : 0;
+
                 container.innerHTML += `
                     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col justify-between group">
                         <div>
                             <div class="relative h-48 overflow-hidden bg-gray-100">
                                 <img src="${t.image}" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 <span class="absolute top-3 left-3 bg-white/95 text-brand-orange text-xs font-bold px-3 py-1 rounded-full shadow-sm">${t.category}</span>
+                                <span class="absolute top-3 right-3 bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+                                    <i class="fa-solid fa-star text-[10px]"></i> ${avgRating} (${reviewCount})
+                                </span>
                                 <span class="absolute bottom-3 right-3 bg-black/65 text-white text-[11px] px-2.5 py-1 rounded-lg backdrop-blur-sm flex items-center gap-1">
-                                    <i class="fa-solid fa-eye"></i> ${t.visits} Kunjungan
+                                    <i class="fa-solid fa-eye"></i> ${t.visits}
                                 </span>
                             </div>
                             <div class="p-5">
-                                <h3 class="font-heading font-bold text-lg text-brand-dark line-clamp-1">${t.businessName}</h3>
-                                <p class="text-xs text-gray-500 mb-2"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> ${t.ownerName} • <span class="text-emerald-600 font-medium">${t.orderMethod}</span></p>
+                                <div class="flex items-center gap-1.5 mb-1">
+                                    <h3 class="font-heading font-bold text-lg text-brand-dark line-clamp-1">${t.businessName}</h3>
+                                    <i class="fa-solid fa-circle-check text-blue-500 text-sm flex-shrink-0" title="Terverifikasi Mahasiswa UAD"></i>
+                                </div>
+                                <p class="text-xs text-gray-500 mb-2"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> ${t.ownerName} (Angkatan ${t.angkatan || 'UAD'}) • <span class="text-emerald-600 font-medium">${t.orderMethod}</span></p>
                                 <p class="text-xs text-gray-600 line-clamp-2 mb-3">${t.desc}</p>
                                 <div class="inline-flex items-center gap-1 bg-brand-light text-brand-orange text-[11px] font-bold px-2.5 py-1 rounded-lg">
-                                    <i class="fa-solid fa-box"></i> ${productCount} Produk Tersedia
+                                    <i class="fa-solid fa-box"></i> ${productCount} Menu Tersedia
                                 </div>
                             </div>
                         </div>
@@ -471,7 +560,36 @@
             renderTenants();
         }
 
-        // CHECKOUT & PEMESANAN TERCATAT
+        // PENGADUAN & PUSAT BANTUAN
+        async function handleReportSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmitReport');
+            btn.disabled = true;
+            btn.innerText = "Mengirim Laporan...";
+
+            try {
+                const res = await postToBackend({
+                    action: "submitReport",
+                    report: {
+                        reporterName: document.getElementById('repName').value.trim(),
+                        reporterContact: document.getElementById('repContact').value.trim(),
+                        targetBusiness: document.getElementById('repTarget').value.trim(),
+                        description: document.getElementById('repDesc').value.trim()
+                    }
+                });
+                if (res.status === "success") {
+                    alert(`Laporan diterima dengan Nomor Tiket ${res.reportId}. Tim Admin ADpreneur akan segera menindaklanjuti.`);
+                    e.target.reset();
+                    closeModal('helpCenterModal');
+                }
+            } catch (err) {
+                alert("Gagal mengirim laporan.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Kirim Laporan ke Admin Kampus";
+            }
+        }
+
         function openCheckout(tenantId, prodIndex) {
             const tenant = publicTenants.find(t => t.id === tenantId);
             if (!tenant || !tenant.products || !tenant.products[prodIndex]) return;
@@ -526,7 +644,7 @@
                 if (res.status === "success") {
                     const msg = encodeURIComponent(
                         `Halo kak *${activeCheckoutItem.tenant.businessName}*,\n` +
-                        `Saya baru memesan lewat *ADpreneur UAD*:\n\n` +
+                        `Saya memesan lewat *ADpreneur UAD*:\n\n` +
                         `• Kode Pesanan: *${res.orderId}*\n` +
                         `• Menu: *${activeCheckoutItem.prod.name}* (${qty}x)\n` +
                         `• Total: *Rp ${totalPrice.toLocaleString('id-ID')}*\n` +
@@ -535,10 +653,8 @@
                         `Mohon konfirmasi pesanan saya ya kak!`
                     );
                     closeModal('checkoutModal');
-                    alert(`Pesanan tercatat dengan kode ${res.orderId}! Kamu akan diarahkan ke WhatsApp penjual.`);
+                    alert(`Pesanan tercatat dengan kode ${res.orderId}!`);
                     window.open(`https://wa.me/${activeCheckoutItem.tenant.whatsapp}?text=${msg}`, '_blank');
-                } else {
-                    alert("Gagal mencatat pesanan: " + res.message);
                 }
             } catch (err) {
                 alert("Terjadi kesalahan koneksi.");
@@ -548,7 +664,6 @@
             }
         }
 
-        // LACAK PESANAN PEMBELI
         async function handleTrackOrders(e) {
             e.preventDefault();
             const btn = document.getElementById('btnTrackOrder');
@@ -617,7 +732,7 @@
                 });
 
                 if (res.status === "success") {
-                    alert("Pendaftaran berhasil! Menunggu validasi Admin Kampus.");
+                    alert("Pendaftaran berhasil! Menunggu validasi identitas mahasiswa oleh Admin Kampus.");
                     document.getElementById('tenantForm').reset();
                     closeModal('registerModal');
                 } else {
@@ -671,7 +786,7 @@
         function renderSellerDashboard() {
             if (!currentSeller) return;
             const statusBadge = currentSeller.status === 'approved' 
-                ? `<span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-circle-check mr-1"></i> Aktif</span>`
+                ? `<span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-circle-check mr-1"></i> Terverifikasi</span>`
                 : `<span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-clock mr-1"></i> Pending</span>`;
 
             let tabBodyHTML = '';
@@ -702,7 +817,7 @@
                                         <option value="Selesai" ${o.status === 'Selesai' ? 'selected' : ''}>Selesai</option>
                                         <option value="Dibatalkan" ${o.status === 'Dibatalkan' ? 'selected' : ''}>Dibatalkan</option>
                                     </select>
-                                    <a href="https://wa.me/${String(o.buyerWa).replace(/^0/, '62')}" target="_blank" class="p-2 bg-emerald-100 text-emerald-700 rounded-lg text-xs" title="Chat Pembeli"><i class="fa-brands fa-whatsapp"></i></a>
+                                    <a href="https://wa.me/${String(o.buyerWa).replace(/^0/, '62')}" target="_blank" class="p-2 bg-emerald-100 text-emerald-700 rounded-lg text-xs"><i class="fa-brands fa-whatsapp"></i></a>
                                 </div>
                             </div>
                         `;
@@ -760,7 +875,6 @@
                         <p class="text-xs font-bold text-brand-orange mt-1"><i class="fa-solid fa-eye mr-1"></i> ${currentSeller.visits} Kunjungan</p>
                     </div>
                 </div>
-
                 <div class="flex gap-2 border-b pb-3 mb-4">
                     <button onclick="switchSellerTab('orders')" class="px-3.5 py-2 rounded-xl text-xs font-bold ${sellerActiveTab === 'orders' ? 'bg-brand-orange text-white' : 'bg-gray-100 text-gray-600'}">
                         <i class="fa-solid fa-receipt mr-1"></i> Pesanan Masuk (${sellerOrders.length})
@@ -769,9 +883,7 @@
                         <i class="fa-solid fa-box-open mr-1"></i> Kelola Produk (${currentSeller.products ? currentSeller.products.length : 0})
                     </button>
                 </div>
-
                 <div class="mb-5">${tabBodyHTML}</div>
-
                 <div class="flex justify-between items-center border-t pt-4">
                     <button onclick="currentSeller = null; sellerSessionToken = null; closeModal('sellerDashboardModal')" class="text-xs font-bold text-rose-600 hover:underline"><i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar Akun</button>
                     <button onclick="closeModal('sellerDashboardModal')" class="px-5 py-2 bg-brand-dark text-white text-xs font-bold rounded-xl">Tutup</button>
@@ -793,8 +905,6 @@
                 renderSellerDashboard();
                 loadPublicData(false);
                 alert(`Status pesanan ${orderId} diperbarui menjadi: ${newStatus}`);
-            } else {
-                alert("Gagal update status: " + res.message);
             }
         }
 
@@ -802,21 +912,18 @@
             e.preventDefault();
             if (!currentSeller) return;
             if (!currentSeller.products) currentSeller.products = [];
-
             currentSeller.products.push({
                 name: document.getElementById('prodName').value.trim(),
                 price: document.getElementById('prodPrice').value.trim(),
                 stock: document.getElementById('prodStock').value.trim(),
                 image: document.getElementById('prodImage').value.trim()
             });
-
             const res = await postToBackend({
                 action: "updateSellerProducts",
                 sellerId: currentSeller.id,
                 token: sellerSessionToken,
                 products: currentSeller.products
             });
-
             if (res.status === "success") {
                 alert("Produk ditambahkan!");
                 renderSellerDashboard();
@@ -855,12 +962,14 @@
                 if (res.status === "success") {
                     adminSessionToken = res.token;
                     adminTenants = res.tenants;
+                    adminReports = res.reports || [];
                     document.getElementById('adminUser').value = '';
                     document.getElementById('adminPass').value = '';
                     closeModal('adminLoginModal');
                     openModal('adminModal');
                     renderPendingValidations();
                     renderMonitoringTable();
+                    renderAdminReports();
                 } else {
                     alert(res.message);
                 }
@@ -877,8 +986,10 @@
             const res = await postToBackend({ action: "adminAction", subAction: "refresh", token: adminSessionToken });
             if (res.status === "success") {
                 adminTenants = res.tenants;
+                adminReports = res.reports || [];
                 renderPendingValidations();
                 renderMonitoringTable();
+                renderAdminReports();
                 alert("Data disegarkan!");
             }
         }
@@ -886,21 +997,27 @@
         function logoutAdmin() {
             adminSessionToken = null;
             adminTenants = [];
+            adminReports = [];
             closeModal('adminModal');
         }
 
         function switchAdminTab(tab) {
+            ['validation', 'monitoring', 'reports'].forEach(t => {
+                document.getElementById('admin' + t.charAt(0).toUpperCase() + t.slice(1) + 'Content').classList.add('hidden');
+            });
+            document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600";
+            document.getElementById('tab-mon').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600";
+            document.getElementById('tab-rep').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600";
+
             if (tab === 'validation') {
                 document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
-                document.getElementById('tab-mon').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200";
                 document.getElementById('adminValidationContent').classList.remove('hidden');
-                document.getElementById('adminMonitoringContent').classList.add('hidden');
-            } else {
+            } else if (tab === 'monitoring') {
                 document.getElementById('tab-mon').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
-                document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200";
                 document.getElementById('adminMonitoringContent').classList.remove('hidden');
-                document.getElementById('adminValidationContent').classList.add('hidden');
-                renderMonitoringTable();
+            } else {
+                document.getElementById('tab-rep').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
+                document.getElementById('adminReportsContent').classList.remove('hidden');
             }
         }
 
@@ -921,12 +1038,12 @@
                             <img src="${t.image}" class="w-16 h-16 object-cover rounded-lg bg-gray-200" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=200&q=80'">
                             <div>
                                 <h4 class="font-heading font-bold text-sm text-brand-dark">${t.businessName}</h4>
-                                <p class="text-xs text-gray-600">Pemilik: <b>${t.ownerName}</b></p>
+                                <p class="text-xs text-gray-600">Mahasiswa: <b>${t.ownerName}</b></p>
                                 <p class="text-xs text-brand-orange font-semibold">NIM: ${t.nim} | Email: ${t.email}</p>
                             </div>
                         </div>
                         <div class="flex gap-2 w-full sm:w-auto justify-end">
-                            <button onclick="executeAdminAction('approve', ${t.id})" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold"><i class="fa-solid fa-check mr-1"></i> ACC</button>
+                            <button onclick="executeAdminAction('approve', ${t.id})" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold"><i class="fa-solid fa-check mr-1"></i> Verifikasi & ACC</button>
                             <button onclick="executeAdminAction('delete', ${t.id}, 'Tolak pendaftaran ini?')" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-bold"><i class="fa-solid fa-xmark mr-1"></i> Tolak</button>
                         </div>
                     </div>
@@ -937,13 +1054,9 @@
         function renderMonitoringTable() {
             const tbody = document.getElementById('monitoringTableBody');
             tbody.innerHTML = '';
-            if (adminTenants.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-gray-400 text-xs">Belum ada tenant.</td></tr>`;
-                return;
-            }
             adminTenants.forEach(t => {
                 const statusLabel = t.status === 'approved' 
-                    ? `<span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-bold">Aktif</span>`
+                    ? `<span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-bold">Terverifikasi</span>`
                     : `<span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-bold">Pending</span>`;
                 tbody.innerHTML += `
                     <tr class="border-b border-gray-100 hover:bg-gray-50">
@@ -961,6 +1074,43 @@
                     </tr>
                 `;
             });
+        }
+
+        function renderAdminReports() {
+            const container = document.getElementById('reportsListContainer');
+            const openCount = adminReports.filter(r => r.status === 'Baru').length;
+            document.getElementById('reportCountBadge').innerText = openCount;
+
+            if (adminReports.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-gray-400 text-xs">Belum ada laporan pengaduan masuk.</div>`;
+                return;
+            }
+            container.innerHTML = '';
+            adminReports.forEach(r => {
+                const isNew = r.status === 'Baru';
+                container.innerHTML += `
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs font-extrabold text-brand-dark">${r.reportId}</span>
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isNew ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'}">${r.status}</span>
+                                <span class="text-[10px] text-gray-400">${r.createdAt}</span>
+                            </div>
+                            <p class="text-xs font-bold text-gray-800">Subjek: ${r.targetBusiness} • Pelapor: ${r.reporterName} (${r.reporterContact})</p>
+                            <p class="text-xs text-gray-600 mt-1">${r.description}</p>
+                        </div>
+                        ${isNew ? `<button onclick="resolveReport('${r.reportId}')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold whitespace-nowrap">Tandai Selesai</button>` : ''}
+                    </div>
+                `;
+            });
+        }
+
+        async function resolveReport(reportId) {
+            const res = await postToBackend({ action: "adminAction", subAction: "resolveReport", reportId: reportId, token: adminSessionToken });
+            if (res.status === "success") {
+                adminReports = res.reports || [];
+                renderAdminReports();
+            }
         }
 
         async function executeAdminAction(subAction, tenantId, confirmMsg = null) {
@@ -1033,25 +1183,29 @@
                     <span class="absolute top-3 left-3 bg-white/95 text-brand-orange text-xs font-bold px-3 py-1 rounded-full shadow-sm">${tenant.category}</span>
                     <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-3 py-1 rounded-lg"><i class="fa-solid fa-eye mr-1"></i> ${tenant.visits} Kunjungan</span>
                 </div>
-                <h2 class="font-heading text-xl font-bold text-brand-dark mb-1">${tenant.businessName}</h2>
-                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> Pemilik: <b>${tenant.ownerName}</b> • ${tenant.orderMethod}</p>
+                <div class="flex items-center gap-2 mb-1">
+                    <h2 class="font-heading text-xl font-bold text-brand-dark">${tenant.businessName}</h2>
+                    <span class="inline-flex items-center gap-1 bg-blue-50 text-blue-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-blue-200"><i class="fa-solid fa-circle-check"></i> Mahasiswa UAD Terverifikasi</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> Pemilik: <b>${tenant.ownerName}</b> (Angkatan ${tenant.angkatan || 'UAD'}) • ${tenant.orderMethod}</p>
                 <p class="text-sm text-gray-600 mb-4 bg-gray-50 p-3.5 rounded-xl border border-gray-100">${tenant.desc}</p>
                 
                 ${productsHTML}
 
                 <div class="border-t pt-4">
-                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Ulasan Pembeli</h4>
+                    <h4 class="font-heading font-bold text-sm text-brand-dark mb-3">Ulasan & Rating Pembeli</h4>
                     <div class="max-h-36 overflow-y-auto mb-3 space-y-2">${reviewsHTML}</div>
                     <form onsubmit="submitReview(event, ${tenant.id})" class="space-y-2 bg-brand-light p-3.5 rounded-xl border border-brand-orange/20">
                         <p class="text-xs font-bold text-brand-dark">Tulis Ulasan:</p>
                         <div class="grid grid-cols-2 gap-2">
                             <input type="text" id="reviewerName" required placeholder="Nama Kamu" class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
                             <select id="reviewRating" class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
-                                <option value="5">★★★★★ (Sangat Baik)</option>
-                                <option value="4">★★★★☆ (Baik)</option>
+                                <option value="5">★★★★★ (5.0 - Sangat Baik)</option>
+                                <option value="4">★★★★☆ (4.0 - Baik)</option>
+                                <option value="3">★★★☆☆ (3.0 - Cukup)</option>
                             </select>
                         </div>
-                        <input type="text" id="reviewComment" required placeholder="Tulis komentar..." class="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
+                        <input type="text" id="reviewComment" required placeholder="Tulis komentar jujur..." class="w-full px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs">
                         <button type="submit" class="w-full py-2 bg-brand-orange hover:bg-orange-600 text-white text-xs font-bold rounded-lg shadow-sm">Kirim Review</button>
                     </form>
                 </div>
@@ -1076,6 +1230,7 @@
                 }
                 alert("Ulasan berhasil disimpan!");
                 openDetail(tenantId);
+                renderTenants();
             }
         }
 
