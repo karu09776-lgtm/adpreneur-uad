@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADpreneur | Ahmad Dahlan Preneur - Food Court Digital Mahasiswa UAD</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -24,8 +25,8 @@
 </head>
 <body class="bg-brand-graybg text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between">
     <div class="bg-brand-orange text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-sm flex items-center justify-center gap-2">
-        <i class="fa-solid fa-circle-check"></i>
-        <span>ADpreneur v4.0 — Ekosistem Terverifikasi Mahasiswa UAD & Pusat Bantuan Aktif</span>
+        <i class="fa-solid fa-chart-line"></i>
+        <span>ADpreneur v5.0 — Ekosistem Digital Mahasiswa UAD dengan Business Intelligence</span>
     </div>
 
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -69,7 +70,7 @@
                     Food Court Digital Mahasiswa <span class="text-brand-orange">UAD</span>
                 </h1>
                 <p class="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto mb-8">
-                    Belanja aman dari sesama mahasiswa UAD yang telah terverifikasi identitas akademiknya. Dilengkapi rating transparan dan layanan pengaduan kampus.
+                    Direktori terverifikasi produk kuliner, barang, dan jasa mahasiswa Universitas Ahmad Dahlan Yogyakarta.
                 </p>
                 <div class="bg-white p-3 rounded-2xl shadow-lg border border-gray-100 max-w-3xl mx-auto flex flex-col md:flex-row gap-3">
                     <div class="flex-1 relative flex items-center">
@@ -110,7 +111,6 @@
         </section>
     </main>
 
-    <!-- FOOTER DENGAN KEBIJAKAN PRIVASI, S&K, DAN PUSAT BANTUAN -->
     <footer class="bg-brand-dark text-white py-10 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div>
@@ -134,9 +134,9 @@
             <button onclick="closeModal('privacyModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="font-heading text-lg font-bold text-brand-dark mb-3"><i class="fa-solid fa-user-shield text-brand-orange mr-2"></i> Kebijakan Privasi ADpreneur UAD</h3>
             <div class="space-y-3 text-xs text-gray-600 leading-relaxed">
-                <p><b>1. Pengumpulan Data Mahasiswa:</b> ADpreneur mengumpulkan Nama Lengkap, Nomor Induk Mahasiswa (NIM), dan Email resmi UAD semata-mata untuk proses verifikasi keabsahan status mahasiswa aktif Universitas Ahmad Dahlan.</p>
-                <p><b>2. Perlindungan Data Privat:</b> Nomor NIM lengkap, alamat email pribadi, dan kata sandi (yang dienkripsi dengan algoritma SHA-256) disimpan secara privat dan <b>tidak pernah ditampilkan</b> di halaman publik.</p>
-                <p><b>3. Data Transaksi:</b> Informasi nama pemesan dan nomor WhatsApp pada fitur pemesanan hanya digunakan untuk keperluan koordinasi pengiriman pesanan antara pembeli dan tenant terkait.</p>
+                <p><b>1. Pengumpulan Data Mahasiswa:</b> ADpreneur mengumpulkan Nama Lengkap, NIM, dan Email resmi UAD semata-mata untuk proses verifikasi keabsahan status mahasiswa aktif Universitas Ahmad Dahlan.</p>
+                <p><b>2. Perlindungan Data Privat:</b> Nomor NIM lengkap, alamat email pribadi, dan kata sandi (terenkripsi SHA-256) disimpan secara privat dan tidak pernah ditampilkan di halaman publik.</p>
+                <p><b>3. Data Transaksi:</b> Informasi nama pemesan dan nomor WhatsApp pada fitur pemesanan hanya digunakan untuk koordinasi pesanan antara pembeli dan tenant terkait.</p>
             </div>
         </div>
     </div>
@@ -148,8 +148,8 @@
             <h3 class="font-heading text-lg font-bold text-brand-dark mb-3"><i class="fa-solid fa-file-contract text-brand-orange mr-2"></i> Syarat & Ketentuan Ekosistem</h3>
             <div class="space-y-3 text-xs text-gray-600 leading-relaxed">
                 <p><b>1. Kelayakan Tenant:</b> Pendaftar wajib merupakan mahasiswa aktif Universitas Ahmad Dahlan yang dibuktikan dengan NIM dan email institusi yang valid.</p>
-                <p><b>2. Standar Produk & Halal:</b> Seluruh produk kuliner dan barang yang dipasarkan di lingkungan kampus UAD wajib memenuhi prinsip kehalalan, higienitas, serta tidak melanggar peraturan akademik maupun hukum yang berlaku.</p>
-                <p><b>3. Sanksi Pelanggaran:</b> Admin Kampus berhak menangguhkan atau menghapus akun tenant apabila ditemukan penipuan transaksi, ketidaksesuaian produk, atau laporan pengaduan yang terbukti valid.</p>
+                <p><b>2. Standar Produk & Halal:</b> Seluruh produk kuliner dan barang yang dipasarkan di lingkungan kampus UAD wajib memenuhi prinsip kehalalan, higienitas, serta tidak melanggar peraturan akademik.</p>
+                <p><b>3. Sanksi Pelanggaran:</b> Admin Kampus berhak menangguhkan atau menghapus akun tenant apabila ditemukan penipuan transaksi atau pelanggaran yang terbukti valid.</p>
             </div>
         </div>
     </div>
@@ -190,13 +190,11 @@
             <button onclick="closeModal('checkoutModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-bag-shopping text-brand-orange mr-2"></i> Form Pemesanan</h3>
             <p class="text-xs text-gray-500 mb-4">Pesananmu tercatat aman untuk memudahkan pelacakan.</p>
-            
             <div class="bg-brand-light p-3.5 rounded-xl border border-brand-orange/20 mb-4">
                 <p class="text-xs text-gray-500" id="coTenantName">Nama Toko</p>
                 <p class="font-heading font-bold text-sm text-brand-dark" id="coProductName">Nama Produk</p>
                 <p class="text-xs font-extrabold text-brand-orange mt-0.5" id="coUnitPrice">Rp 0</p>
             </div>
-
             <form onsubmit="submitOrder(event)" class="space-y-3">
                 <div class="grid grid-cols-2 gap-3">
                     <div>
@@ -245,7 +243,7 @@
         </div>
     </div>
 
-    <!-- MODAL PENDAFTARAN (DENGAN CHECKBOX PERSETUJUAN S&K) -->
+    <!-- MODAL PENDAFTARAN -->
     <div id="registerModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
@@ -331,7 +329,7 @@
             <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-brand-light text-brand-orange rounded-2xl mx-auto flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-user-tie"></i></div>
                 <h3 class="font-heading text-lg font-bold text-brand-dark">Login Peserta Tenant</h3>
-                <p class="text-xs text-gray-500">Kelola produk, stok, dan pesanan masuk</p>
+                <p class="text-xs text-gray-500">Kelola produk, pesanan masuk, dan analitik penjualan</p>
             </div>
             <form onsubmit="handleSellerLogin(event)" class="space-y-4">
                 <div>
@@ -349,7 +347,7 @@
         </div>
     </div>
 
-    <!-- MODAL DASHBOARD PENJUAL -->
+    <!-- MODAL DASHBOARD PENJUAL (DENGAN BUSINESS INTELLIGENCE) -->
     <div id="sellerDashboardModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('sellerDashboardModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
@@ -364,7 +362,7 @@
             <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-brand-dark text-white rounded-2xl mx-auto flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-shield-halved"></i></div>
                 <h3 class="font-heading text-lg font-bold text-brand-dark">Login Admin Kampus</h3>
-                <p class="text-xs text-gray-500">Verifikasi Server-Side</p>
+                <p class="text-xs text-gray-500">Portal Manajemen & Business Intelligence ADpreneur</p>
             </div>
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
@@ -382,14 +380,14 @@
         </div>
     </div>
 
-    <!-- MODAL DASHBOARD ADMIN (DENGAN TAB PENGADUAN / REPORTS) -->
+    <!-- MODAL DASHBOARD ADMIN (DENGAN BUSINESS INTELLIGENCE & EXPORT CSV) -->
     <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+        <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('adminModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 border-b pb-4 gap-3">
                 <div>
-                    <h3 class="font-heading text-xl font-bold text-brand-dark"><i class="fa-solid fa-shield-halved text-brand-orange mr-2"></i> Portal Dashboard Admin UAD</h3>
-                    <p class="text-xs text-gray-500">Validasi mahasiswa, moderasi tenant, dan penanganan laporan pengaduan.</p>
+                    <h3 class="font-heading text-xl font-bold text-brand-dark"><i class="fa-solid fa-shield-halved text-brand-orange mr-2"></i> Portal Admin & Analitik Kampus UAD</h3>
+                    <p class="text-xs text-gray-500">Dasbor intelijen bisnis, validasi mahasiswa, dan moderasi ekosistem.</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="refreshAdminData()" class="bg-gray-100 hover:bg-gray-200 text-brand-dark px-3 py-1.5 rounded-lg text-xs font-bold"><i class="fa-solid fa-rotate mr-1"></i> Segarkan</button>
@@ -397,11 +395,33 @@
                 </div>
             </div>
             <div class="flex flex-wrap gap-2 border-b mb-6 pb-2">
-                <button onclick="switchAdminTab('validation')" id="tab-val" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white">Validasi Mahasiswa (<span id="pendingCountBadge">0</span>)</button>
+                <button onclick="switchAdminTab('bi')" id="tab-bi" class="px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white"><i class="fa-solid fa-chart-pie mr-1"></i> Laporan BI & Statistik</button>
+                <button onclick="switchAdminTab('validation')" id="tab-val" class="px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Validasi Mahasiswa (<span id="pendingCountBadge">0</span>)</button>
                 <button onclick="switchAdminTab('monitoring')" id="tab-mon" class="px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Tenant Aktif</button>
                 <button onclick="switchAdminTab('reports')" id="tab-rep" class="px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Pengaduan (<span id="reportCountBadge">0</span>)</button>
             </div>
-            <div id="adminValidationContent" class="space-y-4">
+
+            <!-- TAB BI ADMIN -->
+            <div id="adminBiContent" class="space-y-6">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" id="adminBiCards"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
+                        <h4 class="font-heading font-bold text-xs text-brand-dark mb-3">Distribusi Omzet per Kategori Usaha (Rp)</h4>
+                        <div class="h-56"><canvas id="adminCategoryChart"></canvas></div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-heading font-bold text-xs text-brand-dark mb-3">Top 5 Tenant Berdasarkan Omzet Transaksi</h4>
+                            <div id="adminTopTenantsList" class="space-y-2"></div>
+                        </div>
+                        <button onclick="exportAdminCSV()" class="mt-4 w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-csv text-base"></i> Unduh Laporan Perkembangan (CSV / Excel)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="adminValidationContent" class="space-y-4 hidden">
                 <div id="pendingListContainer"></div>
             </div>
             <div id="adminMonitoringContent" class="space-y-4 hidden">
@@ -438,14 +458,17 @@
 
         let publicTenants = [];
         let adminTenants = [];
+        let adminOrders = [];
         let adminReports = [];
         let adminSessionToken = null;
         let currentSeller = null;
         let sellerSessionToken = null;
         let sellerOrders = [];
-        let sellerActiveTab = 'orders';
+        let sellerActiveTab = 'bi';
         let currentCategory = 'all';
         let activeCheckoutItem = null;
+        let sellerChartInstance = null;
+        let adminChartInstance = null;
 
         async function postToBackend(payloadObj) {
             const response = await fetch(WEB_APP_URL, {
@@ -560,7 +583,6 @@
             renderTenants();
         }
 
-        // PENGADUAN & PUSAT BANTUAN
         async function handleReportSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmitReport');
@@ -578,7 +600,7 @@
                     }
                 });
                 if (res.status === "success") {
-                    alert(`Laporan diterima dengan Nomor Tiket ${res.reportId}. Tim Admin ADpreneur akan segera menindaklanjuti.`);
+                    alert(`Laporan diterima dengan Nomor Tiket ${res.reportId}.`);
                     e.target.reset();
                     closeModal('helpCenterModal');
                 }
@@ -783,6 +805,7 @@
             renderSellerDashboard();
         }
 
+        // DASHBOARD PENJUAL DENGAN TAB BUSINESS INTELLIGENCE (OMZET, GRAFIK, TOP PRODUK)
         function renderSellerDashboard() {
             if (!currentSeller) return;
             const statusBadge = currentSeller.status === 'approved' 
@@ -791,7 +814,69 @@
 
             let tabBodyHTML = '';
 
-            if (sellerActiveTab === 'orders') {
+            if (sellerActiveTab === 'bi') {
+                const completedOrders = sellerOrders.filter(o => o.status === 'Selesai');
+                const activeOrders = sellerOrders.filter(o => o.status !== 'Dibatalkan' && o.status !== 'Selesai');
+                const totalRevenue = completedOrders.reduce((sum, o) => sum + (Number(o.totalPrice) || 0), 0);
+                const pipelineRevenue = activeOrders.reduce((sum, o) => sum + (Number(o.totalPrice) || 0), 0);
+                const visits = Number(currentSeller.visits) || 0;
+                const convRate = visits > 0 ? ((sellerOrders.filter(o => o.status !== 'Dibatalkan').length / visits) * 100).toFixed(1) : "0.0";
+
+                const prodStats = {};
+                sellerOrders.filter(o => o.status !== 'Dibatalkan').forEach(o => {
+                    if (!prodStats[o.productName]) prodStats[o.productName] = { qty: 0, rev: 0 };
+                    prodStats[o.productName].qty += Number(o.qty) || 0;
+                    prodStats[o.productName].rev += Number(o.totalPrice) || 0;
+                });
+                const sortedProds = Object.entries(prodStats).sort((a, b) => b[1].qty - a[1].qty);
+
+                let topProdHTML = sortedProds.length === 0
+                    ? `<p class="text-xs text-gray-400 italic">Belum ada data penjualan produk.</p>`
+                    : sortedProds.map(([name, st], idx) => `
+                        <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-gray-200 text-xs">
+                            <div class="flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-brand-orange text-white font-bold text-[10px] flex items-center justify-center">${idx + 1}</span>
+                                <span class="font-bold text-brand-dark">${name}</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-extrabold text-brand-orange">Rp ${st.rev.toLocaleString('id-ID')}</span>
+                                <span class="text-gray-400 text-[11px] ml-1">(${st.qty} terjual)</span>
+                            </div>
+                        </div>
+                    `).join('');
+
+                tabBodyHTML = `
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-5">
+                        <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                            <span class="text-[10px] font-bold text-emerald-700 uppercase">Omzet Selesai</span>
+                            <p class="font-heading font-extrabold text-sm sm:text-base text-emerald-800 mt-0.5">Rp ${totalRevenue.toLocaleString('id-ID')}</p>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-xl border border-blue-200">
+                            <span class="text-[10px] font-bold text-blue-700 uppercase">Pesanan Berjalan</span>
+                            <p class="font-heading font-extrabold text-sm sm:text-base text-blue-800 mt-0.5">Rp ${pipelineRevenue.toLocaleString('id-ID')}</p>
+                        </div>
+                        <div class="bg-brand-light p-3 rounded-xl border border-brand-orange/20">
+                            <span class="text-[10px] font-bold text-brand-orange uppercase">Total Transaksi</span>
+                            <p class="font-heading font-extrabold text-sm sm:text-base text-brand-dark mt-0.5">${completedOrders.length} Selesai</p>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
+                            <span class="text-[10px] font-bold text-gray-500 uppercase">Konversi Kunjungan</span>
+                            <p class="font-heading font-extrabold text-sm sm:text-base text-brand-dark mt-0.5">${convRate}%</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 p-3.5 rounded-2xl border border-gray-200">
+                            <h4 class="font-heading font-bold text-xs text-brand-dark mb-2">Grafik Pendapatan per Produk (Rp)</h4>
+                            <div class="h-44"><canvas id="sellerRevenueChart"></canvas></div>
+                        </div>
+                        <div class="bg-gray-50 p-3.5 rounded-2xl border border-gray-200">
+                            <h4 class="font-heading font-bold text-xs text-brand-dark mb-2">Peringkat Produk Terlaris</h4>
+                            <div class="space-y-2 max-h-44 overflow-y-auto">${topProdHTML}</div>
+                        </div>
+                    </div>
+                `;
+            } else if (sellerActiveTab === 'orders') {
                 if (sellerOrders.length === 0) {
                     tabBodyHTML = `<p class="text-xs text-center text-gray-400 py-8">Belum ada pesanan masuk untuk tokomu.</p>`;
                 } else {
@@ -875,7 +960,10 @@
                         <p class="text-xs font-bold text-brand-orange mt-1"><i class="fa-solid fa-eye mr-1"></i> ${currentSeller.visits} Kunjungan</p>
                     </div>
                 </div>
-                <div class="flex gap-2 border-b pb-3 mb-4">
+                <div class="flex flex-wrap gap-2 border-b pb-3 mb-4">
+                    <button onclick="switchSellerTab('bi')" class="px-3.5 py-2 rounded-xl text-xs font-bold ${sellerActiveTab === 'bi' ? 'bg-brand-orange text-white' : 'bg-gray-100 text-gray-600'}">
+                        <i class="fa-solid fa-chart-line mr-1"></i> Statistik Penjualan
+                    </button>
                     <button onclick="switchSellerTab('orders')" class="px-3.5 py-2 rounded-xl text-xs font-bold ${sellerActiveTab === 'orders' ? 'bg-brand-orange text-white' : 'bg-gray-100 text-gray-600'}">
                         <i class="fa-solid fa-receipt mr-1"></i> Pesanan Masuk (${sellerOrders.length})
                     </button>
@@ -889,6 +977,43 @@
                     <button onclick="closeModal('sellerDashboardModal')" class="px-5 py-2 bg-brand-dark text-white text-xs font-bold rounded-xl">Tutup</button>
                 </div>
             `;
+
+            if (sellerActiveTab === 'bi') {
+                setTimeout(renderSellerChart, 50);
+            }
+        }
+
+        function renderSellerChart() {
+            const canvas = document.getElementById('sellerRevenueChart');
+            if (!canvas) return;
+            if (sellerChartInstance) sellerChartInstance.destroy();
+
+            const prodStats = {};
+            sellerOrders.filter(o => o.status !== 'Dibatalkan').forEach(o => {
+                prodStats[o.productName] = (prodStats[o.productName] || 0) + (Number(o.totalPrice) || 0);
+            });
+
+            const labels = Object.keys(prodStats).length > 0 ? Object.keys(prodStats) : ['Belum Ada Transaksi'];
+            const values = Object.values(prodStats).length > 0 ? Object.values(prodStats) : [0];
+
+            sellerChartInstance = new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Omzet (Rp)',
+                        data: values,
+                        backgroundColor: '#F26522',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
         }
 
         async function changeOrderStatus(orderId, newStatus) {
@@ -961,12 +1086,14 @@
 
                 if (res.status === "success") {
                     adminSessionToken = res.token;
-                    adminTenants = res.tenants;
+                    adminTenants = res.tenants || [];
+                    adminOrders = res.orders || [];
                     adminReports = res.reports || [];
                     document.getElementById('adminUser').value = '';
                     document.getElementById('adminPass').value = '';
                     closeModal('adminLoginModal');
                     openModal('adminModal');
+                    renderAdminBI();
                     renderPendingValidations();
                     renderMonitoringTable();
                     renderAdminReports();
@@ -985,31 +1112,39 @@
             if (!adminSessionToken) return;
             const res = await postToBackend({ action: "adminAction", subAction: "refresh", token: adminSessionToken });
             if (res.status === "success") {
-                adminTenants = res.tenants;
+                adminTenants = res.tenants || [];
+                adminOrders = res.orders || [];
                 adminReports = res.reports || [];
+                renderAdminBI();
                 renderPendingValidations();
                 renderMonitoringTable();
                 renderAdminReports();
-                alert("Data disegarkan!");
+                alert("Data BI & Admin disegarkan!");
             }
         }
 
         function logoutAdmin() {
             adminSessionToken = null;
             adminTenants = [];
+            adminOrders = [];
             adminReports = [];
             closeModal('adminModal');
         }
 
         function switchAdminTab(tab) {
-            ['validation', 'monitoring', 'reports'].forEach(t => {
-                document.getElementById('admin' + t.charAt(0).toUpperCase() + t.slice(1) + 'Content').classList.add('hidden');
+            ['bi', 'validation', 'monitoring', 'reports'].forEach(t => {
+                const elId = t === 'bi' ? 'adminBiContent' : 'admin' + t.charAt(0).toUpperCase() + t.slice(1) + 'Content';
+                document.getElementById(elId).classList.add('hidden');
             });
-            document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600";
-            document.getElementById('tab-mon').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600";
-            document.getElementById('tab-rep').className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600";
+            ['tab-bi', 'tab-val', 'tab-mon', 'tab-rep'].forEach(btnId => {
+                document.getElementById(btnId).className = "px-4 py-2 rounded-lg text-xs font-bold bg-gray-100 text-gray-600";
+            });
 
-            if (tab === 'validation') {
+            if (tab === 'bi') {
+                document.getElementById('tab-bi').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
+                document.getElementById('adminBiContent').classList.remove('hidden');
+                renderAdminBI();
+            } else if (tab === 'validation') {
                 document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
                 document.getElementById('adminValidationContent').classList.remove('hidden');
             } else if (tab === 'monitoring') {
@@ -1019,6 +1154,100 @@
                 document.getElementById('tab-rep').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
                 document.getElementById('adminReportsContent').classList.remove('hidden');
             }
+        }
+
+        // BUSINESS INTELLIGENCE EKOSISTEM KAMPUS (ADMIN)
+        function renderAdminBI() {
+            const activeTenants = adminTenants.filter(t => t.status === 'approved');
+            const totalVisits = adminTenants.reduce((sum, t) => sum + (Number(t.visits) || 0), 0);
+            const validOrders = adminOrders.filter(o => o.status !== 'Dibatalkan');
+            const totalGMV = validOrders.reduce((sum, o) => sum + (Number(o.totalPrice) || 0), 0);
+            const avgOrderVal = validOrders.length > 0 ? Math.round(totalGMV / validOrders.length) : 0;
+
+            document.getElementById('adminBiCards').innerHTML = `
+                <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+                    <span class="text-[10px] font-bold text-emerald-700 uppercase">Total GMV Ekosistem</span>
+                    <p class="font-heading font-extrabold text-lg text-emerald-800 mt-1">Rp ${totalGMV.toLocaleString('id-ID')}</p>
+                    <p class="text-[10px] text-emerald-600 mt-0.5">${validOrders.length} transaksi tercatat</p>
+                </div>
+                <div class="bg-brand-light p-4 rounded-2xl border border-brand-orange/20">
+                    <span class="text-[10px] font-bold text-brand-orange uppercase">Tenant Mahasiswa Aktif</span>
+                    <p class="font-heading font-extrabold text-lg text-brand-dark mt-1">${activeTenants.length} Usaha</p>
+                    <p class="text-[10px] text-gray-500 mt-0.5">Terverifikasi UAD</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200">
+                    <span class="text-[10px] font-bold text-blue-700 uppercase">Total Kunjungan Etalase</span>
+                    <p class="font-heading font-extrabold text-lg text-blue-800 mt-1">${totalVisits.toLocaleString('id-ID')}x</p>
+                    <p class="text-[10px] text-blue-600 mt-0.5">Interaksi pembeli kampus</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
+                    <span class="text-[10px] font-bold text-gray-600 uppercase">Rata-Rata Transaksi</span>
+                    <p class="font-heading font-extrabold text-lg text-brand-dark mt-1">Rp ${avgOrderVal.toLocaleString('id-ID')}</p>
+                    <p class="text-[10px] text-gray-500 mt-0.5">Per pesanan masuk</p>
+                </div>
+            `;
+
+            const tenantRevMap = {};
+            const catRevMap = { 'Kuliner': 0, 'Fashion & Barang': 0, 'Jasa & Kreatif': 0 };
+
+            validOrders.forEach(o => {
+                const amt = Number(o.totalPrice) || 0;
+                tenantRevMap[o.businessName] = (tenantRevMap[o.businessName] || 0) + amt;
+                const tObj = adminTenants.find(t => String(t.id) === String(o.tenantId));
+                if (tObj && catRevMap.hasOwnProperty(tObj.category)) {
+                    catRevMap[tObj.category] += amt;
+                }
+            });
+
+            const topTenants = Object.entries(tenantRevMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
+            const topListEl = document.getElementById('adminTopTenantsList');
+            if (topTenants.length === 0) {
+                topListEl.innerHTML = `<p class="text-xs text-gray-400 italic">Belum ada data transaksi tercatat.</p>`;
+            } else {
+                topListEl.innerHTML = topTenants.map(([bName, rev], idx) => `
+                    <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-gray-200 text-xs">
+                        <span class="font-bold text-brand-dark">${idx + 1}. ${bName}</span>
+                        <span class="font-extrabold text-brand-orange">Rp ${rev.toLocaleString('id-ID')}</span>
+                    </div>
+                `).join('');
+            }
+
+            setTimeout(() => {
+                const ctx = document.getElementById('adminCategoryChart');
+                if (!ctx) return;
+                if (adminChartInstance) adminChartInstance.destroy();
+                adminChartInstance = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: Object.keys(catRevMap),
+                        datasets: [{
+                            data: Object.values(catRevMap),
+                            backgroundColor: ['#F26522', '#4B4E53', '#10B981']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                });
+            }, 50);
+        }
+
+        function exportAdminCSV() {
+            let csv = "Nama Usaha,Pemilik,NIM,Kategori,Status,Kunjungan,Total Pesanan,Total Omzet (Rp)\n";
+            adminTenants.forEach(t => {
+                const tOrders = adminOrders.filter(o => String(o.tenantId) === String(t.id) && o.status !== 'Dibatalkan');
+                const tRev = tOrders.reduce((s, o) => s + (Number(o.totalPrice) || 0), 0);
+                csv += `"${t.businessName}","${t.ownerName}","${t.nim}","${t.category}","${t.status}",${t.visits || 0},${tOrders.length},${tRev}\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Laporan_Perkembangan_ADpreneur_UAD_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
         }
 
         function renderPendingValidations() {
@@ -1117,7 +1346,9 @@
             if (confirmMsg && !confirm(confirmMsg)) return;
             const res = await postToBackend({ action: "adminAction", subAction: subAction, tenantId: tenantId, token: adminSessionToken });
             if (res.status === "success") {
-                adminTenants = res.tenants;
+                adminTenants = res.tenants || [];
+                adminOrders = res.orders || [];
+                renderAdminBI();
                 renderPendingValidations();
                 renderMonitoringTable();
                 loadPublicData(false);
