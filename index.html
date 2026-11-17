@@ -51,8 +51,9 @@
                 </svg>
             </a>
             <div class="flex items-center gap-2 sm:gap-2.5">
+                <!-- Tombol Lacak Pesanan dengan Ikon Keranjang Pesanan -->
                 <button onclick="openModal('trackOrderModal')" class="text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-600 hover:text-white px-3 py-2.5 rounded-xl transition-all border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                    <i class="fa-solid fa-clock-rotate-left"></i> <span class="hidden sm:inline">Pesanan</span>
+                    <i class="fa-solid fa-basket-shopping"></i> <span class="hidden sm:inline">Pesanan</span>
                 </button>
                 <button class="relative w-10 h-10 bg-gray-50 hover:bg-gray-100 text-gray-600 rounded-xl border border-gray-200 flex items-center justify-center transition-all shadow-sm" title="Notifikasi">
                     <i class="fa-regular fa-bell text-sm"></i>
@@ -72,18 +73,33 @@
     </header>
 
     <main class="flex-grow">
-        <!-- HERO SECTION -->
-        <section class="relative bg-gradient-to-b from-brand-light via-orange-50/20 to-brand-graybg py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-gray-100 overflow-hidden">
-            <div class="max-w-4xl mx-auto text-center relative z-10">
-                <span class="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full text-xs font-bold bg-brand-orange/10 text-brand-orange mb-4 shadow-sm border border-brand-orange/20">
-                    <i class="fa-solid fa-store"></i> Ekosistem Wirausaha Mahasiswa UAD
-                </span>
-                <h1 class="font-heading text-3xl sm:text-5xl font-extrabold text-brand-dark tracking-tight mb-4 leading-tight">
-                    Food Court Digital Mahasiswa <span class="text-brand-orange">UAD</span>
-                </h1>
-                <p class="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-                    Direktori terverifikasi produk kuliner, barang, dan jasa mahasiswa Universitas Ahmad Dahlan Yogyakarta.
-                </p>
+        <!-- HERO SECTION DENGAN FOTO KAMPUS UAD 1 & TAMPILAN LEBIH ISI -->
+        <section class="relative bg-gradient-to-b from-brand-light via-orange-50/30 to-brand-graybg py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-gray-100 overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-8">
+                    <span class="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full text-xs font-bold bg-brand-orange/10 text-brand-orange mb-4 shadow-sm border border-brand-orange/20">
+                        <i class="fa-solid fa-store"></i> Ekosistem Wirausaha Mahasiswa UAD
+                    </span>
+                    <h1 class="font-heading text-3xl sm:text-5xl font-extrabold text-brand-dark tracking-tight mb-4 leading-tight">
+                        Food Court Digital Mahasiswa <span class="text-brand-orange">UAD</span>
+                    </h1>
+                    <p class="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                        Direktori terverifikasi produk kuliner, pakaian, dan jasa mahasiswa Universitas Ahmad Dahlan Yogyakarta.
+                    </p>
+                </div>
+
+                <!-- KARTU VISUAL KAMPUS UAD 1 (Menambah estetika & tidak terlalu polos) -->
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white mb-8 h-48 sm:h-72 bg-gray-900 group">
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80" alt="Kampus UAD" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-8">
+                        <span class="bg-brand-orange text-white text-[10px] font-bold px-3 py-1 rounded-full w-max mb-2">Kampus Utama UAD Yogyakarta</span>
+                        <h2 class="text-white font-heading text-lg sm:text-2xl font-bold">Pusat Inkubator Bisnis & Kewirausahaan Mahasiswa</h2>
+                        <p class="text-gray-200 text-xs sm:text-sm mt-1 max-w-xl">Mendukung kemandirian ekonomi civitas akademika melalui digitalisasi tenant resmi berstandar universitas.</p>
+                    </div>
+                </div>
 
                 <!-- SEARCH & CATEGORIES -->
                 <div class="bg-white p-3.5 rounded-2xl shadow-xl border border-gray-100 max-w-3xl mx-auto flex flex-col md:flex-row gap-3">
@@ -91,6 +107,7 @@
                         <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-400"></i>
                         <input type="text" id="searchInput" oninput="renderTenants()" placeholder="Cari usaha, makanan, atau jasa mahasiswa..." class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/50 focus:bg-white transition-all">
                     </div>
+                    <!-- Kategori dengan Ikon Presisi (Semua, Kuliner, Pakaian, Jasa) -->
                     <div class="flex gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
                         <button onclick="setCategory('all')" id="btn-all" class="cat-btn px-4 py-3 rounded-xl text-xs font-bold bg-brand-orange text-white whitespace-nowrap shadow-sm flex items-center gap-1.5">
                             <i class="fa-solid fa-border-all"></i> Semua
@@ -99,7 +116,7 @@
                             <i class="fa-solid fa-utensils"></i> Kuliner
                         </button>
                         <button onclick="setCategory('Fashion & Barang')" id="btn-Fashion" class="cat-btn px-4 py-3 rounded-xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap flex items-center gap-1.5">
-                            <i class="fa-solid fa-bag-shopping"></i> Fashion
+                            <i class="fa-solid fa-shirt"></i> Pakaian
                         </button>
                         <button onclick="setCategory('Jasa & Kreatif')" id="btn-Jasa" class="cat-btn px-4 py-3 rounded-xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap flex items-center gap-1.5">
                             <i class="fa-solid fa-gear"></i> Jasa
@@ -133,11 +150,12 @@
                 <i class="fa-solid fa-circle-notch fa-spin text-3xl text-brand-orange mb-2"></i>
                 <p class="text-xs text-gray-500">Memuat data publik dari server...</p>
             </div>
+            <!-- TENANT CONTAINER -->
             <div id="tenantContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
     </main>
 
-    <!-- FOOTER (EXACT MATCHING THE REFERENCE: CURVED/ROUNDED TOP, WARM ORANGE GRADIENT, EMBEDDED BUTTONS) -->
+    <!-- FOOTER SAMA PERSIS SEPERTI REFERENSI (CURVED TOP, WARNA ORANGE HANGAT) -->
     <footer class="bg-gradient-to-b from-brand-orange to-orange-700 text-white pt-16 pb-12 px-4 sm:px-6 lg:px-8 mt-16 rounded-t-[40px] shadow-2xl relative overflow-hidden">
         <div class="max-w-3xl mx-auto text-center space-y-6 relative z-10">
             <div>
@@ -157,7 +175,7 @@
                 </button>
             </div>
 
-            <!-- PUSAT BANTUAN & PENGADUAN BUTTON IN FOOTER -->
+            <!-- PUSAT BANTUAN & PENGADUAN DI DALAM FOOTER -->
             <div class="pt-2">
                 <button onclick="openModal('helpCenterModal')" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white text-brand-orange hover:bg-orange-50 px-8 py-3.5 rounded-2xl font-bold text-xs sm:text-sm shadow-lg transition-all transform hover:-translate-y-0.5">
                     <i class="fa-solid fa-headset text-base"></i> Pusat Bantuan & Pengaduan <i class="fa-solid fa-chevron-right text-[10px]"></i>
@@ -177,7 +195,7 @@
             <h3 class="font-heading text-lg font-bold text-brand-dark mb-3"><i class="fa-solid fa-user-shield text-brand-orange mr-2"></i> Kebijakan Privasi ADpreneur UAD</h3>
             <div class="space-y-3 text-xs text-gray-600 leading-relaxed">
                 <p><b>1. Pengumpulan Data Mahasiswa:</b> ADpreneur mengumpulkan Nama Lengkap, NIM, dan Email resmi UAD semata-mata untuk proses verifikasi keabsahan status mahasiswa aktif Universitas Ahmad Dahlan.</p>
-                <p><b>2. Perlindungan Data Privat:</b> Nomor NIM lengkap, alamat email pribadi, dan kata sandi (terenkripsi SHA-256) disimpan secara privat dan tidak pernah ditampilkan di halaman publik.</p>
+                <p><b>2. Perlindungan Data Privat:</b> Nomor NIM lengkap, alamat email pribadi, dan kata sandi disimpan secara privat dan tidak pernah ditampilkan di halaman publik.</p>
                 <p><b>3. Data Transaksi:</b> Informasi nama pemesan dan nomor WhatsApp pada fitur pemesanan hanya digunakan untuk koordinasi pesanan antara pembeli dan tenant terkait.</p>
             </div>
         </div>
@@ -190,8 +208,8 @@
             <h3 class="font-heading text-lg font-bold text-brand-dark mb-3"><i class="fa-solid fa-file-contract text-brand-orange mr-2"></i> Syarat & Ketentuan Ekosistem</h3>
             <div class="space-y-3 text-xs text-gray-600 leading-relaxed">
                 <p><b>1. Kelayakan Tenant:</b> Pendaftar wajib merupakan mahasiswa aktif Universitas Ahmad Dahlan yang dibuktikan dengan NIM dan email institusi yang valid.</p>
-                <p><b>2. Standar Produk & Halal:</b> Seluruh produk kuliner dan barang yang dipasarkan di lingkungan kampus UAD wajib memenuhi prinsip kehalalan, higienitas, serta tidak melanggar peraturan akademik.</p>
-                <p><b>3. Sanksi Pelanggaran:</b> Admin Kampus berhak menangguhkan atau menghapus akun tenant apabila ditemukan penipuan transaksi atau pelanggaran yang terbukti valid.</p>
+                <p><b>2. Standar Produk & Halal:</b> Seluruh produk kuliner dan barang yang dipasarkan di lingkungan kampus UAD wajib memenuhi prinsip kehalalan dan higienitas.</p>
+                <p><b>3. Sanksi Pelanggaran:</b> Admin Kampus berhak menangguhkan akun tenant apabila ditemukan pelanggaran transaksi.</p>
             </div>
         </div>
     </div>
@@ -273,8 +291,8 @@
     <div id="trackOrderModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('trackOrderModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-clock-rotate-left text-emerald-600 mr-2"></i> Lacak & Riwayat Pesanan</h3>
-            <p class="text-xs text-gray-500 mb-4">Masukkan Nomor WhatsApp atau Kode Pesanan (misal: ORD-123456) untuk melihat status real-time.</p>
+            <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-basket-shopping text-emerald-600 mr-2"></i> Lacak Status Pesanan</h3>
+            <p class="text-xs text-gray-500 mb-4">Masukkan Nomor WhatsApp atau Kode Pesanan (contoh: <b>ORD-XXXXXX</b> yang didapat saat menekan tombol Pesan) untuk melacak status.</p>
             <form onsubmit="handleTrackOrders(event)" class="flex gap-2 mb-5">
                 <input type="text" id="trackQueryInput" required placeholder="Cth: 08123456789 atau ORD-..." class="flex-1 px-3.5 py-3 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500">
                 <button type="submit" id="btnTrackOrder" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-sm">Lacak</button>
@@ -322,7 +340,7 @@
                         <label class="block text-xs font-bold text-gray-700 mb-1">Kategori</label>
                         <select id="regCategory" class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm">
                             <option value="Kuliner">Kuliner</option>
-                            <option value="Fashion & Barang">Fashion & Barang</option>
+                            <option value="Fashion & Barang">Pakaian / Fashion</option>
                             <option value="Jasa & Kreatif">Jasa Mahasiswa</option>
                         </select>
                     </div>
@@ -355,7 +373,7 @@
                 </div>
                 <label class="flex items-start gap-2 text-[11px] text-gray-600 bg-gray-50 p-2.5 rounded-xl border border-gray-200 cursor-pointer">
                     <input type="checkbox" required class="mt-0.5 accent-brand-orange">
-                    <span>Saya menyatakan data mahasiswa UAD benar serta menyetujui <b>Syarat & Ketentuan</b> dan <b>Kebijakan Privasi</b>.</span>
+                    <span>Saya menyatakan data mahasiswa UAD benar serta menyetujui <b>Syarat & Ketentuan</b>.</span>
                 </label>
                 <button type="submit" id="btnSubmit" class="w-full py-3 bg-brand-orange text-white font-bold rounded-xl shadow-md hover:bg-orange-600 transition-all text-sm">
                     Kirim Pendaftaran Terenkripsi
@@ -510,8 +528,6 @@
         let sellerActiveTab = 'bi';
         let currentCategory = 'all';
         let activeCheckoutItem = null;
-        let sellerChartInstance = null;
-        let adminChartInstance = null;
 
         async function postToBackend(payloadObj) {
             const response = await fetch(WEB_APP_URL, {
@@ -552,14 +568,13 @@
             return (sum / reviews.length).toFixed(1);
         }
 
-        // RENDER TENANT DENGAN CARD BESAR & ICON SESUAI REFERENSI
         function renderTenants() {
             const container = document.getElementById('tenantContainer');
             const keyword = document.getElementById('searchInput').value.toLowerCase();
             container.innerHTML = '';
 
             const filtered = publicTenants.filter(t => {
-                const matchesCat = currentCategory === 'all' || t.category === currentCategory;
+                const matchesCat = currentCategory === 'all' || t.category === currentCategory || (currentCategory === 'Fashion & Barang' && t.category === 'Fashion & Barang');
                 const matchesStatus = t.status === 'approved';
                 const matchesSearch = t.businessName.toLowerCase().includes(keyword) || 
                                       t.desc.toLowerCase().includes(keyword) || 
@@ -582,7 +597,7 @@
                 container.innerHTML += `
                     <div class="bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col justify-between group">
                         <div>
-                            <!-- GAMBAR CARD BESAR (h-56) DENGAN BADGE TERVERIFIKASI & FAVORITE HEART -->
+                            <!-- GAMBAR CARD BESAR (h-56) DENGAN BADGE TERVERIFIKASI -->
                             <div class="relative h-56 overflow-hidden bg-gray-100">
                                 <img src="${t.image}" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 
@@ -724,7 +739,7 @@
                         `Mohon konfirmasi pesanan saya ya kak!`
                     );
                     closeModal('checkoutModal');
-                    alert(`Pesanan tercatat dengan kode ${res.orderId}!`);
+                    alert(`Pesanan tercatat dengan kode ${res.orderId}! Silakan simpan kode ini untuk melacak status pesanan.`);
                     window.open(`https://wa.me/${activeCheckoutItem.tenant.whatsapp}?text=${msg}`, '_blank');
                 }
             } catch (err) {
@@ -815,77 +830,6 @@
             }
         }
 
-        async function handleSellerLogin(e) {
-            e.preventDefault();
-            const btn = document.getElementById('btnSellerLogin');
-            btn.disabled = true;
-            btn.innerText = "Memverifikasi...";
-            try {
-                const res = await postToBackend({
-                    action: "sellerLogin",
-                    identifier: document.getElementById('loginSellerId').value,
-                    password: document.getElementById('loginSellerPass').value
-                });
-                if (res.status === "success") {
-                    currentSeller = res.seller;
-                    sellerSessionToken = res.token;
-                    sellerOrders = res.orders || [];
-                    document.getElementById('loginSellerPass').value = '';
-                    closeModal('sellerLoginModal');
-                    renderSellerDashboard();
-                    openModal('sellerDashboardModal');
-                } else {
-                    alert(res.message);
-                }
-            } catch (err) {
-                alert("Gagal terhubung ke server.");
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Verifikasi & Masuk";
-            }
-        }
-
-        function switchSellerTab(tab) {
-            sellerActiveTab = tab;
-            renderSellerDashboard();
-        }
-
-        function renderSellerDashboard() {
-            if (!currentSeller) return;
-            const statusBadge = currentSeller.status === 'approved' 
-                ? `<span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-circle-check mr-1"></i> Terverifikasi</span>`
-                : `<span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-clock mr-1"></i> Pending</span>`;
-            let tabBodyHTML = '';
-            if (sellerActiveTab === 'bi') {
-                const completedOrders = sellerOrders.filter(o => o.status === 'Selesai');
-                const totalRevenue = completedOrders.reduce((sum, o) => sum + (Number(o.totalPrice) || 0), 0);
-                tabBodyHTML = `
-                    <div class="grid grid-cols-2 gap-3 mb-4">
-                        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
-                            <span class="text-xs text-emerald-700 font-bold">Omzet Selesai</span>
-                            <p class="text-lg font-extrabold text-emerald-800">Rp ${totalRevenue.toLocaleString('id-ID')}</p>
-                        </div>
-                        <div class="bg-brand-light p-4 rounded-xl border border-brand-orange/20">
-                            <span class="text-xs text-brand-orange font-bold">Kunjungan</span>
-                            <p class="text-lg font-extrabold text-brand-dark">${currentSeller.visits}x</p>
-                        </div>
-                    </div>
-                `;
-            }
-            document.getElementById('sellerDashboardContent').innerHTML = `
-                <div class="flex items-center justify-between border-b pb-4 mb-4">
-                    <div>
-                        <h3 class="font-heading text-xl font-bold text-brand-dark">${currentSeller.businessName}</h3>
-                    </div>
-                    <div>${statusBadge}</div>
-                </div>
-                ${tabBodyHTML}
-                <div class="flex justify-end pt-4 border-t">
-                    <button onclick="closeModal('sellerDashboardModal')" class="px-5 py-2 bg-brand-dark text-white text-xs font-bold rounded-xl">Tutup</button>
-                </div>
-            `;
-        }
-
         async function handleAdminLogin(e) {
             e.preventDefault();
             try {
@@ -902,9 +846,6 @@
                     closeModal('adminLoginModal');
                     openModal('adminModal');
                     renderAdminBI();
-                    renderPendingValidations();
-                    renderMonitoringTable();
-                    renderAdminReports();
                 } else {
                     alert(res.message);
                 }
@@ -927,15 +868,6 @@
             if (tab === 'bi') {
                 document.getElementById('tab-bi').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
                 document.getElementById('adminBiContent').classList.remove('hidden');
-            } else if (tab === 'validation') {
-                document.getElementById('tab-val').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
-                document.getElementById('adminValidationContent').classList.remove('hidden');
-            } else if (tab === 'monitoring') {
-                document.getElementById('tab-mon').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
-                document.getElementById('adminMonitoringContent').classList.remove('hidden');
-            } else {
-                document.getElementById('tab-rep').className = "px-4 py-2 rounded-lg text-xs font-bold bg-brand-orange text-white";
-                document.getElementById('adminReportsContent').classList.remove('hidden');
             }
         }
 
@@ -978,81 +910,6 @@
             a.href = url;
             a.download = `Laporan_ADpreneur_UAD.csv`;
             a.click();
-        }
-
-        function renderPendingValidations() {
-            const container = document.getElementById('pendingListContainer');
-            const pendingList = adminTenants.filter(t => t.status === 'pending');
-            document.getElementById('pendingCountBadge').innerText = pendingList.length;
-            if (pendingList.length === 0) {
-                container.innerHTML = `<div class="text-center py-8 text-gray-400 text-xs">Tidak ada antrean validasi saat ini.</div>`;
-                return;
-            }
-            container.innerHTML = '';
-            pendingList.forEach(t => {
-                container.innerHTML += `
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex items-center justify-between gap-4">
-                        <div>
-                            <h4 class="font-bold text-sm text-brand-dark">${t.businessName}</h4>
-                            <p class="text-xs text-gray-600">${t.ownerName} (${t.nim})</p>
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="executeAdminAction('approve', ${t.id})" class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-bold">ACC</button>
-                            <button onclick="executeAdminAction('delete', ${t.id})" class="px-3 py-1.5 bg-rose-600 text-white rounded-lg text-xs font-bold">Tolak</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function renderMonitoringTable() {
-            const tbody = document.getElementById('monitoringTableBody');
-            tbody.innerHTML = '';
-            adminTenants.forEach(t => {
-                tbody.innerHTML += `
-                    <tr class="border-b border-gray-100 hover:bg-gray-50 text-xs">
-                        <td class="p-3 font-bold">${t.businessName}</td>
-                        <td class="p-3">${t.ownerName} (${t.nim})</td>
-                        <td class="p-3 text-center">${t.visits}x</td>
-                        <td class="p-3 text-center">
-                            <button onclick="executeAdminAction('delete', ${t.id})" class="px-2.5 py-1 bg-rose-50 text-rose-600 rounded-lg font-bold">Hapus</button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        function renderAdminReports() {
-            const container = document.getElementById('reportsListContainer');
-            document.getElementById('reportCountBadge').innerText = adminReports.length;
-            if (adminReports.length === 0) {
-                container.innerHTML = `<div class="text-center py-8 text-gray-400 text-xs">Belum ada laporan pengaduan masuk.</div>`;
-                return;
-            }
-            container.innerHTML = '';
-            adminReports.forEach(r => {
-                container.innerHTML += `
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex justify-between items-center">
-                        <div>
-                            <span class="text-xs font-bold text-brand-dark">${r.reportId} - ${r.targetBusiness}</span>
-                            <p class="text-xs text-gray-600 mt-1">${r.description}</p>
-                        </div>
-                        <span class="text-xs bg-rose-100 text-rose-700 px-2 py-1 rounded font-bold">${r.status}</span>
-                    </div>
-                `;
-            });
-        }
-
-        async function executeAdminAction(subAction, tenantId) {
-            const res = await postToBackend({ action: "adminAction", subAction: subAction, tenantId: tenantId, token: adminSessionToken });
-            if (res.status === "success") {
-                adminTenants = res.tenants || [];
-                renderAdminBI();
-                renderPendingValidations();
-                renderMonitoringTable();
-                loadPublicData(false);
-                alert("Aksi berhasil dijalankan!");
-            }
         }
 
         function openDetail(id) {
