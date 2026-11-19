@@ -37,10 +37,9 @@
         <span class="truncate">ADpreneur v5.0 — Ekosistem Digital Mahasiswa UAD dengan Business Intelligence</span>
     </div>
 
-    <!-- HEADER / NAVBAR (4 MENU UTAMA + AKUN TENANT & ADMIN) -->
+    <!-- HEADER / NAVBAR -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2">
-            <!-- LOGO -->
             <button onclick="switchMainView('beranda')" class="flex items-center gap-2 text-left focus:outline-none">
                 <svg class="h-8 sm:h-10 w-auto" viewBox="0 0 220 55" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 42L25 12H34L47 42H39.5L36.3 33H22.7L19.5 42H12ZM24.7 27H34.3L29.5 14L24.7 27Z" fill="#F26522"/>
@@ -51,7 +50,6 @@
                 </svg>
             </button>
 
-            <!-- MENU NAVIGASI DESKTOP -->
             <nav class="hidden md:flex items-center gap-1.5 bg-gray-100/80 p-1.5 rounded-2xl border border-gray-200/70">
                 <button onclick="switchMainView('beranda')" id="nav-beranda" class="main-nav-btn px-4 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white shadow-sm transition-all">
                     <i class="fa-solid fa-house mr-1"></i> Beranda
@@ -67,7 +65,6 @@
                 </button>
             </nav>
 
-            <!-- TOMBOL AKUN KANAN (TANPA LACAK PESANAN) -->
             <div class="flex items-center gap-1.5 sm:gap-2">
                 <button onclick="openModal('registerModal')" class="text-xs font-semibold text-white bg-brand-orange hover:bg-orange-600 px-3.5 sm:px-4 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-store"></i> <span>Daftar</span>
@@ -81,33 +78,21 @@
             </div>
         </div>
 
-        <!-- MENU NAVIGASI MOBILE -->
         <div class="md:hidden border-t border-gray-100 bg-white px-3 py-2 flex items-center justify-around gap-1">
-            <button onclick="switchMainView('beranda')" id="mnav-beranda" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-bold bg-brand-orange text-white text-center transition-all">
-                Beranda
-            </button>
-            <button onclick="switchMainView('etalase')" id="mnav-etalase" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all">
-                Etalase
-            </button>
-            <button onclick="switchMainView('lacak')" id="mnav-lacak" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all">
-                Lacak
-            </button>
-            <button onclick="switchMainView('faq')" id="mnav-faq" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all">
-                FAQ
-            </button>
+            <button onclick="switchMainView('beranda')" id="mnav-beranda" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-bold bg-brand-orange text-white text-center transition-all">Beranda</button>
+            <button onclick="switchMainView('etalase')" id="mnav-etalase" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all">Etalase</button>
+            <button onclick="switchMainView('lacak')" id="mnav-lacak" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all">Lacak</button>
+            <button onclick="switchMainView('faq')" id="mnav-faq" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all">FAQ</button>
         </div>
     </header>
 
     <main class="flex-grow">
-        <!-- ========================================================= -->
-        <!-- VIEW 1: BERANDA (LAYOUT AWAL + ILUSTRASI GEDUNG ORANYE)   -->
-        <!-- ========================================================= -->
+        <!-- VIEW 1: BERANDA -->
         <section id="view-beranda" class="main-view relative bg-gradient-to-b from-orange-50/80 via-white to-brand-graybg py-12 sm:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
             <div class="absolute -right-24 -top-24 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -left-24 bottom-0 w-80 h-80 bg-orange-100/40 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
-                <!-- Teks Utama -->
                 <div class="lg:col-span-7 text-center lg:text-left">
                     <span class="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full text-xs font-bold bg-brand-orange/10 text-brand-orange mb-4 shadow-sm border border-brand-orange/20">
                         <i class="fa-solid fa-store"></i> Ekosistem Wirausaha Mahasiswa UAD
@@ -128,7 +113,6 @@
                         </button>
                     </div>
 
-                    <!-- Statistik Ringkas -->
                     <div class="grid grid-cols-3 gap-3 max-w-md mx-auto lg:mx-0 mt-9 pt-6 border-t border-orange-100">
                         <div>
                             <p class="font-heading text-xl sm:text-2xl font-extrabold text-brand-orange" id="heroTenantCount">0</p>
@@ -145,7 +129,7 @@
                     </div>
                 </div>
 
-                <!-- ILUSTRASI VEKTOR GEDUNG KAMPUS BERNUANSA ORANYE -->
+                <!-- ILUSTRASI GEDUNG KAMPUS ORANYE -->
                 <div class="lg:col-span-5 flex justify-center">
                     <div class="w-full max-w-md bg-white/80 backdrop-blur-sm p-5 rounded-[32px] border border-orange-100 shadow-xl">
                         <svg viewBox="0 0 460 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
@@ -163,62 +147,41 @@
                                     <stop offset="100%" stop-color="#EA580C"/>
                                 </linearGradient>
                             </defs>
-
-                            <!-- Latar Langit & Matahari Oranye Lembut -->
                             <rect width="460" height="360" rx="24" fill="url(#skyGrad)"/>
                             <circle cx="365" cy="78" r="38" fill="#FDBA74" fill-opacity="0.45"/>
                             <circle cx="365" cy="78" r="24" fill="#F26522" fill-opacity="0.25"/>
-
-                            <!-- Awan Minimalis -->
                             <path d="M62 86C62 79 68 74 75 74C78 67 85 62 93 62C104 62 113 70 114 81C120 82 124 87 124 93C124 100 118 105 111 105H66C59 105 54 100 54 93C54 89 57 86 62 86Z" fill="#FFFFFF" fill-opacity="0.85"/>
-
-                            <!-- Sayap Gedung Kiri -->
                             <rect x="44" y="138" width="96" height="162" rx="8" fill="url(#wingGrad)"/>
                             <rect x="38" y="130" width="108" height="12" rx="4" fill="#9A3412"/>
-                            <!-- Jendela Kiri -->
                             <g fill="#FFF7ED" fill-opacity="0.9">
                                 <rect x="60" y="156" width="18" height="24" rx="3"/><rect x="86" y="156" width="18" height="24" rx="3"/><rect x="112" y="156" width="14" height="24" rx="3"/>
                                 <rect x="60" y="192" width="18" height="24" rx="3"/><rect x="86" y="192" width="18" height="24" rx="3"/><rect x="112" y="192" width="14" height="24" rx="3"/>
                                 <rect x="60" y="228" width="18" height="24" rx="3"/><rect x="86" y="228" width="18" height="24" rx="3"/><rect x="112" y="228" width="14" height="24" rx="3"/>
                             </g>
-
-                            <!-- Sayap Gedung Kanan -->
                             <rect x="320" y="138" width="96" height="162" rx="8" fill="url(#wingGrad)"/>
                             <rect x="314" y="130" width="108" height="12" rx="4" fill="#9A3412"/>
-                            <!-- Jendela Kanan -->
                             <g fill="#FFF7ED" fill-opacity="0.9">
                                 <rect x="334" y="156" width="14" height="24" rx="3"/><rect x="356" y="156" width="18" height="24" rx="3"/><rect x="382" y="156" width="18" height="24" rx="3"/>
                                 <rect x="334" y="192" width="14" height="24" rx="3"/><rect x="356" y="192" width="18" height="24" rx="3"/><rect x="382" y="192" width="18" height="24" rx="3"/>
                                 <rect x="334" y="228" width="14" height="24" rx="3"/><rect x="356" y="228" width="18" height="24" rx="3"/><rect x="382" y="228" width="18" height="24" rx="3"/>
                             </g>
-
-                            <!-- Gedung Utama Tengah (Kampus UAD) -->
                             <rect x="132" y="76" width="196" height="224" rx="10" fill="url(#mainTower)"/>
-                            <!-- Atap Kubah / Mahkota Modern Oranye -->
                             <path d="M165 76C165 50 194 34 230 34C266 34 295 50 295 76H165Z" fill="#EA580C"/>
                             <rect x="227" y="14" width="6" height="22" rx="3" fill="#9A3412"/>
                             <circle cx="230" cy="14" r="5" fill="#F26522"/>
                             <rect x="124" y="70" width="212" height="12" rx="5" fill="#7C2D12"/>
-
-                            <!-- Papan Identitas Gedung -->
                             <rect x="172" y="92" width="116" height="28" rx="8" fill="#FFFFFF"/>
                             <text x="230" y="111" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="14" fill="#F26522" letter-spacing="1.5">KAMPUS UAD</text>
-
-                            <!-- Jendela Kaca Gedung Utama -->
                             <g fill="#FFEDD5">
                                 <rect x="152" y="134" width="28" height="26" rx="4"/><rect x="192" y="134" width="28" height="26" rx="4"/><rect x="240" y="134" width="28" height="26" rx="4"/><rect x="280" y="134" width="28" height="26" rx="4"/>
                                 <rect x="152" y="172" width="28" height="26" rx="4"/><rect x="192" y="172" width="28" height="26" rx="4"/><rect x="240" y="172" width="28" height="26" rx="4"/><rect x="280" y="172" width="28" height="26" rx="4"/>
                             </g>
-
-                            <!-- Teras & Pilar Gerbang Utama -->
                             <rect x="156" y="216" width="148" height="84" rx="6" fill="#FFF7ED"/>
                             <rect x="150" y="210" width="160" height="10" rx="4" fill="#9A3412"/>
                             <rect x="168" y="220" width="10" height="80" fill="#FDBA74"/>
                             <rect x="282" y="220" width="10" height="80" fill="#FDBA74"/>
                             <rect x="198" y="238" width="64" height="62" rx="6" fill="#F26522"/>
                             <line x1="230" y1="238" x2="230" y2="300" stroke="#FFF7ED" stroke-width="2.5"/>
-
-                            <!-- Vegetasi & Halaman Depan Nuansa Hangat -->
                             <circle cx="36" cy="288" r="22" fill="#FB923C"/>
                             <circle cx="56" cy="294" r="16" fill="#F97316"/>
                             <circle cx="424" cy="288" r="22" fill="#FB923C"/>
@@ -235,11 +198,8 @@
             </div>
         </section>
 
-        <!-- ========================================================= -->
-        <!-- VIEW 2: ETALASE (GRID 4x3 = 12 ITEM + HALAMAN TAK TERHINGGA)-->
-        <!-- ========================================================= -->
+        <!-- VIEW 2: ETALASE (GRID 4x3 + PAGINATION TAK TERHINGGA) -->
         <section id="view-etalase" class="main-view hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-            <!-- Header & Filter Etalase -->
             <div class="bg-white p-5 sm:p-6 rounded-3xl border border-gray-100 shadow-sm mb-6">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-5">
                     <div class="flex items-center gap-3">
@@ -262,7 +222,6 @@
                     </div>
                 </div>
 
-                <!-- Pencarian & Kategori Etalase -->
                 <div class="flex flex-col md:flex-row gap-3">
                     <div class="flex-1 relative flex items-center">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-400"></i>
@@ -282,19 +241,15 @@
                 <p class="text-xs text-gray-500">Memuat etalase tenant dari server...</p>
             </div>
             
-            <!-- GRID 4x3 (4 KE SAMPING x 3 KE BAWAH = 12 ITEM PER HALAMAN) -->
             <div id="tenantContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
 
-            <!-- KONTROL HALAMAN / PAGINATION (HALAMAN 1, 2, 3, ... TAK TERHINGGA) -->
             <div id="paginationWrapper" class="mt-8 bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 hidden">
                 <p class="text-xs text-gray-500 font-medium" id="paginationInfo">Menampilkan 1–12 dari 0 tenant</p>
                 <div id="paginationControls" class="flex flex-wrap items-center justify-center gap-1.5"></div>
             </div>
         </section>
 
-        <!-- ========================================================= -->
-        <!-- VIEW 3: LACAK TENANT (CEK DOUBLE TENANT & MAHASISWA GAIB) -->
-        <!-- ========================================================= -->
+        <!-- VIEW 3: LACAK TENANT -->
         <section id="view-lacak" class="main-view hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
             <div class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-100 shadow-sm">
                 <div class="flex items-start gap-4 mb-6">
@@ -310,7 +265,6 @@
                     </div>
                 </div>
 
-                <!-- Form Pencarian Audit Tenant -->
                 <div class="bg-brand-light/70 p-4 rounded-2xl border border-brand-orange/20 mb-6">
                     <div class="flex flex-col sm:flex-row gap-3">
                         <div class="flex-1 relative flex items-center">
@@ -327,14 +281,11 @@
                     </div>
                 </div>
 
-                <!-- Hasil Pelacakan Tenant -->
                 <div id="lacakTenantResults" class="space-y-3"></div>
             </div>
         </section>
 
-        <!-- ========================================================= -->
-        <!-- VIEW 4: FAQ & KONTAK ADMIN (+6281345991170)               -->
-        <!-- ========================================================= -->
+        <!-- VIEW 4: FAQ & KONTAK ADMIN (+6281345991170) -->
         <section id="view-faq" class="main-view hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
             <div class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-100 shadow-sm">
                 <div class="text-center max-w-xl mx-auto mb-8">
@@ -347,7 +298,6 @@
                     </p>
                 </div>
 
-                <!-- Kartu Kontak Langsung WhatsApp Admin -->
                 <div class="bg-gradient-to-r from-brand-orange to-orange-600 text-white p-6 rounded-3xl shadow-lg mb-8 flex flex-col sm:flex-row items-center justify-between gap-5">
                     <div class="text-center sm:text-left">
                         <p class="text-xs uppercase tracking-wider text-orange-100 font-bold mb-1">Nomor Bantuan & Verifikasi Admin</p>
@@ -359,7 +309,6 @@
                     </a>
                 </div>
 
-                <!-- Daftar Accordion FAQ -->
                 <div class="space-y-3">
                     <div class="bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200/80">
                         <h4 class="font-heading font-bold text-sm text-brand-dark mb-1.5 flex items-center gap-2">
@@ -374,10 +323,10 @@
                     <div class="bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200/80">
                         <h4 class="font-heading font-bold text-sm text-brand-dark mb-1.5 flex items-center gap-2">
                             <span class="w-6 h-6 rounded-lg bg-brand-orange text-white text-xs flex items-center justify-center">2</span>
-                            Apa fungsi menu Lacak Tenant?
+                            Bagaimana cara peserta tenant mengatur katalog, harga, dan qty penjualan harian?
                         </h4>
                         <p class="text-xs text-gray-600 leading-relaxed pl-8">
-                            Menu <b>Lacak</b> memungkinkan civitas akademika dan tim pengawas mencari tenant berdasarkan nama usaha, produk, atau nama pemilik untuk mendeteksi kepemilikan ganda (<i>double tenant</i>) maupun akun palsu/alumni.
+                            Masuk ke menu <b>Tenant</b> di pojok kanan atas, tambahkan menu beserta harga dan foto, lalu isi jumlah <b>Qty Terjual Hari Ini</b> dan klik simpan. Data otomatis masuk ke database dan bisa dilacak Admin.
                         </p>
                     </div>
 
@@ -387,17 +336,17 @@
                             Bagaimana jika toko sedang libur atau tutup sementara?
                         </h4>
                         <p class="text-xs text-gray-600 leading-relaxed pl-8">
-                            Pemilik usaha dapat login ke menu <b>Tenant</b> di pojok kanan atas dan menekan tombol <b>Matikan Toko (Libur)</b>. Status di etalase otomatis berubah menjadi <i>Sedang Libur</i>.
+                            Pemilik usaha dapat login ke menu <b>Tenant</b> dan menekan tombol <b>Matikan Toko (Libur)</b>. Status di etalase otomatis berubah menjadi <i>Libur</i>.
                         </p>
                     </div>
 
                     <div class="bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200/80">
                         <h4 class="font-heading font-bold text-sm text-brand-dark mb-1.5 flex items-center gap-2">
                             <span class="w-6 h-6 rounded-lg bg-brand-orange text-white text-xs flex items-center justify-center">4</span>
-                            Bagaimana cara melaporkan pelanggaran atau kendala transaksi?
+                            Bagaimana cara menghubungi Admin Kampus?
                         </h4>
                         <p class="text-xs text-gray-600 leading-relaxed pl-8">
-                            Kamu dapat langsung menghubungi WhatsApp Admin di <b>+6281345991170</b> atau mengisi formulir pada tombol <b>Pusat Bantuan & Pengaduan</b> di bagian bawah halaman.
+                            Kamu dapat langsung menghubungi WhatsApp Admin di <b>+6281345991170</b> atau mengisi formulir pada tombol <b>Pusat Bantuan & Pengaduan</b>.
                         </p>
                     </div>
                 </div>
@@ -405,7 +354,7 @@
         </section>
     </main>
 
-    <!-- FOOTER BERGELOMBANG / MELENGKUNG -->
+    <!-- FOOTER -->
     <footer class="relative bg-brand-orange text-white pt-14 pb-10 px-4 sm:px-6 lg:px-8 mt-16 rounded-t-[40px] shadow-2xl overflow-hidden">
         <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
         
@@ -450,7 +399,7 @@
             <div class="space-y-3 text-xs text-gray-600 leading-relaxed">
                 <p><b>1. Pengumpulan Data Mahasiswa:</b> ADpreneur mengumpulkan Nama Lengkap, NIM, dan Email resmi UAD semata-mata untuk proses verifikasi keabsahan status mahasiswa aktif Universitas Ahmad Dahlan.</p>
                 <p><b>2. Perlindungan Data Privat:</b> Nomor NIM lengkap, alamat email pribadi, dan kata sandi disimpan secara privat dan tidak pernah ditampilkan di halaman publik.</p>
-                <p><b>3. Data Transaksi:</b> Informasi nama pemesan dan nomor WhatsApp pada fitur pemesanan hanya digunakan untuk koordinasi pesanan antara pembeli dan tenant terkait.</p>
+                <p><b>3. Data Transaksi & Katalog:</b> Data produk, harga, dan kuantitas penjualan harian dikelola untuk transparansi dan rekap evaluasi ekosistem kampus.</p>
             </div>
         </div>
     </div>
@@ -620,7 +569,7 @@
             <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-brand-light text-brand-orange rounded-2xl mx-auto flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-user-tie"></i></div>
                 <h3 class="font-heading text-lg font-bold text-brand-dark">Login Peserta Tenant</h3>
-                <p class="text-xs text-gray-500">Atur status buka/libur toko dan kelola produk</p>
+                <p class="text-xs text-gray-500">Kelola katalog, harga, qty harian & status toko</p>
             </div>
             <form onsubmit="handleSellerLogin(event)" class="space-y-4">
                 <div>
@@ -640,7 +589,7 @@
 
     <!-- MODAL DASHBOARD PENJUAL -->
     <div id="sellerDashboardModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('sellerDashboardModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <div id="sellerDashboardContent"></div>
         </div>
@@ -653,7 +602,7 @@
             <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-brand-dark text-white rounded-2xl mx-auto flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-shield-halved"></i></div>
                 <h3 class="font-heading text-lg font-bold text-brand-dark">Login Admin Kampus</h3>
-                <p class="text-xs text-gray-500">Portal Manajemen & BI</p>
+                <p class="text-xs text-gray-500">Portal Manajemen, Katalog & BI</p>
             </div>
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
@@ -678,15 +627,17 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 border-b pb-4 gap-3">
                 <div>
                     <h3 class="font-heading text-xl font-bold text-brand-dark"><i class="fa-solid fa-shield-halved text-brand-orange mr-2"></i> Portal Admin & Analitik Kampus</h3>
-                    <p class="text-xs text-gray-500">Dasbor intelijen bisnis dan moderasi.</p>
+                    <p class="text-xs text-gray-500">Dasbor intelijen bisnis, pelacakan katalog & qty penjualan harian, serta moderasi.</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="refreshAdminData()" class="bg-gray-100 hover:bg-gray-200 text-brand-dark px-3.5 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-rotate mr-1"></i> Segarkan</button>
                     <button onclick="logoutAdmin()" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white px-3.5 py-2 rounded-xl text-xs font-bold transition-colors">Logout</button>
                 </div>
             </div>
+
             <div class="flex flex-wrap gap-2 border-b mb-6 pb-2">
                 <button onclick="switchAdminTab('bi')" id="tab-bi" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-orange text-white"><i class="fa-solid fa-chart-pie mr-1"></i> Laporan BI</button>
+                <button onclick="switchAdminTab('catalog')" id="tab-cat" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200"><i class="fa-solid fa-boxes-stacked mr-1"></i> Katalog & Qty Harian</button>
                 <button onclick="switchAdminTab('validation')" id="tab-val" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Validasi (<span id="pendingCountBadge">0</span>)</button>
                 <button onclick="switchAdminTab('monitoring')" id="tab-mon" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Tenant Aktif</button>
                 <button onclick="switchAdminTab('reports')" id="tab-rep" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200">Pengaduan (<span id="reportCountBadge">0</span>)</button>
@@ -697,12 +648,26 @@
                 <div class="bg-gray-50 p-4 rounded-3xl border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div>
                         <h4 class="font-heading font-bold text-xs text-brand-dark mb-1">Unduh Rekap Laporan Ekosistem</h4>
-                        <p class="text-xs text-gray-500">Ekspor seluruh data transaksi dan kunjungan ke format CSV / Excel.</p>
+                        <p class="text-xs text-gray-500">Ekspor seluruh data transaksi, katalog & qty terjual harian ke format CSV.</p>
                     </div>
                     <button onclick="exportAdminCSV()" class="w-full sm:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl text-xs shadow-sm flex items-center justify-center gap-2">
                         <i class="fa-solid fa-file-csv text-base"></i> Unduh Laporan CSV
                     </button>
                 </div>
+            </div>
+
+            <!-- TAB PELACAKAN KATALOG & QTY HARIAN ADMIN -->
+            <div id="adminCatalogContent" class="space-y-4 hidden">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-orange-50/70 p-4 rounded-2xl border border-orange-200">
+                    <div>
+                        <h4 class="font-heading font-bold text-sm text-brand-dark">Pelacakan Katalog & Qty Penjualan Harian Tenant</h4>
+                        <p class="text-xs text-gray-600">Pantau menu, harga satuan, jumlah qty terjual hari ini, dan total omzet harian tiap peserta tenant.</p>
+                    </div>
+                    <button onclick="exportCatalogQtyCSV()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-file-excel"></i> Ekspor CSV Katalog & Qty
+                    </button>
+                </div>
+                <div id="adminCatalogListContainer" class="space-y-4"></div>
             </div>
 
             <div id="adminValidationContent" class="space-y-4 hidden">
@@ -741,7 +706,7 @@
     <!-- SCRIPT UTAMA -->
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzWSfeCSW3l6Nh_1AqNo7-Mse81gqvEcZMiy6cT2LQQaHKSbVij7AuUnU3nm9VXZ-f-/exec";
-        const ITEMS_PER_PAGE = 12; // 4 kolom ke samping x 3 baris ke bawah = 12 item per halaman
+        const ITEMS_PER_PAGE = 12;
 
         let publicTenants = [];
         let adminTenants = [];
@@ -751,17 +716,17 @@
         let currentSeller = null;
         let sellerSessionToken = null;
         let sellerOrders = [];
+        let sellerDraftProducts = [];
+        let newProductImageDataUrl = "";
         let currentCategory = 'all';
         let currentEtalasePage = 1;
         let activeCheckoutItem = null;
 
-        // NAVIGASI 4 MENU UTAMA (BERANDA, ETALASE, LACAK, FAQ)
         function switchMainView(viewName) {
             document.querySelectorAll('.main-view').forEach(sec => sec.classList.add('hidden'));
             const targetSec = document.getElementById(`view-${viewName}`);
             if (targetSec) targetSec.classList.remove('hidden');
 
-            // Update tombol navigasi desktop
             document.querySelectorAll('.main-nav-btn').forEach(btn => {
                 btn.className = "main-nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:text-brand-orange transition-all";
             });
@@ -770,7 +735,6 @@
                 activeDesktopBtn.className = "main-nav-btn px-4 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white shadow-sm transition-all";
             }
 
-            // Update tombol navigasi mobile
             document.querySelectorAll('.m-nav-btn').forEach(btn => {
                 btn.className = "m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all";
             });
@@ -815,7 +779,8 @@
             if (Array.isArray(data)) {
                 publicTenants = data.map(t => ({
                     ...t,
-                    isOpen: t.isOpen === undefined ? true : Boolean(t.isOpen)
+                    isOpen: t.isOpen === undefined ? true : Boolean(t.isOpen),
+                    products: Array.isArray(t.products) ? t.products : []
                 }));
             }
             const loader = document.getElementById('loadingState');
@@ -847,7 +812,6 @@
             if (etalaseEl) etalaseEl.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // RENDER ETALASE GRID 4x3 (12 PER HALAMAN) + PAGINATION TAK TERHINGGA
         function renderTenants() {
             const container = document.getElementById('tenantContainer');
             const paginationWrapper = document.getElementById('paginationWrapper');
@@ -944,7 +908,6 @@
                 `;
             });
 
-            // Render Pagination
             paginationWrapper.classList.remove('hidden');
             paginationInfo.innerText = `Halaman ${currentEtalasePage} dari ${totalPages} • Menampilkan ${startIdx + 1}–${endIdx} dari ${filtered.length} tenant`;
 
@@ -971,7 +934,6 @@
             paginationControls.innerHTML = pageButtonsHTML;
         }
 
-        // RENDER MENU LACAK TENANT (AUDIT DOUBLE TENANT & MAHASISWA GAIB)
         function renderLacakTenant() {
             const container = document.getElementById('lacakTenantResults');
             const summaryBadge = document.getElementById('lacakSummaryBadge');
@@ -979,8 +941,6 @@
             if (!container || !inputEl) return;
 
             const keyword = inputEl.value.trim().toLowerCase();
-
-            // Hitung jumlah usaha per pemilik untuk mendeteksi indikasi double tenant
             const ownerCounts = {};
             publicTenants.forEach(t => {
                 const key = String(t.ownerName || "").trim().toLowerCase();
@@ -1004,7 +964,6 @@
                     <div class="text-center py-10 bg-gray-50 rounded-2xl border border-gray-200">
                         <i class="fa-solid fa-user-slash text-3xl text-gray-300 mb-2"></i>
                         <p class="text-xs font-bold text-gray-600">Tidak ditemukan tenant, produk, atau pemilik dengan kata kunci tersebut.</p>
-                        <p class="text-[11px] text-gray-400 mt-1">Jika mencurigai akun palsu di luar sistem, laporkan ke Admin melalui menu FAQ.</p>
                     </div>
                 `;
                 return;
@@ -1016,7 +975,7 @@
                 const countOwned = ownerCounts[ownerKey] || 1;
                 const isDoubleTenant = countOwned > 1;
                 const isVerified = t.status === 'approved' && t.verifiedUad !== false;
-                const productNames = (t.products || []).map(p => p.name).join(', ') || 'Belum ada produk terdaftar';
+                const productNames = (t.products || []).map(p => `${p.name} (Rp ${Number(p.price || 0).toLocaleString('id-ID')})`).join(', ') || 'Belum ada produk terdaftar';
 
                 const verificationBadge = isVerified
                     ? `<span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-[11px] font-bold px-2.5 py-1 rounded-full">
@@ -1046,8 +1005,8 @@
                                 <p class="text-xs text-gray-700 mb-1.5">
                                     <i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> Pemilik: <b>${t.ownerName}</b> • Status Toko: <b>${t.isOpen !== false ? 'Buka' : 'Libur'}</b>
                                 </p>
-                                <p class="text-[11px] text-gray-500 mb-2.5 line-clamp-1">
-                                    <i class="fa-solid fa-box-open mr-1"></i> Produk: ${productNames}
+                                <p class="text-[11px] text-gray-500 mb-2.5">
+                                    <i class="fa-solid fa-box-open mr-1"></i> Katalog: ${productNames}
                                 </p>
                                 <div class="flex flex-wrap gap-1.5">
                                     ${verificationBadge}
@@ -1241,6 +1200,13 @@
                     };
                     sellerSessionToken = res.token;
                     sellerOrders = res.orders || [];
+                    sellerDraftProducts = (Array.isArray(res.seller.products) ? res.seller.products : []).map(p => ({
+                        name: p.name || "",
+                        price: Number(p.price) || 0,
+                        qtySoldToday: Number(p.qtySoldToday) || 0,
+                        image: p.image || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+                    }));
+                    newProductImageDataUrl = "";
                     document.getElementById('loginSellerPass').value = '';
                     closeModal('sellerLoginModal');
                     renderSellerDashboard();
@@ -1256,11 +1222,201 @@
             }
         }
 
+        // Kompres file gambar yang diupload penjual agar hemat ukuran di Google Sheets
+        function handleProductFileUpload(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const maxSize = 480;
+                    let width = img.width;
+                    let height = img.height;
+                    if (width > height && width > maxSize) {
+                        height = Math.round((height * maxSize) / width);
+                        width = maxSize;
+                    } else if (height > maxSize) {
+                        width = Math.round((width * maxSize) / height);
+                        height = maxSize;
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    newProductImageDataUrl = canvas.toDataURL('image/jpeg', 0.72);
+                    const urlInput = document.getElementById('newProdImageUrl');
+                    if (urlInput) urlInput.value = "";
+                    const previewEl = document.getElementById('newProdPreview');
+                    if (previewEl) {
+                        previewEl.src = newProductImageDataUrl;
+                        previewEl.classList.remove('hidden');
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function addMenuToDraft() {
+            const nameEl = document.getElementById('newProdName');
+            const priceEl = document.getElementById('newProdPrice');
+            const qtyEl = document.getElementById('newProdQtyToday');
+            const urlEl = document.getElementById('newProdImageUrl');
+
+            const name = (nameEl ? nameEl.value : "").trim();
+            const price = Math.max(0, Number(priceEl ? priceEl.value : 0) || 0);
+            const qtySoldToday = Math.max(0, parseInt(qtyEl ? qtyEl.value : 0, 10) || 0);
+            const image = newProductImageDataUrl || (urlEl ? urlEl.value.trim() : "") || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80";
+
+            if (!name) {
+                alert("Silakan isi nama menu/produk terlebih dahulu.");
+                return;
+            }
+            if (price <= 0) {
+                alert("Silakan masukkan harga produk yang valid.");
+                return;
+            }
+
+            sellerDraftProducts.push({ name, price, qtySoldToday, image });
+            newProductImageDataUrl = "";
+            renderSellerDashboard();
+        }
+
+        function updateDraftQtyToday(index, val) {
+            if (!sellerDraftProducts[index]) return;
+            sellerDraftProducts[index].qtySoldToday = Math.max(0, parseInt(val, 10) || 0);
+            updateAccountingSummaryDisplay();
+        }
+
+        function updateDraftPrice(index, val) {
+            if (!sellerDraftProducts[index]) return;
+            sellerDraftProducts[index].price = Math.max(0, Number(val) || 0);
+            updateAccountingSummaryDisplay();
+        }
+
+        function removeDraftProduct(index) {
+            sellerDraftProducts.splice(index, 1);
+            renderSellerDashboard();
+        }
+
+        function computeDraftAccounting() {
+            let totalQty = 0;
+            let totalOmzet = 0;
+            sellerDraftProducts.forEach(p => {
+                const q = Math.max(0, parseInt(p.qtySoldToday, 10) || 0);
+                const pr = Math.max(0, Number(p.price) || 0);
+                totalQty += q;
+                totalOmzet += q * pr;
+            });
+            return { totalQty, totalOmzet };
+        }
+
+        function updateAccountingSummaryDisplay() {
+            const { totalQty, totalOmzet } = computeDraftAccounting();
+            const qtyEl = document.getElementById('draftTotalQtyDisplay');
+            const omzetEl = document.getElementById('draftTotalOmzetDisplay');
+            if (qtyEl) qtyEl.innerText = `${totalQty} item`;
+            if (omzetEl) omzetEl.innerText = `Rp ${totalOmzet.toLocaleString('id-ID')}`;
+
+            sellerDraftProducts.forEach((p, idx) => {
+                const subEl = document.getElementById(`draftSubtotal-${idx}`);
+                if (subEl) {
+                    const sub = (Math.max(0, parseInt(p.qtySoldToday, 10) || 0)) * (Math.max(0, Number(p.price) || 0));
+                    subEl.innerText = `Rp ${sub.toLocaleString('id-ID')}`;
+                }
+            });
+        }
+
+        async function saveSellerCatalogAndQty() {
+            if (!currentSeller || !sellerSessionToken) return;
+            const btn = document.getElementById('btnSaveCatalogQty');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerText = "Menyimpan ke Database...";
+            }
+
+            try {
+                const res = await postToBackend({
+                    action: "updateSellerProducts",
+                    sellerId: currentSeller.id,
+                    token: sellerSessionToken,
+                    products: sellerDraftProducts
+                });
+
+                if (res.status === "success") {
+                    const savedProducts = res.products || sellerDraftProducts;
+                    sellerDraftProducts = savedProducts;
+                    currentSeller.products = savedProducts;
+
+                    const pubIdx = publicTenants.findIndex(t => String(t.id) === String(currentSeller.id));
+                    if (pubIdx !== -1) {
+                        publicTenants[pubIdx].products = savedProducts;
+                    }
+                    const admIdx = adminTenants.findIndex(t => String(t.id) === String(currentSeller.id));
+                    if (admIdx !== -1) {
+                        adminTenants[admIdx].products = savedProducts;
+                    }
+
+                    renderTenants();
+                    renderLacakTenant();
+                    if (adminSessionToken) renderAdminCatalogTracker();
+                    alert("Katalog, harga, dan qty penjualan harian berhasil disimpan ke database!");
+                } else {
+                    alert(res.message || "Gagal menyimpan data katalog.");
+                }
+            } catch (err) {
+                alert("Terjadi kesalahan koneksi saat menyimpan.");
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up mr-1.5"></i> Simpan Katalog & Qty ke Database`;
+                }
+            }
+        }
+
         function renderSellerDashboard() {
             if (!currentSeller) return;
             const isOpen = currentSeller.isOpen !== false;
-            const completedOrders = sellerOrders.filter(o => o.status === 'Selesai');
-            const totalRevenue = completedOrders.reduce((sum, o) => sum + (Number(o.totalPrice) || 0), 0);
+            const { totalQty, totalOmzet } = computeDraftAccounting();
+
+            let draftRowsHTML = '';
+            if (sellerDraftProducts.length === 0) {
+                draftRowsHTML = `<div class="text-center py-6 bg-gray-50 rounded-2xl border border-dashed border-gray-200 text-xs text-gray-400">Belum ada menu di katalog. Tambahkan menu baru di form atas.</div>`;
+            } else {
+                sellerDraftProducts.forEach((p, idx) => {
+                    const subtotal = (Number(p.price) || 0) * (Number(p.qtySoldToday) || 0);
+                    draftRowsHTML += `
+                        <div class="bg-gray-50 p-3.5 rounded-2xl border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <img src="${p.image}" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=200&q=80'" class="w-12 h-12 rounded-xl object-cover bg-gray-200 flex-shrink-0">
+                                <div class="min-w-0">
+                                    <p class="font-bold text-brand-dark truncate">${p.name}</p>
+                                    <div class="flex items-center gap-1.5 mt-1">
+                                        <span class="text-[11px] text-gray-500">Harga Rp</span>
+                                        <input type="number" min="0" value="${p.price}" onchange="updateDraftPrice(${idx}, this.value)" class="w-24 px-2 py-1 bg-white border border-gray-200 rounded-lg text-xs font-bold text-brand-orange">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between sm:justify-end gap-3">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-0.5">Qty Terjual Hari Ini</label>
+                                    <input type="number" min="0" value="${p.qtySoldToday}" oninput="updateDraftQtyToday(${idx}, this.value)" class="w-20 px-2.5 py-1.5 bg-white border border-brand-orange/40 rounded-xl text-xs font-extrabold text-brand-dark text-center">
+                                </div>
+                                <div class="text-right min-w-[85px]">
+                                    <span class="block text-[10px] text-gray-400">Subtotal</span>
+                                    <span id="draftSubtotal-${idx}" class="font-heading font-extrabold text-xs text-emerald-700">Rp ${subtotal.toLocaleString('id-ID')}</span>
+                                </div>
+                                <button onclick="removeDraftProduct(${idx})" class="w-8 h-8 rounded-xl bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white flex items-center justify-center transition-all" title="Hapus Menu">
+                                    <i class="fa-solid fa-trash text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
 
             document.getElementById('sellerDashboardContent').innerHTML = `
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-4 mb-5 gap-3">
@@ -1290,16 +1446,68 @@
                     </button>
                 </div>
 
+                <!-- RINGKASAN AKUNTANSI QTY & OMZET HARIAN -->
                 <div class="grid grid-cols-2 gap-3 mb-5">
-                    <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
-                        <span class="text-xs text-emerald-700 font-bold">Omzet Selesai</span>
-                        <p class="text-lg font-extrabold text-emerald-800 mt-0.5">Rp ${totalRevenue.toLocaleString('id-ID')}</p>
-                    </div>
                     <div class="bg-brand-light p-4 rounded-2xl border border-brand-orange/20">
-                        <span class="text-xs text-brand-orange font-bold">Total Kunjungan</span>
-                        <p class="text-lg font-extrabold text-brand-dark mt-0.5">${currentSeller.visits || 0}x</p>
+                        <span class="text-xs text-brand-orange font-bold">Total Qty Terjual Hari Ini</span>
+                        <p id="draftTotalQtyDisplay" class="text-lg font-extrabold text-brand-dark mt-0.5">${totalQty} item</p>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+                        <span class="text-xs text-emerald-700 font-bold">Estimasi Omzet Katalog Hari Ini</span>
+                        <p id="draftTotalOmzetDisplay" class="text-lg font-extrabold text-emerald-800 mt-0.5">Rp ${totalOmzet.toLocaleString('id-ID')}</p>
                     </div>
                 </div>
+
+                <!-- FORM TAMBAH MENU BARU (NAMA, HARGA, QTY TERJUAL, FOTO) -->
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 mb-5">
+                    <h4 class="font-heading font-bold text-xs sm:text-sm text-brand-dark mb-3">
+                        <i class="fa-solid fa-plus-circle text-brand-orange mr-1.5"></i> Tambah Menu / Produk ke Katalog
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-700 mb-1">Nama Menu / Produk</label>
+                            <input type="text" id="newProdName" placeholder="Cth: Dimsum Ayam" class="w-full px-3 py-2.5 bg-white border border-gray-200 rounded-xl text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-700 mb-1">Harga (Rp)</label>
+                            <input type="number" id="newProdPrice" min="0" placeholder="Cth: 12000" class="w-full px-3 py-2.5 bg-white border border-gray-200 rounded-xl text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-700 mb-1">Qty Terjual Hari Ini</label>
+                            <input type="number" id="newProdQtyToday" min="0" value="0" class="w-full px-3 py-2.5 bg-white border border-gray-200 rounded-xl text-xs">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center mb-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-700 mb-1">Upload Foto Produk</label>
+                            <input type="file" accept="image/*" onchange="handleProductFileUpload(event)" class="w-full text-[11px] text-gray-600 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-brand-light file:text-brand-orange hover:file:bg-orange-100">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-700 mb-1">Atau Link URL Foto (Opsional)</label>
+                            <input type="url" id="newProdImageUrl" placeholder="https://..." class="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-3">
+                        <img id="newProdPreview" src="" alt="Preview" class="hidden w-12 h-12 rounded-xl object-cover border border-gray-200">
+                        <button type="button" onclick="addMenuToDraft()" class="ml-auto px-4 py-2.5 bg-brand-dark hover:bg-gray-800 text-white font-bold rounded-xl text-xs transition-all">
+                            <i class="fa-solid fa-plus mr-1"></i> Masukkan ke Daftar Katalog
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DAFTAR MENU & INPUT QTY HARIAN -->
+                <div class="mb-5">
+                    <h4 class="font-heading font-bold text-xs sm:text-sm text-brand-dark mb-2.5">
+                        Daftar Katalog & Qty Terjual Hari Ini (${sellerDraftProducts.length} Item)
+                    </h4>
+                    <div class="space-y-2.5">${draftRowsHTML}</div>
+                </div>
+
+                <button id="btnSaveCatalogQty" onclick="saveSellerCatalogAndQty()" class="w-full py-3.5 bg-brand-orange hover:bg-orange-600 text-white font-bold rounded-2xl shadow-md transition-all text-xs mb-4">
+                    <i class="fa-solid fa-cloud-arrow-up mr-1.5"></i> Simpan Katalog & Qty ke Database
+                </button>
 
                 <div class="flex justify-between items-center pt-4 border-t">
                     <button onclick="currentSeller = null; sellerSessionToken = null; closeModal('sellerDashboardModal')" class="text-xs font-bold text-rose-600 hover:underline">
@@ -1363,6 +1571,7 @@
                     closeModal('adminLoginModal');
                     openModal('adminModal');
                     renderAdminBI();
+                    renderAdminCatalogTracker();
                     renderPendingValidations();
                     renderMonitoringTable();
                     renderAdminReports();
@@ -1378,61 +1587,156 @@
         function logoutAdmin() { adminSessionToken = null; closeModal('adminModal'); }
 
         function switchAdminTab(tab) {
-            ['bi', 'validation', 'monitoring', 'reports'].forEach(t => {
-                const elId = t === 'bi' ? 'adminBiContent' : 'admin' + t.charAt(0).toUpperCase() + t.slice(1) + 'Content';
-                document.getElementById(elId).classList.add('hidden');
+            const tabMap = {
+                bi: 'adminBiContent',
+                catalog: 'adminCatalogContent',
+                validation: 'adminValidationContent',
+                monitoring: 'adminMonitoringContent',
+                reports: 'adminReportsContent'
+            };
+            const btnMap = {
+                bi: 'tab-bi',
+                catalog: 'tab-cat',
+                validation: 'tab-val',
+                monitoring: 'tab-mon',
+                reports: 'tab-rep'
+            };
+            Object.values(tabMap).forEach(elId => document.getElementById(elId).classList.add('hidden'));
+            Object.values(btnMap).forEach(btnId => {
+                document.getElementById(btnId).className = "px-4 py-2.5 rounded-xl text-xs font-bold bg-gray-100 text-gray-600 hover:bg-gray-200";
             });
-            ['tab-bi', 'tab-val', 'tab-mon', 'tab-rep'].forEach(btnId => {
-                document.getElementById(btnId).className = "px-4 py-2.5 rounded-xl text-xs font-bold bg-gray-100 text-gray-600";
-            });
-            if (tab === 'bi') {
-                document.getElementById('tab-bi').className = "px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-orange text-white";
-                document.getElementById('adminBiContent').classList.remove('hidden');
-            } else if (tab === 'validation') {
-                document.getElementById('tab-val').className = "px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-orange text-white";
-                document.getElementById('adminValidationContent').classList.remove('hidden');
-            } else if (tab === 'monitoring') {
-                document.getElementById('tab-mon').className = "px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-orange text-white";
-                document.getElementById('adminMonitoringContent').classList.remove('hidden');
-            } else {
-                document.getElementById('tab-rep').className = "px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-orange text-white";
-                document.getElementById('adminReportsContent').classList.remove('hidden');
+            if (tabMap[tab]) document.getElementById(tabMap[tab]).classList.remove('hidden');
+            if (btnMap[tab]) document.getElementById(btnMap[tab]).className = "px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-orange text-white";
+            if (tab === 'catalog') renderAdminCatalogTracker();
+        }
+
+        // PELACAKAN KATALOG, HARGA, & QTY PENJUALAN HARIAN DI PORTAL ADMIN
+        function renderAdminCatalogTracker() {
+            const container = document.getElementById('adminCatalogListContainer');
+            if (!container) return;
+
+            if (!adminTenants || adminTenants.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-gray-400 text-xs">Belum ada data tenant.</div>`;
+                return;
             }
+
+            container.innerHTML = '';
+            adminTenants.forEach(t => {
+                const prods = Array.isArray(t.products) ? t.products : [];
+                let tenantQtySum = 0;
+                let tenantOmzetSum = 0;
+
+                const itemsRows = prods.map(p => {
+                    const price = Number(p.price) || 0;
+                    const qty = Number(p.qtySoldToday) || 0;
+                    const sub = price * qty;
+                    tenantQtySum += qty;
+                    tenantOmzetSum += sub;
+
+                    return `
+                        <tr class="border-b border-gray-100">
+                            <td class="py-2 pr-3 font-semibold text-brand-dark">${p.name || '-'}</td>
+                            <td class="py-2 px-3 text-right">Rp ${price.toLocaleString('id-ID')}</td>
+                            <td class="py-2 px-3 text-center font-bold text-brand-orange">${qty}</td>
+                            <td class="py-2 pl-3 text-right font-bold text-emerald-700">Rp ${sub.toLocaleString('id-ID')}</td>
+                        </tr>
+                    `;
+                }).join('');
+
+                container.innerHTML += `
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-3 border-b border-gray-200">
+                            <div>
+                                <h5 class="font-heading font-bold text-sm text-brand-dark">${t.businessName} <span class="text-xs font-normal text-gray-500">(${t.ownerName} • NIM: ${t.nim})</span></h5>
+                                <p class="text-[11px] text-gray-500">Status Akun: <b>${t.status}</b> • Operasional: <b>${t.isOpen !== false ? 'Buka' : 'Libur'}</b></p>
+                            </div>
+                            <div class="flex items-center gap-3 text-xs">
+                                <span class="bg-white px-3 py-1.5 rounded-xl border font-bold text-brand-dark">Qty Hari Ini: <span class="text-brand-orange">${tenantQtySum}</span></span>
+                                <span class="bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 font-bold text-emerald-800">Omzet: Rp ${tenantOmzetSum.toLocaleString('id-ID')}</span>
+                            </div>
+                        </div>
+                        ${prods.length > 0 ? `
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-xs border-collapse">
+                                    <thead>
+                                        <tr class="text-[11px] text-gray-500 border-b border-gray-200">
+                                            <th class="pb-1.5 text-left">Nama Menu</th>
+                                            <th class="pb-1.5 px-3 text-right">Harga</th>
+                                            <th class="pb-1.5 px-3 text-center">Qty Terjual</th>
+                                            <th class="pb-1.5 pl-3 text-right">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>${itemsRows}</tbody>
+                                </table>
+                            </div>
+                        ` : `<p class="text-xs text-gray-400 italic">Tenant belum menambahkan menu katalog.</p>`}
+                    </div>
+                `;
+            });
+        }
+
+        function exportCatalogQtyCSV() {
+            let csv = "Nama Usaha,Pemilik,NIM,Nama Menu,Harga (Rp),Qty Terjual Hari Ini,Subtotal Omzet (Rp)\n";
+            adminTenants.forEach(t => {
+                const prods = Array.isArray(t.products) ? t.products : [];
+                if (prods.length === 0) {
+                    csv += `"${t.businessName}","${t.ownerName}","${t.nim}","- (Belum ada menu)",0,0,0\n`;
+                } else {
+                    prods.forEach(p => {
+                        const price = Number(p.price) || 0;
+                        const qty = Number(p.qtySoldToday) || 0;
+                        const sub = price * qty;
+                        csv += `"${t.businessName}","${t.ownerName}","${t.nim}","${p.name}",${price},${qty},${sub}\n`;
+                    });
+                }
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Katalog_Qty_Harian_ADpreneur_UAD.csv`;
+            a.click();
         }
 
         function renderAdminBI() {
             const activeTenants = adminTenants.filter(t => t.status === 'approved');
             const totalVisits = adminTenants.reduce((sum, t) => sum + (Number(t.visits) || 0), 0);
-            const validOrders = adminOrders.filter(o => o.status !== 'Dibatalkan');
-            const totalGMV = validOrders.reduce((sum, o) => sum + (Number(o.totalPrice) || 0), 0);
+            const catalogOmzet = adminTenants.reduce((sum, t) => {
+                const pSum = (t.products || []).reduce((ps, p) => ps + ((Number(p.price) || 0) * (Number(p.qtySoldToday) || 0)), 0);
+                return sum + pSum;
+            }, 0);
+            const totalCatalogQty = adminTenants.reduce((sum, t) => {
+                const qSum = (t.products || []).reduce((qs, p) => qs + (Number(p.qtySoldToday) || 0), 0);
+                return sum + qSum;
+            }, 0);
 
             document.getElementById('adminBiCards').innerHTML = `
                 <div class="bg-emerald-50 p-4 rounded-3xl border border-emerald-200">
-                    <span class="text-[10px] font-bold text-emerald-700 uppercase">Total GMV</span>
-                    <p class="font-heading font-extrabold text-lg text-emerald-800 mt-1">Rp ${totalGMV.toLocaleString('id-ID')}</p>
+                    <span class="text-[10px] font-bold text-emerald-700 uppercase">Omzet Katalog Hari Ini</span>
+                    <p class="font-heading font-extrabold text-lg text-emerald-800 mt-1">Rp ${catalogOmzet.toLocaleString('id-ID')}</p>
                 </div>
                 <div class="bg-brand-light p-4 rounded-3xl border border-brand-orange/20">
-                    <span class="text-[10px] font-bold text-brand-orange uppercase">Tenant Aktif</span>
-                    <p class="font-heading font-extrabold text-lg text-brand-dark mt-1">${activeTenants.length}</p>
+                    <span class="text-[10px] font-bold text-brand-orange uppercase">Qty Terjual Hari Ini</span>
+                    <p class="font-heading font-extrabold text-lg text-brand-dark mt-1">${totalCatalogQty} item</p>
                 </div>
                 <div class="bg-blue-50 p-4 rounded-3xl border border-blue-200">
-                    <span class="text-[10px] font-bold text-blue-700 uppercase">Kunjungan</span>
-                    <p class="font-heading font-extrabold text-lg text-blue-800 mt-1">${totalVisits}x</p>
+                    <span class="text-[10px] font-bold text-blue-700 uppercase">Tenant Aktif</span>
+                    <p class="font-heading font-extrabold text-lg text-blue-800 mt-1">${activeTenants.length}</p>
                 </div>
                 <div class="bg-gray-50 p-4 rounded-3xl border border-gray-200">
-                    <span class="text-[10px] font-bold text-gray-600 uppercase">Transaksi</span>
-                    <p class="font-heading font-extrabold text-lg text-brand-dark mt-1">${validOrders.length}</p>
+                    <span class="text-[10px] font-bold text-gray-600 uppercase">Total Kunjungan</span>
+                    <p class="font-heading font-extrabold text-lg text-brand-dark mt-1">${totalVisits}x</p>
                 </div>
             `;
         }
 
         function exportAdminCSV() {
-            let csv = "Nama Usaha,Pemilik,NIM,Kategori,Status,Operasional,Kunjungan,Total Pesanan,Total Omzet (Rp)\n";
+            let csv = "Nama Usaha,Pemilik,NIM,Kategori,Status,Operasional,Kunjungan,Total Qty Hari Ini,Omzet Katalog Hari Ini (Rp)\n";
             adminTenants.forEach(t => {
-                const tOrders = adminOrders.filter(o => String(o.tenantId) === String(t.id) && o.status !== 'Dibatalkan');
-                const tRev = tOrders.reduce((s, o) => s + (Number(o.totalPrice) || 0), 0);
+                const qSum = (t.products || []).reduce((qs, p) => qs + (Number(p.qtySoldToday) || 0), 0);
+                const oSum = (t.products || []).reduce((os, p) => os + ((Number(p.price) || 0) * (Number(p.qtySoldToday) || 0)), 0);
                 const opStatus = t.isOpen !== false ? "Buka" : "Libur";
-                csv += `"${t.businessName}","${t.ownerName}","${t.nim}","${t.category}","${t.status}","${opStatus}",${t.visits || 0},${tOrders.length},${tRev}\n`;
+                csv += `"${t.businessName}","${t.ownerName}","${t.nim}","${t.category}","${t.status}","${opStatus}",${t.visits || 0},${qSum},${oSum}\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
@@ -1514,6 +1818,7 @@
             if (res.status === "success") {
                 adminTenants = res.tenants || [];
                 renderAdminBI();
+                renderAdminCatalogTracker();
                 renderPendingValidations();
                 renderMonitoringTable();
                 loadPublicData(false);
