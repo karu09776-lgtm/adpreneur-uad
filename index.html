@@ -35,13 +35,13 @@
     <div class="bg-brand-orange text-white text-[11px] sm:text-sm py-2 px-3 text-center font-medium shadow-sm flex items-center justify-center gap-1.5 overflow-hidden">
         <i class="fa-solid fa-bullhorn flex-shrink-0"></i>
         <span class="truncate">ADpreneur v5.0 — Ekosistem Digital Mahasiswa UAD dengan Business Intelligence</span>
-        <i class="fa-solid fa-chevron-right text-[10px]"></i>
     </div>
 
-    <!-- HEADER / NAVBAR -->
+    <!-- HEADER / NAVBAR (4 MENU UTAMA + AKUN TENANT & ADMIN) -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-2 group">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2">
+            <!-- LOGO -->
+            <button onclick="switchMainView('beranda')" class="flex items-center gap-2 text-left focus:outline-none">
                 <svg class="h-8 sm:h-10 w-auto" viewBox="0 0 220 55" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 42L25 12H34L47 42H39.5L36.3 33H22.7L19.5 42H12ZM24.7 27H34.3L29.5 14L24.7 27Z" fill="#F26522"/>
                     <path d="M49 12H59C66.5 12 72 17.5 72 27C72 36.5 66.5 42 59 42H49V12ZM56.5 36H59C62.8 36 65 33 65 27C65 21 62.8 18 59 18H56.5V36Z" fill="#F26522"/>
@@ -49,52 +49,226 @@
                     <text x="78" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="28" fill="#4B4E53">preneur</text>
                     <text x="79" y="47" font-family="'Inter', sans-serif" font-weight="500" font-size="8" fill="#6B7280" letter-spacing="0.5">Pusat Business Mahasiswa UAD</text>
                 </svg>
-            </a>
+            </button>
+
+            <!-- MENU NAVIGASI DESKTOP -->
+            <nav class="hidden md:flex items-center gap-1.5 bg-gray-100/80 p-1.5 rounded-2xl border border-gray-200/70">
+                <button onclick="switchMainView('beranda')" id="nav-beranda" class="main-nav-btn px-4 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white shadow-sm transition-all">
+                    <i class="fa-solid fa-house mr-1"></i> Beranda
+                </button>
+                <button onclick="switchMainView('etalase')" id="nav-etalase" class="main-nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:text-brand-orange transition-all">
+                    <i class="fa-solid fa-grid-2 mr-1"></i> Etalase
+                </button>
+                <button onclick="switchMainView('lacak')" id="nav-lacak" class="main-nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:text-brand-orange transition-all">
+                    <i class="fa-solid fa-magnifying-glass-location mr-1"></i> Lacak
+                </button>
+                <button onclick="switchMainView('faq')" id="nav-faq" class="main-nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:text-brand-orange transition-all">
+                    <i class="fa-solid fa-circle-question mr-1"></i> FAQ
+                </button>
+            </nav>
+
+            <!-- TOMBOL AKUN KANAN (TANPA LACAK PESANAN) -->
             <div class="flex items-center gap-1.5 sm:gap-2">
-                <button onclick="openModal('trackOrderModal')" class="text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-3 py-2 rounded-xl transition-all border border-emerald-200 flex items-center gap-1.5">
-                    <i class="fa-solid fa-box-archive text-emerald-600"></i> <span class="hidden sm:inline">Pesanan</span>
+                <button onclick="openModal('registerModal')" class="text-xs font-semibold text-white bg-brand-orange hover:bg-orange-600 px-3.5 sm:px-4 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-store"></i> <span>Daftar</span>
                 </button>
-                <button onclick="alert('Tidak ada notifikasi baru.')" class="w-10 h-10 bg-gray-50 hover:bg-gray-100 text-gray-600 rounded-xl relative flex items-center justify-center border border-gray-200">
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="absolute top-2 right-2 w-2 h-2 bg-brand-orange rounded-full animate-ping"></span>
-                    <span class="absolute top-2 right-2 w-2 h-2 bg-brand-orange rounded-full"></span>
+                <button onclick="openModal('sellerLoginModal')" class="text-xs font-semibold text-brand-dark bg-gray-100 hover:bg-gray-200 px-3 py-2.5 rounded-xl transition-all flex items-center gap-1.5" title="Login Akun Tenant">
+                    <i class="fa-solid fa-user-tie"></i> <span class="hidden lg:inline">Tenant</span>
                 </button>
-                <button onclick="openModal('registerModal')" class="text-xs font-semibold text-white bg-brand-orange hover:bg-orange-600 px-4 py-2 rounded-xl shadow-sm transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-store"></i> Daftar
-                </button>
-                <button onclick="openModal('sellerLoginModal')" class="w-10 h-10 bg-gray-100 hover:bg-gray-200 text-brand-dark rounded-xl flex items-center justify-center" title="Login Penjual">
-                    <i class="fa-solid fa-user-tie"></i>
-                </button>
-                <button onclick="openModal('adminLoginModal')" class="w-10 h-10 bg-brand-dark hover:bg-gray-700 text-white rounded-xl flex items-center justify-center shadow-sm" title="Admin">
+                <button onclick="openModal('adminLoginModal')" class="w-9 h-9 sm:w-10 sm:h-10 bg-brand-dark hover:bg-gray-700 text-white rounded-xl flex items-center justify-center shadow-sm transition-all" title="Admin Kampus">
                     <i class="fa-solid fa-shield-halved"></i>
                 </button>
             </div>
         </div>
+
+        <!-- MENU NAVIGASI MOBILE -->
+        <div class="md:hidden border-t border-gray-100 bg-white px-3 py-2 flex items-center justify-around gap-1">
+            <button onclick="switchMainView('beranda')" id="mnav-beranda" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-bold bg-brand-orange text-white text-center transition-all">
+                Beranda
+            </button>
+            <button onclick="switchMainView('etalase')" id="mnav-etalase" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all">
+                Etalase
+            </button>
+            <button onclick="switchMainView('lacak')" id="mnav-lacak" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all">
+                Lacak
+            </button>
+            <button onclick="switchMainView('faq')" id="mnav-faq" class="m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all">
+                FAQ
+            </button>
+        </div>
     </header>
 
     <main class="flex-grow">
-        <!-- HERO SECTION -->
-        <section class="relative bg-gradient-to-b from-orange-50/60 via-white to-brand-graybg pt-10 pb-16 px-4 sm:px-6 lg:px-8 border-b border-gray-100 overflow-hidden">
-            <div class="absolute -right-20 -top-20 w-96 h-96 bg-orange-100/40 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div class="max-w-3xl mx-auto text-center relative z-10">
-                <span class="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full text-xs font-bold bg-brand-orange/10 text-brand-orange mb-4 shadow-sm border border-brand-orange/20">
-                    <i class="fa-solid fa-store"></i> Ekosistem Wirausaha Mahasiswa UAD
-                </span>
-                <h1 class="font-heading text-3xl sm:text-5xl font-extrabold text-brand-dark tracking-tight mb-4 leading-tight">
-                    Food Court Digital Mahasiswa <span class="text-brand-orange">UAD</span>
-                </h1>
-                <p class="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto mb-8 leading-relaxed">
-                    Direktori terverifikasi produk kuliner, barang, dan jasa mahasiswa Universitas Ahmad Dahlan Yogyakarta.
-                </p>
+        <!-- ========================================================= -->
+        <!-- VIEW 1: BERANDA (LAYOUT AWAL + ILUSTRASI GEDUNG ORANYE)   -->
+        <!-- ========================================================= -->
+        <section id="view-beranda" class="main-view relative bg-gradient-to-b from-orange-50/80 via-white to-brand-graybg py-12 sm:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div class="absolute -right-24 -top-24 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-24 bottom-0 w-80 h-80 bg-orange-100/40 rounded-full blur-3xl pointer-events-none"></div>
 
-                <!-- KOTAK PENCARIAN & KATEGORI -->
-                <div class="bg-white p-3 rounded-3xl shadow-lg border border-gray-100 flex flex-col md:flex-row gap-3">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+                <!-- Teks Utama -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <span class="inline-flex items-center gap-1.5 py-1.5 px-4 rounded-full text-xs font-bold bg-brand-orange/10 text-brand-orange mb-4 shadow-sm border border-brand-orange/20">
+                        <i class="fa-solid fa-store"></i> Ekosistem Wirausaha Mahasiswa UAD
+                    </span>
+                    <h1 class="font-heading text-3xl sm:text-5xl font-extrabold text-brand-dark tracking-tight mb-4 leading-tight">
+                        Food Court Digital Mahasiswa <span class="text-brand-orange">UAD</span>
+                    </h1>
+                    <p class="text-xs sm:text-base text-gray-600 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+                        Direktori terverifikasi produk kuliner, barang, dan jasa mahasiswa Universitas Ahmad Dahlan Yogyakarta. Transparan, tervalidasi kampus, dan terhubung langsung dengan penjual.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+                        <button onclick="switchMainView('etalase')" class="w-full sm:w-auto px-7 py-3.5 bg-brand-orange hover:bg-orange-600 text-white font-bold rounded-2xl text-xs sm:text-sm shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i> Jelajahi Etalase Tenant
+                        </button>
+                        <button onclick="switchMainView('lacak')" class="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-orange-50 text-brand-dark font-bold rounded-2xl text-xs sm:text-sm border border-gray-200 shadow-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-magnifying-glass-location text-brand-orange"></i> Lacak Keaslian Tenant
+                        </button>
+                    </div>
+
+                    <!-- Statistik Ringkas -->
+                    <div class="grid grid-cols-3 gap-3 max-w-md mx-auto lg:mx-0 mt-9 pt-6 border-t border-orange-100">
+                        <div>
+                            <p class="font-heading text-xl sm:text-2xl font-extrabold text-brand-orange" id="heroTenantCount">0</p>
+                            <p class="text-[11px] text-gray-500 font-medium">Tenant Terverifikasi</p>
+                        </div>
+                        <div>
+                            <p class="font-heading text-xl sm:text-2xl font-extrabold text-brand-dark">100%</p>
+                            <p class="text-[11px] text-gray-500 font-medium">Mahasiswa Aktif UAD</p>
+                        </div>
+                        <div>
+                            <p class="font-heading text-xl sm:text-2xl font-extrabold text-emerald-600">4x3</p>
+                            <p class="text-[11px] text-gray-500 font-medium">Katalog Multi-Halaman</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ILUSTRASI VEKTOR GEDUNG KAMPUS BERNUANSA ORANYE -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="w-full max-w-md bg-white/80 backdrop-blur-sm p-5 rounded-[32px] border border-orange-100 shadow-xl">
+                        <svg viewBox="0 0 460 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                            <defs>
+                                <linearGradient id="skyGrad" x1="230" y1="0" x2="230" y2="320" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FFF5F0"/>
+                                    <stop offset="100%" stop-color="#FFEDD5"/>
+                                </linearGradient>
+                                <linearGradient id="mainTower" x1="230" y1="55" x2="230" y2="300" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#F26522"/>
+                                    <stop offset="100%" stop-color="#C2410C"/>
+                                </linearGradient>
+                                <linearGradient id="wingGrad" x1="0" y1="120" x2="0" y2="300" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FB923C"/>
+                                    <stop offset="100%" stop-color="#EA580C"/>
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Latar Langit & Matahari Oranye Lembut -->
+                            <rect width="460" height="360" rx="24" fill="url(#skyGrad)"/>
+                            <circle cx="365" cy="78" r="38" fill="#FDBA74" fill-opacity="0.45"/>
+                            <circle cx="365" cy="78" r="24" fill="#F26522" fill-opacity="0.25"/>
+
+                            <!-- Awan Minimalis -->
+                            <path d="M62 86C62 79 68 74 75 74C78 67 85 62 93 62C104 62 113 70 114 81C120 82 124 87 124 93C124 100 118 105 111 105H66C59 105 54 100 54 93C54 89 57 86 62 86Z" fill="#FFFFFF" fill-opacity="0.85"/>
+
+                            <!-- Sayap Gedung Kiri -->
+                            <rect x="44" y="138" width="96" height="162" rx="8" fill="url(#wingGrad)"/>
+                            <rect x="38" y="130" width="108" height="12" rx="4" fill="#9A3412"/>
+                            <!-- Jendela Kiri -->
+                            <g fill="#FFF7ED" fill-opacity="0.9">
+                                <rect x="60" y="156" width="18" height="24" rx="3"/><rect x="86" y="156" width="18" height="24" rx="3"/><rect x="112" y="156" width="14" height="24" rx="3"/>
+                                <rect x="60" y="192" width="18" height="24" rx="3"/><rect x="86" y="192" width="18" height="24" rx="3"/><rect x="112" y="192" width="14" height="24" rx="3"/>
+                                <rect x="60" y="228" width="18" height="24" rx="3"/><rect x="86" y="228" width="18" height="24" rx="3"/><rect x="112" y="228" width="14" height="24" rx="3"/>
+                            </g>
+
+                            <!-- Sayap Gedung Kanan -->
+                            <rect x="320" y="138" width="96" height="162" rx="8" fill="url(#wingGrad)"/>
+                            <rect x="314" y="130" width="108" height="12" rx="4" fill="#9A3412"/>
+                            <!-- Jendela Kanan -->
+                            <g fill="#FFF7ED" fill-opacity="0.9">
+                                <rect x="334" y="156" width="14" height="24" rx="3"/><rect x="356" y="156" width="18" height="24" rx="3"/><rect x="382" y="156" width="18" height="24" rx="3"/>
+                                <rect x="334" y="192" width="14" height="24" rx="3"/><rect x="356" y="192" width="18" height="24" rx="3"/><rect x="382" y="192" width="18" height="24" rx="3"/>
+                                <rect x="334" y="228" width="14" height="24" rx="3"/><rect x="356" y="228" width="18" height="24" rx="3"/><rect x="382" y="228" width="18" height="24" rx="3"/>
+                            </g>
+
+                            <!-- Gedung Utama Tengah (Kampus UAD) -->
+                            <rect x="132" y="76" width="196" height="224" rx="10" fill="url(#mainTower)"/>
+                            <!-- Atap Kubah / Mahkota Modern Oranye -->
+                            <path d="M165 76C165 50 194 34 230 34C266 34 295 50 295 76H165Z" fill="#EA580C"/>
+                            <rect x="227" y="14" width="6" height="22" rx="3" fill="#9A3412"/>
+                            <circle cx="230" cy="14" r="5" fill="#F26522"/>
+                            <rect x="124" y="70" width="212" height="12" rx="5" fill="#7C2D12"/>
+
+                            <!-- Papan Identitas Gedung -->
+                            <rect x="172" y="92" width="116" height="28" rx="8" fill="#FFFFFF"/>
+                            <text x="230" y="111" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="14" fill="#F26522" letter-spacing="1.5">KAMPUS UAD</text>
+
+                            <!-- Jendela Kaca Gedung Utama -->
+                            <g fill="#FFEDD5">
+                                <rect x="152" y="134" width="28" height="26" rx="4"/><rect x="192" y="134" width="28" height="26" rx="4"/><rect x="240" y="134" width="28" height="26" rx="4"/><rect x="280" y="134" width="28" height="26" rx="4"/>
+                                <rect x="152" y="172" width="28" height="26" rx="4"/><rect x="192" y="172" width="28" height="26" rx="4"/><rect x="240" y="172" width="28" height="26" rx="4"/><rect x="280" y="172" width="28" height="26" rx="4"/>
+                            </g>
+
+                            <!-- Teras & Pilar Gerbang Utama -->
+                            <rect x="156" y="216" width="148" height="84" rx="6" fill="#FFF7ED"/>
+                            <rect x="150" y="210" width="160" height="10" rx="4" fill="#9A3412"/>
+                            <rect x="168" y="220" width="10" height="80" fill="#FDBA74"/>
+                            <rect x="282" y="220" width="10" height="80" fill="#FDBA74"/>
+                            <rect x="198" y="238" width="64" height="62" rx="6" fill="#F26522"/>
+                            <line x1="230" y1="238" x2="230" y2="300" stroke="#FFF7ED" stroke-width="2.5"/>
+
+                            <!-- Vegetasi & Halaman Depan Nuansa Hangat -->
+                            <circle cx="36" cy="288" r="22" fill="#FB923C"/>
+                            <circle cx="56" cy="294" r="16" fill="#F97316"/>
+                            <circle cx="424" cy="288" r="22" fill="#FB923C"/>
+                            <circle cx="404" cy="294" r="16" fill="#F97316"/>
+                            <rect x="16" y="300" width="428" height="16" rx="8" fill="#9A3412"/>
+                            <rect x="90" y="316" width="280" height="10" rx="5" fill="#FDBA74"/>
+                        </svg>
+                        <div class="mt-3 flex items-center justify-between text-xs px-1">
+                            <span class="font-bold text-brand-dark"><i class="fa-solid fa-building-columns text-brand-orange mr-1.5"></i> Gedung Pusat Wirausaha UAD</span>
+                            <span class="text-[11px] font-semibold text-brand-orange bg-brand-light px-2.5 py-1 rounded-full">Yogyakarta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 2: ETALASE (GRID 4x3 = 12 ITEM + HALAMAN TAK TERHINGGA)-->
+        <!-- ========================================================= -->
+        <section id="view-etalase" class="main-view hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+            <!-- Header & Filter Etalase -->
+            <div class="bg-white p-5 sm:p-6 rounded-3xl border border-gray-100 shadow-sm mb-6">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-light text-brand-orange flex items-center justify-center text-xl shadow-sm flex-shrink-0">
+                            <i class="fa-solid fa-store"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-heading text-xl sm:text-2xl font-bold text-brand-dark">Etalase Produk & Tenant UAD</h2>
+                            <p class="text-xs text-gray-500">Menampilkan maksimal 12 tenant per halaman (Grid 4 Kolom x 3 Baris)</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <button onclick="loadPublicData(true)" class="text-xs font-semibold text-brand-orange bg-brand-light hover:bg-brand-orange hover:text-white px-4 py-2.5 rounded-2xl border border-brand-orange/20 transition-all flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-rotate"></i> Segarkan
+                        </button>
+                        <div class="flex items-center gap-2 text-xs font-medium text-gray-600 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-200">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <span id="tenantCount">0</span> Terdaftar
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pencarian & Kategori Etalase -->
+                <div class="flex flex-col md:flex-row gap-3">
                     <div class="flex-1 relative flex items-center">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-400"></i>
-                        <input type="text" id="searchInput" oninput="renderTenants()" placeholder="Cari usaha, makanan, atau jasa mahasiswa..." class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/50 focus:bg-white">
+                        <input type="text" id="searchInput" oninput="resetAndRenderEtalase()" placeholder="Cari produk, makanan, atau nama tenant..." class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/50 focus:bg-white">
                     </div>
-                    <div class="flex gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+                    <div class="flex gap-2 overflow-x-auto pb-1 md:pb-0">
                         <button onclick="setCategory('all')" id="btn-all" class="cat-btn px-4 py-3 rounded-2xl text-xs font-bold bg-brand-orange text-white whitespace-nowrap shadow-sm">Semua</button>
                         <button onclick="setCategory('Kuliner')" id="btn-Kuliner" class="cat-btn px-4 py-3 rounded-2xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap">Kuliner</button>
                         <button onclick="setCategory('Fashion & Barang')" id="btn-Fashion" class="cat-btn px-4 py-3 rounded-2xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap">Fashion & Barang</button>
@@ -102,42 +276,136 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- ETALASE TENANT -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-light text-brand-orange flex items-center justify-center text-xl shadow-sm">
-                        <i class="fa-solid fa-award"></i>
-                    </div>
-                    <div>
-                        <h2 class="font-heading text-xl font-bold text-brand-dark">Etalase Tenant Terverifikasi</h2>
-                        <p class="text-xs text-gray-500">Semua tenant telah divalidasi identitas mahasiswa UAD oleh Admin Kampus</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3">
-                    <button onclick="loadPublicData(true)" class="text-xs font-semibold text-brand-orange bg-brand-light hover:bg-brand-orange hover:text-white px-4 py-2.5 rounded-2xl border border-brand-orange/20 transition-all flex items-center gap-1.5 shadow-sm">
-                        <i class="fa-solid fa-rotate"></i> Segarkan Data
-                    </button>
-                    <div class="flex items-center gap-2 text-xs font-medium text-gray-600 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-200">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span id="tenantCount">0</span> Usaha Aktif
-                    </div>
-                </div>
-            </div>
 
             <div id="loadingState" class="text-center py-12">
                 <i class="fa-solid fa-circle-notch fa-spin text-3xl text-brand-orange mb-2"></i>
-                <p class="text-xs text-gray-500">Memuat data publik dari server...</p>
+                <p class="text-xs text-gray-500">Memuat etalase tenant dari server...</p>
             </div>
             
-            <!-- Grid Card Tenant -->
-            <div id="tenantContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <!-- GRID 4x3 (4 KE SAMPING x 3 KE BAWAH = 12 ITEM PER HALAMAN) -->
+            <div id="tenantContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+
+            <!-- KONTROL HALAMAN / PAGINATION (HALAMAN 1, 2, 3, ... TAK TERHINGGA) -->
+            <div id="paginationWrapper" class="mt-8 bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 hidden">
+                <p class="text-xs text-gray-500 font-medium" id="paginationInfo">Menampilkan 1–12 dari 0 tenant</p>
+                <div id="paginationControls" class="flex flex-wrap items-center justify-center gap-1.5"></div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 3: LACAK TENANT (CEK DOUBLE TENANT & MAHASISWA GAIB) -->
+        <!-- ========================================================= -->
+        <section id="view-lacak" class="main-view hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-100 shadow-sm">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-light text-brand-orange flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-brand-orange">Sistem Audit & Transparansi Ekosistem</span>
+                        <h2 class="font-heading text-xl sm:text-2xl font-bold text-brand-dark">Lacak Data & Keaslian Tenant</h2>
+                        <p class="text-xs sm:text-sm text-gray-500 mt-1">
+                            Cari berdasarkan <b>Nama Tenant</b>, <b>Produk yang Dijual</b>, atau <b>Nama Pemilik Mahasiswa</b> untuk memeriksa indikasi <i>double tenant</i> maupun keaktifan status mahasiswa UAD.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Form Pencarian Audit Tenant -->
+                <div class="bg-brand-light/70 p-4 rounded-2xl border border-brand-orange/20 mb-6">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <div class="flex-1 relative flex items-center">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 text-brand-orange"></i>
+                            <input type="text" id="lacakTenantInput" oninput="renderLacakTenant()" placeholder="Ketik nama tenant, produk (misal: dimsum), atau nama pemilik..." class="w-full pl-11 pr-4 py-3.5 bg-white border border-orange-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange">
+                        </div>
+                        <button onclick="renderLacakTenant()" class="px-6 py-3.5 bg-brand-orange hover:bg-orange-600 text-white font-bold rounded-2xl text-xs sm:text-sm shadow-sm transition-all whitespace-nowrap">
+                            Lacak Tenant
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 mt-3 text-[11px] text-gray-600 px-1">
+                        <span><i class="fa-solid fa-circle-info text-brand-orange mr-1"></i> Sistem otomatis menandai pemilik yang memiliki lebih dari 1 usaha (<i>Double Tenant</i>).</span>
+                        <span class="font-bold text-brand-dark" id="lacakSummaryBadge">Total Terdata: 0 Tenant</span>
+                    </div>
+                </div>
+
+                <!-- Hasil Pelacakan Tenant -->
+                <div id="lacakTenantResults" class="space-y-3"></div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 4: FAQ & KONTAK ADMIN (+6281345991170)               -->
+        <!-- ========================================================= -->
+        <section id="view-faq" class="main-view hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-100 shadow-sm">
+                <div class="text-center max-w-xl mx-auto mb-8">
+                    <span class="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full text-xs font-bold bg-brand-light text-brand-orange mb-3">
+                        <i class="fa-solid fa-headset"></i> Pusat Informasi & Bantuan
+                    </span>
+                    <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brand-dark">Pertanyaan Umum (FAQ)</h2>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-2">
+                        Temukan panduan penggunaan platform ADpreneur UAD atau hubungi langsung Admin Kampus melalui WhatsApp resmi.
+                    </p>
+                </div>
+
+                <!-- Kartu Kontak Langsung WhatsApp Admin -->
+                <div class="bg-gradient-to-r from-brand-orange to-orange-600 text-white p-6 rounded-3xl shadow-lg mb-8 flex flex-col sm:flex-row items-center justify-between gap-5">
+                    <div class="text-center sm:text-left">
+                        <p class="text-xs uppercase tracking-wider text-orange-100 font-bold mb-1">Nomor Bantuan & Verifikasi Admin</p>
+                        <h3 class="font-heading text-xl sm:text-2xl font-extrabold">+62 813-4599-1170</h3>
+                        <p class="text-xs text-orange-100 mt-1">Layanan aduan tenant, kendala aktivasi akun, dan pelaporan mahasiswa fiktif.</p>
+                    </div>
+                    <a href="https://wa.me/6281345991170?text=Halo%20Admin%20ADpreneur%20UAD%2C%20saya%20membutuhkan%20bantuan%20terkait..." target="_blank" class="w-full sm:w-auto px-6 py-3.5 bg-white text-brand-orange hover:bg-orange-50 font-bold rounded-2xl text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 whitespace-nowrap">
+                        <i class="fa-brands fa-whatsapp text-lg text-emerald-600"></i> Chat Admin via WhatsApp
+                    </a>
+                </div>
+
+                <!-- Daftar Accordion FAQ -->
+                <div class="space-y-3">
+                    <div class="bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200/80">
+                        <h4 class="font-heading font-bold text-sm text-brand-dark mb-1.5 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-lg bg-brand-orange text-white text-xs flex items-center justify-center">1</span>
+                            Bagaimana cara mendaftar menjadi Tenant di ADpreneur UAD?
+                        </h4>
+                        <p class="text-xs text-gray-600 leading-relaxed pl-8">
+                            Klik tombol <b>Daftar</b> di pojok kanan atas, isi formulir identitas mahasiswa aktif UAD (Nama, NIM, Email UAD) beserta profil usaha. Admin akan memverifikasi keaslian data mahasiswa sebelum etalase ditampilkan.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200/80">
+                        <h4 class="font-heading font-bold text-sm text-brand-dark mb-1.5 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-lg bg-brand-orange text-white text-xs flex items-center justify-center">2</span>
+                            Apa fungsi menu Lacak Tenant?
+                        </h4>
+                        <p class="text-xs text-gray-600 leading-relaxed pl-8">
+                            Menu <b>Lacak</b> memungkinkan civitas akademika dan tim pengawas mencari tenant berdasarkan nama usaha, produk, atau nama pemilik untuk mendeteksi kepemilikan ganda (<i>double tenant</i>) maupun akun palsu/alumni.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200/80">
+                        <h4 class="font-heading font-bold text-sm text-brand-dark mb-1.5 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-lg bg-brand-orange text-white text-xs flex items-center justify-center">3</span>
+                            Bagaimana jika toko sedang libur atau tutup sementara?
+                        </h4>
+                        <p class="text-xs text-gray-600 leading-relaxed pl-8">
+                            Pemilik usaha dapat login ke menu <b>Tenant</b> di pojok kanan atas dan menekan tombol <b>Matikan Toko (Libur)</b>. Status di etalase otomatis berubah menjadi <i>Sedang Libur</i>.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-200/80">
+                        <h4 class="font-heading font-bold text-sm text-brand-dark mb-1.5 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-lg bg-brand-orange text-white text-xs flex items-center justify-center">4</span>
+                            Bagaimana cara melaporkan pelanggaran atau kendala transaksi?
+                        </h4>
+                        <p class="text-xs text-gray-600 leading-relaxed pl-8">
+                            Kamu dapat langsung menghubungi WhatsApp Admin di <b>+6281345991170</b> atau mengisi formulir pada tombol <b>Pusat Bantuan & Pengaduan</b> di bagian bawah halaman.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER BERGELOMBANG / MELENGKUNG -->
     <footer class="relative bg-brand-orange text-white pt-14 pb-10 px-4 sm:px-6 lg:px-8 mt-16 rounded-t-[40px] shadow-2xl overflow-hidden">
         <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
         
@@ -159,10 +427,13 @@
                 </button>
             </div>
 
-            <div class="pt-2">
-                <button onclick="openModal('helpCenterModal')" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-brand-orange hover:bg-orange-50 px-8 py-3.5 rounded-2xl font-bold text-xs sm:text-sm shadow-lg transition-all transform hover:-translate-y-0.5">
-                    <i class="fa-solid fa-headset text-base text-brand-orange"></i> Pusat Bantuan & Pengaduan <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <button onclick="openModal('helpCenterModal')" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-brand-orange hover:bg-orange-50 px-7 py-3.5 rounded-2xl font-bold text-xs sm:text-sm shadow-lg transition-all">
+                    <i class="fa-solid fa-headset text-base text-brand-orange"></i> Pusat Bantuan & Pengaduan
                 </button>
+                <a href="https://wa.me/6281345991170" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-orange-700/70 hover:bg-orange-800 text-white px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm border border-orange-400/40 transition-all">
+                    <i class="fa-brands fa-whatsapp text-base"></i> +62 813-4599-1170
+                </a>
             </div>
 
             <div class="border-t border-orange-600/60 pt-6 text-[11px] sm:text-xs text-orange-200">
@@ -191,7 +462,7 @@
             <div class="space-y-3 text-xs text-gray-600 leading-relaxed">
                 <p><b>1. Kelayakan Tenant:</b> Pendaftar wajib merupakan mahasiswa aktif Universitas Ahmad Dahlan yang dibuktikan dengan NIM dan email institusi yang valid.</p>
                 <p><b>2. Standar Produk & Halal:</b> Seluruh produk kuliner dan barang yang dipasarkan di lingkungan kampus UAD wajib memenuhi prinsip kehalalan dan higienitas.</p>
-                <p><b>3. Sanksi Pelanggaran:</b> Admin Kampus berhak menangguhkan atau menghapus akun tenant apabila ditemukan penipuan transaksi.</p>
+                <p><b>3. Sanksi Pelanggaran:</b> Admin Kampus berhak menangguhkan atau menghapus akun tenant apabila ditemukan penipuan transaksi atau akun fiktif.</p>
             </div>
         </div>
     </div>
@@ -200,7 +471,7 @@
         <div class="bg-white rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('helpCenterModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-headset text-blue-600 mr-2"></i> Pusat Bantuan & Pengaduan</h3>
-            <p class="text-xs text-gray-500 mb-4">Alami kendala pesanan atau ingin melaporkan pelanggaran tenant? Sampaikan kepada tim moderasi ADpreneur.</p>
+            <p class="text-xs text-gray-500 mb-4">Laporkan kendala pesanan, indikasi <i>double tenant</i>, atau hubungi WA Admin: <b>+6281345991170</b>.</p>
             <form onsubmit="handleReportSubmit(event)" class="space-y-3">
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1">Nama Pelapor</label>
@@ -211,8 +482,8 @@
                     <input type="text" id="repContact" required placeholder="08123456789" class="w-full px-3.5 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-xs">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Nama Usaha / Kode Pesanan (Opsional)</label>
-                    <input type="text" id="repTarget" placeholder="Cth: Dimsum Dahlan / ORD-123456" class="w-full px-3.5 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-xs">
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Nama Usaha / Pemilik Terkait (Opsional)</label>
+                    <input type="text" id="repTarget" placeholder="Cth: Dimsum Dahlan" class="w-full px-3.5 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-xs">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-1">Detail Kendala</label>
@@ -230,7 +501,7 @@
         <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl p-6 relative">
             <button onclick="closeModal('checkoutModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-bag-shopping text-brand-orange mr-2"></i> Form Pemesanan</h3>
-            <p class="text-xs text-gray-500 mb-4">Pesananmu tercatat aman untuk memudahkan pelacakan.</p>
+            <p class="text-xs text-gray-500 mb-4">Pesananmu akan langsung diteruskan ke WhatsApp penjual.</p>
             <div class="bg-brand-light p-3.5 rounded-2xl border border-brand-orange/20 mb-4">
                 <p class="text-xs text-gray-500" id="coTenantName">Nama Toko</p>
                 <p class="font-heading font-bold text-sm text-brand-dark" id="coProductName">Nama Produk</p>
@@ -265,22 +536,6 @@
                     <i class="fa-brands fa-whatsapp text-base"></i> Catat Pesanan & Lanjut ke WhatsApp
                 </button>
             </form>
-        </div>
-    </div>
-
-    <!-- MODAL LACAK PESANAN -->
-    <div id="trackOrderModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
-            <button onclick="closeModal('trackOrderModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="font-heading text-lg font-bold text-brand-dark mb-1"><i class="fa-solid fa-box-archive text-emerald-600 mr-2"></i> Lacak Riwayat Pesanan</h3>
-            <p class="text-xs text-gray-500 mb-4">Masukkan Nomor WhatsApp atau Kode Pesanan (misal: ORD-123456).</p>
-            <form onsubmit="handleTrackOrders(event)" class="flex gap-2 mb-5">
-                <input type="text" id="trackQueryInput" required placeholder="0812... atau ORD-..." class="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-xs">
-                <button type="submit" id="btnTrackOrder" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl text-xs shadow-sm">Cari</button>
-            </form>
-            <div id="trackOrderResults" class="space-y-3">
-                <p class="text-xs text-center text-gray-400 py-6">Belum ada pencarian riwayat pesanan.</p>
-            </div>
         </div>
     </div>
 
@@ -365,7 +620,7 @@
             <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-brand-light text-brand-orange rounded-2xl mx-auto flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-user-tie"></i></div>
                 <h3 class="font-heading text-lg font-bold text-brand-dark">Login Peserta Tenant</h3>
-                <p class="text-xs text-gray-500">Atur status buka/libur toko dan pantau pesanan</p>
+                <p class="text-xs text-gray-500">Atur status buka/libur toko dan kelola produk</p>
             </div>
             <form onsubmit="handleSellerLogin(event)" class="space-y-4">
                 <div>
@@ -486,6 +741,7 @@
     <!-- SCRIPT UTAMA -->
     <script>
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzWSfeCSW3l6Nh_1AqNo7-Mse81gqvEcZMiy6cT2LQQaHKSbVij7AuUnU3nm9VXZ-f-/exec";
+        const ITEMS_PER_PAGE = 12; // 4 kolom ke samping x 3 baris ke bawah = 12 item per halaman
 
         let publicTenants = [];
         let adminTenants = [];
@@ -496,7 +752,37 @@
         let sellerSessionToken = null;
         let sellerOrders = [];
         let currentCategory = 'all';
+        let currentEtalasePage = 1;
         let activeCheckoutItem = null;
+
+        // NAVIGASI 4 MENU UTAMA (BERANDA, ETALASE, LACAK, FAQ)
+        function switchMainView(viewName) {
+            document.querySelectorAll('.main-view').forEach(sec => sec.classList.add('hidden'));
+            const targetSec = document.getElementById(`view-${viewName}`);
+            if (targetSec) targetSec.classList.remove('hidden');
+
+            // Update tombol navigasi desktop
+            document.querySelectorAll('.main-nav-btn').forEach(btn => {
+                btn.className = "main-nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:text-brand-orange transition-all";
+            });
+            const activeDesktopBtn = document.getElementById(`nav-${viewName}`);
+            if (activeDesktopBtn) {
+                activeDesktopBtn.className = "main-nav-btn px-4 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white shadow-sm transition-all";
+            }
+
+            // Update tombol navigasi mobile
+            document.querySelectorAll('.m-nav-btn').forEach(btn => {
+                btn.className = "m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-semibold text-gray-600 text-center transition-all";
+            });
+            const activeMobileBtn = document.getElementById(`mnav-${viewName}`);
+            if (activeMobileBtn) {
+                activeMobileBtn.className = "m-nav-btn flex-1 py-2 rounded-xl text-[11px] font-bold bg-brand-orange text-white text-center transition-all";
+            }
+
+            if (viewName === 'etalase') renderTenants();
+            if (viewName === 'lacak') renderLacakTenant();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         async function postToBackend(payloadObj) {
             const response = await fetch(WEB_APP_URL, {
@@ -508,7 +794,9 @@
         }
 
         function loadPublicData(showAlert = false) {
-            document.getElementById('loadingState').classList.remove('hidden');
+            const loader = document.getElementById('loadingState');
+            if (loader) loader.classList.remove('hidden');
+
             const oldScript = document.getElementById('jsonpScript');
             if (oldScript) oldScript.remove();
 
@@ -516,7 +804,7 @@
             script.id = 'jsonpScript';
             script.src = `${WEB_APP_URL}?callback=handlePublicData&_t=${Date.now()}`;
             script.onerror = function() {
-                document.getElementById('loadingState').classList.add('hidden');
+                if (loader) loader.classList.add('hidden');
                 if (showAlert) alert("Gagal terhubung ke server.");
             };
             document.body.appendChild(script);
@@ -530,8 +818,15 @@
                     isOpen: t.isOpen === undefined ? true : Boolean(t.isOpen)
                 }));
             }
-            document.getElementById('loadingState').classList.add('hidden');
+            const loader = document.getElementById('loadingState');
+            if (loader) loader.classList.add('hidden');
+
+            const approvedCount = publicTenants.filter(t => t.status === 'approved').length;
+            const heroCountEl = document.getElementById('heroTenantCount');
+            if (heroCountEl) heroCountEl.innerText = approvedCount;
+
             renderTenants();
+            renderLacakTenant();
         }
 
         function getAverageRating(reviews) {
@@ -540,17 +835,35 @@
             return (sum / reviews.length).toFixed(1);
         }
 
+        function resetAndRenderEtalase() {
+            currentEtalasePage = 1;
+            renderTenants();
+        }
+
+        function goToEtalasePage(page) {
+            currentEtalasePage = page;
+            renderTenants();
+            const etalaseEl = document.getElementById('view-etalase');
+            if (etalaseEl) etalaseEl.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // RENDER ETALASE GRID 4x3 (12 PER HALAMAN) + PAGINATION TAK TERHINGGA
         function renderTenants() {
             const container = document.getElementById('tenantContainer');
+            const paginationWrapper = document.getElementById('paginationWrapper');
+            const paginationControls = document.getElementById('paginationControls');
+            const paginationInfo = document.getElementById('paginationInfo');
             const keyword = document.getElementById('searchInput').value.toLowerCase();
             container.innerHTML = '';
 
             const filtered = publicTenants.filter(t => {
                 const matchesCat = currentCategory === 'all' || t.category === currentCategory;
                 const matchesStatus = t.status === 'approved';
+                const prodMatch = (t.products || []).some(p => String(p.name || "").toLowerCase().includes(keyword));
                 const matchesSearch = t.businessName.toLowerCase().includes(keyword) || 
                                       t.desc.toLowerCase().includes(keyword) || 
-                                      t.ownerName.toLowerCase().includes(keyword);
+                                      t.ownerName.toLowerCase().includes(keyword) ||
+                                      prodMatch;
                 return matchesCat && matchesStatus && matchesSearch;
             });
 
@@ -558,62 +871,197 @@
             document.getElementById('tenantCount').innerText = `${openCount} Buka / ${filtered.length} Usaha`;
 
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400"><i class="fa-solid fa-store-slash text-4xl mb-2"></i><p class="text-xs">Belum ada tenant aktif yang sesuai.</p></div>`;
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400 bg-white rounded-3xl border border-gray-100"><i class="fa-solid fa-store-slash text-4xl mb-2"></i><p class="text-xs">Belum ada tenant aktif yang sesuai.</p></div>`;
+                paginationWrapper.classList.add('hidden');
                 return;
             }
 
-            filtered.forEach(t => {
+            const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+            if (currentEtalasePage > totalPages) currentEtalasePage = totalPages;
+            if (currentEtalasePage < 1) currentEtalasePage = 1;
+
+            const startIdx = (currentEtalasePage - 1) * ITEMS_PER_PAGE;
+            const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, filtered.length);
+            const paginatedItems = filtered.slice(startIdx, endIdx);
+
+            paginatedItems.forEach(t => {
                 const isOpen = t.isOpen !== false;
                 const avgRating = getAverageRating(t.reviews);
                 const reviewCount = t.reviews ? t.reviews.length : 0;
 
                 const operationalBadge = isOpen
-                    ? `<span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold px-2.5 py-1 rounded-full">
-                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Sedang Buka
+                    ? `<span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Buka
                        </span>`
-                    : `<span class="inline-flex items-center gap-1.5 bg-rose-50 text-rose-700 border border-rose-200 text-[11px] font-bold px-2.5 py-1 rounded-full">
-                         <span class="w-2 h-2 rounded-full bg-rose-500"></span> Sedang Libur
+                    : `<span class="inline-flex items-center gap-1 bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                         <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> Libur
                        </span>`;
 
                 const cardActionBtn = isOpen
-                    ? `<button onclick="openDetail(${t.id})" class="w-full py-3 bg-brand-orange hover:bg-orange-600 text-white rounded-2xl text-xs font-bold transition-colors text-center shadow-sm flex items-center justify-center gap-1.5">
+                    ? `<button onclick="openDetail(${t.id})" class="w-full py-2.5 bg-brand-orange hover:bg-orange-600 text-white rounded-xl text-xs font-bold transition-colors text-center shadow-sm flex items-center justify-center gap-1.5">
                          <i class="fa-solid fa-bag-shopping"></i> Pesan & Lihat Menu
                        </button>`
-                    : `<button onclick="openDetail(${t.id})" class="w-full py-3 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-2xl text-xs font-bold transition-colors text-center flex items-center justify-center gap-1.5">
-                         <i class="fa-solid fa-moon"></i> Toko Libur • Lihat Etalase
+                    : `<button onclick="openDetail(${t.id})" class="w-full py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl text-xs font-bold transition-colors text-center flex items-center justify-center gap-1.5">
+                         <i class="fa-solid fa-moon"></i> Libur • Lihat Menu
                        </button>`;
 
                 container.innerHTML += `
-                    <div class="bg-white rounded-3xl border ${isOpen ? 'border-gray-100' : 'border-rose-100 opacity-90'} shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col justify-between group">
+                    <div class="bg-white rounded-3xl border ${isOpen ? 'border-gray-100' : 'border-rose-100 opacity-90'} shadow-sm hover:shadow-lg transition-all overflow-hidden flex flex-col justify-between group">
                         <div>
-                            <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <div class="relative h-48 overflow-hidden bg-gray-100">
                                 <img src="${t.image}" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'" class="w-full h-full object-cover ${isOpen ? 'group-hover:scale-105' : 'grayscale-[40%]'} transition-transform duration-500">
                                 
-                                <div class="absolute top-3 left-3 bg-white/95 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm flex items-center gap-1 border border-emerald-100">
+                                <div class="absolute top-2.5 left-2.5 bg-white/95 text-emerald-700 text-[11px] font-bold px-2.5 py-1 rounded-full shadow-sm backdrop-blur-sm flex items-center gap-1 border border-emerald-100">
                                     <i class="fa-solid fa-circle-check text-emerald-500"></i> Terverifikasi
                                 </div>
 
-                                <button onclick="this.classList.toggle('text-rose-500'); this.classList.toggle('bg-white');" class="absolute top-3 right-3 w-9 h-9 bg-white/80 hover:bg-white text-gray-500 rounded-full flex items-center justify-center backdrop-blur-sm shadow-sm transition-all">
-                                    <i class="fa-regular fa-heart text-sm"></i>
+                                <button onclick="this.classList.toggle('text-rose-500'); this.classList.toggle('bg-white');" class="absolute top-2.5 right-2.5 w-8 h-8 bg-white/85 hover:bg-white text-gray-500 rounded-full flex items-center justify-center backdrop-blur-sm shadow-sm transition-all">
+                                    <i class="fa-regular fa-heart text-xs"></i>
                                 </button>
                             </div>
 
-                            <div class="p-5">
-                                <div class="flex items-center justify-between gap-2 mb-2">
-                                    <h3 class="font-heading font-bold text-base text-brand-dark line-clamp-1">${t.businessName}</h3>
+                            <div class="p-4">
+                                <div class="flex items-center justify-between gap-1.5 mb-1.5">
+                                    <h3 class="font-heading font-bold text-sm text-brand-dark line-clamp-1">${t.businessName}</h3>
                                     ${operationalBadge}
                                 </div>
-                                <p class="text-xs text-gray-500 mb-2">${t.category}</p>
-                                <div class="flex items-center gap-1 text-xs font-bold text-brand-dark">
-                                    <i class="fa-solid fa-star text-amber-400"></i>
-                                    <span>${avgRating}</span>
-                                    <span class="text-gray-400 font-normal">(${reviewCount || 120})</span>
+                                <p class="text-[11px] text-gray-500 mb-2">${t.category}</p>
+                                <div class="flex items-center justify-between text-xs font-bold text-brand-dark">
+                                    <div class="flex items-center gap-1">
+                                        <i class="fa-solid fa-star text-amber-400"></i>
+                                        <span>${avgRating}</span>
+                                        <span class="text-gray-400 font-normal text-[11px]">(${reviewCount || 120})</span>
+                                    </div>
+                                    <span class="text-[11px] text-brand-orange font-semibold">${(t.products || []).length} Menu</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="p-5 pt-0 border-t border-gray-50 mt-auto pt-3">
+                        <div class="p-4 pt-0 border-t border-gray-50 mt-auto pt-3">
                             ${cardActionBtn}
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Render Pagination
+            paginationWrapper.classList.remove('hidden');
+            paginationInfo.innerText = `Halaman ${currentEtalasePage} dari ${totalPages} • Menampilkan ${startIdx + 1}–${endIdx} dari ${filtered.length} tenant`;
+
+            let pageButtonsHTML = `
+                <button onclick="goToEtalasePage(${currentEtalasePage - 1})" ${currentEtalasePage === 1 ? 'disabled' : ''} class="px-3 py-2 rounded-xl text-xs font-bold border ${currentEtalasePage === 1 ? 'bg-gray-50 text-gray-300 border-gray-100 cursor-not-allowed' : 'bg-white text-brand-dark border-gray-200 hover:bg-brand-light hover:text-brand-orange'}">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            `;
+
+            for (let p = 1; p <= totalPages; p++) {
+                const isActive = p === currentEtalasePage;
+                pageButtonsHTML += `
+                    <button onclick="goToEtalasePage(${p})" class="w-9 h-9 rounded-xl text-xs font-bold transition-all ${isActive ? 'bg-brand-orange text-white shadow-sm' : 'bg-gray-50 text-gray-600 hover:bg-orange-100 hover:text-brand-orange'}">
+                        ${p}
+                    </button>
+                `;
+            }
+
+            pageButtonsHTML += `
+                <button onclick="goToEtalasePage(${currentEtalasePage + 1})" ${currentEtalasePage === totalPages ? 'disabled' : ''} class="px-3 py-2 rounded-xl text-xs font-bold border ${currentEtalasePage === totalPages ? 'bg-gray-50 text-gray-300 border-gray-100 cursor-not-allowed' : 'bg-white text-brand-dark border-gray-200 hover:bg-brand-light hover:text-brand-orange'}">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            `;
+            paginationControls.innerHTML = pageButtonsHTML;
+        }
+
+        // RENDER MENU LACAK TENANT (AUDIT DOUBLE TENANT & MAHASISWA GAIB)
+        function renderLacakTenant() {
+            const container = document.getElementById('lacakTenantResults');
+            const summaryBadge = document.getElementById('lacakSummaryBadge');
+            const inputEl = document.getElementById('lacakTenantInput');
+            if (!container || !inputEl) return;
+
+            const keyword = inputEl.value.trim().toLowerCase();
+
+            // Hitung jumlah usaha per pemilik untuk mendeteksi indikasi double tenant
+            const ownerCounts = {};
+            publicTenants.forEach(t => {
+                const key = String(t.ownerName || "").trim().toLowerCase();
+                if (key) ownerCounts[key] = (ownerCounts[key] || 0) + 1;
+            });
+
+            const matched = publicTenants.filter(t => {
+                if (!keyword) return true;
+                const inBusiness = String(t.businessName || "").toLowerCase().includes(keyword);
+                const inOwner = String(t.ownerName || "").toLowerCase().includes(keyword);
+                const inProducts = (t.products || []).some(p => String(p.name || "").toLowerCase().includes(keyword));
+                return inBusiness || inOwner || inProducts;
+            });
+
+            if (summaryBadge) {
+                summaryBadge.innerText = `Hasil Ditemukan: ${matched.length} dari ${publicTenants.length} Tenant`;
+            }
+
+            if (matched.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 bg-gray-50 rounded-2xl border border-gray-200">
+                        <i class="fa-solid fa-user-slash text-3xl text-gray-300 mb-2"></i>
+                        <p class="text-xs font-bold text-gray-600">Tidak ditemukan tenant, produk, atau pemilik dengan kata kunci tersebut.</p>
+                        <p class="text-[11px] text-gray-400 mt-1">Jika mencurigai akun palsu di luar sistem, laporkan ke Admin melalui menu FAQ.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            matched.forEach(t => {
+                const ownerKey = String(t.ownerName || "").trim().toLowerCase();
+                const countOwned = ownerCounts[ownerKey] || 1;
+                const isDoubleTenant = countOwned > 1;
+                const isVerified = t.status === 'approved' && t.verifiedUad !== false;
+                const productNames = (t.products || []).map(p => p.name).join(', ') || 'Belum ada produk terdaftar';
+
+                const verificationBadge = isVerified
+                    ? `<span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-[11px] font-bold px-2.5 py-1 rounded-full">
+                         <i class="fa-solid fa-circle-check"></i> Mahasiswa UAD Terverifikasi (${t.angkatan || 'UAD'})
+                       </span>`
+                    : `<span class="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-[11px] font-bold px-2.5 py-1 rounded-full">
+                         <i class="fa-solid fa-triangle-exclamation"></i> Belum Terverifikasi / Pending
+                       </span>`;
+
+                const doubleBadge = isDoubleTenant
+                    ? `<span class="inline-flex items-center gap-1 bg-rose-100 text-rose-700 text-[11px] font-bold px-2.5 py-1 rounded-full">
+                         <i class="fa-solid fa-clone"></i> Indikasi Double Tenant (${countOwned} Usaha)
+                       </span>`
+                    : `<span class="inline-flex items-center gap-1 bg-blue-50 text-blue-700 text-[11px] font-bold px-2.5 py-1 rounded-full">
+                         <i class="fa-solid fa-user-check"></i> Kepemilikan Tunggal (1 Usaha)
+                       </span>`;
+
+                container.innerHTML += `
+                    <div class="bg-gray-50 hover:bg-white p-4 sm:p-5 rounded-2xl border ${isDoubleTenant ? 'border-rose-200' : 'border-gray-200'} transition-all flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <img src="${t.image}" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=200&q=80'" class="w-16 h-16 rounded-2xl object-cover bg-gray-200 flex-shrink-0">
+                            <div>
+                                <div class="flex flex-wrap items-center gap-2 mb-1">
+                                    <h4 class="font-heading font-bold text-sm sm:text-base text-brand-dark">${t.businessName}</h4>
+                                    <span class="text-[11px] font-semibold text-brand-orange bg-brand-light px-2.5 py-0.5 rounded-lg">${t.category}</span>
+                                </div>
+                                <p class="text-xs text-gray-700 mb-1.5">
+                                    <i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> Pemilik: <b>${t.ownerName}</b> • Status Toko: <b>${t.isOpen !== false ? 'Buka' : 'Libur'}</b>
+                                </p>
+                                <p class="text-[11px] text-gray-500 mb-2.5 line-clamp-1">
+                                    <i class="fa-solid fa-box-open mr-1"></i> Produk: ${productNames}
+                                </p>
+                                <div class="flex flex-wrap gap-1.5">
+                                    ${verificationBadge}
+                                    ${doubleBadge}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex sm:flex-row md:flex-col gap-2 justify-end flex-shrink-0">
+                            <button onclick="openDetail(${t.id})" class="px-4 py-2 bg-brand-dark hover:bg-gray-800 text-white rounded-xl text-xs font-bold transition-all">
+                                Lihat Detail
+                            </button>
+                            <a href="https://wa.me/6281345991170?text=${encodeURIComponent('Halo Admin ADpreneur, saya ingin melaporkan/konfirmasi data tenant: ' + t.businessName + ' (Pemilik: ' + t.ownerName + ')')}" target="_blank" class="px-4 py-2 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-xl text-xs font-bold text-center transition-all">
+                                Laporkan ke Admin
+                            </a>
                         </div>
                     </div>
                 `;
@@ -622,6 +1070,7 @@
 
         function setCategory(cat) {
             currentCategory = cat;
+            currentEtalasePage = 1;
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.className = "cat-btn px-4 py-3 rounded-2xl text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 whitespace-nowrap";
             });
@@ -737,43 +1186,11 @@
             }
         }
 
-        async function handleTrackOrders(e) {
-            e.preventDefault();
-            const btn = document.getElementById('btnTrackOrder');
-            const query = document.getElementById('trackQueryInput').value.trim();
-            btn.disabled = true;
-            btn.innerText = "Mencari...";
-
-            try {
-                const res = await postToBackend({ action: "trackOrders", query: query });
-                const container = document.getElementById('trackOrderResults');
-                if (res.status === "success" && res.orders.length > 0) {
-                    container.innerHTML = '';
-                    res.orders.forEach(o => {
-                        container.innerHTML += `
-                            <div class="bg-gray-50 p-3.5 rounded-2xl border border-gray-200 text-xs">
-                                <div class="flex items-center justify-between mb-1">
-                                    <span class="font-extrabold text-brand-dark">${o.orderId} • ${o.businessName}</span>
-                                    <span class="font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">${o.status}</span>
-                                </div>
-                                <p class="font-semibold text-gray-700">${o.productName} (${o.qty}x) — <span class="text-brand-orange">Rp ${Number(o.totalPrice).toLocaleString('id-ID')}</span></p>
-                                <p class="text-[11px] text-gray-500 mt-1">Catatan: ${o.note} | ${o.createdAt}</p>
-                            </div>
-                        `;
-                    });
-                } else {
-                    container.innerHTML = `<p class="text-xs text-center text-gray-400 py-6">Tidak ditemukan pesanan.</p>`;
-                }
-            } catch (err) {
-                alert("Gagal terhubung.");
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Cari";
-            }
-        }
-
         async function submitTenant(e) {
             e.preventDefault();
+            const btn = document.getElementById('btnSubmit');
+            btn.disabled = true;
+            btn.innerText = "Mengenkripsi & Mengirim...";
             try {
                 const res = await postToBackend({
                     action: "register",
@@ -800,6 +1217,9 @@
                 }
             } catch (err) {
                 alert("Kesalahan koneksi.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Kirim Pendaftaran Terenkripsi";
             }
         }
 
@@ -914,6 +1334,7 @@
                         publicTenants[pubIdx].isOpen = currentSeller.isOpen;
                     }
                     renderTenants();
+                    renderLacakTenant();
                     renderSellerDashboard();
                     alert(currentSeller.isOpen ? "Toko berhasil dinyalakan (Buka) di etalase!" : "Toko berhasil dimatikan (Libur) di etalase.");
                 } else {
