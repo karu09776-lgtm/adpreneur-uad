@@ -38,7 +38,7 @@
         <i class="fa-solid fa-chevron-right text-[10px]"></i>
     </div>
 
-    <!-- HEADER / NAVBAR (SESUAI REFERENSI) -->
+    <!-- HEADER / NAVBAR -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 group">
@@ -73,7 +73,7 @@
     </header>
 
     <main class="flex-grow">
-        <!-- HERO SECTION (TANPA FOTO UAD, MENGGUNAKAN ILUSTRASI ORANYE HALUS SESUAI REFERENSI) -->
+        <!-- HERO SECTION -->
         <section class="relative bg-gradient-to-b from-orange-50/60 via-white to-brand-graybg pt-10 pb-16 px-4 sm:px-6 lg:px-8 border-b border-gray-100 overflow-hidden">
             <div class="absolute -right-20 -top-20 w-96 h-96 bg-orange-100/40 rounded-full blur-3xl pointer-events-none"></div>
             
@@ -104,7 +104,7 @@
             </div>
         </section>
 
-        <!-- ETALASE TENANT (CARD DIKSTYLING PERSIS SEPERTI REFERENSI) -->
+        <!-- ETALASE TENANT -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
@@ -137,7 +137,7 @@
         </section>
     </main>
 
-    <!-- FOOTER BERGELOMBANG / MELENGKUNG (PERSIS SEPERTI GAMBAR REFERENSI KEDUA) -->
+    <!-- FOOTER -->
     <footer class="relative bg-brand-orange text-white pt-14 pb-10 px-4 sm:px-6 lg:px-8 mt-16 rounded-t-[40px] shadow-2xl overflow-hidden">
         <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
         
@@ -159,7 +159,6 @@
                 </button>
             </div>
 
-            <!-- Tombol Pengaduan / Pusat Bantuan di dalam Footer -->
             <div class="pt-2">
                 <button onclick="openModal('helpCenterModal')" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-brand-orange hover:bg-orange-50 px-8 py-3.5 rounded-2xl font-bold text-xs sm:text-sm shadow-lg transition-all transform hover:-translate-y-0.5">
                     <i class="fa-solid fa-headset text-base text-brand-orange"></i> Pusat Bantuan & Pengaduan <i class="fa-solid fa-chevron-right text-[10px]"></i>
@@ -366,7 +365,7 @@
             <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-brand-light text-brand-orange rounded-2xl mx-auto flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-user-tie"></i></div>
                 <h3 class="font-heading text-lg font-bold text-brand-dark">Login Peserta Tenant</h3>
-                <p class="text-xs text-gray-500">Kelola produk dan pesanan masuk</p>
+                <p class="text-xs text-gray-500">Atur status buka/libur toko dan pantau pesanan</p>
             </div>
             <form onsubmit="handleSellerLogin(event)" class="space-y-4">
                 <div>
@@ -386,7 +385,7 @@
 
     <!-- MODAL DASHBOARD PENJUAL -->
     <div id="sellerDashboardModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative">
             <button onclick="closeModal('sellerDashboardModal')" class="absolute top-4 right-4 text-gray-400 hover:text-brand-dark text-lg w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <div id="sellerDashboardContent"></div>
         </div>
@@ -461,6 +460,7 @@
                             <tr class="bg-gray-100 text-gray-700">
                                 <th class="p-3 rounded-l-xl">Usaha</th>
                                 <th class="p-3">Pemilik</th>
+                                <th class="p-3 text-center">Operasional</th>
                                 <th class="p-3 text-center">Kunjungan</th>
                                 <th class="p-3 text-center rounded-r-xl">Aksi</th>
                             </tr>
@@ -495,7 +495,6 @@
         let currentSeller = null;
         let sellerSessionToken = null;
         let sellerOrders = [];
-        let sellerActiveTab = 'bi';
         let currentCategory = 'all';
         let activeCheckoutItem = null;
 
@@ -526,7 +525,10 @@
 
         function handlePublicData(data) {
             if (Array.isArray(data)) {
-                publicTenants = data;
+                publicTenants = data.map(t => ({
+                    ...t,
+                    isOpen: t.isOpen === undefined ? true : Boolean(t.isOpen)
+                }));
             }
             document.getElementById('loadingState').classList.add('hidden');
             renderTenants();
@@ -538,7 +540,6 @@
             return (sum / reviews.length).toFixed(1);
         }
 
-        // RENDER TENANT DENGAN CARD PERSIS SEPERTI GAMBAR REFERENSI
         function renderTenants() {
             const container = document.getElementById('tenantContainer');
             const keyword = document.getElementById('searchInput').value.toLowerCase();
@@ -553,7 +554,8 @@
                 return matchesCat && matchesStatus && matchesSearch;
             });
 
-            document.getElementById('tenantCount').innerText = filtered.length;
+            const openCount = filtered.filter(t => t.isOpen !== false).length;
+            document.getElementById('tenantCount').innerText = `${openCount} Buka / ${filtered.length} Usaha`;
 
             if (filtered.length === 0) {
                 container.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400"><i class="fa-solid fa-store-slash text-4xl mb-2"></i><p class="text-xs">Belum ada tenant aktif yang sesuai.</p></div>`;
@@ -561,15 +563,31 @@
             }
 
             filtered.forEach(t => {
+                const isOpen = t.isOpen !== false;
                 const avgRating = getAverageRating(t.reviews);
                 const reviewCount = t.reviews ? t.reviews.length : 0;
 
+                const operationalBadge = isOpen
+                    ? `<span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold px-2.5 py-1 rounded-full">
+                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Sedang Buka
+                       </span>`
+                    : `<span class="inline-flex items-center gap-1.5 bg-rose-50 text-rose-700 border border-rose-200 text-[11px] font-bold px-2.5 py-1 rounded-full">
+                         <span class="w-2 h-2 rounded-full bg-rose-500"></span> Sedang Libur
+                       </span>`;
+
+                const cardActionBtn = isOpen
+                    ? `<button onclick="openDetail(${t.id})" class="w-full py-3 bg-brand-orange hover:bg-orange-600 text-white rounded-2xl text-xs font-bold transition-colors text-center shadow-sm flex items-center justify-center gap-1.5">
+                         <i class="fa-solid fa-bag-shopping"></i> Pesan & Lihat Menu
+                       </button>`
+                    : `<button onclick="openDetail(${t.id})" class="w-full py-3 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-2xl text-xs font-bold transition-colors text-center flex items-center justify-center gap-1.5">
+                         <i class="fa-solid fa-moon"></i> Toko Libur • Lihat Etalase
+                       </button>`;
+
                 container.innerHTML += `
-                    <div class="bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col justify-between group">
+                    <div class="bg-white rounded-3xl border ${isOpen ? 'border-gray-100' : 'border-rose-100 opacity-90'} shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col justify-between group">
                         <div>
-                            <!-- GAMBAR BESAR DENGAN BADGE TERVERIFIKASI & TOMBOL LOVE DI DALAMNYA -->
                             <div class="relative h-56 overflow-hidden bg-gray-100">
-                                <img src="${t.image}" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <img src="${t.image}" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'" class="w-full h-full object-cover ${isOpen ? 'group-hover:scale-105' : 'grayscale-[40%]'} transition-transform duration-500">
                                 
                                 <div class="absolute top-3 left-3 bg-white/95 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full shadow-sm backdrop-blur-sm flex items-center gap-1 border border-emerald-100">
                                     <i class="fa-solid fa-circle-check text-emerald-500"></i> Terverifikasi
@@ -581,8 +599,9 @@
                             </div>
 
                             <div class="p-5">
-                                <div class="flex items-center justify-between mb-1">
+                                <div class="flex items-center justify-between gap-2 mb-2">
                                     <h3 class="font-heading font-bold text-base text-brand-dark line-clamp-1">${t.businessName}</h3>
+                                    ${operationalBadge}
                                 </div>
                                 <p class="text-xs text-gray-500 mb-2">${t.category}</p>
                                 <div class="flex items-center gap-1 text-xs font-bold text-brand-dark">
@@ -594,9 +613,7 @@
                         </div>
 
                         <div class="p-5 pt-0 border-t border-gray-50 mt-auto pt-3">
-                            <button onclick="openDetail(${t.id})" class="w-full py-3 bg-brand-orange hover:bg-orange-600 text-white rounded-2xl text-xs font-bold transition-colors text-center shadow-sm flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-bag-shopping"></i> Pesan & Lihat Menu
-                            </button>
+                            ${cardActionBtn}
                         </div>
                     </div>
                 `;
@@ -644,6 +661,10 @@
         function openCheckout(tenantId, prodIndex) {
             const tenant = publicTenants.find(t => t.id === tenantId);
             if (!tenant || !tenant.products || !tenant.products[prodIndex]) return;
+            if (tenant.isOpen === false) {
+                alert("Toko sedang libur/tutup sehingga belum menerima pesanan baru.");
+                return;
+            }
             const prod = tenant.products[prodIndex];
             activeCheckoutItem = { tenant, prod };
 
@@ -705,6 +726,8 @@
                     closeModal('checkoutModal');
                     alert(`Pesanan tercatat dengan kode ${res.orderId}!`);
                     window.open(`https://wa.me/${activeCheckoutItem.tenant.whatsapp}?text=${msg}`, '_blank');
+                } else {
+                    alert(res.message || "Gagal mencatat pesanan.");
                 }
             } catch (err) {
                 alert("Terjadi kesalahan koneksi.");
@@ -782,6 +805,9 @@
 
         async function handleSellerLogin(e) {
             e.preventDefault();
+            const btn = document.getElementById('btnSellerLogin');
+            btn.disabled = true;
+            btn.innerText = "Memverifikasi...";
             try {
                 const res = await postToBackend({
                     action: "sellerLogin",
@@ -789,16 +815,114 @@
                     password: document.getElementById('loginSellerPass').value
                 });
                 if (res.status === "success") {
-                    currentSeller = res.seller;
+                    currentSeller = {
+                        ...res.seller,
+                        isOpen: res.seller.isOpen === undefined ? true : Boolean(res.seller.isOpen)
+                    };
                     sellerSessionToken = res.token;
                     sellerOrders = res.orders || [];
+                    document.getElementById('loginSellerPass').value = '';
                     closeModal('sellerLoginModal');
-                    alert(`Selamat datang, ${currentSeller.businessName}!`);
+                    renderSellerDashboard();
+                    openModal('sellerDashboardModal');
                 } else {
                     alert(res.message);
                 }
             } catch (err) {
                 alert("Gagal login.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Verifikasi & Masuk";
+            }
+        }
+
+        function renderSellerDashboard() {
+            if (!currentSeller) return;
+            const isOpen = currentSeller.isOpen !== false;
+            const completedOrders = sellerOrders.filter(o => o.status === 'Selesai');
+            const totalRevenue = completedOrders.reduce((sum, o) => sum + (Number(o.totalPrice) || 0), 0);
+
+            document.getElementById('sellerDashboardContent').innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-4 mb-5 gap-3">
+                    <div>
+                        <span class="text-[11px] text-gray-400">Dashboard Pengelola Tenant</span>
+                        <h3 class="font-heading text-xl font-bold text-brand-dark">${currentSeller.businessName}</h3>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full ${isOpen ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
+                        <i class="fa-solid ${isOpen ? 'fa-door-open' : 'fa-door-closed'}"></i>
+                        ${isOpen ? 'Toko Sedang Buka' : 'Toko Sedang Libur'}
+                    </span>
+                </div>
+
+                <!-- KONTROL BUKA / TUTUP TOKO -->
+                <div class="p-4 rounded-2xl border ${isOpen ? 'bg-emerald-50/70 border-emerald-200' : 'bg-rose-50/70 border-rose-200'} mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h4 class="font-heading font-bold text-sm text-brand-dark">Status Operasional Toko di Etalase</h4>
+                        <p class="text-xs text-gray-600 mt-0.5">
+                            ${isOpen
+                                ? 'Toko aktif dan pembeli dapat melihat status buka serta melakukan pemesanan.'
+                                : 'Toko sedang ditandai libur di etalase sehingga pembeli tahu toko belum melayani pesanan.'}
+                        </p>
+                    </div>
+                    <button id="btnToggleStore" onclick="toggleStoreStatus()" class="px-5 py-2.5 rounded-2xl text-xs font-bold text-white shadow-sm transition-all flex items-center justify-center gap-2 whitespace-nowrap ${isOpen ? 'bg-rose-600 hover:bg-rose-700' : 'bg-emerald-600 hover:bg-emerald-700'}">
+                        <i class="fa-solid ${isOpen ? 'fa-power-off' : 'fa-store'}"></i>
+                        ${isOpen ? 'Matikan Toko (Libur)' : 'Nyalakan Toko (Buka)'}
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mb-5">
+                    <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+                        <span class="text-xs text-emerald-700 font-bold">Omzet Selesai</span>
+                        <p class="text-lg font-extrabold text-emerald-800 mt-0.5">Rp ${totalRevenue.toLocaleString('id-ID')}</p>
+                    </div>
+                    <div class="bg-brand-light p-4 rounded-2xl border border-brand-orange/20">
+                        <span class="text-xs text-brand-orange font-bold">Total Kunjungan</span>
+                        <p class="text-lg font-extrabold text-brand-dark mt-0.5">${currentSeller.visits || 0}x</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t">
+                    <button onclick="currentSeller = null; sellerSessionToken = null; closeModal('sellerDashboardModal')" class="text-xs font-bold text-rose-600 hover:underline">
+                        <i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar Akun
+                    </button>
+                    <button onclick="closeModal('sellerDashboardModal')" class="px-5 py-2.5 bg-brand-dark text-white text-xs font-bold rounded-xl">Tutup</button>
+                </div>
+            `;
+        }
+
+        async function toggleStoreStatus() {
+            if (!currentSeller || !sellerSessionToken) return;
+            const btn = document.getElementById('btnToggleStore');
+            const nextIsOpen = !(currentSeller.isOpen !== false);
+            if (btn) {
+                btn.disabled = true;
+                btn.innerText = "Menyimpan...";
+            }
+
+            try {
+                const res = await postToBackend({
+                    action: "toggleStoreStatus",
+                    sellerId: currentSeller.id,
+                    token: sellerSessionToken,
+                    isOpen: nextIsOpen
+                });
+
+                if (res.status === "success") {
+                    currentSeller.isOpen = Boolean(res.isOpen);
+                    const pubIdx = publicTenants.findIndex(t => String(t.id) === String(currentSeller.id));
+                    if (pubIdx !== -1) {
+                        publicTenants[pubIdx].isOpen = currentSeller.isOpen;
+                    }
+                    renderTenants();
+                    renderSellerDashboard();
+                    alert(currentSeller.isOpen ? "Toko berhasil dinyalakan (Buka) di etalase!" : "Toko berhasil dimatikan (Libur) di etalase.");
+                } else {
+                    alert(res.message || "Gagal memperbarui status toko.");
+                    if (btn) btn.disabled = false;
+                }
+            } catch (err) {
+                alert("Terjadi kesalahan koneksi.");
+                if (btn) btn.disabled = false;
             }
         }
 
@@ -882,11 +1006,12 @@
         }
 
         function exportAdminCSV() {
-            let csv = "Nama Usaha,Pemilik,NIM,Kategori,Status,Kunjungan,Total Pesanan,Total Omzet (Rp)\n";
+            let csv = "Nama Usaha,Pemilik,NIM,Kategori,Status,Operasional,Kunjungan,Total Pesanan,Total Omzet (Rp)\n";
             adminTenants.forEach(t => {
                 const tOrders = adminOrders.filter(o => String(o.tenantId) === String(t.id) && o.status !== 'Dibatalkan');
                 const tRev = tOrders.reduce((s, o) => s + (Number(o.totalPrice) || 0), 0);
-                csv += `"${t.businessName}","${t.ownerName}","${t.nim}","${t.category}","${t.status}",${t.visits || 0},${tOrders.length},${tRev}\n`;
+                const opStatus = t.isOpen !== false ? "Buka" : "Libur";
+                csv += `"${t.businessName}","${t.ownerName}","${t.nim}","${t.category}","${t.status}","${opStatus}",${t.visits || 0},${tOrders.length},${tRev}\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
@@ -925,10 +1050,14 @@
             const tbody = document.getElementById('monitoringTableBody');
             tbody.innerHTML = '';
             adminTenants.forEach(t => {
+                const isOpen = t.isOpen !== false;
                 tbody.innerHTML += `
                     <tr class="border-b border-gray-100 hover:bg-gray-50 text-xs">
                         <td class="p-3 font-bold">${t.businessName}</td>
                         <td class="p-3">${t.ownerName}</td>
+                        <td class="p-3 text-center">
+                            <span class="px-2 py-0.5 rounded-full font-bold ${isOpen ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">${isOpen ? 'Buka' : 'Libur'}</span>
+                        </td>
                         <td class="p-3 text-center">${t.visits}x</td>
                         <td class="p-3 text-center">
                             <button onclick="executeAdminAction('delete', ${t.id})" class="px-3 py-1 bg-rose-50 text-rose-600 rounded-xl font-bold">Hapus</button>
@@ -974,14 +1103,26 @@
         function openDetail(id) {
             const tenant = publicTenants.find(t => t.id === id);
             if (!tenant) return;
+            const isOpen = tenant.isOpen !== false;
             tenant.visits = (tenant.visits || 0) + 1;
             renderTenants();
             postToBackend({ action: "incrementVisit", tenantId: id }).catch(() => {});
+
+            const storeNoticeHTML = !isOpen
+                ? `<div class="bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold p-3.5 rounded-2xl mb-4 flex items-center gap-2">
+                     <i class="fa-solid fa-circle-info"></i>
+                     <span>Toko ini sedang <b>Libur</b>. Katalog tetap bisa dilihat, namun pemesanan sementara dinonaktifkan.</span>
+                   </div>`
+                : '';
 
             let productsHTML = '';
             if (tenant.products && tenant.products.length > 0) {
                 productsHTML = `<div class="mb-6"><h4 class="font-bold text-xs text-brand-dark mb-3">Katalog Menu & Produk</h4><div class="grid grid-cols-1 sm:grid-cols-2 gap-3">`;
                 tenant.products.forEach((p, idx) => {
+                    const orderBtnHTML = isOpen
+                        ? `<button onclick="openCheckout(${tenant.id}, ${idx})" class="w-full py-2 bg-brand-orange hover:bg-orange-600 text-white rounded-xl font-bold shadow-sm">Pesan Sekarang</button>`
+                        : `<button disabled class="w-full py-2 bg-gray-200 text-gray-500 rounded-xl font-bold cursor-not-allowed">Toko Sedang Libur</button>`;
+
                     productsHTML += `
                         <div class="bg-gray-50 rounded-2xl p-3 border border-gray-200 flex flex-col justify-between text-xs">
                             <div class="flex items-center gap-3 mb-3">
@@ -991,7 +1132,7 @@
                                     <p class="text-brand-orange font-extrabold mt-0.5">Rp ${Number(p.price).toLocaleString('id-ID')}</p>
                                 </div>
                             </div>
-                            <button onclick="openCheckout(${tenant.id}, ${idx})" class="w-full py-2 bg-brand-orange hover:bg-orange-600 text-white rounded-xl font-bold shadow-sm">Pesan Sekarang</button>
+                            ${orderBtnHTML}
                         </div>
                     `;
                 });
@@ -1004,8 +1145,14 @@
                 <div class="relative h-48 rounded-2xl overflow-hidden mb-4 bg-gray-100">
                     <img src="${tenant.image}" class="w-full h-full object-cover">
                 </div>
-                <h2 class="font-heading text-xl font-bold text-brand-dark mb-1">${tenant.businessName}</h2>
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                    <h2 class="font-heading text-xl font-bold text-brand-dark">${tenant.businessName}</h2>
+                    <span class="text-xs font-bold px-3 py-1 rounded-full ${isOpen ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
+                        ${isOpen ? 'Sedang Buka' : 'Sedang Libur'}
+                    </span>
+                </div>
                 <p class="text-xs text-gray-500 mb-3"><i class="fa-solid fa-user-graduate text-brand-orange mr-1"></i> ${tenant.ownerName} • ${tenant.orderMethod}</p>
+                ${storeNoticeHTML}
                 <p class="text-xs text-gray-600 mb-4 bg-gray-50 p-3.5 rounded-2xl border border-gray-100 leading-relaxed">${tenant.desc}</p>
                 ${productsHTML}
             `;
