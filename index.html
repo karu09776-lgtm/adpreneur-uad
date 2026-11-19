@@ -1222,7 +1222,6 @@
             }
         }
 
-        // Kompres file gambar yang diupload penjual agar hemat ukuran di Google Sheets
         function handleProductFileUpload(event) {
             const file = event.target.files && event.target.files[0];
             if (!file) return;
@@ -1610,7 +1609,6 @@
             if (tab === 'catalog') renderAdminCatalogTracker();
         }
 
-        // PELACAKAN KATALOG, HARGA, & QTY PENJUALAN HARIAN DI PORTAL ADMIN
         function renderAdminCatalogTracker() {
             const container = document.getElementById('adminCatalogListContainer');
             if (!container) return;
