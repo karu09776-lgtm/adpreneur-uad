@@ -68,14 +68,12 @@
     <!-- HEADER / NAVBAR -->
     <header class="sticky top-0 z-40 bg-brand-cream/95 backdrop-blur-md border-b border-orange-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2">
-            <button onclick="switchMainView('beranda')" class="flex items-center gap-2.5 text-left focus:outline-none group">
-                <div class="w-10 h-10 rounded-2xl bg-brand-orange text-white flex items-center justify-center font-heading font-extrabold text-lg shadow-sm group-hover:bg-brand-orangeBright transition-colors">
-                    AD
+            <!-- LOGO PERSIS REFERENSI: ADpreneur + Ahmad Dahlan Preneur -->
+            <button onclick="switchMainView('beranda')" class="flex flex-col items-start text-left focus:outline-none group">
+                <div class="font-heading font-extrabold text-xl sm:text-2xl tracking-tight leading-none">
+                    <span class="text-brand-orange">AD</span><span class="text-brand-dark">preneur</span>
                 </div>
-                <div class="leading-tight">
-                    <span class="font-heading font-extrabold text-base sm:text-lg text-brand-dark block">ADpreneur</span>
-                    <span class="text-[10px] text-gray-500 font-medium block">Ahmad Dahlan Preneur • UAD</span>
-                </div>
+                <span class="text-[11px] text-gray-600 font-medium mt-0.5 leading-tight">Ahmad Dahlan Preneur</span>
             </button>
 
             <nav class="hidden md:flex items-center gap-1 bg-white/90 p-1.5 rounded-2xl border border-orange-100 shadow-2xs">
@@ -167,9 +165,11 @@
                         </div>
                     </div>
 
-                    <!-- ILUSTRASI MENYATU TANPA BINGKAI & TANPA TEKS KETERANGAN -->
+                    <!-- ILUSTRASI GEDUNG UAD MENYATU TANPA BINGKAI & TANPA TEKS -->
                     <div class="lg:col-span-6 flex items-center justify-center">
-                        <img src="99f3b4d370e7e684d01db9f711e0c69d.svg" alt="" aria-hidden="true" class="seamless-illustration w-full max-w-xl h-auto object-contain select-none pointer-events-none">
+                        <div id="uadSketchContainer" class="seamless-illustration w-full max-w-xl select-none pointer-events-none">
+                            <img id="uadSketchImg" src="99f3b4d370e7e684d01db9f711e0c69d.svg" alt="" aria-hidden="true" class="w-full h-auto object-contain">
+                        </div>
                     </div>
                 </div>
 
@@ -446,14 +446,11 @@
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-white/20">
                 <div class="md:col-span-5 space-y-4">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-10 h-10 rounded-2xl bg-white text-brand-orange flex items-center justify-center font-heading font-extrabold text-base">
-                            AD
+                    <div class="flex flex-col items-start">
+                        <div class="font-heading font-extrabold text-xl sm:text-2xl tracking-tight leading-none">
+                            <span class="text-white">AD</span><span class="text-orange-100">preneur</span>
                         </div>
-                        <div>
-                            <p class="font-heading font-extrabold text-lg text-white leading-none">ADpreneur</p>
-                            <span class="text-[11px] text-orange-100">Ahmad Dahlan Preneur</span>
-                        </div>
+                        <span class="text-[11px] text-orange-100 mt-0.5 leading-tight">Ahmad Dahlan Preneur</span>
                     </div>
                     <p class="text-xs sm:text-sm text-orange-100 max-w-sm leading-relaxed">
                         Platform Ekosistem Digital Wirausaha Mahasiswa Universitas Ahmad Dahlan Yogyakarta.
@@ -824,19 +821,101 @@
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzWSfeCSW3l6Nh_1AqNo7-Mse81gqvEcZMiy6cT2LQQaHKSbVij7AuUnU3nm9VXZ-f-/exec";
         const ITEMS_PER_PAGE = 12;
 
-        let publicTenants = [];
-        let adminTenants = [];
-        let adminOrders = [];
-        let adminReports = [];
-        let adminSessionToken = null;
-        let currentSeller = null;
-        let sellerSessionToken = null;
-        let sellerOrders = [];
-        let sellerDraftProducts = [];
-        let newProductImageDataUrl = "";
-        let currentCategory = 'all';
-        let currentEtalasePage = 1;
-        let activeCheckoutItem = null;
+        // Fallback SVG inline agar sketsa gedung UAD tetap muncul walau file eksternal belum ter-load atau dibuka via file://
+        const FALLBACK_UAD_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" class="w-full h-auto">
+            <defs>
+                <radialGradient id="sunGlow" cx="50%" cy="32%" r="45%">
+                    <stop offset="0%" stop-color="#FFE4D6" stop-opacity="0.65"/>
+                    <stop offset="100%" stop-color="#FFFBF8" stop-opacity="0"/>
+                </radialGradient>
+                <pattern id="latticeLeft" width="22" height="22" patternUnits="userSpaceOnUse">
+                    <path d="M11 2 L20 11 L11 20 L2 11 Z" fill="none" stroke="#D98A63" stroke-width="1" stroke-opacity="0.55"/>
+                    <circle cx="11" cy="11" r="1.5" fill="#C84B11" fill-opacity="0.45"/>
+                </pattern>
+                <pattern id="hedgeGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+                    <path d="M2 2 L24 24 M24 2 L2 24" stroke="#D98A63" stroke-width="1" stroke-opacity="0.45"/>
+                </pattern>
+            </defs>
+            <rect width="1000" height="720" fill="url(#sunGlow)"/>
+            <!-- Menara Kiri -->
+            <polygon points="85,35 235,35 220,550 70,550" fill="#FDE8DC" fill-opacity="0.65"/>
+            <line x1="85" y1="35" x2="70" y2="550" stroke="#C84B11" stroke-width="2" stroke-dasharray="14 6"/>
+            <line x1="235" y1="35" x2="220" y2="550" stroke="#C84B11" stroke-width="2" stroke-dasharray="10 5"/>
+            <line x1="85" y1="35" x2="235" y2="35" stroke="#C84B11" stroke-width="2.2"/>
+            <rect x="105" y="65" width="42" height="475" fill="#FAD7C3" fill-opacity="0.55"/>
+            <rect x="165" y="65" width="52" height="475" fill="url(#latticeLeft)"/>
+            <line x1="55" y1="145" x2="255" y2="145" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
+            <line x1="55" y1="275" x2="255" y2="275" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
+            <line x1="55" y1="405" x2="255" y2="405" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
+
+            <!-- Sayap Miring Kiri & Kanan -->
+            <polygon points="235,35 335,35 390,260 220,550" fill="#FDE8DC" fill-opacity="0.45"/>
+            <line x1="335" y1="35" x2="390" y2="260" stroke="#C84B11" stroke-width="2"/>
+            <line x1="235" y1="35" x2="335" y2="35" stroke="#C84B11" stroke-width="2"/>
+
+            <polygon points="665,35 765,35 780,550 610,260" fill="#FDE8DC" fill-opacity="0.45"/>
+            <line x1="665" y1="35" x2="610" y2="260" stroke="#C84B11" stroke-width="2"/>
+            <line x1="665" y1="35" x2="765" y2="35" stroke="#C84B11" stroke-width="2"/>
+
+            <!-- Menara Kanan -->
+            <polygon points="765,35 915,35 930,550 780,550" fill="#FDE8DC" fill-opacity="0.65"/>
+            <line x1="765" y1="35" x2="780" y2="550" stroke="#C84B11" stroke-width="2" stroke-dasharray="10 5"/>
+            <line x1="915" y1="35" x2="930" y2="550" stroke="#C84B11" stroke-width="2" stroke-dasharray="14 6"/>
+            <line x1="765" y1="35" x2="915" y2="35" stroke="#C84B11" stroke-width="2.2"/>
+            <rect x="783" y="65" width="52" height="475" fill="url(#latticeLeft)"/>
+            <rect x="853" y="65" width="42" height="475" fill="#FAD7C3" fill-opacity="0.55"/>
+            <line x1="745" y1="145" x2="945" y2="145" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
+            <line x1="745" y1="275" x2="945" y2="275" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
+            <line x1="745" y1="405" x2="945" y2="405" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
+
+            <!-- Bagian Tengah & Kanopi Melengkung -->
+            <rect x="390" y="255" width="220" height="80" fill="#FDE8DC" fill-opacity="0.4"/>
+            <line x1="390" y1="255" x2="610" y2="255" stroke="#C84B11" stroke-width="1.8"/>
+            <path d="M415 265 L415 335 M445 265 L445 335 M475 265 L475 335 M505 265 L505 335 M535 265 L535 335 M565 265 L565 335 M585 265 L585 335" stroke="#C84B11" stroke-width="1" stroke-opacity="0.5"/>
+
+            <path d="M250 345 Q500 295 750 345" fill="none" stroke="#C84B11" stroke-width="2.4"/>
+            <path d="M255 375 Q500 325 745 375" fill="none" stroke="#C84B11" stroke-width="1.8"/>
+            <path d="M265 375 Q500 328 735 375 L730 445 Q500 405 270 445 Z" fill="#FAD7C3" fill-opacity="0.65"/>
+            <path d="M268 445 Q500 405 732 445 L732 490 Q500 455 268 490 Z" fill="#FFFBF8" stroke="#C84B11" stroke-width="1.8"/>
+
+            <!-- Tiang Penyangga -->
+            <path d="M300 485 Q325 540 348 485" fill="none" stroke="#C84B11" stroke-width="1.6"/>
+            <rect x="315" y="510" width="16" height="115" rx="4" fill="#F2C4AD" fill-opacity="0.75"/>
+
+            <path d="M455 475 Q495 545 535 475" fill="none" stroke="#C84B11" stroke-width="1.6"/>
+            <rect x="486" y="515" width="18" height="118" rx="4" fill="#F2C4AD" fill-opacity="0.75"/>
+
+            <path d="M652 485 Q675 540 700 485" fill="none" stroke="#C84B11" stroke-width="1.6"/>
+            <rect x="669" y="510" width="16" height="115" rx="4" fill="#F2C4AD" fill-opacity="0.75"/>
+
+            <!-- Pohon Kanan -->
+            <line x1="875" y1="450" x2="875" y2="575" stroke="#C84B11" stroke-width="1.6"/>
+            <path d="M830 510 C800 490 815 435 855 435 C865 405 915 405 925 440 C955 450 950 505 915 515 C890 525 850 525 830 510 Z" fill="#FAD7C3" fill-opacity="0.75" stroke="#C84B11" stroke-width="1.5"/>
+
+            <!-- Garis Dasar & Semak -->
+            <line x1="40" y1="550" x2="960" y2="550" stroke="#C84B11" stroke-width="1.6" stroke-dasharray="14 6" stroke-opacity="0.65"/>
+            <rect x="35" y="575" width="260" height="90" fill="url(#hedgeGrid)"/>
+            <rect x="705" y="575" width="260" height="90" fill="url(#hedgeGrid)"/>
+            <path d="M75 575 Q105 545 135 575 Q165 545 195 575" fill="none" stroke="#C84B11" stroke-width="1.5"/>
+            <path d="M745 575 Q775 545 805 575 Q835 545 865 575" fill="none" stroke="#C84B11" stroke-width="1.5"/>
+
+            <!-- Garis Perspektif Bawah -->
+            <line x1="495" y1="635" x2="120" y2="715" stroke="#D98A63" stroke-width="1.4" stroke-dasharray="14 8"/>
+            <line x1="495" y1="635" x2="290" y2="715" stroke="#D98A63" stroke-width="1.4" stroke-dasharray="14 8"/>
+            <line x1="495" y1="635" x2="495" y2="715" stroke="#D98A63" stroke-width="1.4" stroke-dasharray="14 8"/>
+            <line x1="495" y1="635" x2="700" y2="715" stroke="#D98A63" stroke-width="1.4" stroke-dasharray="14 8"/>
+            <line x1="495" y1="635" x2="880" y2="715" stroke="#D98A63" stroke-width="1.4" stroke-dasharray="14 8"/>
+        </svg>`;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const imgEl = document.getElementById('uadSketchImg');
+            const containerEl = document.getElementById('uadSketchContainer');
+            if (imgEl && containerEl) {
+                imgEl.addEventListener('error', () => {
+                    containerEl.innerHTML = FALLBACK_UAD_SVG;
+                });
+            }
+        });
 
         function switchMainView(viewName) {
             document.querySelectorAll('.main-view').forEach(sec => sec.classList.add('hidden'));
@@ -848,7 +927,7 @@
             });
             const activeDesktopBtn = document.getElementById(`nav-${viewName}`);
             if (activeDesktopBtn) {
-                activeDesktopBtn.className = "main-nav-btn px-4 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white shadow-2xs transition-all";
+                activeDesktopBtn.className = "main-nav-btn px-4 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white shadow-sm transition-all";
             }
 
             document.querySelectorAll('.m-nav-btn').forEach(btn => {
