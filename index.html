@@ -55,208 +55,9 @@
         .seamless-illustration {
             mix-blend-mode: multiply;
         }
-    
-        /* INTRO ANIMATION OVERLAY (ADpreneur Motion) */
-        #introOverlay {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: radial-gradient(circle at 50% 42%, #FFFFFF 0%, #FFFDFB 58%, #F8F3EE 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.55s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        #introOverlay.intro-exit {
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(1.03);
-            pointer-events: none;
-        }
-        #btnSkipIntro {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10001;
-            background: rgba(255, 255, 255, 0.92);
-            color: #3A2318;
-            border: 1px solid rgba(200, 75, 17, 0.22);
-            padding: 9px 16px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(58, 35, 24, 0.08);
-            backdrop-filter: blur(8px);
-            transition: all 0.2s ease;
-        }
-        #btnSkipIntro:hover {
-            background: #FFF3EC;
-            color: #C84B11;
-            border-color: #C84B11;
-            transform: translateY(-1px);
-        }
-        .intro-center-stage {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            max-width: 760px;
-            width: 100%;
-        }
-        .intro-logo-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .intro-wordmark-row {
-            display: inline-flex;
-            align-items: baseline;
-            justify-content: center;
-            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: clamp(3.1rem, 8.5vw, 5.75rem);
-            line-height: 1.02;
-            letter-spacing: -0.03em;
-        }
-        .intro-ad-mark {
-            position: relative;
-            display: inline-block;
-            color: #FF7A00;
-            opacity: 0;
-            transform: scale(0.86) translateY(12px);
-            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .intro-play .intro-ad-mark {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-        .intro-slash-svg {
-            position: absolute;
-            left: -6%;
-            top: 10%;
-            width: 112%;
-            height: 82%;
-            overflow: visible;
-            pointer-events: none;
-        }
-        .intro-slash-path {
-            stroke: #FFFFFF;
-            stroke-width: 7.5;
-            stroke-linecap: round;
-            fill: none;
-            stroke-dasharray: 240;
-            stroke-dashoffset: 240;
-            filter: drop-shadow(0 1px 1px rgba(255, 122, 0, 0.35));
-            transition: stroke-dashoffset 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.45s;
-        }
-        .intro-play .intro-slash-path {
-            stroke-dashoffset: 0;
-        }
-        .intro-preneur-clip {
-            display: inline-block;
-            overflow: hidden;
-            max-width: 0;
-            opacity: 0;
-            transform: translateX(-14px);
-            color: #383B3E;
-            transition: max-width 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.95s, opacity 0.55s ease 0.95s, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.95s;
-            vertical-align: baseline;
-        }
-        .intro-play .intro-preneur-clip {
-            max-width: 9ch;
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .intro-subbrand {
-            margin-top: 8px;
-            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-            font-size: clamp(0.95rem, 2.2vw, 1.45rem);
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            color: #4B4F54;
-            align-self: flex-end;
-            padding-right: 4px;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.65s ease 1.65s, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 1.65s;
-        }
-        .intro-play .intro-subbrand {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .intro-enter-wrap {
-            margin-top: 30px;
-            opacity: 0;
-            transform: translateY(14px);
-            pointer-events: none;
-            transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .intro-enter-wrap.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        #btnEnterSite {
-            background: linear-gradient(135deg, #C84B11 0%, #E05A1A 100%);
-            color: #FFFFFF;
-            padding: 13px 30px;
-            border-radius: 999px;
-            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 12px 26px -6px rgba(200, 75, 17, 0.45);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-        }
-        #btnEnterSite:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 30px -6px rgba(200, 75, 17, 0.55);
-            background: linear-gradient(135deg, #D9531E 0%, #F06424 100%);
-        }
-        #btnEnterSite:active {
-            transform: translateY(0);
-        }
-</style>
+    </style>
 </head>
 <body class="bg-brand-cream text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between">
-    <!-- INTRO ANIMATION OVERLAY -->
-    <div id="introOverlay" role="dialog" aria-modal="true" aria-label="Intro ADpreneur Ahmad Dahlan Preneur">
-        <button type="button" id="btnSkipIntro" onclick="finishIntroAnimation()" aria-label="Lewati intro">
-            <span>Lewati</span>
-            <i class="fa-solid fa-forward-step text-[11px]"></i>
-        </button>
-
-        <div class="intro-center-stage">
-            <div class="intro-logo-box" id="introLogoBox">
-                <div class="intro-wordmark-row">
-                    <span class="intro-ad-mark">AD<svg class="intro-slash-svg" viewBox="0 0 140 80" aria-hidden="true">
-                            <path class="intro-slash-path" d="M 16 64 Q 72 34 126 16" />
-                        </svg></span><span class="intro-preneur-clip">preneur</span>
-                </div>
-                <div class="intro-subbrand">Ahmad Dahlan Preneur</div>
-            </div>
-
-            <div class="intro-enter-wrap" id="introEnterWrap">
-                <button type="button" id="btnEnterSite" onclick="finishIntroAnimation()">
-                    <span>Masuk</span>
-                    <i class="fa-solid fa-arrow-right text-xs"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
 
     <!-- NECK BAR -->
     <div class="bg-brand-orange text-white text-[11px] sm:text-xs py-2 px-3 text-center font-medium shadow-sm flex items-center justify-center gap-1.5 overflow-hidden">
@@ -267,12 +68,14 @@
     <!-- HEADER / NAVBAR -->
     <header class="sticky top-0 z-40 bg-brand-cream/95 backdrop-blur-md border-b border-orange-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2">
-            <!-- LOGO PERSIS REFERENSI: ADpreneur + Ahmad Dahlan Preneur -->
-            <button onclick="switchMainView('beranda')" class="flex flex-col items-start text-left focus:outline-none group">
-                <div class="font-heading font-extrabold text-xl sm:text-2xl tracking-tight leading-none">
-                    <span class="text-brand-orange">AD</span><span class="text-brand-dark">preneur</span>
+            <button onclick="switchMainView('beranda')" class="flex items-center gap-2.5 text-left focus:outline-none group">
+                <div class="w-10 h-10 rounded-2xl bg-brand-orange text-white flex items-center justify-center font-heading font-extrabold text-lg shadow-sm group-hover:bg-brand-orangeBright transition-colors">
+                    AD
                 </div>
-                <span class="text-[11px] text-gray-600 font-medium mt-0.5 leading-tight">Ahmad Dahlan Preneur</span>
+                <div class="leading-tight">
+                    <span class="font-heading font-extrabold text-base sm:text-lg text-brand-dark block">ADpreneur</span>
+                    <span class="text-[10px] text-gray-500 font-medium block">Ahmad Dahlan Preneur • UAD</span>
+                </div>
             </button>
 
             <nav class="hidden md:flex items-center gap-1 bg-white/90 p-1.5 rounded-2xl border border-orange-100 shadow-2xs">
@@ -364,11 +167,9 @@
                         </div>
                     </div>
 
-                    <!-- ILUSTRASI GEDUNG UAD MENYATU TANPA BINGKAI & TANPA TEKS -->
+                    <!-- ILUSTRASI MENYATU TANPA BINGKAI & TANPA TEKS KETERANGAN -->
                     <div class="lg:col-span-6 flex items-center justify-center">
-                        <div id="uadSketchContainer" class="seamless-illustration w-full max-w-xl select-none pointer-events-none">
-                            <img id="uadSketchImg" src="99f3b4d370e7e684d01db9f711e0c69d.svg" alt="" aria-hidden="true" class="w-full h-auto object-contain">
-                        </div>
+                        <img src="99f3b4d370e7e684d01db9f711e0c69d.svg" alt="" aria-hidden="true" class="seamless-illustration w-full max-w-xl h-auto object-contain select-none pointer-events-none">
                     </div>
                 </div>
 
@@ -645,11 +446,14 @@
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-white/20">
                 <div class="md:col-span-5 space-y-4">
-                    <div class="flex flex-col items-start">
-                        <div class="font-heading font-extrabold text-xl sm:text-2xl tracking-tight leading-none">
-                            <span class="text-white">AD</span><span class="text-orange-100">preneur</span>
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-10 h-10 rounded-2xl bg-white text-brand-orange flex items-center justify-center font-heading font-extrabold text-base">
+                            AD
                         </div>
-                        <span class="text-[11px] text-orange-100 mt-0.5 leading-tight">Ahmad Dahlan Preneur</span>
+                        <div>
+                            <p class="font-heading font-extrabold text-lg text-white leading-none">ADpreneur</p>
+                            <span class="text-[11px] text-orange-100">Ahmad Dahlan Preneur</span>
+                        </div>
                     </div>
                     <p class="text-xs sm:text-sm text-orange-100 max-w-sm leading-relaxed">
                         Platform Ekosistem Digital Wirausaha Mahasiswa Universitas Ahmad Dahlan Yogyakarta.
@@ -1020,101 +824,19 @@
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzWSfeCSW3l6Nh_1AqNo7-Mse81gqvEcZMiy6cT2LQQaHKSbVij7AuUnU3nm9VXZ-f-/exec";
         const ITEMS_PER_PAGE = 12;
 
-        // Fallback SVG inline agar sketsa gedung UAD tetap muncul walau file eksternal belum ter-load atau dibuka via file://
-        const FALLBACK_UAD_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" class="w-full h-auto">
-            <defs>
-                <radialGradient id="sunGlow" cx="50%" cy="32%" r="45%">
-                    <stop offset="0%" stop-color="#FFE4D6" stop-opacity="0.65"/>
-                    <stop offset="100%" stop-color="#FFFBF8" stop-opacity="0"/>
-                </radialGradient>
-                <pattern id="latticeLeft" width="22" height="22" patternUnits="userSpaceOnUse">
-                    <path d="M11 2 L20 11 L11 20 L2 11 Z" fill="none" stroke="#D98A63" stroke-width="1" stroke-opacity="0.55"/>
-                    <circle cx="11" cy="11" r="1.5" fill="#C84B11" fill-opacity="0.45"/>
-                </pattern>
-                <pattern id="hedgeGrid" width="26" height="26" patternUnits="userSpaceOnUse">
-                    <path d="M2 2 L24 24 M24 2 L2 24" stroke="#D98A63" stroke-width="1" stroke-opacity="0.45"/>
-                </pattern>
-            </defs>
-            <rect width="1000" height="720" fill="url(#sunGlow)"/>
-            <!-- Menara Kiri -->
-            <polygon points="85,35 235,35 220,550 70,550" fill="#FDE8DC" fill-opacity="0.65"/>
-            <line x1="85" y1="35" x2="70" y2="550" stroke="#C84B11" stroke-width="2" stroke-dasharray="14 6"/>
-            <line x1="235" y1="35" x2="220" y2="550" stroke="#C84B11" stroke-width="2" stroke-dasharray="10 5"/>
-            <line x1="85" y1="35" x2="235" y2="35" stroke="#C84B11" stroke-width="2.2"/>
-            <rect x="105" y="65" width="42" height="475" fill="#FAD7C3" fill-opacity="0.55"/>
-            <rect x="165" y="65" width="52" height="475" fill="url(#latticeLeft)"/>
-            <line x1="55" y1="145" x2="255" y2="145" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
-            <line x1="55" y1="275" x2="255" y2="275" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
-            <line x1="55" y1="405" x2="255" y2="405" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
-
-            <!-- Sayap Miring Kiri & Kanan -->
-            <polygon points="235,35 335,35 390,260 220,550" fill="#FDE8DC" fill-opacity="0.45"/>
-            <line x1="335" y1="35" x2="390" y2="260" stroke="#C84B11" stroke-width="2"/>
-            <line x1="235" y1="35" x2="335" y2="35" stroke="#C84B11" stroke-width="2"/>
-
-            <polygon points="665,35 765,35 780,550 610,260" fill="#FDE8DC" fill-opacity="0.45"/>
-            <line x1="665" y1="35" x2="610" y2="260" stroke="#C84B11" stroke-width="2"/>
-            <line x1="665" y1="35" x2="765" y2="35" stroke="#C84B11" stroke-width="2"/>
-
-            <!-- Menara Kanan -->
-            <polygon points="765,35 915,35 930,550 780,550" fill="#FDE8DC" fill-opacity="0.65"/>
-            <line x1="765" y1="35" x2="780" y2="550" stroke="#C84B11" stroke-width="2" stroke-dasharray="10 5"/>
-            <line x1="915" y1="35" x2="930" y2="550" stroke="#C84B11" stroke-width="2" stroke-dasharray="14 6"/>
-            <line x1="765" y1="35" x2="915" y2="35" stroke="#C84B11" stroke-width="2.2"/>
-            <rect x="783" y="65" width="52" height="475" fill="url(#latticeLeft)"/>
-            <rect x="853" y="65" width="42" height="475" fill="#FAD7C3" fill-opacity="0.55"/>
-            <line x1="745" y1="145" x2="945" y2="145" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
-            <line x1="745" y1="275" x2="945" y2="275" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
-            <line x1="745" y1="405" x2="945" y2="405" stroke="#C84B11" stroke-width="1.2" stroke-dasharray="12 6" stroke-opacity="0.6"/>
-
-            <!-- Bagian Tengah & Kanopi Melengkung -->
-            <rect x="390" y="255" width="220" height="80" fill="#FDE8DC" fill-opacity="0.4"/>
-            <line x1="390" y1="255" x2="610" y2="255" stroke="#C84B11" stroke-width="1.8"/>
-            <path d="M415 265 L415 335 M445 265 L445 335 M475 265 L475 335 M505 265 L505 335 M535 265 L535 335 M565 265 L565 335 M585 265 L585 335" stroke="#C84B11" stroke-width="1" stroke-opacity="0.5"/>
-
-            <path d="M250 345 Q500 295 750 345" fill="none" stroke="#C84B11" stroke-width="2.4"/>
-            <path d="M255 375 Q500 325 745 375" fill="none" stroke="#C84B11" stroke-width="1.8"/>
-            <path d="M265 375 Q500 328 735 375 L730 445 Q500 405 270 445 Z" fill="#FAD7C3" fill-opacity="0.65"/>
-            <path d="M268 445 Q500 405 732 445 L732 490 Q500 455 268 490 Z" fill="#FFFBF8" stroke="#C84B11" stroke-width="1.8"/>
-
-            <!-- Tiang Penyangga -->
-            <path d="M300 485 Q325 540 348 485" fill="none" stroke="#C84B11" stroke-width="1.6"/>
-            <rect x="315" y="510" width="16" height="115" rx="4" fill="#F2C4AD" fill-opacity="0.75"/>
-
-            <path d="M455 475 Q495 545 535 475" fill="none" stroke="#C84B11" stroke-width="1.6"/>
-            <rect x="486" y="515" width="18" height="118" rx="4" fill="#F2C4AD" fill-opacity="0.75"/>
-
-            <path d="M652 485 Q675 540 700 485" fill="none" stroke="#C84B11" stroke-width="1.6"/>
-            <rect x="669" y="510" width="16" height="115" rx="4" fill="#F2C4AD" fill-opacity="0.75"/>
-
-            <!-- Pohon Kanan -->
-            <line x1="875" y1="450" x2="875" y2="575" stroke="#C84B11" stroke-width="1.6"/>
-            <path d="M830 510 C800 490 815 435 855 435 C865 405 915 405 925 440 C955 450 950 505 915 515 C890 525 850 525 830 510 Z" fill="#FAD7C3" fill-opacity="0.75" stroke="#C84B11" stroke-width="1.5"/>
-
-            <!-- Garis Dasar & Semak -->
-            <line x1="40" y1="550" x2="960" y2="550" stroke="#C84B11" stroke-width="1.6" stroke-dasharray="14 6" stroke-opacity="0.65"/>
-            <rect x="35" y="575" width="260" height="90" fill="url(#hedgeGrid)"/>
-            <rect x="705" y="575" width="260" height="90" fill="url(#hedgeGrid)"/>
-            <path d="M75 575 Q105 545 135 575 Q165 545 195 575" fill="none" stroke="#C84B11" stroke-width="1.5"/>
-            <path d="M745 575 Q775 545 805 575 Q835 545 865 575" fill="none" stroke="#C84B11" stroke-width="1.5"/>
-
-            <!-- Garis Perspektif Bawah -->
-            <line x1="495" y1="635" x2="120" y2="715" stroke="#D98A63" stroke-width="1.4" stroke-dasharray="14 8"/>
-            <line x1="495" y1="635" x2="290" y2="715" stroke="#D98A63" stroke-width="1.4" stroke-dasharray="14 8"/>
-            <line x1="495" y1="635" x2="495" y2="715" stroke="#D98A63" stroke-width="1.4" stroke-dasharray="14 8"/>
-            <line x1="495" y1="635" x2="700" y2="715" stroke="#D98A63" stroke-width="1.4" stroke-dasharray="14 8"/>
-            <line x1="495" y1="635" x2="880" y2="715" stroke="#D98A63" stroke-width="1.4" stroke-dasharray="14 8"/>
-        </svg>`;
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const imgEl = document.getElementById('uadSketchImg');
-            const containerEl = document.getElementById('uadSketchContainer');
-            if (imgEl && containerEl) {
-                imgEl.addEventListener('error', () => {
-                    containerEl.innerHTML = FALLBACK_UAD_SVG;
-                });
-            }
-        });
+        let publicTenants = [];
+        let adminTenants = [];
+        let adminOrders = [];
+        let adminReports = [];
+        let adminSessionToken = null;
+        let currentSeller = null;
+        let sellerSessionToken = null;
+        let sellerOrders = [];
+        let sellerDraftProducts = [];
+        let newProductImageDataUrl = "";
+        let currentCategory = 'all';
+        let currentEtalasePage = 1;
+        let activeCheckoutItem = null;
 
         function switchMainView(viewName) {
             document.querySelectorAll('.main-view').forEach(sec => sec.classList.add('hidden'));
@@ -1126,7 +848,7 @@
             });
             const activeDesktopBtn = document.getElementById(`nav-${viewName}`);
             if (activeDesktopBtn) {
-                activeDesktopBtn.className = "main-nav-btn px-4 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white shadow-sm transition-all";
+                activeDesktopBtn.className = "main-nav-btn px-4 py-2 rounded-xl text-xs font-bold bg-brand-orange text-white shadow-2xs transition-all";
             }
 
             document.querySelectorAll('.m-nav-btn').forEach(btn => {
@@ -2254,46 +1976,6 @@
         function closeModal(id) { document.getElementById(id).classList.remove('flex'); document.getElementById(id).classList.add('hidden'); }
 
         loadPublicData(false);
-    
-        // Intro animation controller: shows "Lewati" at top-right immediately,
-        // plays logo motion sequence, then reveals "Masuk" right below the logo.
-        let introCompleted = false;
-        let introRevealTimer = null;
-
-        function finishIntroAnimation() {
-            if (introCompleted) return;
-            introCompleted = true;
-            if (introRevealTimer) {
-                clearTimeout(introRevealTimer);
-                introRevealTimer = null;
-            }
-            const overlay = document.getElementById('introOverlay');
-            if (overlay) {
-                overlay.classList.add('intro-exit');
-                setTimeout(() => {
-                    overlay.remove();
-                }, 680);
-            }
-        }
-
-        (function initIntroSequence() {
-            const logoBox = document.getElementById('introLogoBox');
-            const enterWrap = document.getElementById('introEnterWrap');
-            if (!logoBox || !enterWrap) return;
-
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    logoBox.classList.add('intro-play');
-                });
-            });
-
-            // Reveal "Masuk" right beneath the logo after the logo & subbrand motion completes
-            introRevealTimer = setTimeout(() => {
-                if (!introCompleted) {
-                    enterWrap.classList.add('is-visible');
-                }
-            }, 2400);
-        })();
-</script>
+    </script>
 </body>
 </html>
