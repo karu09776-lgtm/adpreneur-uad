@@ -55,9 +55,208 @@
         .seamless-illustration {
             mix-blend-mode: multiply;
         }
-    </style>
+    
+        /* INTRO ANIMATION OVERLAY (ADpreneur Motion) */
+        #introOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: radial-gradient(circle at 50% 42%, #FFFFFF 0%, #FFFDFB 58%, #F8F3EE 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.55s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        #introOverlay.intro-exit {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.03);
+            pointer-events: none;
+        }
+        #btnSkipIntro {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10001;
+            background: rgba(255, 255, 255, 0.92);
+            color: #3A2318;
+            border: 1px solid rgba(200, 75, 17, 0.22);
+            padding: 9px 16px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(58, 35, 24, 0.08);
+            backdrop-filter: blur(8px);
+            transition: all 0.2s ease;
+        }
+        #btnSkipIntro:hover {
+            background: #FFF3EC;
+            color: #C84B11;
+            border-color: #C84B11;
+            transform: translateY(-1px);
+        }
+        .intro-center-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            max-width: 760px;
+            width: 100%;
+        }
+        .intro-logo-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .intro-wordmark-row {
+            display: inline-flex;
+            align-items: baseline;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: clamp(3.1rem, 8.5vw, 5.75rem);
+            line-height: 1.02;
+            letter-spacing: -0.03em;
+        }
+        .intro-ad-mark {
+            position: relative;
+            display: inline-block;
+            color: #FF7A00;
+            opacity: 0;
+            transform: scale(0.86) translateY(12px);
+            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .intro-play .intro-ad-mark {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        .intro-slash-svg {
+            position: absolute;
+            left: -6%;
+            top: 10%;
+            width: 112%;
+            height: 82%;
+            overflow: visible;
+            pointer-events: none;
+        }
+        .intro-slash-path {
+            stroke: #FFFFFF;
+            stroke-width: 7.5;
+            stroke-linecap: round;
+            fill: none;
+            stroke-dasharray: 240;
+            stroke-dashoffset: 240;
+            filter: drop-shadow(0 1px 1px rgba(255, 122, 0, 0.35));
+            transition: stroke-dashoffset 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.45s;
+        }
+        .intro-play .intro-slash-path {
+            stroke-dashoffset: 0;
+        }
+        .intro-preneur-clip {
+            display: inline-block;
+            overflow: hidden;
+            max-width: 0;
+            opacity: 0;
+            transform: translateX(-14px);
+            color: #383B3E;
+            transition: max-width 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.95s, opacity 0.55s ease 0.95s, transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.95s;
+            vertical-align: baseline;
+        }
+        .intro-play .intro-preneur-clip {
+            max-width: 9ch;
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .intro-subbrand {
+            margin-top: 8px;
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-size: clamp(0.95rem, 2.2vw, 1.45rem);
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: #4B4F54;
+            align-self: flex-end;
+            padding-right: 4px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.65s ease 1.65s, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 1.65s;
+        }
+        .intro-play .intro-subbrand {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .intro-enter-wrap {
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(14px);
+            pointer-events: none;
+            transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .intro-enter-wrap.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        #btnEnterSite {
+            background: linear-gradient(135deg, #C84B11 0%, #E05A1A 100%);
+            color: #FFFFFF;
+            padding: 13px 30px;
+            border-radius: 999px;
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 12px 26px -6px rgba(200, 75, 17, 0.45);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        #btnEnterSite:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 30px -6px rgba(200, 75, 17, 0.55);
+            background: linear-gradient(135deg, #D9531E 0%, #F06424 100%);
+        }
+        #btnEnterSite:active {
+            transform: translateY(0);
+        }
+</style>
 </head>
 <body class="bg-brand-cream text-brand-dark font-sans antialiased min-h-screen flex flex-col justify-between">
+    <!-- INTRO ANIMATION OVERLAY -->
+    <div id="introOverlay" role="dialog" aria-modal="true" aria-label="Intro ADpreneur Ahmad Dahlan Preneur">
+        <button type="button" id="btnSkipIntro" onclick="finishIntroAnimation()" aria-label="Lewati intro">
+            <span>Lewati</span>
+            <i class="fa-solid fa-forward-step text-[11px]"></i>
+        </button>
+
+        <div class="intro-center-stage">
+            <div class="intro-logo-box" id="introLogoBox">
+                <div class="intro-wordmark-row">
+                    <span class="intro-ad-mark">AD<svg class="intro-slash-svg" viewBox="0 0 140 80" aria-hidden="true">
+                            <path class="intro-slash-path" d="M 16 64 Q 72 34 126 16" />
+                        </svg></span><span class="intro-preneur-clip">preneur</span>
+                </div>
+                <div class="intro-subbrand">Ahmad Dahlan Preneur</div>
+            </div>
+
+            <div class="intro-enter-wrap" id="introEnterWrap">
+                <button type="button" id="btnEnterSite" onclick="finishIntroAnimation()">
+                    <span>Masuk</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
 
     <!-- NECK BAR -->
     <div class="bg-brand-orange text-white text-[11px] sm:text-xs py-2 px-3 text-center font-medium shadow-sm flex items-center justify-center gap-1.5 overflow-hidden">
@@ -2055,6 +2254,46 @@
         function closeModal(id) { document.getElementById(id).classList.remove('flex'); document.getElementById(id).classList.add('hidden'); }
 
         loadPublicData(false);
-    </script>
+    
+        // Intro animation controller: shows "Lewati" at top-right immediately,
+        // plays logo motion sequence, then reveals "Masuk" right below the logo.
+        let introCompleted = false;
+        let introRevealTimer = null;
+
+        function finishIntroAnimation() {
+            if (introCompleted) return;
+            introCompleted = true;
+            if (introRevealTimer) {
+                clearTimeout(introRevealTimer);
+                introRevealTimer = null;
+            }
+            const overlay = document.getElementById('introOverlay');
+            if (overlay) {
+                overlay.classList.add('intro-exit');
+                setTimeout(() => {
+                    overlay.remove();
+                }, 680);
+            }
+        }
+
+        (function initIntroSequence() {
+            const logoBox = document.getElementById('introLogoBox');
+            const enterWrap = document.getElementById('introEnterWrap');
+            if (!logoBox || !enterWrap) return;
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    logoBox.classList.add('intro-play');
+                });
+            });
+
+            // Reveal "Masuk" right beneath the logo after the logo & subbrand motion completes
+            introRevealTimer = setTimeout(() => {
+                if (!introCompleted) {
+                    enterWrap.classList.add('is-visible');
+                }
+            }, 2400);
+        })();
+</script>
 </body>
 </html>
